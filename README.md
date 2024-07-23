@@ -1,5 +1,4 @@
-<font-size="4">Alma Lactancia</font> 
-
+Alma Lactancia
 
 Proyecto voluntariado, creación del sitio web para la asociación sin ánimo de lucro "Alma Lactancia". 
 Esta organización se dedica a apoyar y promover la lactancia materna, brindando recursos, información y 
