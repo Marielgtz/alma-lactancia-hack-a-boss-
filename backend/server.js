@@ -1,48 +1,26 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const dotenv = require('dotenv');
+import express from 'express'
+import dotenv from 'dotenv'
+import cors from 'cors'
+import { activities, images } from './src/routes/index.js'
+import { notFound, manageError } from './src/middlewares/index.js'
 
-dotenv.config();
+dotenv.config()
 
-const activitiesRouter = require('./routes/activities');
-const contactRouter = require('./routes/contact');
-const calendarRouter = require('./routes/calendar');
-const homeRouter = require('./routes/home');
+const app = express()
 
-const server = express();
+//Middlewares de aplicación:
+app.use(express.json())
+app.use(cors())
 
+// Rutas
+app.use(activities)
+app.use(images)
 
+//Middlewares
+app.use(notFound)
+app.use(manageError)
 
-// Usar los middlewares
-
-
-// Definir rutas cuando se decida cuales serán exactamente, comienzo por básicas.
-server.use('/activities', activitiesRouter);
-server.use('/contact', contactRouter);
-server.use('/calendar', calendarRouter);
-server.use('/home', homeRouter);
-
-
-
-
-// mirar para  poner el generatorError comentado con Guille y hacerlo más genérico
-server.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// Manejar otros errores
-server.use((err, req, res, next) => {
-  // Configurar errores solo en desarrollo
-  res.locals.message = err.message;
-  res.locals.error = req.server.get('env') === 'development' ? err : {};
-
-  // Renderizar la página de error
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = server;
+//Server:
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor activo en el puerto ${process.env.PORT}`)
+})
