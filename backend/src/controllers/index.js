@@ -1,12 +1,14 @@
-import setActivitiesController from './setActivitiesController'
-import deleteActivitiesController from './deleteActivitiesController'
-import getActivitiesController from './getActivitiesController'
-import imagesController from './imagesController'
-import checkActivitiesControlers from './checkActivitiesControlers'
+import deleteRowController from './deleteRowController.js'
+import imagesController from './imagesController.js'
+import searchRowController from './searchRowController.js'
+import updateDataController from './updateDataController.js'
+import getSheetController from './getSheetController.js'
+import createDataController from './createDataController.js'
 export {
-    setActivitiesController,
-    deleteActivitiesController,
-    getActivitiesController,
+    searchRowController,
+    deleteRowController,
     imagesController,
-    checkActivitiesControlers,
+    updateDataController,
+    getSheetController,
+    createDataController,
 }
