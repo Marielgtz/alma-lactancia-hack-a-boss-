@@ -1,0 +1,29 @@
+.App-footer {
+    height: 10vh;
+    display: flex;
+    flex-direction: column; /* Cambia la dirección a columna */
+    justify-content: center; /* Centra los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+  }
+  
+  .social-media {
+    display: flex;
+    gap: 2rem; /* Espacio entre los íconos */
+    margin-bottom: 1rem; /* Espacio entre los íconos y el texto de copyright */
+  }
+  
+  .social-media a {
+    display: flex;
+    align-items: center;
+  }
+  
+  .social-media img {
+    width: 3rem; /* Tamaño del ícono */
+    height: 3rem; /* Tamaño del ícono */
+  }
+  
+  .App-footer p {
+    margin-top: 0.3rem; /* Añade espacio arriba del texto de copyright */
+    margin-bottom: 1.7rem; /* Elimina el margen inferior para centrar el texto */
+  }
+  
