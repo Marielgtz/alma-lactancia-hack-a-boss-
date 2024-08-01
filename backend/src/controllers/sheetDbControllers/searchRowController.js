@@ -1,4 +1,4 @@
-import { searchRow } from '../sheetDb-engine/methods/index.js'
+import { searchRow } from '../../sheetDb-engine/methods/index.js'
 
 const searchRowController = async (req, res, next) => {
     const field = req.params.field

@@ -1,4 +1,4 @@
-import { getSheet } from '../sheetDb-engine/methods/index.js'
+import { getSheet } from '../../sheetDb-engine/methods/index.js'
 
 const getSheetController = async (req, res, next) => {
     const sheetName = req.params.sheetName

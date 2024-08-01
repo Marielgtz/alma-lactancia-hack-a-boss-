@@ -1,4 +1,4 @@
-import { deleteRow } from '../sheetDb-engine/methods/index.js'
+import { deleteRow } from '../../sheetDb-engine/methods/index.js'
 
 const deleteRowController = async (req, res, next) => {
     const field = req.params.field

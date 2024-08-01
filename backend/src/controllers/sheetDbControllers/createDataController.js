@@ -1,4 +1,4 @@
-import { createData } from '../sheetDb-engine/methods/index.js'
+import { createData } from '../../sheetDb-engine/methods/index.js'
 
 const createDataController = async (req, res, next) => {
     try {

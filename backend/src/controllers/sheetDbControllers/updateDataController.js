@@ -1,4 +1,4 @@
-import { updateData } from '../sheetDb-engine/methods/index.js'
+import { updateData } from '../../sheetDb-engine/methods/index.js'
 
 const updateDataController = async (req, res, next) => {
     const { field, value, dataToUpdate } = req.body
