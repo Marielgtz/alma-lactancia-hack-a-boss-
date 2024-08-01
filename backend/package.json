@@ -15,8 +15,8 @@
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
         "express": "^4.19.2",
+        "joi": "^17.13.3",
         "node-fetch": "^3.3.2",
-        "sheetdb-node": "^0.0.12",
-        "uuid": "^10.0.0"
+        "sheetdb-node": "^0.0.12"
     }
 }

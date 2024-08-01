@@ -1,7 +1,12 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import { activities, images } from './src/routes/index.js'
+import {
+    SheetDbActivities,
+    images,
+    partners,
+    activities,
+} from './src/routes/index.js'
 import { notFound, manageError } from './src/middlewares/index.js'
 
 dotenv.config()
@@ -13,8 +18,10 @@ app.use(express.json())
 app.use(cors())
 
 // Rutas
-app.use(activities)
+app.use(SheetDbActivities)
 app.use(images)
+app.use(partners)
+app.use(activities)
 
 //Middlewares
 app.use(notFound)
