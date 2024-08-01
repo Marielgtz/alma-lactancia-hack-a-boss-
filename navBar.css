@@ -101,3 +101,36 @@ body {
 .menu-item:hover > .submenu {
     display: block; /* Muestra el submenú en hover */
 }
+.menu-toggle {
+    display:none; /*Oculta el ícono de menú hamburguesa */
+}
+
+/* Estilos responsivos para dispositivos móviles */
+@media (max-width: 768px) {
+    .menu {
+        display: none; /* Oculta el menú por defecto en dispositivos móviles */
+        flex-direction: column; /* Alinea el menú en columna */
+        width: 100%; /* El menú ocupa todo el ancho */
+    }
+
+    .menu-item {
+        width: 100%; /* Los elementos del menú ocupan todo el ancho */
+    }
+
+    .menu-item > a {
+        padding: 15px; /* Ajusta el padding para el menú en dispositivos móviles */
+    }
+
+    .menu.active {
+        display: flex; /* Muestra el menú cuando está activo */
+    }
+
+    .menu-toggle {
+        display: block; /* Muestra el ícono de menú hamburguesa */
+        cursor: pointer;
+    }
+
+    .logo {
+        height: 50px; /* Ajusta la altura del logo en dispositivos móviles */
+    }
+}
