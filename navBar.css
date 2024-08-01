@@ -3,11 +3,6 @@ body {
     margin: 0;
 }
 
-/* Estilo del header */
-header {
-    /* Ajusta el fondo del header si es necesario */
-}
-
 /* Contenedor de la barra de navegación */
 .navbar {
     display: flex;
