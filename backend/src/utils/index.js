@@ -3,6 +3,7 @@ import {
     validationSchemaPartnerActivity,
     validationSchemaNonPartnerActivity,
     validationSchemaNewPartner,
+    validationSchemaLogin,
 } from './validation.js'
 
 export {
@@ -10,4 +11,5 @@ export {
     generateError,
     validationSchemaPartnerActivity,
     validationSchemaNonPartnerActivity,
+    validationSchemaLogin,
 }

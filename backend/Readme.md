@@ -77,6 +77,17 @@ Required fields (in JSON format):
 
     _All fields are required._
 
+**Admin**
+Path to login:
+Method: post,
+Path: `/admin-login`
+Required fields (in JSON format):
+
+-   correo_electronico
+-   contrasinal
+
+    _All fields are required._
+
 ### Developer
 
 [Guillermo Cerviño Porto](https://www.linkedin.com/in/guillermocporto/)

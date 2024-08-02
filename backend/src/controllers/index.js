@@ -9,6 +9,8 @@ import deletePartner from './partners/deletePartner.js'
 import updatePartner from './partners/updatePartner.js'
 import freeActivity from './freeActivities/freeActivity.js'
 import activity from './partnersActivities/activity.js'
+import loginController from './admin/loginController.js'
+
 export {
     searchRowController,
     deleteRowController,
@@ -21,4 +23,5 @@ export {
     deletePartner,
     freeActivity,
     activity,
+    loginController,
 }
