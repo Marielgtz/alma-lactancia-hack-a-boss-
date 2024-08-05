@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Details from "./pages/Details";
+import About from "./pages/About";
 import Activities from "./pages/Activities";
 import Library from "./pages/Library";
 import Collaborate from "./pages/Collaborate";
@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/quienes-somos" element={<Details />} />
+          <Route path="/quienes-somos" element={<About />} />
           <Route path="/actividades" element={<Activities />} />
           <Route path="/biblioteca" element={<Library />} />
           <Route path="/colabora" element={<Collaborate />} />
