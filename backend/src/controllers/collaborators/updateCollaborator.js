@@ -11,7 +11,7 @@ const updateCollaborator = async (req, res, next) => {
         const newData = {
             ...oldData,
             ...req.body,
-            ...{ collaboratorImage: req.file.filename && req.file.filename },
+            ...{ imaxeColaborador: req.file.filename && req.file.filename },
         }
 
         const dataToValidate = {
@@ -19,6 +19,7 @@ const updateCollaborator = async (req, res, next) => {
             apelidos: newData.apelidos,
             descripcion: newData.descripcion,
             rol: newData.rol || '',
+            equipo: newData.equipo,
         }
         //Se validan:
         const { error } =
@@ -35,7 +36,7 @@ const updateCollaborator = async (req, res, next) => {
             const oldImagePath = path.join(
                 'src',
                 'uploads',
-                newData.collaboratorImage
+                newData.imaxeColaborador
             )
 
             try {

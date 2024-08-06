@@ -88,9 +88,9 @@ Required fields (in JSON format):
 
     _All fields are required._
 
-**Collaborators**
+**Collaborators/Teams members**
 
-Route to register a new collaborator:
+Route to register a new collaborator/team member:
 Method: post,
 Path: `/new-collaborator`
 Required fields (in JSON format):
@@ -99,7 +99,8 @@ Required fields (in JSON format):
 -   apelidos
 -   descripcion
 -   rol (optional)
--   collaboratorImage (optional)
+-   imaxeColaborador (optional)
+-   equipo (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)(required)
 
 Method: patch,
 Path: `/update-collaborator`
@@ -109,7 +110,7 @@ Required fields (in JSON format):
 -   apelidos
 -   descripcion
 -   rol
--   collaboratorImage
+-   imaxeColaborador
 
     _All fields are optional._
 

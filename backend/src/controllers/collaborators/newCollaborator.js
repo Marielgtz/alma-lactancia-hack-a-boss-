@@ -2,9 +2,9 @@ import { generateError } from '../../utils/index.js'
 import { validationSchemaNewCollaborator } from '../../utils/index.js'
 const newCollaborator = (req, res, next) => {
     try {
-        const { nome, apelidos, descripcion, rol } = req.body
+        const { nome, apelidos, descripcion, rol, equipo } = req.body
 
-        const collaboratorImage = req.file.filename
+        const imaxeColaborador = req.file.filename
 
         // Validación de datos:
         const { error } = validationSchemaNewCollaborator.validate(req.body)

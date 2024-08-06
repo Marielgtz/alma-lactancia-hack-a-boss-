@@ -48,6 +48,7 @@ const validationSchemaNewCollaborator = Joi.object({
     apelidos: Joi.string().max(30).required(),
     descripcion: Joi.string().min(6).max(255).required(),
     rol: Joi.string().max(15),
+    equipo: Joi.boolean().required(),
 })
 
 //Exporto las variables:
