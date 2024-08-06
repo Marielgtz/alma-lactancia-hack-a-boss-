@@ -1,20 +1,20 @@
-import {
-    generateError,
-    validationSchemaNonPartnerActivity,
-} from '../../utils/index.js'
-const freeActivity = (req, res, next) => {
+import { generateError } from '../../utils/index.js'
+import { validationSchemaPartnerActivity } from '../../utils/index.js'
+const joinPartnerActivity = (req, res, next) => {
     try {
         const {
-            asistencia,
+            socio,
             nome_nai,
-            fpp,
+            nome_bebe,
+            data_nacemento,
             centro_saude,
             telefono,
             correo_electronico,
+            outros,
         } = req.body
 
         //Validación de datos:
-        const { error } = validationSchemaNonPartnerActivity.validate(req.body)
+        const { error } = validationSchemaPartnerActivity.validate(req.body)
 
         if (error) {
             error.message = error.details[0].message
@@ -25,4 +25,4 @@ const freeActivity = (req, res, next) => {
         next(error)
     }
 }
-export default freeActivity
+export default joinPartnerActivity

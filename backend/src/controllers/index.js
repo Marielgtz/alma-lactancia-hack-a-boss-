@@ -7,8 +7,8 @@ import createDataController from './sheetDbControllers/createDataController.js'
 import newPartner from './partners/newPartNer.js'
 import deletePartner from './partners/deletePartner.js'
 import updatePartner from './partners/updatePartner.js'
-import freeActivity from './freeActivities/freeActivity.js'
-import activity from './partnersActivities/activity.js'
+import joinFreeActivity from './freeActivities/joinFreeActivity.js'
+import joinPartnerActivity from './partnersActivities/joinPartnerActivity.js'
 import loginController from './admin/loginController.js'
 
 export {
@@ -21,7 +21,7 @@ export {
     newPartner,
     updatePartner,
     deletePartner,
-    freeActivity,
-    activity,
+    joinFreeActivity,
+    joinPartnerActivity,
     loginController,
 }

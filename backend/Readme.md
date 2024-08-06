@@ -49,7 +49,7 @@ Path: `/delete-partner`
 
 Path to add a partner to an activity:
 Method: post,
-Path: `/partner-activity`
+Path: `/join-partner-activity`
 Required fields (in JSON format):
 
 -   socio (¿Eres socia de Alma este año? Sí o No) Enviar booleano.
@@ -65,7 +65,7 @@ Required fields (in JSON format):
 
 Path to add a partner or a non-partner to an free activity:
 Method: post,
-Path: `/non-partner-activity`
+Path: `/join-non-partner-activity`
 Required fields (in JSON format):
 
 -   asistencia ( Vendrás a la charla acompañada? Sí o no) Enviar booleano.

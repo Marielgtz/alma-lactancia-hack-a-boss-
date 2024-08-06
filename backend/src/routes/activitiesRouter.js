@@ -1,9 +1,9 @@
 import express from 'express'
-import { activity, freeActivity } from '../controllers/index.js'
+import { joinPartnerActivity, joinFreeActivity } from '../controllers/index.js'
 const router = express.Router()
 
 //Ruta para actividades:
-router.post('/partner-activity', activity)
-router.post('/non-partner-activity', freeActivity)
+router.post('/join-partner-activity', joinPartnerActivity)
+router.post('/join-non-partner-activity', joinFreeActivity)
 
 export default router
