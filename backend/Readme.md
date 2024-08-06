@@ -5,7 +5,7 @@ The project involves developing a website for "Alma Lactancia," a non-profit org
 **Scripts**:
 <small>npm run dev</small>, to start the project in development mode.
 
-**Stack**: <small>"cors": "^2.8.5", "dotenv": "^16.4.5", "express": "^4.19.2"</small>
+**Stack**: <small>"cors": "^2.8.5", "dotenv": "^16.4.5", "express": "^4.19.2", "googleapis": "^140.0.1", "jsonwebtoken": "^9.0.2", "bcrypt": "^5.1.1",</small>
 
 ### Endpoints:
 

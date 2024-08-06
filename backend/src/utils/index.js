@@ -5,6 +5,7 @@ import {
     validationSchemaNewPartner,
     validationSchemaLogin,
 } from './validation.js'
+import getColumnLetter from './getColumnLetter.js'
 
 export {
     validationSchemaNewPartner,
@@ -12,4 +13,5 @@ export {
     validationSchemaPartnerActivity,
     validationSchemaNonPartnerActivity,
     validationSchemaLogin,
+    getColumnLetter,
 }
