@@ -1,4 +1,4 @@
-import sheets from '../client.js'
+import { sheets } from '../client.js'
 import getColumnLetter from '../../utils/index.js'
 
 const insertRow = async (spreadsheetId, sheetName, nextRow, values) => {

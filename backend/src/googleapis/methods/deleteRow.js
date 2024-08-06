@@ -1,4 +1,4 @@
-import sheets from '../client'
+import { sheets } from '../client'
 
 const deleteRow = async (dataToDelete) => {
     try {

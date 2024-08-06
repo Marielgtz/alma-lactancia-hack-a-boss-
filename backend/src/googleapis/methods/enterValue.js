@@ -1,4 +1,4 @@
-import sheets from '../client'
+import { sheets } from '../client'
 
 const enterValue = async (dataToUpdate) => {
     const result = await sheets.spreadsheets.values.update(dataToUpdate)

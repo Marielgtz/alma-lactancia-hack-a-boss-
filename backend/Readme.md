@@ -88,6 +88,34 @@ Required fields (in JSON format):
 
     _All fields are required._
 
+**Collaborators**
+
+Route to register a new collaborator:
+Method: post,
+Path: `/new-collaborator`
+Required fields (in JSON format):
+
+-   nome
+-   apelidos
+-   descripcion
+-   rol (optional)
+-   collaboratorImage (optional)
+
+Method: patch,
+Path: `/update-collaborator`
+Required fields (in JSON format):
+
+-   nome
+-   apelidos
+-   descripcion
+-   rol
+-   collaboratorImage
+
+    _All fields are optional._
+
+Method: delete,
+Path: `/delete-colaborator`
+
 ### Developer
 
 [Guillermo Cerviño Porto](https://www.linkedin.com/in/guillermocporto/)
