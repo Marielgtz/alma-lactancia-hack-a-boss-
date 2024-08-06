@@ -4,7 +4,7 @@ import getSheetId from './getSheetId.js'
 
 const getValues = async (spreadsheetId, range, fields = {}) => {
     try {
-        // Traer todos los datos de una hoja, o la siguiente fila vacía, SOLO si han pasado un rango:
+        // Traer todos los datos de una hoja, o la siguiente fila vacía, SOLO si han pasado un rango (Habrá que pasar range como null):
         let allData
         let rows
         let nextRow
