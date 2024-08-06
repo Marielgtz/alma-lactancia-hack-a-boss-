@@ -88,6 +88,35 @@ Required fields (in JSON format):
 
     _All fields are required._
 
+**Collaborators/Teams members**
+
+Route to register a new collaborator/team member:
+Method: post,
+Path: `/new-collaborator`
+Required fields (in JSON format):
+
+-   nome
+-   apelidos
+-   descripcion
+-   rol (optional)
+-   imaxeColaborador (optional)
+-   equipo (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)(required)
+
+Method: patch,
+Path: `/update-collaborator`
+Required fields (in JSON format):
+
+-   nome
+-   apelidos
+-   descripcion
+-   rol
+-   imaxeColaborador
+
+    _All fields are optional._
+
+Method: delete,
+Path: `/delete-colaborator`
+
 ### Developer
 
 [Guillermo Cerviño Porto](https://www.linkedin.com/in/guillermocporto/)

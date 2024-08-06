@@ -1,4 +1,4 @@
-import sheets from '../client'
+import { sheets } from '../client'
 import getColumnLetter from '../../utils/index.js'
 import getSheetId from './getSheetId.js'
 

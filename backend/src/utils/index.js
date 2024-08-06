@@ -1,11 +1,13 @@
 import generateError from './generateError.js'
+import getColumnLetter from './getColumnLetter.js'
+import { storage, limits, fileFilter } from './multerConfig.js'
 import {
     validationSchemaPartnerActivity,
     validationSchemaNonPartnerActivity,
     validationSchemaNewPartner,
     validationSchemaLogin,
+    validationSchemaNewCollaborator,
 } from './validation.js'
-import getColumnLetter from './getColumnLetter.js'
 
 export {
     validationSchemaNewPartner,
@@ -14,4 +16,8 @@ export {
     validationSchemaNonPartnerActivity,
     validationSchemaLogin,
     getColumnLetter,
+    validationSchemaNewCollaborator,
+    storage,
+    limits,
+    fileFilter,
 }

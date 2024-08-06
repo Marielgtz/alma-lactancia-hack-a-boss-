@@ -1,5 +1,6 @@
 import Joi from 'joi'
 
+//Socios/as:
 const validationSchemaNewPartner = Joi.object({
     nome: Joi.string().max(15).required(),
     apelidos: Joi.string().max(30).required(),
@@ -11,6 +12,7 @@ const validationSchemaNewPartner = Joi.object({
     correo_electronico: Joi.string().email().required(),
 })
 
+//Actividades:
 const validationSchemaPartnerActivity = Joi.object({
     socio: Joi.boolean().required(),
     nome_bebe: Joi.string().max(15).required(),
@@ -34,9 +36,19 @@ const validationSchemaNonPartnerActivity = Joi.object({
     correo_electronico: Joi.string().email().required(),
 })
 
+//Administradores/as
 const validationSchemaLogin = Joi.object({
     correo_electronico: Joi.string().email().required(),
     contrasinal: Joi.string().min(6).required(),
+})
+
+//Colaboradores/as:
+const validationSchemaNewCollaborator = Joi.object({
+    nome: Joi.string().max(15).required(),
+    apelidos: Joi.string().max(30).required(),
+    descripcion: Joi.string().min(6).max(255).required(),
+    rol: Joi.string().max(15),
+    equipo: Joi.boolean().required(),
 })
 
 //Exporto las variables:
@@ -45,4 +57,5 @@ export {
     validationSchemaPartnerActivity,
     validationSchemaNonPartnerActivity,
     validationSchemaLogin,
+    validationSchemaNewCollaborator,
 }
