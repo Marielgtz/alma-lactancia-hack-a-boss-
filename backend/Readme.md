@@ -149,6 +149,20 @@ Required fields (in JSON format)
 
 _All fields are required._
 
+**contact**
+Path to save contact data:
+Method: post,
+Path: `/new-contact-message`
+Required fields (in JSON format):
+
+-   name
+-   surname
+-   email
+-   subject
+-   comments
+
+    _All fields are required._
+
 ### Developer
 
 [Guillermo Cerviño Porto](https://www.linkedin.com/in/guillermocporto/)

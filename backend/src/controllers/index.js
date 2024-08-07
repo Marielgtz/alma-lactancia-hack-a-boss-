@@ -10,6 +10,7 @@ import updateCollaborator from './collaborators/updateCollaborator.js'
 import deleteEventController from './calendar/deleteEventController.js'
 import updateEventController from './calendar/updateEventController.js'
 import listEventsController from './calendar/listEventsController.js'
+import saveMessage from './contact/saveMessage.js'
 
 export {
     newPartner,
@@ -24,4 +25,5 @@ export {
     deleteEventController,
     updateEventController,
     listEventsController,
+    saveMessage,
 }
