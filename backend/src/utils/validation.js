@@ -43,6 +43,14 @@ const validationSchemaLogin = Joi.object({
 })
 
 //Colaboradores/as:
+const validationSchemaNewMessage = Joi.object({
+    name: Joi.string().max(15).required(),
+    surname: Joi.string().max(30).required(),
+    email: Joi.string().email().required(),
+    subject: Joi.string().max(30),
+    comments: Joi.string().max(255),
+})
+//Colaboradores/as:
 const validationSchemaNewCollaborator = Joi.object({
     name: Joi.string().max(15).required(),
     surname: Joi.string().max(30).required(),
@@ -58,4 +66,5 @@ export {
     validationSchemaNonPartnerActivity,
     validationSchemaLogin,
     validationSchemaNewCollaborator,
+    validationSchemaNewMessage,
 }

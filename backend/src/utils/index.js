@@ -8,6 +8,7 @@ import {
     validationSchemaNewPartner,
     validationSchemaLogin,
     validationSchemaNewCollaborator,
+    validationSchemaNewMessage,
 } from './validation.js'
 
 export {
@@ -22,4 +23,5 @@ export {
     limits,
     fileFilter,
     filterProperties,
+    validationSchemaNewMessage,
 }
