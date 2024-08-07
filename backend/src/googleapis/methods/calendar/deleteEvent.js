@@ -1,4 +1,4 @@
-import { calendar } from '../../client'
+import { calendar } from '../../client.js'
 import { generateError } from '../../../utils/index.js'
 
 const deleteEvent = async (eventId, calendarId = 'primary') => {

@@ -1,5 +1,5 @@
-import { sheets } from '../client'
-import getColumnLetter from '../../utils/index.js'
+import { sheets } from '../client.js'
+import { getColumnLetter } from '../../utils/index.js'
 import getSheetId from './getSheetId.js'
 
 const getValues = async (spreadsheetId, range, fields = {}) => {

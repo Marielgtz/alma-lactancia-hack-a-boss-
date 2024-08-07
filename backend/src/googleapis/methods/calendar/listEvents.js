@@ -1,4 +1,4 @@
-import { calendar } from '../../client'
+import { calendar } from '../../client.js'
 import { generateError } from '../../../utils/index.js'
 
 const listEvents = async (eventData) => {

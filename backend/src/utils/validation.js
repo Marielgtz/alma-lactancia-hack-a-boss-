@@ -44,11 +44,11 @@ const validationSchemaLogin = Joi.object({
 
 //Colaboradores/as:
 const validationSchemaNewCollaborator = Joi.object({
-    nome: Joi.string().max(15).required(),
-    apelidos: Joi.string().max(30).required(),
-    descripcion: Joi.string().min(6).max(255).required(),
-    rol: Joi.string().max(15),
-    equipo: Joi.boolean().required(),
+    name: Joi.string().max(15).required(),
+    surname: Joi.string().max(30).required(),
+    description: Joi.string().min(6).max(255).required(),
+    role: Joi.string().max(15),
+    team: Joi.boolean().required(),
 })
 
 //Exporto las variables:

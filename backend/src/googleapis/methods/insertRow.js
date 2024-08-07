@@ -1,5 +1,5 @@
 import { sheets } from '../client.js'
-import getColumnLetter from '../../utils/index.js'
+import { getColumnLetter } from '../../utils/index.js'
 
 const insertRow = async (spreadsheetId, sheetName, nextRow, values) => {
     try {
@@ -8,6 +8,7 @@ const insertRow = async (spreadsheetId, sheetName, nextRow, values) => {
         const endColumn = getColumnLetter(numColumns)
 
         const range = `${sheetName}!${startColumn}${nextRow}:${endColumn}${nextRow}`
+        console.log('values', values)
 
         const data = {
             spreadsheetId,
