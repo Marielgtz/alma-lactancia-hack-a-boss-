@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv/config'
 import cors from 'cors'
-import { partners, activities, login } from './src/routes/index.js'
+import { partners, activities, login, calendar } from './src/routes/index.js'
 import { notFound, manageError } from './src/middlewares/index.js'
 
 const app = express()
@@ -14,6 +14,7 @@ app.use(cors())
 app.use(partners)
 app.use(activities)
 app.use(login)
+app.use(calendar)
 
 //Middlewares
 app.use(notFound)

@@ -1,5 +1,6 @@
 import generateError from './generateError.js'
 import getColumnLetter from './getColumnLetter.js'
+import filterProperties from './filterProperties.js'
 import { storage, limits, fileFilter } from './multerConfig.js'
 import {
     validationSchemaPartnerActivity,
@@ -20,4 +21,5 @@ export {
     storage,
     limits,
     fileFilter,
+    filterProperties,
 }

@@ -7,6 +7,9 @@ import loginController from './admin/loginController.js'
 import newCollaborator from './collaborators/newCollaborator.js'
 import deleteCollaborator from './collaborators/deleteCollaborator.js'
 import updateCollaborator from './collaborators/updateCollaborator.js'
+import deleteEventController from './calendar/deleteEventController.js'
+import updateEventController from './calendar/updateEventController.js'
+import listEventsController from './calendar/listEventsController.js'
 
 export {
     newPartner,
@@ -18,4 +21,7 @@ export {
     newCollaborator,
     deleteCollaborator,
     updateCollaborator,
+    deleteEventController,
+    updateEventController,
+    listEventsController,
 }
