@@ -5,7 +5,8 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Evita el scroll horizontal */
+  overflow-x: hidden;
+  /* Evita el scroll horizontal */
 }
 
 .home-page {
@@ -20,7 +21,7 @@ body,
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
 }
 
 .main-home {
@@ -31,8 +32,8 @@ body,
 }
 
 .img-section {
-  width: 100%;
-  height: 100vh; /* Hace que la imagen ocupe toda la vista inicial */
+  width: 100vw;
+  height: 100vh;
   position: relative;
   overflow: hidden;
 }
@@ -46,17 +47,86 @@ body,
 }
 
 .content {
-  padding: 20px;
+  padding: 2em;
   background-color: white;
   position: relative;
   z-index: 1;
+}
+
+.section-title {
+  text-align: center;
+  margin: 2em 0;
+  margin-top: 2em;
+}
+
+.section-text {
+  max-width: 70em;
+  line-height: 2;
+}
+
+.centered-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.activities {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5em;
+}
+
+.activity {
+  background-color: #f0f0f0;
+  width: 30em;
+  height: 25em;
+  text-align: center;
+}
+
+.activities-button {
+  display: block;
+  margin: 0 auto;
+  padding: 1em 2em;
+  background-color: #e0a0b0;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 2em;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  font-size: 0.9em;
+}
+
+.calendar-section {
+  padding: 20px;
+}
+
+.calendar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.calendar-text {
+  max-width: 50%;
+  text-align: left;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .footer {
   font-size: 0.7em;
   background-color: white;
   z-index: 1000;
-  width: 100%;
+  width: 100vw;
   position: relative;
   margin-top: auto;
 }
