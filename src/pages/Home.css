@@ -158,10 +158,6 @@ body,
     height: auto;
   }
 
-  .section-text {
-    max-width: 100vw;
-  }
-
   .calendar-content {
     flex-direction: column;
     gap: 0;
@@ -178,5 +174,6 @@ body,
   .section-title {
     margin-top: auto;
     margin-bottom: auto;
+    font-size: 1em;
   }
 }
