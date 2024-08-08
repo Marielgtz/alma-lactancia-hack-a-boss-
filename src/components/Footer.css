@@ -1,29 +1,47 @@
 .App-footer {
-    height: 10vh;
-    display: flex;
-    flex-direction: column; /* Cambia la dirección a columna */
-    justify-content: center; /* Centra los elementos verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
-  }
-  
+  height: 10vh;
+  display: flex;
+  flex-direction: column; /* Cambia la dirección a columna */
+  justify-content: center; /* Centra los elementos verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  padding: 1rem;
+  text-align: center;
+}
+
+.social-media {
+  display: flex;
+  gap: 2rem; /* Espacio entre los íconos */
+  margin-bottom: 0.3rem; /* Espacio entre los íconos y el texto de copyright */
+  font-size: 1rem;
+}
+
+.social-media a {
+  display: flex;
+  align-items: center;
+}
+
+.social-media img {
+  width: 3rem; /* Tamaño del ícono */
+  height: 3rem; /* Tamaño del ícono */
+}
+
+.App-footer p {
+  margin-top: 0.3rem; /* Añade espacio arriba del texto de copyright */
+  font-size: 0.9rem;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
   .social-media {
-    display: flex;
-    gap: 2rem; /* Espacio entre los íconos */
-    margin-bottom: 0.3rem; /* Espacio entre los íconos y el texto de copyright */
-    font-size: 1rem;
+    gap: 1rem; /* Reduce el espacio entre íconos en pantallas pequeñas */
+    font-size: 0.8rem;
   }
-  
-  .social-media a {
-    display: flex;
-    align-items: center;
+
+  .App-footer {
+    padding: 0.5rem; /* Reduce el padding en pantallas pequeñas */
   }
-  
-  .social-media img {
-    width: 3rem; /* Tamaño del ícono */
-    height: 3rem; /* Tamaño del ícono */
-  }
-  
+
   .App-footer p {
-    margin-top: 0.3rem; /* Añade espacio arriba del texto de copyright */
+    font-size: 0.7rem; /* Reduce el tamaño de la fuente en pantallas pequeñas */
   }
-  
+}
