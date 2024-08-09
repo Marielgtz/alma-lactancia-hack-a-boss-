@@ -108,10 +108,12 @@ body,
 
 .calendar-section {
   padding: 20px;
+  text-align: center;
 }
 
 .calendar-content {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -129,6 +131,12 @@ body,
   display: flex;
   justify-content: center;
   margin: 20px 0;
+}
+
+iframe {
+  border: 0;
+  max-width: 50rem;
+  height: 40rem;
 }
 
 .experience {

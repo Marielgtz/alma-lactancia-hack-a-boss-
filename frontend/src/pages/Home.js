@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Calendar from "react-calendar";
 import image1 from "../images/cropped-logo_fedalma_200.png";
 import image2 from "../images/logo-fedegalma1-300x102.jpg";
-import "react-calendar/dist/Calendar.css";
 import "./Home.css";
 
 const Home = () => {
-  const [date, setDate] = useState(new Date());
-
-  const onChange = (date) => {
-    setDate(date);
-  };
-
   return (
     <div className="home-page">
       <Header />
@@ -69,7 +61,15 @@ const Home = () => {
                 <br></br>y actividades ¡te esperamos!
               </p>
               <div className="calendar-container">
-                <Calendar onChange={onChange} value={date} />
+                <iframe
+                  src="https://calendar.google.com/calendar/embed?src=adm.almalactancia%40gmail.com&ctz=UTC"
+                  style={{ border: 0 }}
+                  width="800"
+                  height="600"
+                  frameBorder="0"
+                  scrolling="no"
+                  title="Google Calendar"
+                ></iframe>
               </div>
             </div>
           </div>
