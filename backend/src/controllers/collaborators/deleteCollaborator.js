@@ -1,6 +1,40 @@
-const deleteCollaborator = (_req, res, next) => {
+import { getValues, deleteRow } from '../../googleapis/methods/index.js'
+
+const deleteCollaborator = async (req, res, next) => {
     try {
-        res.send({})
+        const sheetId = process.env.SPREADSHEET_ID
+
+        const { id, team } = req.params
+        let sheetName
+        let fields
+        if (team === 'false') {
+            sheetName = 'Colaboradores'
+            fields = {
+                field: 'id',
+                value: id,
+                newValue: '',
+                sheetName: sheetName,
+            }
+
+            const data = await getValues(sheetId, sheetName, fields)
+            const { rowToDelete } = data
+
+            await deleteRow(rowToDelete)
+            res.send({ message: 'Colaborador eliminado' })
+        }
+        if (team === 'true') {
+            sheetName = 'Miembros'
+            fields = {
+                field: 'id',
+                value: id,
+                newValue: '',
+                sheetName: sheetName,
+            }
+            const data = await getValues(sheetId, sheetName, fields)
+            const { rowToDelete } = data
+            await deleteRow(rowToDelete)
+            res.send({ message: 'Miembro eliminado' })
+        }
     } catch (error) {
         next(error)
     }

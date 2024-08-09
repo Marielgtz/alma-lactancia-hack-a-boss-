@@ -42,7 +42,7 @@ const validationSchemaLogin = Joi.object({
     contrasinal: Joi.string().min(6).required(),
 })
 
-//Colaboradores/as:
+//Mensajes:
 const validationSchemaNewMessage = Joi.object({
     name: Joi.string().max(15).required(),
     surname: Joi.string().max(30).required(),
@@ -56,7 +56,7 @@ const validationSchemaNewCollaborator = Joi.object({
     surname: Joi.string().max(30).required(),
     description: Joi.string().min(6).max(255).required(),
     role: Joi.string().max(15),
-    team: Joi.boolean().required(),
+    team: Joi.alternatives().try(Joi.boolean(), Joi.string()).required(),
 })
 
 //Exporto las variables:
