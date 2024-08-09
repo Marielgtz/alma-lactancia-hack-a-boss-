@@ -49,7 +49,36 @@ Required fields (in JSON format):
 Method: delete,
 Path: `/delete-partner`
 
-**PartnersActivities**
+**Activities**
+Path to create activities:
+Method: post,
+Path: `/create-activity`
+Required fields (in JSON format):
+
+-   summary: <font color="red">(Required)</font>
+-   description: <font color="green">(Optional)</font>
+-   start: { <font color="red">(Required)</font>
+    dateTime: "2024-08-09T10:00:00+02:00", (Fecha y hora de inicio en formato ISO 8601) <font color="red">(Required)</font>
+    timeZone: "Europe/Madrid" <font color="green">(Optional)</font>
+    },
+    end: { <font color="red">(Required)</font>
+-   dateTime: "2024-08-09T12:00:00+02:00", (Fecha y hora de finalización en formato ISO 8601) <font color="red">(Required)</font>
+-   timeZone: "Europe/Madrid" <font color="green">(Optional)</font>
+    },
+-   location: "123 de Michelena, Pontevedra, ES", <font color="green">(Optional)</font>
+-   attendees: [ (Lista de asistentes, <font color="green">(Optional)</font>)
+    { email: "fulano@example.com" },
+    { email: "mengano@example.com" }
+    ],
+-   reminders: { (Recordatorios del evento <font color="green">(Optional)</font>)
+-   useDefault: false, (En este caso, No usar recordatorios por defecto)
+-   overrides: [ (Lista de recordatorios personalizados)
+    { method: "email", minutes: 1440 }, (En este ejemplo: Enviar email un día antes (1440 minutos))
+    { method: "popup", minutes: 10 } (En este ejemplo: Mostrar popup 10 minutos antes del evento)
+    ]
+    },
+-   visibility: "private", (Visibilidad del evento, puede ser 'default', 'public' o 'private') <font color="red">(Required)</font>
+-   access: "partners" (Acceso, en este caso para 'socios', puede ser 'partners' o 'free') <font color="red">(Required)</font>
 
 Path to add a partner to an activity:
 Method: post,
@@ -99,12 +128,12 @@ Method: post,
 Path: `/new-collaborator`
 Required fields (in JSON format):
 
--   name
--   surname
--   description
--   role (optional)
--   collaboratorImage (optional)
--   team (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)(required)
+-   name <font color="red">(Required)</font>
+-   surname <font color="red">(Required)</font>
+-   description <font color="red">(Required)</font>
+-   role <font color="green">(Optional)</font>
+-   collaboratorImage <font color="green">(Optional)</font>
+-   team (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)<font color="red">(Required)</font>
 
 Method: patch,
 Path: `/update-collaborator/:id/team`

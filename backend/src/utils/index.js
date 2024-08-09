@@ -4,18 +4,19 @@ import filterProperties from './filterProperties.js'
 import { storage, limits, fileFilter } from './multerConfig.js'
 import {
     validationSchemaPartnerActivity,
-    validationSchemaNonPartnerActivity,
+    validationSchemaJoinNonPartnerActivity,
     validationSchemaNewPartner,
     validationSchemaLogin,
     validationSchemaNewCollaborator,
     validationSchemaNewMessage,
+    eventSchema,
 } from './validation.js'
 
 export {
     validationSchemaNewPartner,
     generateError,
     validationSchemaPartnerActivity,
-    validationSchemaNonPartnerActivity,
+    validationSchemaJoinNonPartnerActivity,
     validationSchemaLogin,
     getColumnLetter,
     validationSchemaNewCollaborator,
@@ -24,4 +25,5 @@ export {
     fileFilter,
     filterProperties,
     validationSchemaNewMessage,
+    eventSchema,
 }
