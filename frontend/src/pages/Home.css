@@ -1,0 +1,207 @@
+html,
+body,
+#root,
+.home-page {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Evita el scroll horizontal */
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: white;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+}
+
+.main-home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.img-section {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-image {
+  background-image: url("/src/images/bebe\ pecho.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content {
+  padding: 2em;
+  background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  text-align: center;
+  margin: 2em 0;
+  margin-top: 2em;
+}
+
+.section-text {
+  max-width: 70em;
+  line-height: 2;
+}
+
+.centered-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.activities {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5em;
+  gap: 2em;
+}
+
+.activity {
+  background-color: #f0f0f0;
+  width: 30em;
+  height: 25em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.activities-button {
+  display: block;
+  margin: 2em auto;
+  padding: 1em 2em;
+  background-color: #e0a0b0;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 2em;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  font-size: 0.9em;
+}
+
+.calendar-section {
+  padding: 20px;
+}
+
+.calendar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.calendar-text {
+  max-width: 50%;
+  text-align: left;
+  font-size: 1.2em;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.experience {
+  text-align: center;
+}
+
+.img-collab {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  gap: 5em;
+}
+
+.footer {
+  font-size: 0.7em;
+  background-color: white;
+  z-index: 1000;
+  width: 100vw;
+  position: relative;
+  margin-top: auto;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .section-text {
+    font-size: 0.8em;
+  }
+
+  .calendar-text {
+    display: none;
+  }
+
+  .activities {
+    flex-direction: column;
+    margin-top: 2em;
+  }
+
+  .activity {
+    width: auto;
+    height: auto;
+  }
+
+  .calendar-content {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .calendar-container {
+    width: 100vw;
+  }
+
+  .activities-button {
+    font-size: 0.7em;
+  }
+
+  .section-title {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1em;
+  }
+
+  .experience {
+    text-align: center;
+    font-size: 0.8em;
+  }
+  
+  .img-collab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .collab-img {
+    max-width: 45%;
+  }
+}
