@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_BACKEND;
+const API_BASE_URL = process.env.REACT_APP_BACKEND || 'http://localhost:4000';
 
 export const getCalendarEvents = async () => {
   try {
@@ -15,6 +15,11 @@ export const getCalendarEvents = async () => {
         timeMin: new Date().toISOString(),
       }),
     });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
     const data = await response.json();
     return data.response;
   } catch (error) {
