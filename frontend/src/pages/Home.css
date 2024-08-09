@@ -56,11 +56,11 @@ body,
 .section-title {
   text-align: center;
   margin: 2em 0;
-  margin-top: 2em;
 }
 
 .section-text {
-  max-width: 70em;
+  max-width: 80em;
+  font-size: 1.2em;
   line-height: 2;
 }
 
@@ -76,7 +76,6 @@ body,
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-top: 5em;
   gap: 2em;
 }
 
@@ -92,7 +91,7 @@ body,
 }
 
 .activities-button {
-  display: block;
+  display: flex;
   margin: 2em auto;
   padding: 1em 2em;
   background-color: #e0a0b0;
@@ -100,9 +99,11 @@ body,
   color: white;
   cursor: pointer;
   border-radius: 2em;
-  margin-top: 5em;
-  margin-bottom: 5em;
+  margin-top: 3em;
   font-size: 0.9em;
+  max-width: 30%;
+  text-align: center;
+  justify-content: center;
 }
 
 .calendar-section {
