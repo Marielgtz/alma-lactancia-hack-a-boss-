@@ -188,6 +188,12 @@ iframe {
     width: 100vw;
   }
 
+  iframe {
+    border: 0;
+    max-width: 35rem;
+    height: 25rem;
+  }
+
   .activities-button {
     font-size: 0.7em;
   }

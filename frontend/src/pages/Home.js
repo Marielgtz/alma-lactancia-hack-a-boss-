@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import image1 from "../images/cropped-logo_fedalma_200.png";
 import image2 from "../images/logo-fedegalma1-300x102.jpg";
 import "./Home.css";
+import { getCalendarEvents } from "../services/apigoogle";
 
 const Home = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const eventsData = await getCalendarEvents();
+        setEvents(eventsData);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <div className="home-page">
       <Header />
@@ -49,8 +65,16 @@ const Home = () => {
           </div>
           <h2 className="section-title">PRÓXIMAS ACTIVIDADES</h2>
           <div className="activities">
-            <div className="activity">ACTIVIDAD 1</div>
-            <div className="activity">ACTIVIDAD 2</div>
+            {events.length > 0 ? (
+              events.map((event) => (
+                <div className="activity" key={event.id}>
+                  {event.summary} -{" "}
+                  {new Date(event.start.dateTime).toLocaleString()}
+                </div>
+              ))
+            ) : (
+              <div>No hay actividades programadas</div>
+            )}
           </div>
           <button className="activities-button">VER MÁS ACTIVIDADES</button>
           <div className="calendar-section">
