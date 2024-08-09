@@ -131,7 +131,7 @@ Required fields from params.
 Path to delete an event:
 Method: delete,
 Path: `/delete-calendar-event/:eventId/:delete-from-sheet`
-Required field in params:
+Required field in params: (delete-from-sheet: true or false)
 
 Path to update an event:
 Method: patch,
