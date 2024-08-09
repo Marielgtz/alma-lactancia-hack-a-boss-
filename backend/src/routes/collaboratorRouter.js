@@ -18,9 +18,9 @@ router.post(
     upload.single('collaboratorImage'),
     newCollaborator
 )
-router.delete('/delete-collaborator', deleteCollaborator)
+router.delete('/delete-collaborator/:id/:team', deleteCollaborator)
 router.patch(
-    '/update-collaborator',
+    '/update-collaborator/:id/:team',
     upload.single('collaborator-image'),
     updateCollaborator
 )

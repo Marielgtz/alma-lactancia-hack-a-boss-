@@ -9,6 +9,10 @@ The project involves developing a website for "Alma Lactancia," a non-profit org
 
 ### Endpoints:
 
+**Important Note: due to the data insertion system in Google API spreadsheets, it is very important that the fields in the json objects are sent in the same order as indicated here.**
+
+**Nota importante: Debido al sistema de inserción de datos en las hojas de cálculo de la API de Google es muy importante que los campos en los objetos json se envíen en el mismo orden que aquí se indica.**
+
 **Partners**
 
 Route to register a new member:
@@ -95,27 +99,29 @@ Method: post,
 Path: `/new-collaborator`
 Required fields (in JSON format):
 
--   nome
--   apelidos
--   descripcion
--   rol (optional)
--   imaxeColaborador (optional)
--   equipo (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)(required)
+-   name
+-   surname
+-   description
+-   role (optional)
+-   collaboratorImage (optional)
+-   team (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)(required)
 
 Method: patch,
-Path: `/update-collaborator`
+Path: `/update-collaborator/:id/team`
+Required fields (id, team) in params:
 Required fields (in JSON format):
 
--   nome
--   apelidos
--   descripcion
--   rol
--   imaxeColaborador
+-   name
+-   surname
+-   description
+-   role
+-   collaboratorImage
 
-    _All fields are optional._
+    _All JSON fields are optional._
 
 Method: delete,
-Path: `/delete-colaborator`
+Path: `/delete-collaborator/:id/:team` (En team habrá que enviar "true" si es miembro o "false" si es colaborador)
+Required fields from params.
 
 **Calendar events**
 
@@ -124,7 +130,7 @@ Path: `/delete-colaborator`
 
 Path to delete an event:
 Method: delete,
-Path: `/delete-calendar-event/:eventId`
+Path: `/delete-calendar-event/:eventId/:delete-from-sheet`
 Required field in params:
 
 Path to update an event:
@@ -133,7 +139,7 @@ Path: `/update-calendar-event/:eventId`
 Required eventId field in params:
 Required eventDetails object in JSON format
 
-_All fields are optional._
+_All JSON fields are optional._
 
 Path to get events from calendar:
 Method: post,

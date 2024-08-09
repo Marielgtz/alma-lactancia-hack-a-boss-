@@ -1,10 +1,10 @@
 import { sheets } from '../client.js'
 
-const enterValue = async (dataToUpdate) => {
-    const result = await sheets.spreadsheets.values.update(dataToUpdate)
+const updateRow = async (rowToUpdate) => {
+    const result = await sheets.spreadsheets.values.update(rowToUpdate)
     return result
 }
-export default enterValue
+export default updateRow
 
 //Estructura del objeto dataToUpdate:
 //Ejemplo:
