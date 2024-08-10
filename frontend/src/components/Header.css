@@ -6,22 +6,37 @@ body {
 /* Contenedor de la barra de navegación */
 .navbar {
   display: flex;
-  justify-content: space-between; /* Espacio entre el logo y el menú */
   align-items: center; /* Alinea verticalmente el logo y el menú */
   padding: 10px 20px; /* Espaciado alrededor del contenido del header */
   z-index: 1;
   background: transparent;
   position: absolute;
-  top: 0;
   left: 0;
   right: 0;
+  top: 0;
+  flex-direction: column;
 }
 
 /* Estilo del logo */
 .logo {
   height: 6em; /* Altura del logo */
   z-index: 1;
-  position: relative;
+  position: absolute;
+  align-self: flex-start;
+  margin-top: 2em;
+}
+
+/* social media*/
+.social-media {
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+}
+
+/* Social media icons styling */
+.social-media a {
+  color: white;
+  margin: 0 1em;
 }
 
 /* Estilo de la lista de menú principal */
@@ -30,6 +45,9 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  justify-content: center;
+  align-self: flex-end;
+  margin-top: 1em;
 }
 
 /* Estilo de los elementos del menú */
@@ -114,10 +132,15 @@ body {
 
 /* Estilos responsivos para dispositivos móviles */
 @media (max-width: 768px) {
+  .social-media {
+    display: none;
+  }
+  
   .menu {
     display: none; /* Oculta el menú por defecto en dispositivos móviles */
     flex-direction: column; /* Alinea el menú en columna */
-    width: 100%; /* El menú ocupa todo el ancho */
+    width: auto; /* Ajusta el ancho del menú */
+    align-items: flex-end;
   }
 
   .menu.active {
@@ -125,9 +148,9 @@ body {
   }
 
   .menu-item {
-    width: 100%; /* Los elementos del menú ocupan todo el ancho */
-    margin: 0;
+    width: 100%; 
     font-weight: bold;
+    text-align: right;
   }
 
   .menu-item > a {
@@ -136,7 +159,9 @@ body {
 
   .submenu {
     position: static;
-    box-shadow: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);   
   }
 
   .submenu .menu-item a {
@@ -148,14 +173,17 @@ body {
   }
 
   .menu-toggle {
-    display: block; /* Muestra el ícono de menú hamburguesa */
+    display: flex;
     cursor: pointer;
     color: white;
-    font-size: 1.5em;
+    font-size: 2em;
+    align-self: flex-end;
+    margin-top: -1.8em;
   }
 
   .logo {
     height: 5em; /* Ajusta la altura del logo en dispositivos móviles */
+    margin-top: 0.5em;
   }
 }
 

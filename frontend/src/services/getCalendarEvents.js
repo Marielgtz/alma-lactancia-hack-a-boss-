@@ -16,13 +16,18 @@ export const getCalendarEvents = async () => {
       }),
     });
 
+    console.log('Response status:', response.status);
+    console.log('Response status text:', response.statusText);
+
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorText = await response.text();
+      throw new Error(`Network response was not ok: ${response.status} ${response.statusText}. Response text: ${errorText}`);
     }
 
     const data = await response.json();
     return data.response;
   } catch (error) {
+    console.log('Fetching calendar events from:', `${API_BASE_URL}/api/list-calendar-events`);
     console.error('Error fetching calendar events:', error);
     throw error;
   }

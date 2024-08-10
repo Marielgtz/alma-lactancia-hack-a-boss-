@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./Home.css";
-import { getCalendarEvents } from "../services/apigoogle";
+import { getCalendarEvents } from "../services/getCalendarEvents";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -19,6 +20,18 @@ const Home = () => {
 
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300); // Muestra el botón si el usuario ha bajado más de 300px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="home-page">
@@ -103,6 +116,11 @@ const Home = () => {
         </div>
       </main>
       <Footer />
+      {showScrollTop && (
+        <button className="scroll-top" onClick={scrollToTop}>
+          ↑
+        </button>
+      )}
     </div>
   );
 };

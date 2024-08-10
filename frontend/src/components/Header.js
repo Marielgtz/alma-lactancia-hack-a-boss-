@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../images/logo-alma.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 const Header = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -22,13 +24,29 @@ const Header = () => {
         <div className="menu-toggle" onClick={toggleMenu}>
           ☰
         </div>
+        <div className={`social-media ${menuOpen ? "active" : ""}`}>
+          <a
+            href="https://www.instagram.com/alma_lactancia/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faInstagram} size="2x" />
+          </a>
+          <a
+            href="https://www.facebook.com/AlmaLactanciaMaterna/?locale=es_ES"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faFacebookF} size="2x" />
+          </a>
+        </div>
+        {/* Inicio de la lista de elementos del menú */}
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
             <a href="#">Inicio</a>
           </li>
           <li className="menu-item">
-            <a href="#">¿Quiénes somos?
-            </a>
+            <a href="#">¿Quiénes somos?</a>
           </li>
           <li className="menu-item">
             <a href="#">Biblioteca</a>
@@ -47,9 +65,12 @@ const Header = () => {
             </ul>
           </li>
           <li className="menu-item">
-            <Link to="/contacto" onClick={toggleMenu}>Contacto</Link>
+            <Link to="/contacto" onClick={toggleMenu}>
+              Contacto
+            </Link>
           </li>
         </ul>
+        {/* Fin de la lista de elementos del menú */}
       </nav>
     </header>
   );

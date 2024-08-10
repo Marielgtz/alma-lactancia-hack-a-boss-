@@ -149,6 +149,31 @@ iframe {
   gap: 5em;
 }
 
+/* Estilos para el botón de volver arriba */
+.scroll-top {
+  position: fixed;
+  bottom: 20px; /* Ajusta la distancia desde el fondo del viewport */
+  right: 50%; /* Centro horizontal */
+  transform: translateX(50%); /* Ajusta el botón al centro exacto */
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color del texto/icono */
+  border: none;
+  border-radius: 50%; /* Hacer el botón redondo */
+  width: 50px; /* Tamaño del botón */
+  height: 50px; /* Tamaño del botón */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem; /* Tamaño del icono de la flecha */
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del botón */
+  transition: background-color 0.3s ease;
+}
+
+.scroll-top:hover {
+  background-color: #0056b3; /* Color del botón al pasar el cursor */
+}
+
 /* Estilos responsive */
 @media (max-width: 768px) {
   .activities-button {
@@ -159,7 +184,8 @@ iframe {
     bottom: 2em;
     margin: 0 auto;
     font-size: 1.05em;
-    right: -1em;
+    right: 0;
+    left: 0;
     border: none;
     border-radius: 3em;
     cursor: pointer;
