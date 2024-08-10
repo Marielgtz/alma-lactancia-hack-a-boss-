@@ -1,11 +1,11 @@
 .App-footer {
-  height: 10vh;
   display: flex;
   flex-direction: column; /* Cambia la dirección a columna */
   justify-content: center; /* Centra los elementos verticalmente */
   align-items: center; /* Centra los elementos horizontalmente */
   padding: 1rem;
   text-align: center;
+  position: relative;
 }
 
 .social-media {

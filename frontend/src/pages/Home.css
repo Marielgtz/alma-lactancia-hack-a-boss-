@@ -2,60 +2,87 @@ html,
 body,
 #root,
 .home-page {
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  /* Evita el scroll horizontal */
 }
 
 .home-page {
   display: flex;
   flex-direction: column;
+  position: relative;
   min-height: 100vh;
 }
 
 .header {
-  background-color: white;
-  z-index: 1000;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
+  z-index: 1;
+  background: transparent;
 }
 
 .main-home {
   flex: 1;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .img-section {
-  width: 100vw;
-  height: 100vh;
   position: relative;
-  overflow: hidden;
+  height: 100vh;
 }
 
 .background-image {
   background-image: url("/src/images/bebe\ pecho.jpg");
   background-size: cover;
   background-position: center;
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.activities-button {
+  position: absolute;
+  background-color: #d8e2dc;
+  border: none;
+  color: #b380b5;
+  cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  max-width: 25%;
+  justify-content: center;
+  bottom: 2.2em;
+  right: -1em;
+}
+
+.activities-button:hover {
+  background-color: #b380b5;
+  color: white;
 }
 
 .content {
   padding: 2em;
   background-color: white;
   position: relative;
-  z-index: 1;
 }
 
 .section-title {
-  text-align: center;
-  margin: 2em 0;
+  margin-top: 2em;
+  margin-left: 2em;
+  color: #b380b5;
+}
+
+.section-title-calendar {
+  display: flex;
+  justify-content: center;
+  color: #b380b5;
 }
 
 .section-text {
@@ -67,8 +94,7 @@ body,
 .centered-container {
   display: flex;
   align-items: center;
-  text-align: center;
-  justify-content: center;
+  margin-left: 3em;
 }
 
 .activities {
@@ -90,27 +116,6 @@ body,
   padding: 1em;
 }
 
-.activities-button {
-  display: flex;
-  margin: 2em auto;
-  padding: 1em 2em;
-  background-color: #e0a0b0;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 2em;
-  margin-top: 3em;
-  font-size: 0.9em;
-  max-width: 30%;
-  text-align: center;
-  justify-content: center;
-}
-
-.calendar-section {
-  padding: 20px;
-  text-align: center;
-}
-
 .calendar-content {
   display: flex;
   flex-direction: row;
@@ -121,12 +126,6 @@ body,
   margin: 0 auto;
 }
 
-.calendar-text {
-  max-width: 50%;
-  text-align: left;
-  font-size: 1.2em;
-}
-
 .calendar-container {
   display: flex;
   justify-content: center;
@@ -135,8 +134,8 @@ body,
 
 iframe {
   border: 0;
-  max-width: 50rem;
-  height: 40rem;
+  width: 35em;
+  height: 30em;
 }
 
 .experience {
@@ -150,23 +149,30 @@ iframe {
   gap: 5em;
 }
 
-.footer {
-  font-size: 0.7em;
-  background-color: white;
-  z-index: 1000;
-  width: 100vw;
-  position: relative;
-  margin-top: auto;
-}
-
 /* Estilos responsive */
 @media (max-width: 768px) {
-  .section-text {
-    font-size: 0.8em;
+  .activities-button {
+    position: absolute;
+    background-color: #d8e2dc;
+    color: #b380b5;
+    max-width: 45%;
+    bottom: 2em;
+    margin: 0 auto;
+    font-size: 1.05em;
+    right: -1em;
+    border: none;
+    border-radius: 3em;
+    cursor: pointer;
   }
 
-  .calendar-text {
-    display: none;
+  .activities-button:hover {
+    background-color: #b380b5;
+    color: white;
+  }
+  
+  .section-text {
+    font-size: 0.8em;
+    margin-left: -0.5em;
   }
 
   .activities {
@@ -190,25 +196,27 @@ iframe {
 
   iframe {
     border: 0;
-    max-width: 35rem;
-    height: 25rem;
-  }
-
-  .activities-button {
-    font-size: 0.7em;
+    width: 30rem;
+    height: 23rem;
   }
 
   .section-title {
     margin-top: auto;
     margin-bottom: auto;
-    font-size: 1em;
+    font-size: 1.3em;
+  }
+
+  .section-title-calendar {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3em;
   }
 
   .experience {
     text-align: center;
     font-size: 0.8em;
   }
-  
+
   .img-collab {
     display: flex;
     flex-direction: column;
