@@ -1,7 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
-import logo from "../images/logo-alma.png"; // Ajusta la ruta del logo según la ubicación real
+import logo from "../images/logo-alma.png";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
@@ -15,19 +16,19 @@ const Footer = () => {
           <h3>Mapa web</h3>
           <ul>
             <li>
-              <a href="#">Inicio</a>
+              <Link to="/">Inicio</Link>
             </li>
             <li>
-              <a href="#">¿Quiénes somos?</a>
+              <Link to="/quienes-somos">¿Quiénes somos?</Link>
             </li>
             <li>
-              <a href="#">Biblioteca</a>
+              <Link to="/biblioteca">Biblioteca</Link>
             </li>
             <li>
-              <a href="#">Actividades</a>
+              <Link to="/actividades">Actividades</Link>
             </li>
             <li>
-              <a href="#">Contacto</a>
+              <Link to="/contacto">Contacto</Link>
             </li>
           </ul>
         </div>

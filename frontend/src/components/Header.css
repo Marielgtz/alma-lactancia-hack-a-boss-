@@ -37,6 +37,7 @@ body {
 .social-media a {
   color: white;
   margin: 0 1em;
+  margin-top: -1em;
 }
 
 /* Estilo de la lista de menú principal */

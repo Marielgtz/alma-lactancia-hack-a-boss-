@@ -77,6 +77,7 @@ body,
   margin-top: 2em;
   margin-left: 2em;
   color: #b380b5;
+  font-weight: bold;
 }
 
 .section-title-calendar {
@@ -152,26 +153,35 @@ iframe {
 /* Estilos para el botón de volver arriba */
 .scroll-top {
   position: fixed;
-  bottom: 20px; /* Ajusta la distancia desde el fondo del viewport */
-  right: 50%; /* Centro horizontal */
-  transform: translateX(50%); /* Ajusta el botón al centro exacto */
-  background-color: #007bff; /* Color de fondo del botón */
-  color: white; /* Color del texto/icono */
+  bottom: 20px; /* Ajusta el espacio desde el fondo */
+  left: 50%; /* Posiciona horizontalmente al centro */
+  transform: translateX(-50%); /* Centra horizontalmente el botón */
+  background-color: #000; /* Fondo del botón */
+  color: #fff; /* Color del texto */
   border: none;
-  border-radius: 50%; /* Hacer el botón redondo */
-  width: 50px; /* Tamaño del botón */
-  height: 50px; /* Tamaño del botón */
+  border-radius: 50%; /* Botón circular */
+  width: 50px; /* Ancho del botón */
+  height: 50px; /* Alto del botón */
+  font-size: 24px; /* Tamaño del texto */
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 1.5rem; /* Tamaño del icono de la flecha */
+  justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del botón */
-  transition: background-color 0.3s ease;
+  z-index: 1000; /* Asegura que el botón esté por encima de otros elementos */
+  opacity: 0.8; /* Opacidad del botón */
+  transition: opacity 0.3s ease; /* Transición suave para la opacidad */
+}
+
+.scroll-top {
+  background-color: red; /* Color de fondo temporal para ver el botón */
 }
 
 .scroll-top:hover {
-  background-color: #0056b3; /* Color del botón al pasar el cursor */
+  opacity: 1; /* Botón completamente visible al pasar el mouse */
+}
+
+.scroll-top {
+  display: flex; /* Asegura que el botón sea visible */
 }
 
 /* Estilos responsive */

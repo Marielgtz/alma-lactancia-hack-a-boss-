@@ -23,10 +23,12 @@ const Home = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300); // Muestra el botón si el usuario ha bajado más de 300px
+      console.log("Scroll Position:", window.scrollY);
+      setShowScrollTop(window.scrollY > 20); // Muestra el botón si el usuario ha bajado más de 20px
     };
 
     window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll); // Cleanup
   }, []);
 
   const scrollToTop = () => {
@@ -114,13 +116,13 @@ const Home = () => {
           <h2 className="section-title">Experiencias reales</h2>
           <p className="experience">Nombre - Experiencia</p>
         </div>
+        {showScrollTop && (
+          <button className="scroll-top" onClick={scrollToTop}>
+            ↑
+          </button>
+        )}
       </main>
       <Footer />
-      {showScrollTop && (
-        <button className="scroll-top" onClick={scrollToTop}>
-          ↑
-        </button>
-      )}
     </div>
   );
 };
