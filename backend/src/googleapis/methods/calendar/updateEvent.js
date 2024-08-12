@@ -1,7 +1,11 @@
 import { calendar } from '../../client.js'
 import { generateError } from '../../../utils/index.js'
 
-const updateEvent = async (eventId, eventDetails, calendarId = 'primary') => {
+const updateEvent = async (
+    eventId,
+    eventDetails,
+    calendarId = process.env.CALENDAR_ID
+) => {
     try {
         const data = {
             calendarId,

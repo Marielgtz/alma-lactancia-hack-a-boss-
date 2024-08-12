@@ -8,7 +8,6 @@ const insertRow = async (spreadsheetId, sheetName, nextRow, values) => {
         const endColumn = getColumnLetter(numColumns)
 
         const range = `${sheetName}!${startColumn}${nextRow}:${endColumn}${nextRow}`
-        console.log('values', values)
 
         const data = {
             spreadsheetId,

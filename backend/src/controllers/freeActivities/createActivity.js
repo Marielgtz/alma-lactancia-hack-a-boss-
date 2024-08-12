@@ -1,12 +1,26 @@
-import { getValues, insertRow } from '../../googleapis/methods/index.js'
+import {
+    getValues,
+    insertRow,
+    addEvent,
+} from '../../googleapis/methods/index.js'
 import { generateError, eventSchema } from '../../utils/index.js'
 import { v4 as uuidv4 } from 'uuid'
+import { formatDate } from '../../utils/index.js'
 
 const createActivity = async (req, res, next) => {
     try {
         const sheetId = process.env.SPREADSHEET_ID
         const id = uuidv4()
         const { summary, description, start, end, location, access } = req.body
+
+        let accessDataSheet
+        if (access === 'free') {
+            accessDataSheet = 'libre'
+        } else accessDataSheet = 'solo_socios'
+
+        //Formato de fechas para insertar en la hoja de Google:
+        const formattedStartDate = formatDate(start.dateTime)
+        const formattedEndtDate = formatDate(end.dateTime)
 
         //Validación de datos:
         const { error } = eventSchema.validate(req.body)
@@ -22,12 +36,13 @@ const createActivity = async (req, res, next) => {
                 id,
                 summary,
                 description,
-                start.dateTime,
-                end.dateTime,
+                formattedStartDate,
+                formattedEndtDate,
                 location,
-                access,
+                accessDataSheet,
             ],
         ]
+
         //Obtener la siguiente fila vacía:
         const values = await getValues(sheetId, 'Actividades')
         const { nextRow } = values
@@ -40,9 +55,15 @@ const createActivity = async (req, res, next) => {
             dataToInsert
         )
 
+        //Añadir el evento al calendario:
+        const response = await addEvent(req.body)
+        if (!response.id) {
+            generateError('Error al crear el evento en Google Calendar')
+        }
+
         res.send({
             message: 'Actividad creada y subida al calendario correctamente',
-            eventAdded,
+            response,
         })
     } catch (error) {
         next(error)
