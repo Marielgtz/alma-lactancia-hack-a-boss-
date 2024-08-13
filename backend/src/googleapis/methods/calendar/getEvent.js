@@ -9,7 +9,6 @@ const getEvent = async (eventId, calendarId = process.env.CALENDAR_ID) => {
         }
         const response = await calendar.events.get(data)
 
-        console.log('Event details:', response.data)
         return response.data
     } catch (error) {
         console.error('Error getting event:', error)
