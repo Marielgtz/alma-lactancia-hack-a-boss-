@@ -6,7 +6,6 @@ import { getCalendarEvents } from "../services/getCalendarEvents";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
-  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -20,20 +19,6 @@ const Home = () => {
 
     fetchEvents();
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      console.log("Scroll Position:", window.scrollY);
-      setShowScrollTop(window.scrollY > 20); // Muestra el botón si el usuario ha bajado más de 20px
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll); // Cleanup
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <div className="home-page">
@@ -116,11 +101,6 @@ const Home = () => {
           <h2 className="section-title">Experiencias reales</h2>
           <p className="experience">Nombre - Experiencia</p>
         </div>
-        {showScrollTop && (
-          <button className="scroll-top" onClick={scrollToTop}>
-            ↑
-          </button>
-        )}
       </main>
       <Footer />
     </div>

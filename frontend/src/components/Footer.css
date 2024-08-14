@@ -4,7 +4,8 @@
   padding: 2rem; /* Espacio interno alrededor del contenido */
   text-align: center;
   background-color: #d8e2dc;
-  min-height: 40vh; /* Altura mínima del footer */
+  min-height: 45vh; /* Altura mínima del footer */
+  max-height: 45vh; /* Altura máxima del footer */
   position: relative;
 }
 
@@ -113,15 +114,14 @@
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column; /* Alinea las columnas en una sola columna en pantallas pequeñas */
-    align-items: center; /* Centra las columnas */
-  }
-
-  .footer-column {
-    margin-bottom: 1rem; /* Espacio entre las columnas en pantallas pequeñas */
+    align-items: center; /* Centra las columnas */;
+    font-size: 0.8em;
   }
 
   .footer-logo img {
-    height: 2.5rem; /* Ajusta el tamaño del logo en pantallas pequeñas */
+    height: 4em; /* Ajusta el tamaño del logo en pantallas pequeñas */
+    margin-bottom: 2.5em;
+    margin-left: 10em;
   }
 
   .social-media {
@@ -131,28 +131,28 @@
 
   .App-footer {
     padding: 1rem; /* Ajusta el padding en pantallas pequeñas */
-    min-height: auto; /* Ajusta la altura según el contenido */
+    min-height: 45em; /* Ajusta la altura según el contenido */
   }
 
   .App-footer p {
-    font-size: 0.9rem; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
+    font-size: 0.7rem; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
   }
 
   .admin {
-    padding: 0.5rem; /* Reduce el padding en pantallas pequeñas */
-    text-align: left;
-    margin-left: 17em;
+    text-align: center;
+    margin-right: 0;
   }
 
   .admin h5 {
     font-size: 0.8rem; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
+    margin-top: 2em;
   }
 
   .admin-links {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     gap: 0.5rem;
+    margin-right: 0;
   }
 
   .admin-links a {
