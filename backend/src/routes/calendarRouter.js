@@ -8,7 +8,10 @@ import {
 const router = express.Router()
 
 //Ruta para actividades del calendario:
-router.delete('/delete-calendar-event/:eventId', deleteEventController)
+router.delete(
+    '/delete-calendar-event/:eventId/:deleteFromSheet',
+    deleteEventController
+)
 router.patch('/update-calendar-event/:eventId', updateEventController)
 router.post('/list-calendar-events', listEventsController)
 router.get('/get-calendar-event/:eventId', getEventController)

@@ -171,7 +171,7 @@ Path to update an event:
 Method: patch,
 Path: `/update-calendar-event/:eventId`
 Required eventId field in params:
-Required eventDetails object in JSON format
+Required eventDetails object in JSON format (The same object as when an event is created)
 
 _All JSON fields are optional._
 
