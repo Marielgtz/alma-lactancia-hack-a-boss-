@@ -201,6 +201,18 @@ Required fields (in JSON format):
 
     _All fields are required._
 
+**captcha**
+Path to save generate captcha:
+Method: get,
+Path: `/generate-captcha`
+
+Path to save validate captcha:
+Method: get,
+Path: `/validate-captcha`
+Required fields (in JSON format):
+
+-   captcha (el texto del captcha)
+
 ### Developer
 
 [Guillermo Cerviño Porto](https://www.linkedin.com/in/guillermocporto/)
