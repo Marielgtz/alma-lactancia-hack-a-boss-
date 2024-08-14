@@ -29,6 +29,7 @@ const Header = () => {
             href="https://www.instagram.com/alma_lactancia/"
             target="_blank"
             rel="noopener noreferrer"
+            className="social-media-item"
           >
             <FontAwesomeIcon icon={faInstagram} size="2x" />
           </a>
@@ -36,6 +37,7 @@ const Header = () => {
             href="https://www.facebook.com/AlmaLactanciaMaterna/?locale=es_ES"
             target="_blank"
             rel="noopener noreferrer"
+            className="social-media-item"
           >
             <FontAwesomeIcon icon={faFacebookF} size="2x" />
           </a>

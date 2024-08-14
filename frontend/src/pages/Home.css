@@ -1,7 +1,6 @@
 html,
 body,
-#root,
-.home-page {
+#root {
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -150,40 +149,6 @@ iframe {
   gap: 5em;
 }
 
-/* Estilos para el botón de volver arriba */
-.scroll-top {
-  position: fixed;
-  bottom: 20px; /* Ajusta el espacio desde el fondo */
-  left: 50%; /* Posiciona horizontalmente al centro */
-  transform: translateX(-50%); /* Centra horizontalmente el botón */
-  background-color: #000; /* Fondo del botón */
-  color: #fff; /* Color del texto */
-  border: none;
-  border-radius: 50%; /* Botón circular */
-  width: 50px; /* Ancho del botón */
-  height: 50px; /* Alto del botón */
-  font-size: 24px; /* Tamaño del texto */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1000; /* Asegura que el botón esté por encima de otros elementos */
-  opacity: 0.8; /* Opacidad del botón */
-  transition: opacity 0.3s ease; /* Transición suave para la opacidad */
-}
-
-.scroll-top {
-  background-color: red; /* Color de fondo temporal para ver el botón */
-}
-
-.scroll-top:hover {
-  opacity: 1; /* Botón completamente visible al pasar el mouse */
-}
-
-.scroll-top {
-  display: flex; /* Asegura que el botón sea visible */
-}
-
 /* Estilos responsive */
 @media (max-width: 768px) {
   .activities-button {
@@ -206,9 +171,16 @@ iframe {
     color: white;
   }
   
+  .section-title {
+    text-align: center;
+    margin-left: 0;
+  }
+
   .section-text {
-    font-size: 0.8em;
-    margin-left: -0.5em;
+    font-size: 0.75em;
+    text-align: center;
+    max-width: 100%;
+    margin-left: -1.5em;
   }
 
   .activities {
@@ -232,8 +204,8 @@ iframe {
 
   iframe {
     border: 0;
-    width: 30rem;
-    height: 23rem;
+    width: 22em;
+    height: 19rem;
   }
 
   .section-title {
