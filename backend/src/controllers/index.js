@@ -13,6 +13,7 @@ import listEventsController from './calendar/listEventsController.js'
 import saveMessage from './contact/saveMessage.js'
 import createActivity from './freeActivities/createActivity.js'
 import getEventController from './calendar/getEventController.js'
+import generateCaptcha from './captcha/generateCaptcha.js'
 
 export {
     newPartner,
@@ -30,4 +31,5 @@ export {
     listEventsController,
     saveMessage,
     getEventController,
+    generateCaptcha,
 }
