@@ -14,7 +14,6 @@ const updateEvent = async (
         }
         const response = await calendar.events.update(data)
 
-        console.log('Event updated:', response.data)
         return response.data
     } catch (error) {
         console.error('Error updating event:', error)

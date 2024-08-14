@@ -63,7 +63,7 @@ export default addEvent
 //     "htmlLink": "https://www.google.com/calendar/event?eid=event_id",
 //     "created": "2024-08-05T12:34:56.000Z",
 //     "updated": "2024-08-05T12:34:56.000Z",
-//     "summary": "Event Summary",
+//     "summary": "Event summary",
 //     "description": "Event Description",
 //     "location": "Event Location",
 //     "start": {

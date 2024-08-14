@@ -14,13 +14,11 @@ const updateEventController = async (req, res, next) => {
             'description',
             'start',
             'end',
+            'location',
             'attendees',
             'reminders',
-            'recurrence',
-            'colorId',
             'visibility',
-            'conferenceData',
-            'attachments',
+            'access',
         ]
 
         //Creo un objeto solo con las propiedades que admite el método update de calendar:
@@ -56,3 +54,32 @@ const updateEventController = async (req, res, next) => {
     }
 }
 export default updateEventController
+
+//Ejemplo del objeto necesario
+
+//{
+//     summary:
+//     description:
+//     start: {
+//         dateTime: "2024-08-09T10:00:00+02:00",
+//         timeZone: "Europe/Madrid"
+//     },
+//     end: {
+//         dateTime: "2024-08-09T12:00:00+02:00",
+//         timeZone: "Europe/Madrid"
+//     },
+//     location: "123 de Michelena, Pontevedra, ES",
+//     attendees: [  // Lista de asistentes
+//         { email: "fulano@example.com" },
+//         { email: "mengano@example.com" }
+//     ],
+//     reminders: {
+//         useDefault: false,
+//         overrides: [
+//             { method: "email", minutes: 1440 },
+//             { method: "popup", minutes: 10 }  /
+//         ]
+//     },
+//     visibility: "private",
+//     access: "partners"
+// };

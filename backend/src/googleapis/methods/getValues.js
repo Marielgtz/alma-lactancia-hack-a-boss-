@@ -69,7 +69,7 @@ const getValues = async (
             }
 
             if (rowIndex === -1) {
-                return { error: 'No se ha encontrado el valor especificado.' }
+                generateError('No se ha encontrado el valor especificado.')
             }
 
             //Rango de la celda concreta en la que se quiere cambiar el valor buscado.
@@ -121,7 +121,7 @@ const getValues = async (
             //Datos para borrar una fila con  el método batchUpdate:
 
             rowToDelete = {
-                spreadsheetId,
+                spreadsheetId: spreadsheetId,
                 resource: {
                     requests: [
                         {
