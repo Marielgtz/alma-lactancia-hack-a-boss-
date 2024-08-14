@@ -157,6 +157,11 @@ Required fields from params.
 **Note: Events/activities will be automatically added to the calendar from the server once created from the web form.**
 **Nota: Los eventos/actividades se añadirán automáticamente al calendario desde el servidor una vez creados desde el formulario de la web.**
 
+Path to add get list activities:
+Method: get,
+Path: `/get-calendar-event/:eventId`
+Required fields (in params):
+
 Path to delete an event:
 Method: delete,
 Path: `/delete-calendar-event/:eventId/:delete-from-sheet`
@@ -170,19 +175,17 @@ Required eventDetails object in JSON format
 
 _All JSON fields are optional._
 
-Path to get events from calendar:
+Path to add get list activities:
 Method: post,
 Path: `/list-calendar-events`
+Required fields (in JSON format):
 
-Required fields (in JSON format)
-
--   calendarId: (Si solo hay un calendario: 'primary')
 -   maxResults: 10 (Número máximo de eventos a devolver)
 -   orderBy: 'startTime' (Tambien: 'updated')
--   singleEvents: true,
--   timeMin: new Date().toISOString() (La fecha y hora mínima para filtrar los eventos. Solo se devolverán los eventos que comiencen después de esta fecha y hora. En este caso, solo se mostrarán eventos futuros)
+-   singleEvents: true
+-   timeMin: new Date().toISOString() (La fecha y hora mínima para filtrar los eventos. Solo se devolverán los eventos que comiencen después de esta fecha y hora. En este ejemplo, solo se mostrarán eventos futuros)
 
-_All fields are required._
+    _All fields are required._
 
 **contact**
 Path to save contact data:
