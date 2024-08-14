@@ -1,20 +1,22 @@
 import {
     generateError,
-    validationSchemaNonPartnerActivity,
+    validationSchemaJoinNonPartnerActivity,
 } from '../../utils/index.js'
 const joinFreeActivity = (req, res, next) => {
     try {
         const {
-            asistencia,
-            nome_nai,
-            fpp,
-            centro_saude,
-            telefono,
-            correo_electronico,
+            attendance,
+            mothers_name,
+            edd,
+            health_center,
+            phone_number,
+            email,
         } = req.body
 
         //Validación de datos:
-        const { error } = validationSchemaNonPartnerActivity.validate(req.body)
+        const { error } = validationSchemaJoinNonPartnerActivity.validate(
+            req.body
+        )
 
         if (error) {
             error.message = error.details[0].message

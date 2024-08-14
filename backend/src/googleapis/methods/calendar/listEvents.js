@@ -5,7 +5,6 @@ const listEvents = async (eventData) => {
     try {
         const response = await calendar.events.list(eventData)
 
-        console.log('Events:', response.data.items)
         return response.data.items
     } catch (error) {
         console.error('Error listing events:', error)

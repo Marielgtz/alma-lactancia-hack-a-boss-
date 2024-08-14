@@ -1,7 +1,7 @@
 import { calendar } from '../../client.js'
 import { generateError } from '../../../utils/index.js'
 
-const deleteEvent = async (eventId, calendarId = 'primary') => {
+const deleteEvent = async (eventId, calendarId = process.env.CALENDAR_ID) => {
     try {
         const data = {
             calendarId,
