@@ -15,6 +15,7 @@ import createActivity from './freeActivities/createActivity.js'
 import getEventController from './calendar/getEventController.js'
 import generateCaptcha from './captcha/generateCaptcha.js'
 import validateCaptcha from './captcha/validateCaptcha.js'
+import googleSignIn from './googleSignIn/googleSignIn.js'
 
 export {
     newPartner,
@@ -34,4 +35,5 @@ export {
     getEventController,
     generateCaptcha,
     validateCaptcha,
+    googleSignIn,
 }
