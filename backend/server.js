@@ -17,7 +17,12 @@ const app = express()
 
 //Middlewares de aplicación:
 app.use(express.json())
-app.use(cors())
+app.use(
+    cors({
+        origin: true, //Acepta todas las entradas.
+        credentials: true, // Esto permite que las cookies y credenciales se envíen
+    })
+)
 app.use(sessionMiddleware)
 
 // Rutas
