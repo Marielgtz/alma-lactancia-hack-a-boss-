@@ -1,17 +1,17 @@
+import { generateError } from '../../../utils/index.js'
 import { calendar } from '../../client.js'
 
 const addEvent = async (eventDetails) => {
     try {
         const data = {
-            calendarId: 'primary', // Usa 'primary' para añadir el evento al calendario principal del usuario
+            calendarId: process.env.CALENDAR_ID,
             resource: eventDetails,
         }
         const response = await calendar.events.insert(data)
 
-        console.log('Event created:', response.data)
         return response.data
     } catch (error) {
-        console.error('Error creating event:', error)
+        generateError('Error creating event:', error)
         throw error
     }
 }

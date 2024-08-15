@@ -1,12 +1,12 @@
+import { generateError } from '../../utils/index.js'
 import { sheets } from '../client.js'
 
 const deleteRow = async (dataToDelete) => {
     try {
-        await sheets.spreadsheets.batchUpdate(dataToDelete)
-
-        console.log('Fila borrada.')
+        const response = await sheets.spreadsheets.batchUpdate(dataToDelete)
+        console.log('Fila borrada.', response)
     } catch (error) {
-        console.error('Error al borrar la fila:', error.message)
+        generateError('Error al borrar la fila:')
     }
 }
 export default deleteRow

@@ -36,13 +36,13 @@ const Footer = () => {
           <h3>Actividades</h3>
           <ul>
             <li>
-              <a href="#">Actividad 1</a>
+              <a href="/">Actividad 1</a>
             </li>
             <li>
-              <a href="#">Actividad 2</a>
+              <a href="/">Actividad 2</a>
             </li>
             <li>
-              <a href="#">Actividad 3</a>
+              <a href="/">Actividad 3</a>
             </li>
             {/* Añade más actividades según sea necesario */}
           </ul>
@@ -68,11 +68,10 @@ const Footer = () => {
         </div>
       </div>
       <div className="admin">
-        <h5>Acceso administración</h5>
         <div className="admin-links">
-          <a href="#">Política de privacidad</a>
-          <a href="#">Política de cookies</a>
-          <a href="#">Aviso legal</a>
+          <a href="/politica-de-privacidad">Política de privacidad</a>
+          <a href="/politica-de-cookies">Política de cookies</a>
+          <a href="/aviso-legal">Aviso legal</a>
         </div>
       </div>
       <p>Alma Lactancia © 2024. Todos los derechos reservados.</p>

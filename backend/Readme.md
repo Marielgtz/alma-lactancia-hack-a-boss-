@@ -9,6 +9,10 @@ The project involves developing a website for "Alma Lactancia," a non-profit org
 
 ### Endpoints:
 
+**Important Note: due to the data insertion system in Google API spreadsheets, it is very important that the fields in the json objects are sent in the same order as indicated here.**
+
+**Nota importante: Debido al sistema de inserción de datos en las hojas de cálculo de la API de Google es muy importante que los campos en los objetos json se envíen en el mismo orden que aquí se indica.**
+
 **Partners**
 
 Route to register a new member:
@@ -45,7 +49,36 @@ Required fields (in JSON format):
 Method: delete,
 Path: `/delete-partner`
 
-**PartnersActivities**
+**Activities**
+Path to create activities:
+Method: post,
+Path: `/create-activity`
+Required fields (in JSON format):
+
+-   summary: <font color="red">(Required)</font>
+-   description: <font color="green">(Optional)</font>
+-   start: { <font color="red">(Required)</font>
+    dateTime: "2024-08-09T10:00:00+02:00", (Fecha y hora de inicio en formato ISO 8601) <font color="red">(Required)</font>
+    timeZone: "Europe/Madrid" <font color="green">(Optional)</font>
+    },
+    end: { <font color="red">(Required)</font>
+-   dateTime: "2024-08-09T12:00:00+02:00", (Fecha y hora de finalización en formato ISO 8601) <font color="red">(Required)</font>
+-   timeZone: "Europe/Madrid" <font color="green">(Optional)</font>
+    },
+-   location: "123 de Michelena, Pontevedra, ES", <font color="green">(Optional)</font>
+-   attendees: [ (Lista de asistentes, <font color="green">(Optional)</font>)
+    { email: "fulano@example.com" },
+    { email: "mengano@example.com" }
+    ],
+-   reminders: { (Recordatorios del evento <font color="green">(Optional)</font>)
+-   useDefault: false, (En este caso, No usar recordatorios por defecto)
+-   overrides: [ (Lista de recordatorios personalizados)
+    { method: "email", minutes: 1440 }, (En este ejemplo: Enviar email un día antes (1440 minutos))
+    { method: "popup", minutes: 10 } (En este ejemplo: Mostrar popup 10 minutos antes del evento)
+    ]
+    },
+-   visibility: "private", (Visibilidad del evento, puede ser 'default', 'public' o 'private') <font color="red">(Required)</font>
+-   access: "partners" (Acceso, en este caso para 'socios', puede ser 'partners' o 'free') <font color="red">(Required)</font>
 
 Path to add a partner to an activity:
 Method: post,
@@ -95,37 +128,44 @@ Method: post,
 Path: `/new-collaborator`
 Required fields (in JSON format):
 
--   nome
--   apelidos
--   descripcion
--   rol (optional)
--   imaxeColaborador (optional)
--   equipo (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)(required)
+-   name <font color="red">(Required)</font>
+-   surname <font color="red">(Required)</font>
+-   description <font color="red">(Required)</font>
+-   role <font color="green">(Optional)</font>
+-   collaboratorImage <font color="green">(Optional)</font>
+-   team (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)<font color="red">(Required)</font>
 
 Method: patch,
-Path: `/update-collaborator`
+Path: `/update-collaborator/:id/team`
+Required fields (id, team) in params:
 Required fields (in JSON format):
 
--   nome
--   apelidos
--   descripcion
--   rol
--   imaxeColaborador
+-   name
+-   surname
+-   description
+-   role
+-   collaboratorImage
 
-    _All fields are optional._
+    _All JSON fields are optional._
 
 Method: delete,
-Path: `/delete-colaborator`
+Path: `/delete-collaborator/:id/:team` (En team habrá que enviar "true" si es miembro o "false" si es colaborador)
+Required fields from params.
 
 **Calendar events**
 
 **Note: Events/activities will be automatically added to the calendar from the server once created from the web form.**
 **Nota: Los eventos/actividades se añadirán automáticamente al calendario desde el servidor una vez creados desde el formulario de la web.**
 
+Path to add get list activities:
+Method: get,
+Path: `/get-calendar-event/:eventId`
+Required fields (in params):
+
 Path to delete an event:
 Method: delete,
-Path: `/delete-calendar-event/:eventId`
-Required field in params:
+Path: `/delete-calendar-event/:eventId/:delete-from-sheet`
+Required field in params: (delete-from-sheet: true or false)
 
 Path to update an event:
 Method: patch,
@@ -133,21 +173,19 @@ Path: `/update-calendar-event/:eventId`
 Required eventId field in params:
 Required eventDetails object in JSON format
 
-_All fields are optional._
+_All JSON fields are optional._
 
-Path to get events from calendar:
+Path to add get list activities:
 Method: post,
 Path: `/list-calendar-events`
+Required fields (in JSON format):
 
-Required fields (in JSON format)
-
--   calendarId: (Si solo hay un calendario: 'primary')
 -   maxResults: 10 (Número máximo de eventos a devolver)
 -   orderBy: 'startTime' (Tambien: 'updated')
--   singleEvents: true,
--   timeMin: new Date().toISOString() (La fecha y hora mínima para filtrar los eventos. Solo se devolverán los eventos que comiencen después de esta fecha y hora. En este caso, solo se mostrarán eventos futuros)
+-   singleEvents: true
+-   timeMin: new Date().toISOString() (La fecha y hora mínima para filtrar los eventos. Solo se devolverán los eventos que comiencen después de esta fecha y hora. En este ejemplo, solo se mostrarán eventos futuros)
 
-_All fields are required._
+    _All fields are required._
 
 **contact**
 Path to save contact data:

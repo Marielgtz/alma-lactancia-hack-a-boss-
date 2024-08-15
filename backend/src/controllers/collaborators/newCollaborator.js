@@ -1,6 +1,7 @@
 import { generateError } from '../../utils/index.js'
 import { validationSchemaNewCollaborator } from '../../utils/index.js'
 import { getValues, insertRow } from '../../googleapis/methods/index.js'
+import { v4 as uuidv4 } from 'uuid'
 
 const newCollaborator = async (req, res, next) => {
     try {
@@ -9,8 +10,9 @@ const newCollaborator = async (req, res, next) => {
         const { name, surname, description, role, team } = req.body
 
         const collaboratorImage = req.file?.filename || 'sin imagen'
+        const id = uuidv4()
         const dataToInsert = [
-            [name, surname, description, role, collaboratorImage],
+            [id, name, surname, description, role, collaboratorImage],
         ]
 
         // Validación de datos:

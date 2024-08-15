@@ -19,3 +19,6 @@ build/
 
 # Optional npm cache directory
 .npm
+
+# folder Backend
+backend/
