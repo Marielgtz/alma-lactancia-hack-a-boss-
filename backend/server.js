@@ -10,6 +10,7 @@ import {
     collaborator,
     contact,
     captcha,
+    instagram,
 } from './src/routes/index.js'
 import { notFound, manageError } from './src/middlewares/index.js'
 
@@ -34,6 +35,7 @@ app.use(calendar)
 app.use(collaborator)
 app.use(contact)
 app.use(captcha)
+app.use(instagram)
 
 //Middlewares
 app.use(notFound)
