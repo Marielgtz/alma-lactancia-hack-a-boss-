@@ -16,6 +16,7 @@ import generateCaptcha from './captcha/generateCaptcha.js'
 import validateCaptcha from './captcha/validateCaptcha.js'
 import googleSignIn from './googleSignIn/googleSignIn.js'
 import checkSession from './googleSignIn/checkSession.js'
+import logout from './googleSignIn/logout.js'
 
 export {
     newPartner,
@@ -36,4 +37,5 @@ export {
     validateCaptcha,
     googleSignIn,
     checkSession,
+    logout,
 }
