@@ -9,7 +9,7 @@ const getPost = async (req, res, next) => {
 
     try {
         const response = await fetch(
-            `https://graph.facebook.com/v15.0/instagram_oembed?url=${encodeURIComponent(
+            `${process.env.INSTAGRAM_OEMBED_URL}?url=${encodeURIComponent(
                 instagramUrl
             )}&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`
         )
