@@ -3,7 +3,6 @@ import deletePartner from './partners/deletePartner.js'
 import updatePartner from './partners/updatePartner.js'
 import joinFreeActivity from './freeActivities/joinFreeActivity.js'
 import joinPartnerActivity from './partnersActivities/joinPartnerActivity.js'
-import loginController from './admin/loginController.js'
 import newCollaborator from './collaborators/newCollaborator.js'
 import deleteCollaborator from './collaborators/deleteCollaborator.js'
 import updateCollaborator from './collaborators/updateCollaborator.js'
@@ -15,6 +14,9 @@ import createActivity from './freeActivities/createActivity.js'
 import getEventController from './calendar/getEventController.js'
 import generateCaptcha from './captcha/generateCaptcha.js'
 import validateCaptcha from './captcha/validateCaptcha.js'
+import googleSignIn from './googleSignIn/googleSignIn.js'
+import checkSession from './googleSignIn/checkSession.js'
+import logout from './googleSignIn/logout.js'
 
 export {
     newPartner,
@@ -23,7 +25,6 @@ export {
     createActivity,
     joinFreeActivity,
     joinPartnerActivity,
-    loginController,
     newCollaborator,
     deleteCollaborator,
     updateCollaborator,
@@ -34,4 +35,7 @@ export {
     getEventController,
     generateCaptcha,
     validateCaptcha,
+    googleSignIn,
+    checkSession,
+    logout,
 }

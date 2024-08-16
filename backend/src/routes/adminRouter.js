@@ -1,7 +1,9 @@
 import express from 'express'
-import { loginController } from '../controllers/index.js'
+import { googleSignIn, checkSession, logout } from '../controllers/index.js'
 const router = express.Router()
 
-router.post('/admin-login', loginController)
+router.get('/auth/callback', googleSignIn)
+router.get('/check-session', checkSession)
+router.post('/logout', logout)
 
 export default router

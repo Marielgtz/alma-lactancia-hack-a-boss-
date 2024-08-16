@@ -16,7 +16,8 @@ import { notFound, manageError } from './src/middlewares/index.js'
 const app = express()
 
 //Middlewares de aplicación:
-app.use(express.json())
+app.use(express.json()) //Para manejar application/json en las solicitudes.
+app.use(express.urlencoded({ extended: true })) //Para manejar application/x-www-form-urlencoded en las solicitudes.
 app.use(
     cors({
         origin: true, //Acepta todas las entradas.
