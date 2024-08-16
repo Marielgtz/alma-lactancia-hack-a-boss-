@@ -1,5 +1,6 @@
 # Node.js
 node_modules/
+/node_modules
 
 # Logs
 logs
@@ -20,5 +21,3 @@ build/
 # Optional npm cache directory
 .npm
 
-# folder Backend
-backend/

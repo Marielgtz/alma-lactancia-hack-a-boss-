@@ -44,6 +44,12 @@ const Footer = () => {
             <li>
               <a href="/">Actividad 3</a>
             </li>
+            <li>
+              <a href="/">Actividad 4</a>
+            </li>
+            <li>
+              <a href="/">Actividad 5</a>
+            </li>
             {/* Añade más actividades según sea necesario */}
           </ul>
         </div>

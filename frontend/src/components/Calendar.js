@@ -3,7 +3,9 @@ import { listCalendarEventsService } from "../services/api";
 import "./Calendar.css";
 
 const Calendar = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]); // Estado para eventos
+  const [loading, setLoading] = useState(true); // Estado para la carga
+  const [error, setError] = useState(null); // Estado para errores
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -11,7 +13,10 @@ const Calendar = () => {
         const eventsData = await listCalendarEventsService();
         setEvents(eventsData);
       } catch (error) {
+        setError("Error fetching events");
         console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false); // Finaliza la carga
       }
     };
 
@@ -22,7 +27,11 @@ const Calendar = () => {
     <div className="calendar-section">
       <div className="activities">
         <h2 className="section-title-activity">Próximas actividades</h2>
-        {events.length > 0 ? (
+        {loading ? (
+          <p>Cargando actividades...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : events.length > 0 ? (
           events.map((event) => (
             <div className="activity" key={event.id}>
               {event.summary} -{" "}
