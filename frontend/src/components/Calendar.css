@@ -1,59 +1,77 @@
 .activities {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  margin-left: 2em;
 }
 
 .section-title-activity {
-  display: flex;
-  margin-top: 2em;
-  margin-left: 2em;
+  margin: 2em 0;
   color: #b380b5;
 }
 
 .activity {
   background-color: #d8e2dc;
-  width: 27em;
-  height: 30em;
+  width: 100%;
+  max-width: 27rem;
+  height: 100%;
+  max-height: 30rem;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-left: 3rem;
+  margin: 1em 0;
+}
+
+/* Ajustar el contenedor de los botones */
+.rbc-btn-group {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Ajustar cada botón individualmente */
+.rbc-btn-group button {
+  flex: 1 1 auto; /* Permite que los botones crezcan y se encojan según el espacio disponible */
+  min-width: 80px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: nowrap; /* Evita el desbordamiento del texto en múltiples líneas */
 }
 
 .section-title-calendar {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   color: #b380b5;
-  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .calendar-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  max-width: 80%;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 1em;
 }
 
 .calendar-container {
   display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-iframe {
-  border: 0;
-  width: 35em;
-  height: 30em;
+.calendar {
+  width: 100%;
+  max-width: 70vw;
+  height: 70vh;
 }
 
 /* Estilos responsive */
 @media (max-width: 768px) {
   .section-title-activity {
-    display: flex;
-    justify-content: center;
     font-size: 1.3em;
   }
 
@@ -74,22 +92,15 @@ iframe {
 
   .calendar-content {
     flex-direction: column;
-    gap: 0;
+    gap: 1em;
   }
 
   .calendar-container {
-    width: 100vw;
-  }
-
-  iframe {
-    border: 0;
-    width: 25rem;
-    height: 22rem;
+    width: 100%;
+    padding: 0;
   }
 
   .section-title-calendar {
-    display: flex;
-    justify-content: center;
     font-size: 1.3em;
     margin-top: 2rem;
   }
