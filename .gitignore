@@ -21,3 +21,7 @@ build/
 # Optional npm cache directory
 .npm
 
+# Carpeta Backend
+backend/
+/backend
+
