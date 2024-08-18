@@ -23,13 +23,3 @@
 .btn-up:hover {
     opacity: .75;
 }
-
-/* JS class*/
-
-.hide {
-    display: none;
-}
-
-.active {
-    display: block;
-}
