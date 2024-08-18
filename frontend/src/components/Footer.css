@@ -1,64 +1,61 @@
 .App-footer {
   display: flex;
-  flex-direction: column; /* Alinea el contenido en columna */
-  padding: 2rem; /* Espacio interno alrededor del contenido */
+  flex-direction: column;
+  padding: 0.5rem;
   text-align: center;
   background-color: #d8e2dc;
-  min-height: 45vh; /* Altura mínima del footer */
-  max-height: 45vh; /* Altura máxima del footer */
-  position: relative;
+  max-height: auto;
 }
 
 .footer-logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 10em;
+  max-width: 8rem;
 }
 
 .footer-logo img {
-  height: 4rem; /* Ajusta el tamaño del logo */
-  max-width: 10em;
+  height: 6rem;
+  width: 13rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
-  width: 70%; /* Ancho completo del contenedor del footer */
-  margin: 0 auto; /* Centra el contenido */
-  margin-top: -2.5em;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: -10rem;
   gap: 1rem;
 }
 
 .footer-column {
-  flex: 1; /* Las columnas ocupan el mismo ancho */
-  padding: 0 0.5rem;
+  flex: 1 1 200px;
 }
 
 .footer-column h3 {
-  margin-bottom: 1rem; /* Espacio debajo del título de cada columna */
-  font-size: 1.2rem; /* Tamaño de fuente del título */
   font-weight: bold;
   color: #b380b5;
 }
 
 .footer-column ul {
-  list-style: none; /* Elimina los puntos de la lista */
+  list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .footer-column ul li {
-  margin-bottom: 0.5rem; /* Espacio entre los ítems de la lista */
+  margin-bottom: 0.5rem;
 }
 
 .footer-column ul li a {
-  color: #333; /* Color de los enlaces en la lista */
-  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: #333;
+  text-decoration: none;
 }
 
 .footer-column ul li a:hover {
-  text-decoration: underline; /* Subraya los enlaces al pasar el ratón */
+  text-decoration: underline;
 }
 
 .social-media {
@@ -72,70 +69,70 @@
 }
 
 .social-media svg {
-  width: 2.5rem; /* Tamaño de los íconos sociales */
-  height: 2.5rem; /* Tamaño de los íconos sociales */
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .admin {
-  padding: 1rem; /* Espacio interno alrededor del contenido */
-  text-align: right; /* Alinea el texto a la izquierda */
-  margin-right: 20em;
-}
-
-.admin h5 {
-  margin: 0 0 0.5rem 0; /* Espacio debajo del título */
-  font-size: 1rem; /* Tamaño de fuente para el título principal */
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
 }
 
 .admin-links {
-  display: flex; /* Alinea los enlaces en una fila */
-  gap: 1rem; /* Espacio entre los enlaces */
-  justify-content: flex-end; /* Alinea los enlaces al final del contenedor */
-  margin-right: -9.2em;
+  display: flex;
+  gap: 1rem;
+  text-decoration: none;
+  font-size: 0.8rem;
 }
 
 .admin-links a {
-  text-decoration: none; /* Elimina el subrayado de los enlaces */
-  font-size: 0.8rem; /* Tamaño de fuente para los enlaces */
+  text-decoration: none;
+  font-size: 0.8rem;
 }
 
 .admin-links a:hover {
-  text-decoration: underline; /* Subraya el enlace en hover para mejorar la accesibilidad */
+  text-decoration: underline;
 }
 
 .App-footer p {
-  font-size: 1rem; /* Tamaño de la fuente del texto de copyright */
+  font-size: 0.8rem;
   font-weight: bold;
-  margin-top: 5em;
 }
 
 /* Estilos responsive */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column; /* Alinea las columnas en una sola columna en pantallas pequeñas */
-    align-items: center; /* Centra las columnas */;
-    font-size: 0.8em;
+  .App-footer {
+    padding: 1rem;
+    min-height: auto;
   }
 
   .footer-logo img {
-    height: 4em; /* Ajusta el tamaño del logo en pantallas pequeñas */
-    margin-bottom: 2.5em;
+    height: 4em;
     margin-left: 10em;
+    margin-top: 0.5rem;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-bottom: -2rem;
+  }
+
+  .footer-column {
+    margin-bottom: -1rem;
   }
 
   .social-media {
-    gap: 1rem; /* Ajusta el espacio entre íconos en pantallas pequeñas */
+    gap: 1rem;
     font-size: 0.1em;
   }
 
-  .App-footer {
-    padding: 1rem; /* Ajusta el padding en pantallas pequeñas */
-    min-height: 45em; /* Ajusta la altura según el contenido */
-  }
-
   .App-footer p {
-    font-size: 0.7rem; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
+    font-size: 0.7rem;
   }
 
   .admin {
@@ -143,20 +140,13 @@
     margin-right: 0;
   }
 
-  .admin h5 {
-    font-size: 0.8rem; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
-    margin-top: 2em;
-  }
-
   .admin-links {
     display: flex;
-    flex-direction: column;
     gap: 0.5rem;
-    margin-right: 0;
   }
 
   .admin-links a {
-    font-size: 0.7rem; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
+    font-size: 0.7rem;
   }
 }
 

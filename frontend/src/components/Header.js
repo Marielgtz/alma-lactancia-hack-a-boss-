@@ -45,24 +45,24 @@ const Header = () => {
         {/* Inicio de la lista de elementos del menú */}
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
-            <a href="#">Inicio</a>
+            <a href="/">Inicio</a>
           </li>
           <li className="menu-item">
-            <a href="#">¿Quiénes somos?</a>
+            <a href="/">¿Quiénes somos?</a>
           </li>
           <li className="menu-item">
-            <a href="#">Biblioteca</a>
+            <a href="/">Biblioteca</a>
           </li>
           <li className="menu-item">
-            <a href="#" onClick={() => toggleSubMenu(1)}>
+            <a href="/" onClick={() => toggleSubMenu(1)}>
               Actividades
             </a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
-                <a href="#">Próximas Inscripciones</a>
+                <a href="/">Próximas Inscripciones</a>
               </li>
               <li>
-                <a href="#">Histórico</a>
+                <a href="/">Histórico</a>
               </li>
             </ul>
           </li>

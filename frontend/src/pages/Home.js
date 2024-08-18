@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "../components/Header";
+import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
 import "./Home.css";
-import { getCalendarEvents } from "../services/getCalendarEvents";
 
 const Home = () => {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const eventsData = await getCalendarEvents();
-        setEvents(eventsData);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
   return (
     <div className="home-page">
       <Header />
@@ -74,30 +59,7 @@ const Home = () => {
               las madres, financiadas por las cuotas anuales de las socias.
             </p>
           </div>
-          <h2 className="section-title">Próximas actividades</h2>
-          <div className="activities">
-            {events.length > 0 ? (
-              events.map((event) => (
-                <div className="activity" key={event.id}>
-                  {event.summary} -{" "}
-                  {new Date(event.start.dateTime).toLocaleString()}
-                </div>
-              ))
-            ) : (
-              <div>No hay actividades programadas</div>
-            )}
-          </div>
-          <div className="calendar-section">
-            <h2 className="section-title-calendar">Calendario</h2>
-            <div className="calendar-content">
-              <div className="calendar-container">
-                <iframe
-                  src="https://calendar.google.com/calendar/embed?src=adm.almalactancia%40gmail.com&ctz=UTC"
-                  title="Google Calendar"
-                ></iframe>
-              </div>
-            </div>
-          </div>
+          <Calendar />
           <h2 className="section-title">Experiencias reales</h2>
           <p className="experience">Nombre - Experiencia</p>
         </div>
