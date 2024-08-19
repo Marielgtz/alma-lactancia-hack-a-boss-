@@ -75,6 +75,7 @@ const Footer = () => {
       </div>
       <div className="admin">
         <div className="admin-links">
+          <a href="/acceso-admin">Acceso administración</a>
           <a href="/politica-de-privacidad">Política de privacidad</a>
           <a href="/politica-de-cookies">Política de cookies</a>
           <a href="/aviso-legal">Aviso legal</a>

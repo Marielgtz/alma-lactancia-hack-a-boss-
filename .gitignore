@@ -24,4 +24,5 @@ build/
 # Carpeta Backend
 backend/
 /backend
+/backend/
 

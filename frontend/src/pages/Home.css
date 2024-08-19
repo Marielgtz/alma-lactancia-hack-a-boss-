@@ -31,19 +31,29 @@ body,
 
 .img-section {
   position: relative;
-  height: 100vh;
+  height: 90vh;
 }
 
 .background-image {
   background-image: url("/src/images/bebe\ pecho.jpg");
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+}
+
+.support-button p {
+  display: flex;
+  position: absolute;
+  top: 26.5rem;
+  left: 4.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f5f5f5;
 }
 
 .activities-button {
@@ -55,10 +65,10 @@ body,
   border-radius: 3em;
   font-size: 1.4em;
   font-weight: bold;
-  max-width: 25%;
+  max-width: 22%;
   justify-content: center;
-  bottom: 2.2em;
-  right: -1em;
+  bottom: 3em;
+  margin-left: 3em;
 }
 
 .activities-button:hover {
@@ -73,16 +83,18 @@ body,
 }
 
 .section-title {
-  margin-top: 2rem;
   margin-left: 2em;
   color: #b380b5;
   font-weight: bold;
+  font-size: 1.7rem;
+  margin-bottom: 0.2em;
 }
 
 .section-text {
   max-width: 80em;
-  font-size: 1.2em;
-  line-height: 2;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-left: 0.5em;
 }
 
 .centered-container {
@@ -104,16 +116,40 @@ body,
 
 /* Estilos responsive */
 @media (max-width: 768px) {
+  .img-section {
+    position: relative;
+    height: 50vh;
+  }
+  
+  .background-image {
+    background-image: url("/src/images/bebe\ pecho.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .support-button p {
+    position: absolute;
+    top: 15rem;
+    left: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
   .activities-button {
     position: absolute;
     background-color: #d8e2dc;
     color: #b380b5;
-    max-width: 45%;
+    max-width: 55%;
     bottom: 2em;
     margin: 0 auto;
-    font-size: 1.05em;
-    right: 0;
-    left: 0;
+    font-size: 1rem;
+    left: 1rem;
     border: none;
     border-radius: 3em;
     cursor: pointer;
