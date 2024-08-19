@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import CustomToolbar from "./CustomToolbar";
 import "moment/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css";
 
+moment.locale("es");
 const localizer = momentLocalizer(moment);
 
 const MyCalendar = () => {
@@ -58,9 +60,15 @@ const MyCalendar = () => {
 
   // Función para formatear la fecha
   const formatEventDate = (date) => {
-    const options = { weekday: "long", day: "numeric", month: "long" };
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
     let formattedDate = new Date(date).toLocaleDateString("es-ES", options);
-    formattedDate = formattedDate.replace(",", " |");
+    formattedDate = formattedDate.replace(",", "").replace(",", " |");
     return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
   };
 
@@ -74,6 +82,15 @@ const MyCalendar = () => {
       (event) =>
         new Date(event.start).toLocaleDateString() ===
         new Date(slotInfo.start).toLocaleDateString()
+    );
+    setSelectedEvent(event || null);
+  };
+
+  const handleDayClick = (slotInfo) => {
+    const event = events.find(
+      (event) =>
+        new Date(event.start).toLocaleDateString() ===
+        new Date(slotInfo).toLocaleDateString()
     );
     setSelectedEvent(event || null);
   };
@@ -106,11 +123,16 @@ const MyCalendar = () => {
               <div>
                 <h3 className="event-title">{selectedEvent.title}</h3>
                 <p className="event-date">
-                  {new Date(selectedEvent.start).toLocaleDateString("es-ES", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                  })}
+                  {new Date(selectedEvent.start)
+                    .toLocaleDateString("es-ES", {
+                      weekday: "long",
+                      day: "numeric",
+                      month: "long",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                    .replace(",", "")
+                    .replace(",", " |")}
                 </p>
                 <p className="event-description">{selectedEvent.description}</p>
               </div>
@@ -132,6 +154,10 @@ const MyCalendar = () => {
                 onSelectEvent={handleSelectEvent}
                 onSelectSlot={handleSelectSlot}
                 selectable
+                onDrillDown={handleDayClick}
+                components={{
+                  toolbar: CustomToolbar,
+                }}
                 messages={{
                   month: "Mes",
                   week: "Semana",
@@ -142,6 +168,8 @@ const MyCalendar = () => {
                   showMore: (total) => `+ Ver más (${total})`,
                 }}
                 className="calendar"
+                views={{ month: true }}
+                popup={false}
               />
             )}
           </div>

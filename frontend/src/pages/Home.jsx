@@ -11,9 +11,12 @@ const Home = () => {
       <main className="main-home">
         <div className="img-section">
           <div className="background-image"></div>
-          <button className="activities-button">
-            Conoce nuestras actividades
-          </button>
+          <div className="support-button">
+            <p>
+              Apoyando la lactancia, <br /> fortaleciendo familias
+            </p>
+            <button className="activities-button">Nuestras actividades</button>
+          </div>
         </div>
         <div className="content">
           <h2 className="section-title">Nosotras</h2>
