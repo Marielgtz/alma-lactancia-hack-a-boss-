@@ -11,6 +11,7 @@
   margin-left: 2em;
   margin-bottom: -0.5rem;
   font-size: 1.7rem;
+  font-family: outfit;
 }
 
 .activity {
@@ -31,6 +32,7 @@
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: #b380b5;
+  font-family: outfit;
 }
 
 .event-date {
@@ -42,6 +44,7 @@
   text-align: center;
   color: #b380b5;
   font-size: 1.7rem;
+  font-family: outfit;
 }
 
 .calendar-content {
@@ -66,6 +69,7 @@
 .event-title {
   font-size: 1rem;
   color: #a768ab;
+  font-family: outfit;
 }
 
 .event-date {
@@ -169,6 +173,7 @@
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
     margin-left: 3.5rem;
+    font-family: outfit;
   }
 
   .activities {
@@ -188,6 +193,7 @@
   .section-title-calendar {
     font-size: 1.3rem;
     margin-top: 2rem;
+    font-family: outfit;
   }
 
   .calendar {
