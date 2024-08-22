@@ -22,7 +22,7 @@ const Header = () => {
       <nav className="navbar">
         <img src={logo} alt="Logo Alma" className="logo" />
         <div className="menu-toggle" onClick={toggleMenu}>
-          ☰
+          {menuOpen ? "✕" : "☰"}
         </div>
         <div className={`social-media ${menuOpen ? "active" : ""}`}>
           <a

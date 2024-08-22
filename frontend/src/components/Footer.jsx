@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import logo from "../images/logo-alma.png";
@@ -6,6 +6,14 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
+  const backURL = import.meta.env.VITE_API_URL;
+  const clientId = import.meta.env.VITE_CLIENT_ID;
+  const googleURL = import.meta.env.VITE_GOOGLE_URL;
+
+  const handleLogin = () => {
+    window.location.href = `${googleURL}?client_id=${clientId}&redirect_uri=${backURL}/auth/callback&response_type=code&scope=email%20profile`;
+  };
+
   return (
     <footer className="App-footer">
       <div className="footer-logo">
@@ -75,7 +83,7 @@ const Footer = () => {
       </div>
       <div className="admin">
         <div className="admin-links">
-          <a href="/acceso-admin">Acceso administración</a>
+          <a href="#" onClick={handleLogin} className="button-login">Acceso administración</a>
           <a href="/politica-de-privacidad">Política de privacidad</a>
           <a href="/politica-de-cookies">Política de cookies</a>
           <a href="/aviso-legal">Aviso legal</a>

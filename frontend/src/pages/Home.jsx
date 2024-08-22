@@ -63,7 +63,9 @@ const Home = () => {
             </p>
           </div>
           <Calendar />
-          <h2 className="section-title">Experiencias reales</h2>
+        </div>
+        <div className="experience-section">
+          <h2 className="experience-title">Experiencias reales</h2>
           <p className="experience">Nombre - Experiencia</p>
         </div>
       </main>

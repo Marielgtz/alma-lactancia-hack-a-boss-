@@ -6,8 +6,31 @@ import "moment/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css";
 
-moment.locale("es");
+moment.updateLocale("es", {
+  week: {
+    dow: 1, // Establece que el primer día de la semana es lunes (0 = domingo, 1 = lunes)
+    doy: 4, // El primer día del año debe ser un lunes
+  },
+});
+
 const localizer = momentLocalizer(moment);
+
+const messages = {
+  month: "Mes",
+  week: "Semana",
+  day: "Día",
+  today: "Hoy",
+  previous: "Anterior",
+  next: "Siguiente",
+  sunday: "dom",
+  monday: "lu",
+  tuesday: "ma",
+  wednesday: "mié",
+  thursday: "jue",
+  friday: "vie",
+  saturday: "sáb",
+  showMore: (total) => `+ Ver más (${total})`,
+};
 
 const MyCalendar = () => {
   const [events, setEvents] = useState([]);
@@ -137,7 +160,9 @@ const MyCalendar = () => {
                 <p className="event-description">{selectedEvent.description}</p>
               </div>
             ) : (
-              <p>No hay eventos programados para este día.</p>
+              <p className="no-events">
+                No hay eventos programados para este día.
+              </p>
             )}
           </div>
           <div className="calendar-wrapper">
@@ -158,15 +183,7 @@ const MyCalendar = () => {
                 components={{
                   toolbar: CustomToolbar,
                 }}
-                messages={{
-                  month: "Mes",
-                  week: "Semana",
-                  day: "Día",
-                  today: "Hoy",
-                  previous: "Anterior",
-                  next: "Siguiente",
-                  showMore: (total) => `+ Ver más (${total})`,
-                }}
+                messages={messages}
                 className="calendar"
                 views={{ month: true }}
                 popup={false}
