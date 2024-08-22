@@ -17,7 +17,6 @@ import validateCaptcha from './captcha/validateCaptcha.js'
 import googleSignIn from './googleSignIn/googleSignIn.js'
 import checkSession from './googleSignIn/checkSession.js'
 import logout from './googleSignIn/logout.js'
-import getPost from './instagram/getPost.js'
 
 export {
     newPartner,
@@ -39,5 +38,4 @@ export {
     googleSignIn,
     checkSession,
     logout,
-    getPost,
 }
