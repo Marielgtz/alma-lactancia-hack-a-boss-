@@ -17,6 +17,7 @@ import validateCaptcha from './captcha/validateCaptcha.js'
 import googleSignIn from './googleSignIn/googleSignIn.js'
 import checkSession from './googleSignIn/checkSession.js'
 import logout from './googleSignIn/logout.js'
+import getFilteredActivities from './freeActivities/getFilteredActivities.js'
 
 export {
     newPartner,
@@ -38,4 +39,5 @@ export {
     googleSignIn,
     checkSession,
     logout,
+    getFilteredActivities,
 }
