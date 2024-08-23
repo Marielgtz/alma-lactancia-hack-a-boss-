@@ -88,17 +88,17 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  display: none; /* Oculta el submenú por defecto */
+  display: none;
   position: absolute;
-  top: 100%; /* Posiciona el submenú justo debajo del elemento del menú */
-  min-width: 200px; /* Ajusta el ancho mínimo del submenú */
-  z-index: 999; /* Asegúrate de que los submenús tengan un z-index alto */
-  background-color: transparent; /* Fondo transparente para los submenús */
+  top: 100%;
+  min-width: 200px;
+  z-index: 999;
+  background-color: white;
 }
 
 /* Estilo de los enlaces dentro del submenú */
 .submenu li a {
-  color: white; /* Color del texto del submenú */
+  color: #9c6fa0; /* Color del texto del submenú */
   text-decoration: none;
   padding: 10px;
   display: block;
