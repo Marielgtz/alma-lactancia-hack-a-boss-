@@ -51,9 +51,6 @@ const Header = () => {
             <a href="/">¿Quiénes somos?</a>
           </li>
           <li className="menu-item">
-            <a href="/">Biblioteca</a>
-          </li>
-          <li className="menu-item">
             <a href="/" onClick={() => toggleSubMenu(1)}>
               Actividades
             </a>
@@ -65,6 +62,11 @@ const Header = () => {
                 <a href="/">Histórico</a>
               </li>
             </ul>
+          </li>
+          <li className="menu-item">
+            <Link to="/biblioteca" onClick={toggleMenu}>
+              Biblioteca
+            </Link>
           </li>
           <li className="menu-item">
             <Link to="/contacto" onClick={toggleMenu}>
