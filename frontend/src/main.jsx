@@ -10,52 +10,40 @@ function ScrollToTopButton() {
     console.log('$btnUp:', $btnUp);
 
     if (!$btnUp) {
-      $btnUp.addEventListener("click", (e) => {
-        console.log('Button clicked', e);
-      })
       console.error('Button element not found!');
       return;
     }
 
     const handleScroll = () => {
       const y = window.scrollY;
-      console.log('Current scroll position:', y);
-      if (y >= 50) {
-        console.log('Adding active class');
+      if (y >= 100) {
         $btnUp.classList.remove("hide");
         $btnUp.classList.add("active");
       } else {
-        console.log('Removing active class');
         $btnUp.classList.add("hide");
         $btnUp.classList.remove("active");
       }
     };
 
-    const handleClick = (e) => {
-      console.log('Click event detected');
-      if (e.target === $btnUp || e.target.matches(".fa-arrow-up")) {
-        console.log('Scrolling to top');
-        window.scrollTo({
-          behavior: "smooth",
-          top: 0,
-        });
-      }
+    const handleClick = () => {
+      window.scrollTo({
+        behavior: "smooth",
+        top: 0,
+      });
     };
 
     window.addEventListener("scroll", handleScroll);
-    document.addEventListener("click", handleClick);
+    $btnUp.addEventListener("click", handleClick);
 
-    // Cleanup listeners on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("click", handleClick);
+      $btnUp.removeEventListener("click", handleClick);
     };
   }, []);
 
   return null;
 }
 
-// Render React application
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

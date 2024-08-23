@@ -1,25 +1,27 @@
 /*Button styles*/
 
 .btn-up {
-    width: 50px;
-    height: 50px;
-    outline: 0;
-    border-radius: 50%;
-    border: 1px solid #b380b5;
-    background-color: #b380b5;
-    position: fixed;
-    right: 20px;
-    left: 95%;
-    bottom: 50px;
-    transition: all .3s ease-in-out;
-    cursor: pointer;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  left: 95%;
+  padding: 10px;
+  background-color: #b380b5;
+  color: black;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-.fa-arrow-up {
-    color: #fff;
-    font-size: 18px;
+.btn-up.hide {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.btn-up:hover {
-    opacity: .75;
+.btn-up.active {
+  opacity: 1;
+  pointer-events: all;
 }
