@@ -1,10 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
 import "./Home.css";
 
 const Home = () => {
+  const [cardsToShow, setCardsToShow] = useState(2);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const updateCardsToShow = () => {
+      if (window.innerWidth < 768) {
+        setCardsToShow(1);
+      } else {
+        setCardsToShow(2);
+      }
+    };
+
+    window.addEventListener("resize", updateCardsToShow);
+    updateCardsToShow();
+
+    return () => window.removeEventListener("resize", updateCardsToShow);
+  }, []);
+
+  const experiences = [
+    {
+      id: 1,
+      name: "Alba Debutt",
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      image: "ruta-a-tu-imagen-1.jpg",
+    },
+    {
+      id: 2,
+      name: "Sofia Vergeron",
+      text: "Nunc placerat eu metus ac hendrerit.",
+      image: "ruta-a-tu-imagen-2.jpg",
+    },
+    {
+      id: 3,
+      name: "Otra Persona",
+      text: "Otro ejemplo de texto.",
+      image: "ruta-a-tu-imagen-3.jpg",
+    },
+  ];
+
+  const totalExperiences = experiences.length;
+
+  const nextSlide = () => {
+    if (currentIndex < totalExperiences - cardsToShow) {
+      setCurrentIndex(currentIndex + cardsToShow);
+    } else {
+      setCurrentIndex(0);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - cardsToShow);
+    } else {
+      setCurrentIndex(totalExperiences - cardsToShow);
+    }
+  };
+
   return (
     <div className="home-page">
       <Header />
@@ -66,7 +123,30 @@ const Home = () => {
         </div>
         <div className="experience-section">
           <h2 className="experience-title">Experiencias reales</h2>
-          <p className="experience">Nombre - Experiencia</p>
+          <div className="experience-container">
+            <button className="prev-arrow" onClick={prevSlide}>
+              &#8249;
+            </button>
+            {experiences
+              .slice(currentIndex, currentIndex + cardsToShow)
+              .map((exp) => (
+                <div className="experience-card" key={exp.id}>
+                  <img
+                    src={exp.image}
+                    alt={`Experiencia de ${exp.name}`}
+                    className="experience-image"
+                  />
+                  <p className="experience-text">
+                    {exp.text}
+                    <br />
+                    <strong>{exp.name}</strong>
+                  </p>
+                </div>
+              ))}
+            <button className="next-arrow" onClick={nextSlide}>
+              &#8250;
+            </button>
+          </div>
         </div>
       </main>
       <Footer />

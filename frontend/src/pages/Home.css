@@ -104,33 +104,79 @@ body,
 .centered-container {
   display: flex;
   align-items: center;
-  margin-left: 3em;
+  justify-content: center;
+  position: relative;
 }
 
 .experience-section {
   background-color: white;
   padding: 2rem;
-  margin: 0;
+  margin-bottom: 3rem;
 }
 
 .experience-title {
-  margin-left: 2em;
+  font-family: "Outfit", sans-serif;
   color: #b380b5;
-  font-weight: bold;
-  font-size: 1.7rem;
-  margin-bottom: 0.2em;
-  font-family: outfit;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2em;
 }
 
-.experience {
-  text-align: center;
+.experience-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
 }
 
-.img-collab {
+.prev-arrow,
+.next-arrow {
+  background-color: transparent;
+  color: black;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0 1rem;
+  position: relative;
+  width: 10%;
+}
+
+.experience-cards-container {
   display: flex;
   justify-content: center;
-  margin-top: 1em;
-  gap: 5em;
+  width: 100%;
+  max-width: 70rem;
+}
+
+.experience-card {
+  background-color: #edf2ef;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.5s ease;
+  width: 100%;
+  max-width: 70rem;
+}
+
+.experience-image {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.experience-text {
+  font-family: bellota;
+  text-align: center;
+  color: #333;
+}
+
+.experience-text strong {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
 }
 
 /* Estilos responsive */
@@ -199,29 +245,43 @@ body,
     font-family: bellota;
   }
 
+  .experience-section {
+    padding: 0.5rem;
+    height: 20rem;
+    margin-bottom: 4rem;
+  }
+
   .experience-title {
     text-align: center;
+    justify-content: center;
     margin-left: 0;
     color: #b380b5;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     margin-bottom: 2rem;
     font-size: 1.3em;
     font-family: outfit;
   }
 
-  .experience {
-    text-align: center;
-    font-size: 0.8em;
-  }
-
-  .img-collab {
+  .experience-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 1em;
+    justify-content: center;
+    gap: 1rem;
+    height: 15rem;
   }
 
-  .collab-img {
-    max-width: 45%;
+  .experience-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    height: 15rem;
   }
+
+  .experience-text {
+    font-size: 0.8rem;
+  }
+
 }
