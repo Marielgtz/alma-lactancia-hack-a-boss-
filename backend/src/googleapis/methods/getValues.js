@@ -13,11 +13,15 @@ const getValues = async (
         let allSheetData
         let rows
         let nextRow
+        try {
+            allSheetData = await sheets.spreadsheets.values.get({
+                spreadsheetId,
+                range,
+            })
+        } catch (error) {
+            generateError(error.errors[0].message)
+        }
 
-        allSheetData = await sheets.spreadsheets.values.get({
-            spreadsheetId,
-            range,
-        })
         //Estructura ejemplo del objeto que devuelve el método get:
         // {
         //     "range": "Sheet1!A1:B2",
@@ -30,7 +34,7 @@ const getValues = async (
 
         rows = allSheetData.data.values
         if (!rows || rows.length === 0) {
-            return { error: 'No se encontraron datos.' }
+            generateError('No se encontraron datos.')
         }
         // Localiza la siguiente fila vacía
         nextRow = rows.length + 1
@@ -107,6 +111,7 @@ const getValues = async (
                 spreadsheetId,
                 range: updateRowRange,
             })
+
             rowData = rowData.data.values[0]
 
             //Estructura de values
@@ -149,7 +154,7 @@ const getValues = async (
             rowToDelete,
         }
     } catch (error) {
-        return { error: error.message }
+        generateError(error.message)
     }
 }
 export default getValues
