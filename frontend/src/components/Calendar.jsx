@@ -47,6 +47,11 @@ const MyCalendar = () => {
             method: "POST", // El método tiene que coincidir con la ruta del servidor
           }
         );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         console.log("Datos recibidos:", data);
 
@@ -55,7 +60,7 @@ const MyCalendar = () => {
           ? data.response
           : (data && data.events) || [];
 
-        // Mapear los eventos al formato necesario para react-big-calendar
+        // Mapea los eventos al formato necesario para react-big-calendar
         const formattedEvents = eventsArray.map((event) => ({
           title: event.summary, // Usar summary como título
           start: new Date(event.start.dateTime || event.start.date), // Mostrar fecha de inicio
