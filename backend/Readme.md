@@ -96,6 +96,22 @@ Required fields (in JSON format):
 
     _All fields are required._
 
+Path to get activities by filter params:
+Method: post,
+Path: `/get-filtered-activities`
+Required fields (in JSON format):
+
+-   id
+-   summary
+-   description
+-   exactDate (custom format: Miércoles, 10 de Septiembre de 2025, 12:00)
+-   dateFrom (custom format: Miércoles, 10 de Septiembre de 2025, 12:00)
+-   dateUntil (custom format: Miércoles, 10 de Septiembre de 2025, 12:00)
+-   location
+-   access
+
+    _All fields are optional._
+
 Path to add a partner or a non-partner to an free activity:
 Method: post,
 Path: `/join-non-partner-activity`
