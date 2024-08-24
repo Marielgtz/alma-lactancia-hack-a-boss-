@@ -102,35 +102,35 @@ body,
 }
 
 .section-text0 {
-  max-width: 65rem;
+  max-width: 70rem;
   line-height: 1.7;
   font-family: bellota;
   margin-left: 3.5rem;
 }
 
 .section-text1 {
-  max-width: 65rem;
+  max-width: 70rem;
   line-height: 1.7;
   font-family: bellota;
   margin-left: 3.5rem;
 }
 
 .section-text2 {
-  max-width: 65rem;
+  max-width: 70rem;
   line-height: 1.7;
   font-family: bellota;
   margin-left: 3.5rem;
 }
 
 .section-text3 {
-  max-width: 50rem;
+  max-width: 60rem;
   line-height: 1.7;
   font-family: bellota;
   margin-left: 3.5rem;
 }
 
 .section-text4 {
-  max-width: 50rem;
+  max-width: 60rem;
   line-height: 1.7;
   font-family: bellota;
   margin-left: 3.5rem;
@@ -138,9 +138,9 @@ body,
 
 .img-silueta {
   display: flex;
-  margin-left: auto;
-  margin-top: -19rem;
-  margin-right: 4rem;
+  position: relative;
+  margin-left: 65rem;
+  margin-top: -18rem;
 }
 
 .experience-section {
