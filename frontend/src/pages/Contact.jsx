@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
-import silueta from '../images/imagen-silueta.png';
+import silueta from "../images/imagen-silueta.png";
 import "./Contact.css";
 
 const Contact = () => {
@@ -108,13 +108,9 @@ const Contact = () => {
           </form>
 
           <div className="contact-info">
-            <p>
-              También podéis contactar con la Asociación
-              <br />
-              ALMA a través de cualquiera de los
-              <br />
-              siguientes medios:
-            </p>
+            <p>También podéis contactar con la Asociación</p>
+            <p>ALMA a través de cualquiera de los</p>
+            <p>siguientes medios:</p>
             <p>
               <i className="fas fa-envelope"></i> almalactancia@gmail.com
             </p>

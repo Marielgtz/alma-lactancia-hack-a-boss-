@@ -58,17 +58,6 @@ body,
   position: relative;
 }
 
-.collapsible-container.open::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #d8e2dc;
-  z-index: -1;
-}
-
 .collapsible-header {
   display: flex;
   justify-content: space-between;
@@ -79,16 +68,21 @@ body,
 
 .collapsible-title {
   font-family: outfit;
-  font-size: 1.25rem;
+  font-size: 1.20rem;
+  font-weight: bold;
+  width: 8rem;
 }
 
 .collapsible-arrow {
-  font-size: 1rem;
+  font-size: 0.85rem;
   transition: transform 0.3s ease;
-}
-
-.collapsible-arrow.open {
+  border-radius: 100%;
+  background-color: #b380b5;
+  width: 1.2rem;
+  height: 1.2rem;
+  text-align: center;
   transform: rotate(90deg);
+  color: #fff;
 }
 
 .collapsible-content {
@@ -96,4 +90,36 @@ body,
   font-family: bellota;
   display: block;
   width: 100%;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .library-page .navbar {
+    background-color: #b380b5;
+    height: 6.5rem;
+    position: relative;
+  }
+  
+  .library-title{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    margin-left: 6.5rem;
+    justify-content: center;
+  }
+  
+  .library-text {
+    display: none;
+  }
+
+  .collapsible-container {
+    width: 14rem;
+    justify-content: center;
+  }
+
+  .collapsible-content {
+    padding: 1rem;
+    font-family: bellota;
+    display: block;
+    width: 80%;
+  }
 }
