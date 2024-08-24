@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
+import image2 from "../images/imagen-silueta2.png";
 import "./Home.css";
 
 const Home = () => {
@@ -78,13 +79,15 @@ const Home = () => {
         <div className="content">
           <h2 className="section-title">Nosotras</h2>
           <div className="centered-container">
-            <p className="section-text">
+            <p className="section-text0">
               Somos un grupo de madres y asesoras de lactancia voluntarias que
               tenemos en común nuestra experiencia y formación en lactancia
               materna. Fundamos la asociación en mayo de 2009 y realizamos
               nuestra labor desde A Coruña y Culleredo.
-              <br />
-              <br />
+            </p>
+            <br />
+            <br />
+            <p className="section-text1">
               ALMA es una entidad que se dedica al apoyo a la lactancia materna
               a través, principalmente, de los grupos de apoyo a la lactancia,
               que se reúnen en Culleredo, Coruña. En ellos se apoya y asesora a
@@ -93,22 +96,28 @@ const Home = () => {
               relacionados con la lactancia (sueño, alimentación, porteo,
               crianza, parto…). No obstante, la labor de ALMA va más allá de los
               grupos.
-              <br />
-              <br />
+            </p>
+            <br />
+            <br />
+            <p className="section-text2">
               Colaboramos y organizamos actividades de difusión y apoyo a la
               lactancia materna, así como actividades familiares de carácter más
               lúdico. Ofrecemos información y noticias a través de nuestra web,
               y de nuestras redes sociales, y también realizamos charlas sobre
               lactancia materna para mujeres embarazadas.
-              <br />
-              <br />
+            </p>
+            <br />
+            <br />
+            <p className="section-text3">
               Puedes contactarnos, y acudir a nuestras reuniones si necesitas
               ayuda, asesoramiento o simplemente sentirte apoyada en tu
               lactancia. También si estás embarazada y quieres informarte. La
               información veraz previa puede facilitar un mejor comienzo en tu
               lactancia.
-              <br />
-              <br />
+            </p>
+            <br />
+            <br />
+            <p className="section-text4">
               ALMA está constituida como asociación sin ánimo de lucro, motivo
               por el cual queremos dejar claro que no está vinculada a ninguna
               iniciativa de interés lucrativo ni comercial. No es necesario ser
@@ -119,6 +128,7 @@ const Home = () => {
               las madres, financiadas por las cuotas anuales de las socias.
             </p>
           </div>
+          <img src={image2} className="img-silueta" />
           <Calendar />
         </div>
         <div className="experience-section">
@@ -133,7 +143,6 @@ const Home = () => {
                 <div className="experience-card" key={exp.id}>
                   <img
                     src={exp.image}
-                    alt={`Experiencia de ${exp.name}`}
                     className="experience-image"
                   />
                   <p className="experience-text">
