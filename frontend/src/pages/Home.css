@@ -66,7 +66,8 @@ body,
   border-radius: 3em;
   font-size: 1.4em;
   font-weight: bold;
-  max-width: 22%;
+  width: 18rem;
+  height: 2.5rem;
   justify-content: center;
   bottom: 3em;
   margin-left: 3em;
@@ -245,8 +246,9 @@ body,
     position: absolute;
     background-color: #d8e2dc;
     color: #b380b5;
-    max-width: 55%;
-    bottom: 2em;
+    width: 12rem;
+    height: 2rem;
+    bottom: 3rem;
     margin: 0 auto;
     font-size: 1rem;
     left: 1rem;
@@ -265,18 +267,58 @@ body,
     text-align: center;
     margin-left: 0;
     color: #b380b5;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    font-size: 1.3em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
     font-family: outfit;
   }
 
-  .section-text {
+  .centered-container {
+    margin-left: 2em;
+  }
+
+  .section-text0 {
     font-size: 0.75em;
     text-align: center;
     max-width: 100%;
     margin-left: -1.5em;
     font-family: bellota;
+  }
+
+  .section-text1 {
+    font-size: 0.75em;
+    text-align: center;
+    max-width: 100%;
+    margin-left: -1.5em;
+    font-family: bellota;
+  }
+
+  .section-text2 {
+    font-size: 0.75em;
+    text-align: center;
+    max-width: 100%;
+    margin-left: -1.5em;
+    font-family: bellota;
+  }
+
+  .section-text3 {
+    font-size: 0.75em;
+    text-align: center;
+    max-width: 100%;
+    margin-left: -1.5em;
+    font-family: bellota;
+  }
+
+  .section-text4 {
+    font-size: 0.75em;
+    text-align: center;
+    max-width: 100%;
+    margin-left: -1.5em;
+    font-family: bellota;
+  }
+
+  .img-silueta {
+    display: none;
   }
 
   .experience-section {
@@ -292,7 +334,7 @@ body,
     color: #b380b5;
     margin-top: 1.5rem;
     margin-bottom: 2rem;
-    font-size: 1.3em;
+    font-size: 2rem;
     font-family: outfit;
   }
 
@@ -312,6 +354,10 @@ body,
     justify-content: center;
     padding: 0.5rem;
     height: 15rem;
+  }
+
+  .experiencie-image {
+    
   }
 
   .experience-text {

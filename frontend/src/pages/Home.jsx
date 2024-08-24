@@ -143,7 +143,6 @@ const Home = () => {
                 <div className="experience-card" key={exp.id}>
                   <img
                     src={exp.image}
-                    alt={`Experiencia de ${exp.name}`}
                     className="experience-image"
                   />
                   <p className="experience-text">
