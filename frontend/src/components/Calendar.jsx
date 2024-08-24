@@ -51,7 +51,7 @@ const MyCalendar = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
         console.log("Datos recibidos:", data);
 
@@ -67,14 +67,29 @@ const MyCalendar = () => {
           end: new Date(event.end.dateTime || event.end.date), // Mostrar fecha de finalización
           id: event.id, // Incluir el id si se necesita para las claves
           description: event.description || "", // Incluir la descripción si está disponible
+          attachments: event.attachments || [], // Incluir los archivos adjuntos si están disponibles
         }));
 
-        // Ordenar los eventos por fecha de inicio y tomar los 3 más cercanos
-        const sortedEvents = formattedEvents
+        // Filtrar los eventos para que solo muestren los futuros
+        const now = new Date(); // Fecha actual en la zona horaria local
+
+        const futureEvents = formattedEvents.filter((event) => {
+          const eventStart = new Date(event.start); // Convierte la fecha del evento
+          console.log(
+            "Event Start:",
+            eventStart.toISOString(),
+            "Now:",
+            now.toISOString()
+          );
+          return eventStart.getTime() >= now.getTime(); // Compara ambas fechas en milisegundos
+        });
+
+        // Ordenar los eventos futuros por fecha de inicio y tomar los 3 más cercanos
+        const sortedEvents = futureEvents
           .sort((a, b) => new Date(a.start) - new Date(b.start))
           .slice(0, 3);
 
-        setEvents(sortedEvents);
+        setEvents(sortedEvents); // Actualiza los eventos a mostrar
       } catch (error) {
         setError("Error fetching events");
         console.error("Error fetching events:", error);
@@ -134,6 +149,27 @@ const MyCalendar = () => {
         ) : events.length > 0 ? (
           events.map((event) => (
             <div className="activity" key={event.id}>
+              {/* Mostrar archivos adjuntos si están disponibles */}
+              {event.attachments.length > 0 && (
+                <div className="event-attachments">
+                  {event.attachments.map((attachment, index) => (
+                    <div key={index} className="attachment">
+                      {/* Asumiendo que los adjuntos son imágenes */}
+                      <img
+                        src={attachment.url}
+                        alt={`attachment-${index}`}
+                        className="attachment-image"
+                      />
+                      {/* En caso de ser otro tipo de archivo */}
+                      <a
+                        href={attachment.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      ></a>
+                    </div>
+                  ))}
+                </div>
+              )}
               <p className="event-title">{event.title}</p>
               <p className="event-description">{event.description}</p>
               <p className="event-date">{formatEventDate(event.start)}</p>
@@ -143,6 +179,7 @@ const MyCalendar = () => {
           <div className="activity">No hay actividades programadas</div>
         )}
       </div>
+
       <h2 className="section-title-calendar">Calendario</h2>
       <div className="calendar-content">
         <div className="calendar-container">
@@ -163,6 +200,22 @@ const MyCalendar = () => {
                     .replace(",", " |")}
                 </p>
                 <p className="event-description">{selectedEvent.description}</p>
+
+                {/* Mostrar archivos adjuntos si están disponibles */}
+                {selectedEvent.attachments.length > 0 && (
+                  <div className="event-attachments">
+                    <h4>Archivos adjuntos:</h4>
+                    {selectedEvent.attachments.map((attachment, index) => (
+                      <div key={index} className="attachment">
+                        <img
+                          src={attachment.url}
+                          alt={`attachment-${index}`}
+                          className="attachment-image"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <p className="no-events">
@@ -170,6 +223,7 @@ const MyCalendar = () => {
               </p>
             )}
           </div>
+
           <div className="calendar-wrapper">
             {loading ? (
               <p>Cargando calendario...</p>

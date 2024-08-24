@@ -17,14 +17,19 @@
 .activity {
   background-color: #d8e2dc;
   width: 100%;
-  max-width: 20rem;
+  max-width: 15rem;
   max-height: 40rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   margin: 1em;
   padding: 1rem;
   border-radius: 1.5rem;
+}
+
+.event-attachments {
+  font-family: bellota;
 }
 
 .event-title {

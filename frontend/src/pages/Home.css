@@ -93,19 +93,53 @@ body,
   font-family: outfit;
 }
 
-.section-text {
-  max-width: 80em;
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-left: 0.5em;
-  font-family: bellota;
-}
-
 .centered-container {
   display: flex;
-  align-items: center;
   justify-content: center;
   position: relative;
+  flex-direction: column;
+}
+
+.section-text0 {
+  max-width: 65rem;
+  line-height: 1.7;
+  font-family: bellota;
+  margin-left: 3.5rem;
+}
+
+.section-text1 {
+  max-width: 65rem;
+  line-height: 1.7;
+  font-family: bellota;
+  margin-left: 3.5rem;
+}
+
+.section-text2 {
+  max-width: 65rem;
+  line-height: 1.7;
+  font-family: bellota;
+  margin-left: 3.5rem;
+}
+
+.section-text3 {
+  max-width: 50rem;
+  line-height: 1.7;
+  font-family: bellota;
+  margin-left: 3.5rem;
+}
+
+.section-text4 {
+  max-width: 50rem;
+  line-height: 1.7;
+  font-family: bellota;
+  margin-left: 3.5rem;
+}
+
+.img-silueta {
+  display: flex;
+  margin-left: auto;
+  margin-top: -19rem;
+  margin-right: 4rem;
 }
 
 .experience-section {
