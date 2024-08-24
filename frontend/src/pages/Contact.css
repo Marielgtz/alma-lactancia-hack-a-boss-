@@ -182,3 +182,111 @@ textarea {
   font-weight: bold;
   margin-left: 5px;
 }
+
+@media (max-width: 768px) {
+  .contact-page .navbar {
+    background-color: #b380b5;
+    height: 6.5rem;
+    position: relative;
+  }
+
+  .contact-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-content {
+    flex-direction: column;
+  }
+
+  .contact-title {
+    margin-top: 3rem;
+  }
+
+  label {
+    margin-left: 4rem;
+  }
+
+  .name-fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name-field {
+    width: 100%;
+  }
+
+  input {
+    margin-left: 4rem;
+    width: 16rem;
+  }
+
+  .email-input {
+    width: 16rem;
+  }
+
+  .subject-input {
+    width: 16rem;
+  }
+
+  textarea {
+    margin-left: 4rem;
+    width: 16rem;
+  }
+
+  .contact-page .captcha-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-page .captcha-img {
+    margin-left: 3.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-page .captcha-input {
+    width: 8.5rem;
+    margin-left: 4rem;
+    padding: 0.5rem;
+    font-family: outfit;
+  }
+
+  .contact-page .captcha-button {
+    margin-top: 1rem;
+    margin-left: 4.2rem;
+    border: none;
+    width: 8rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: outfit;
+    padding: 0;
+    height: 2rem;
+  }
+
+  .contact-info {
+    margin-left: 4rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info p {
+    width: 90%;
+    font-size: 0.9rem;
+  }
+
+  .contact-info img {
+    display: none;
+  }
+
+  .contact-button {
+    margin-left: 4rem;
+    margin-bottom: 2rem;
+  }
+
+}
