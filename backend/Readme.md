@@ -126,16 +126,16 @@ Required fields (in JSON format):
 
     _All fields are required._
 
-**Admin**
-Path to login:
+**Forms**
+Path to create an interactive form:
 Method: post,
-Path: `/admin-login`
-Required fields (in JSON format):
+Path: `/create-form`
+Required fields (are sent from FormBuilderComponent)
 
--   correo_electronico
--   contrasinal
-
-    _All fields are required._
+Path to send data to interactive form:
+Method: post,
+Path: `/submit-form/:sheetName`
+Required fields (are sent from FormDisplayComponent)
 
 **Collaborators/Teams members**
 

@@ -6,10 +6,11 @@ const googleSignIn = async (req, res, next) => {
     const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
     const clientSecret = process.env.GOOGLE_CLIENT_SECRET
     const redirectUri = process.env.REDIRECT_URI
+    const googleToken = process.env.GOOGLE_TOKEN_URL
     const adminEmails = [process.env.ADMIN_1, process.env.ADMIN_2]
     try {
         // Esto es para intercambiar el código recibido de Google por un token:
-        const response = await fetch('https://oauth2.googleapis.com/token', {
+        const response = await fetch(googleToken, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
