@@ -1,0 +1,65 @@
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.history-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.history-page .navbar {
+  background-color: #b380b5;
+  height: 10rem;
+  position: relative;
+}
+
+.history-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fdeee7;
+}
+
+.history-title {
+  font-family: outfit;
+  color: #b380b5;
+  margin-left: 5rem;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+}
+
+.history-text {
+  font-family: outfit;
+  color: #b380b5;
+  margin-left: 5rem;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .history-page .navbar {
+    background-color: #b380b5;
+    height: 6.5rem;
+    position: relative;
+  }
+  
+  .history-title{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    margin-left: 6.5rem;
+    justify-content: center;
+  }
+  
+  .history-text {
+    display: none;
+  }
+
+}
