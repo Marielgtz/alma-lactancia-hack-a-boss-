@@ -1,9 +1,12 @@
 import { getValues } from '../../googleapis/methods/index.js'
 import groupDataById from '../../utils/groupDataById.js'
+import fs from 'fs/promises'
+import path from 'path'
 
 const getFormById = async (req, res, next) => {
     try {
         const formId = req.params.formId
+        const publish = req.params.publish
         const spreadsheetId = process.env.SPREADSHEET_ID
         const fields = {
             field: 'id',
@@ -22,6 +25,12 @@ const getFormById = async (req, res, next) => {
             fields: Object.entries(form)[0][1].fields,
         }
 
+        //Si se publica, se guarda en un JSON para después ser recuperado:
+        if (publish) {
+            const filePath = path.join('src', 'assets', 'formPublished.json')
+            await fs.writeFile(filePath, JSON.stringify(dataToSend, null, 2))
+            console.log('Form guardado en el archivo formPublished.json')
+        }
         res.send({
             message: `formulario con id: ${formId} obtenido`,
             form: dataToSend,

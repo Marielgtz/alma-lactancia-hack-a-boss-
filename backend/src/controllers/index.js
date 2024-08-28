@@ -22,6 +22,7 @@ import createFormController from './forms/createFormController.js'
 import saveFormResponses from './forms/saveFormResponses.js'
 import getAllForms from './forms/getAllForms.js'
 import getFormById from './forms/getFormById.js'
+import getPublishedForm from './forms/getPublishedForm.js'
 
 export {
     newPartner,
@@ -48,4 +49,5 @@ export {
     saveFormResponses,
     getAllForms,
     getFormById,
+    getPublishedForm,
 }

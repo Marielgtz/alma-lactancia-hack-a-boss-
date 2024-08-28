@@ -1,0 +1,9 @@
+{
+  "formName": "Charla sobre la locura",
+  "fields": [
+    {
+      "label": "Estado mental",
+      "type": "text"
+    }
+  ]
+}
