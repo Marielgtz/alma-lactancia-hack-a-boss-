@@ -37,11 +37,17 @@ const createFormController = async (req, res, next) => {
             formData.fields.length,
             formLabels
         )
+        //Edito la estructura de datos para que coincida con la esperada en el front:
+        let dataToSend = {}
+        dataToSend[formDataString.formId] = {
+            formName: formDataString.formName,
+            fields: formDataString.fields,
+        }
 
         res.status(200).json({
             message:
                 'Formulario generado y guardado correctamente. Creada hoja de respuestas',
-            form: formDataString,
+            form: dataToSend,
         })
     } catch (error) {
         next(error)
