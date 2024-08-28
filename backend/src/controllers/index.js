@@ -20,6 +20,8 @@ import logout from './googleSignIn/logout.js'
 import getFilteredActivities from './freeActivities/getFilteredActivities.js'
 import createFormController from './forms/createFormController.js'
 import saveFormResponses from './forms/saveFormResponses.js'
+import getAllForms from './forms/getAllForms.js'
+import getFormById from './forms/getFormById.js'
 
 export {
     newPartner,
@@ -44,4 +46,6 @@ export {
     getFilteredActivities,
     createFormController,
     saveFormResponses,
+    getAllForms,
+    getFormById,
 }

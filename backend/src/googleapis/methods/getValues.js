@@ -49,6 +49,7 @@ const getValues = async (
         let cellToUpdate //Datos para enviar al controlador de actualizar celda.
         let headers //Cabeceras, es decir, fila superior con los nombres de los campos.
         let rowData //Datos de una fila en concreto.
+        let rowsData //Datos de varias filas coincidentes.
         if (fields && fields.field && fields.value) {
             if (rows && rows.length > 0) {
                 headers = rows[0]
@@ -64,11 +65,12 @@ const getValues = async (
                 generateError('No se ha encontrado el campo.')
             }
 
-            // Encontrar la fila que contiene el valor buscado
+            // Encontrar la fila que contenga el valor buscado:
+            let matchingRows = [] //Para almacenar los index de las filas coincidentes, en caso de que haya más de una:
             for (let i = 1; i < rows.length; i++) {
                 if (rows[i][fieldColumnIndex] === fields.value) {
-                    rowIndex = i + 1 // Esto será el número de la fila.
-                    break
+                    rowIndex = i + 1 // Esto será el número de la fila (en caso de que sea única).
+                    matchingRows.push(i + 1)
                 }
             }
 
@@ -92,7 +94,7 @@ const getValues = async (
                 },
             }
 
-            //Rango de la fila en la que se quieren modificar u obtener datos:
+            //Rango de la fila única en la que se quieren modificar u obtener datos:
             updateRowRange = `${fields.sheetName}!A${rowIndex}:Z${rowIndex}`
 
             //Datos para actualizar una fila:
@@ -114,6 +116,19 @@ const getValues = async (
 
             rowData = rowData.data.values[0]
 
+            //Datos de varias filas coincidentes.
+            rowsData = await Promise.all(
+                matchingRows.map(async (row) => {
+                    const configData = {
+                        spreadsheetId,
+                        range: `${fields.sheetName}!A${row}:Z${row}`,
+                    }
+                    const rowData = await sheets.spreadsheets.values.get(
+                        configData
+                    )
+                    return rowData.data.values[0]
+                })
+            )
             //Estructura de values
             // La API de Google Sheets espera que el objeto resource contenga una propiedad values que es una matriz bidimensional:
 
@@ -149,6 +164,7 @@ const getValues = async (
             nextRow,
             allSheetData,
             rowData,
+            rowsData,
             cellToUpdate,
             rowToUpdate,
             rowToDelete,

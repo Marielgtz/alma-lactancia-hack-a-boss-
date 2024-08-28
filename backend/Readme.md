@@ -137,6 +137,10 @@ Method: post,
 Path: `/submit-form/:sheetName`
 Required fields (are sent from FormDisplayComponent)
 
+Path to get all forms:
+Method: get,
+Path: `/get-all-forms`
+
 **Collaborators/Teams members**
 
 Route to register a new collaborator/team member:
