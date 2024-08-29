@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./History.css";
-import ActivityFilter from "../components/ActivityFilter";
-import silueta from "../images/imagen-silueta.png";
+import ActivityFilter from "../components/filters/ActivityFilter";
+import silueta from "../images/Imagen-silueta.png";
+import { getPastEvents } from "../services/api";
 
 const History = () => {
   const navigate = useNavigate();
@@ -18,50 +19,18 @@ const History = () => {
   //TODO IMPLEMENTANDO EL FETCH
 
   // Accede a env y crea url de fetch
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const endpoint = '/get-filtered-activities';
-  const fullUrl = `${apiUrl}${endpoint}`;
 
-  const activitiesFilters = {
-    // id: "",                  
-    // summary: ""
-    // description: "", 
-    // exactDate: "Miércoles, 10 de Septiembre de 2025, 12:00", 
-    // dateFrom: "Miércoles, 01 de Septiembre de 2025, 12:00",  
-    // dateUntil: "Miércoles, 15 de Septiembre de 2025, 12:00", 
-    // location: "",         
-    // access: ""              
-};
-
-// Función de fetch
-async function getData() {
-  try {
-      const response = await fetch(fullUrl, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(activitiesFilters)
-      });
-
-      const data = await response.json();
-      return data.data; 
-  } catch (error) {
-      console.error('Error:', error);
-      return null; 
-  }
-}
-
-useEffect(() => {
-  async function fetchActivities() {
-    const fetchedActivities = await getData();
-    if (fetchedActivities) {
-      setActivities(fetchedActivities);
+  //TODO Pasarlo a dentro del componente - Pasar como param la URL (histórico o proximas acts)
+  useEffect(() => {
+    async function fetchActivities() {
+      const fetchedActivities = await getPastEvents();
+      if (fetchedActivities) {
+        setActivities(fetchedActivities);
+      }
     }
-  }
 
-  fetchActivities();
-}, []);
+    fetchActivities();
+  }, []);
 
   return (
     <div className="history-page">
@@ -80,23 +49,24 @@ useEffect(() => {
 
         <ol className="activity-container">
 
-            {/* 
-                //TODO: AGREGAR UN MAP CON LAS DIFERENTES ACTIVIDADES TRAS HACER EL FETCH   
-            */
+            {
+              /* Map con las actividades recibidas en el fetch */
+              activities.length > 0 ? (
+                activities.map((activity,index) => (
 
-            activities.length > 0 ? (
-              activities.map((activity,index) => (
-                <li key={index} className="activity" style={{ backgroundColor: getBackgroundColor(index) }}>
-                  <p>{activity.image ? <img src={activity.image} alt={activity.summary} /> : 'imagen'}</p>
-                  <h1 className="activity-title">{activity.summary || 'Título'}</h1>
-                  <h2 className="activity-date">{activity.exactDate || 'Fecha'}</h2>
-                  <p className="activity-location">{activity.location || 'Lugar'}</p>
-                </li>
-              ))
-            ) : (
-              <p>No se han encontrado actividades</p>
-            )}
+                  <li key={index} className="activity" style={{ backgroundColor: getBackgroundColor(index) }}>
+                    <p>{activity.image ? <img src={activity.image} alt={activity.summary} /> : 'imagen'}</p>
+                    <h1 className="activity-title">{activity.summary || 'Título'}</h1>
+                    <h2 className="activity-date">{activity.exactDate || 'Fecha'}</h2>
+                    <p className="activity-location">{activity.location || 'Lugar'}</p>
+                  </li>
+                ))
+              ) : (
+                <p>No se han podido cargar las actividades pasadas</p>
+              )
+            }
 
+            {/* //! Actividad de ejemplo */}
             <article className="activity">
                 <img src= {silueta} alt="Logo Alma" className="activity-image" />
                 <h1 className="activity-title">obradoiro: Alimentación complementaria</h1>

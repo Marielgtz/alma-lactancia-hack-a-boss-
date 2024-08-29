@@ -256,3 +256,38 @@ export const updatePartnerService = async (partnerData) => {
     throw error;
   }
 };
+
+// Listar todos los eventos pasados
+const apiUrl = import.meta.env.VITE_API_URL;
+const endpoint = '/get-filtered-activities';
+const fullUrl = `${apiUrl}${endpoint}`;
+
+const activitiesFilters = {
+  // id: "",                  
+  // summary: ""
+  // description: "", 
+  // exactDate: "Miércoles, 10 de Septiembre de 2025, 12:00", 
+  // dateFrom: "Miércoles, 01 de Septiembre de 2025, 12:00",  
+  // dateUntil: "Miércoles, 15 de Septiembre de 2025, 12:00", 
+  // location: "",         
+  // access: ""              
+};
+
+
+export async function getPastEvents() {
+  try {
+      const response = await fetch(fullUrl, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(activitiesFilters)
+      });
+
+      const data = await response.json();
+      return data.data; 
+  } catch (error) {
+      console.error('Error:', error);
+      return null; 
+  }
+}
