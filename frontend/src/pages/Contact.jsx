@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
-// import silueta from "../images/imagen-silueta.png";
+import silueta from "../images/imagen-silueta.png";
 import "./Contact.css";
 
 const Contact = () => {
