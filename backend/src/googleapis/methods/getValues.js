@@ -45,6 +45,7 @@ const getValues = async (
         let updateCellRange //Rango para localizar una celda en concreto.
         let updateRowRange //Rango para una fila en concreto.
         let rowToDelete //Datos para enviar al controlador de borrar fila.
+        let rowsToDelete //Datos para enviar al controlador de borrar fila.
         let rowToUpdate //Fila preparada para enviar al método de actualizar.
         let cellToUpdate //Datos para enviar al controlador de actualizar celda.
         let headers //Cabeceras, es decir, fila superior con los nombres de los campos.
@@ -116,7 +117,7 @@ const getValues = async (
 
             rowData = rowData.data.values[0]
 
-            //Datos de varias filas coincidentes.
+            //Datos obtenidos de varias filas coincidentes.
             rowsData = await Promise.all(
                 matchingRows.map(async (row) => {
                     const configData = {
@@ -131,15 +132,13 @@ const getValues = async (
             )
             //Estructura de values
             // La API de Google Sheets espera que el objeto resource contenga una propiedad values que es una matriz bidimensional:
-
             // Primera dimensión: Cada fila que deseas actualizar.
             // Segunda dimensión: Los valores de cada celda en esa fila.
             // Aunque solo estés actualizando una celda, la API necesita que los datos se estructuren como una matriz de una fila y una columna.
 
             const sheetId = await getSheetId(spreadsheetId, fields.sheetName)
 
-            //Datos para borrar una fila con  el método batchUpdate:
-
+            //Datos para borrar una fila con el método batchUpdate:
             rowToDelete = {
                 spreadsheetId: spreadsheetId,
                 resource: {
@@ -157,6 +156,29 @@ const getValues = async (
                     ],
                 },
             }
+
+            //Datos para borrar todas las filas que contengan el valor enviado en el objeto fields:
+            rowsToDelete = await Promise.all(
+                matchingRows.map(async (row) => {
+                    return {
+                        spreadsheetId: spreadsheetId,
+                        resource: {
+                            requests: [
+                                {
+                                    deleteDimension: {
+                                        range: {
+                                            sheetId: sheetId,
+                                            dimension: 'ROWS',
+                                            startIndex: row - 1,
+                                            endIndex: row,
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                    }
+                })
+            )
         }
 
         return {
@@ -168,6 +190,7 @@ const getValues = async (
             cellToUpdate,
             rowToUpdate,
             rowToDelete,
+            rowsToDelete,
         }
     } catch (error) {
         generateError(error.message)

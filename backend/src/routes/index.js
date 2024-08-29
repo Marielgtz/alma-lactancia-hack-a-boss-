@@ -5,5 +5,15 @@ import calendar from './calendarRouter.js'
 import collaborator from './collaboratorRouter.js'
 import contact from './contactRouter.js'
 import captcha from './captchaRouter.js'
+import forms from './formsRouter.js'
 
-export { partners, activities, login, calendar, collaborator, contact, captcha }
+export {
+    partners,
+    activities,
+    login,
+    calendar,
+    collaborator,
+    contact,
+    captcha,
+    forms,
+}

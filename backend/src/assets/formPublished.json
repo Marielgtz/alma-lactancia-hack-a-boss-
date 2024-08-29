@@ -1,8 +1,12 @@
 {
-  "formName": "Charla sobre la locura",
+  "formName": "666",
   "fields": [
     {
-      "label": "Estado mental",
+      "label": "2123",
+      "type": "number"
+    },
+    {
+      "label": "eee",
       "type": "text"
     }
   ]

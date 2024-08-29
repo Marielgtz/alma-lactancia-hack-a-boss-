@@ -12,6 +12,7 @@ import listEvents from './calendar/listEvents.js'
 import saveFormData from './forms/saveFormData.js'
 import addSheetToSpreadsheet from './addSheetToSpreadsheet.js'
 import configureSheet from './configureSheet.js'
+import deleteSheet from './deleteSheet.js'
 
 export {
     getValues,
@@ -28,4 +29,5 @@ export {
     saveFormData,
     addSheetToSpreadsheet,
     configureSheet,
+    deleteSheet,
 }
