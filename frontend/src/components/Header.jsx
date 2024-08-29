@@ -51,15 +51,15 @@ const Header = () => {
             <a href="/">¿Quiénes somos?</a>
           </li>
           <li className="menu-item">
-            <a href="/" onClick={() => toggleSubMenu(1)}>
+            <a onClick={() => toggleSubMenu(1)}>
               Actividades
             </a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
-                <a href="/">Próximas Inscripciones</a>
+                <a href="/actividades">Próximas Inscripciones</a>
               </li>
               <li>
-                <a href="/">Histórico</a>
+                <a href="/historico">Histórico</a>
               </li>
             </ul>
           </li>

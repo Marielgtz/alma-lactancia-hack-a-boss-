@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./History.css";
 import ActivityFilter from "../components/ActivityFilter";
+import silueta from "../images/imagen-silueta.png";
 
 const History = () => {
+  const navigate = useNavigate();
   const [openInfo, setOpenInfo] = useState(null);
   const [activities, setActivities] = useState([]);
 
@@ -64,10 +67,14 @@ useEffect(() => {
     <div className="history-page">
       <Header />
       <main className="history-main">
+        <div className="history-header">
         <p className="history-text">Alma Lactancia</p>
         <h1 className="history-title">Histórico</h1>
     
-        <button>Próximas actividades</button>
+        <button className="upcoming-activities" onClick={() => navigate('/actividades')}
+        >Próximas actividades
+        </button>
+        </div>
 
         <ActivityFilter />
 
@@ -79,7 +86,7 @@ useEffect(() => {
 
             activities.length > 0 ? (
               activities.map((activity,index) => (
-                <li key={index} className="activity">
+                <li key={index} className="activity" style={{ backgroundColor: getBackgroundColor(index) }}>
                   <p>{activity.image ? <img src={activity.image} alt={activity.summary} /> : 'imagen'}</p>
                   <h1 className="activity-title">{activity.summary || 'Título'}</h1>
                   <h2 className="activity-date">{activity.exactDate || 'Fecha'}</h2>
@@ -91,7 +98,7 @@ useEffect(() => {
             )}
 
             <article className="activity">
-                <p>imagen</p>
+                <img src= {silueta} alt="Logo Alma" className="activity-image" />
                 <h1 className="activity-title">obradoiro: Alimentación complementaria</h1>
                 {/* <p className="activity-author">Por Emma Enríquez (Nutricionista)</p> */}
                 <h2 className="activity-date">Sábado 6 de xullo | 11h</h2>
@@ -106,6 +113,11 @@ useEffect(() => {
       <Footer />
     </div>
   );
+};
+
+const getBackgroundColor = (index) => {
+  const colors = ['#b380b5', '#e0bb8e', '#c897b1'];
+  return colors[index % colors.length];
 };
 
 export default History;

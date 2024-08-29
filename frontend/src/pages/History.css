@@ -25,6 +25,11 @@ body,
   display: flex;
   flex-direction: column;
   background-color: #fdeee7;
+  position: relative;
+}
+
+.history-header {
+  padding-bottom: 20px;
 }
 
 .history-title {
@@ -43,6 +48,42 @@ body,
   width: 100%;
 }
 
+.upcoming-activities {
+  position: absolute;
+  right: 6rem;
+  top: 4.5rem;
+  background-color: #d8e2dc;
+  border: none;
+  color: #b380b5;
+  cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: 18rem;
+  height: 2.5rem;
+  font-family: outfit;
+}
+
+.upcoming-activities:hover {
+  background-color: #b380b5;
+  color: white;
+}
+
+.activity-container {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity {
+  flex: 1 1 30%;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Estilos responsive */
 @media (max-width: 768px) {
   .history-page .navbar {
@@ -50,16 +91,29 @@ body,
     height: 6.5rem;
     position: relative;
   }
-  
-  .history-title{
+
+  .history-title {
     margin-top: 3rem;
     margin-bottom: 2rem;
     margin-left: 6.5rem;
     justify-content: center;
+    text-align: center;
+    margin-left: 0;
   }
-  
+
   .history-text {
     display: none;
   }
 
+  .upcoming-activities {
+    display: none;
+  }
+}
+
+.activity {
+  flex: 1 1 100%;
+}
+
+.activity-container {
+  justify-content: center;
 }
