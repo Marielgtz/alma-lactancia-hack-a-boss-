@@ -22,6 +22,7 @@ const getFormById = async (req, res, next) => {
         //Formateo los datos para que coincidan con la estructura esperada en el front:
         const dataToSend = {
             formName: Object.entries(form)[0][1].formName,
+            formId: formId,
             fields: Object.entries(form)[0][1].fields,
         }
 

@@ -1,13 +1,18 @@
 {
-  "formName": "666",
+  "formName": "Charla nocturna",
+  "formId": "69828b67-c605-488a-ac9d-2aa57e278ba3",
   "fields": [
     {
-      "label": "2123",
+      "label": "Nombre",
+      "type": "text"
+    },
+    {
+      "label": "Teléfono",
       "type": "number"
     },
     {
-      "label": "eee",
-      "type": "text"
+      "label": "Correo electrónico",
+      "type": "email"
     }
   ]
 }

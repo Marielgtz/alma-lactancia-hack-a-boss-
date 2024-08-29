@@ -7,6 +7,7 @@ import {
     getPublishedForm,
     unpublishForm,
     deleteForm,
+    checkIsPublished,
 } from '../controllers/index.js'
 const router = express.Router()
 
@@ -17,6 +18,7 @@ router.get('/get-all-forms', getAllForms)
 router.get('/get-form/:formId/:publish?', getFormById)
 router.get('/get-published-form', getPublishedForm)
 router.get('/unpublish-form', unpublishForm)
+router.get('/check-is-published/:formId', checkIsPublished)
 router.post('/submit-form/:sheetName', saveFormResponses)
 
 export default router
