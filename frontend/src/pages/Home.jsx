@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
-import image2 from "../images/imagen-silueta2.png";
+import silueta from "../images/IlustracionLactancia.png";
 import "./Home.css";
 
 const Home = () => {
@@ -128,7 +128,7 @@ const Home = () => {
               las madres, financiadas por las cuotas anuales de las socias.
             </p>
           </div>
-          <img src={image2} className="img-silueta" />
+          <img src={silueta} className="img-silueta" />
           <Calendar />
         </div>
         <div className="experience-section">

@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./History.css";
 import ActivityFilter from "../components/filters/ActivityFilter";
-import silueta from "../images/Imagen-silueta.png";
+import silueta from "../images/IlustracionLactancia.png";
 import { getPastEvents } from "../services/api";
 
 const History = () => {

@@ -159,6 +159,11 @@ textarea {
   color: #b380b5;
 }
 
+.contact-info img {
+  width: 15vw;
+  height: 40vh;
+}
+
 #responseMessage {
   margin-top: 20px;
   padding: 10px;

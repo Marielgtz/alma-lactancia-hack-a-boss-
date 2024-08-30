@@ -139,8 +139,10 @@ body,
 .img-silueta {
   display: flex;
   position: relative;
-  margin-left: 65rem;
+  margin-left: 66rem;
   margin-top: -18rem;
+  width: 17vw;
+  height: 45vh;
 }
 
 .experience-section {
