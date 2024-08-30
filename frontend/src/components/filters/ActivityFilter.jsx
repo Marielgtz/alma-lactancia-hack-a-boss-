@@ -1,9 +1,8 @@
 import "./ActivityFilter.css";
 import { useState, useEffect } from 'react'
 import { SelectInput } from "./SelectInput";
-import { getPastEvents } from "../../services/api";
 
-function ActivityFilter() {
+function ActivityFilter({ activities, setFilteredActivites }) {
 
   // Variables de React de los filtros (en useState)
   const [typeEvent, setTypeEvent] = useState("");
@@ -20,8 +19,8 @@ function ActivityFilter() {
   // ! MOCKUPS =========================================================
 
   const categoryEvents = [
-    "Obradoiro",
-    "Charla"
+    "Entrada libre",
+    "Exclusivo Socios"
   ]
 
   const locations = [
@@ -30,6 +29,46 @@ function ActivityFilter() {
   ]
 
   //! ===================================================================
+
+  //? Control en desarrollo =============================================
+
+  useEffect(() => {
+    let msg = 'Filtro actual: '
+    if(typeEvent) msg = msg + "" + typeEvent + ","
+    if(locationEvent) msg = msg + "" + locationEvent + ","
+    if(eventDateStart) msg = msg + "" + eventDateStart + ","
+    if(eventDateEnd) msg = msg + "" + eventDateEnd + ","
+    console.log(msg);
+    
+    
+  },[typeEvent, locationEvent, eventDateStart, eventDateEnd])
+
+  // TODO Filtro de las actividades según tipo
+  useEffect(() => {
+    let translatedEventType;
+  
+    switch (typeEvent) {
+      case "Entrada libre":
+        translatedEventType = "free";
+        break;
+      case "Exclusivo Socios":
+        translatedEventType = "member";
+        break;
+      default:
+        translatedEventType = null;
+        break;
+    }
+  
+    if (translatedEventType) {
+      setFilteredActivites(
+        activities.filter(activity => activity.access === translatedEventType)
+      );
+    } else {
+      setFilteredActivites(activities);
+    }
+  }, [typeEvent, activities, setFilteredActivites]);
+
+  //? ===================================================================
 
   return (
     <div className="filter-container">
