@@ -17,6 +17,10 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <header>
       <nav className="navbar">
@@ -45,10 +49,10 @@ const Header = () => {
         {/* Inicio de la lista de elementos del menú */}
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
-            <a href="/">Inicio</a>
+            <a href="/" onClick={closeMenu}>Inicio</a>
           </li>
           <li className="menu-item">
-            <a href="/">¿Quiénes somos?</a>
+            <a href="/" onClick={closeMenu}>¿Quiénes somos?</a>
           </li>
           <li className="menu-item">
             <a onClick={() => toggleSubMenu(1)}>
@@ -56,20 +60,20 @@ const Header = () => {
             </a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
-                <a href="/actividades">Próximas Inscripciones</a>
+                <a href="/actividades" onClick={closeMenu}>Próximas Inscripciones</a>
               </li>
               <li>
-                <a href="/historico">Histórico</a>
+                <a href="/historico" onClick={closeMenu}>Histórico</a>
               </li>
             </ul>
           </li>
           <li className="menu-item">
-            <Link to="/biblioteca" onClick={toggleMenu}>
+            <Link to="/biblioteca" onClick={closeMenu}>
               Biblioteca
             </Link>
           </li>
           <li className="menu-item">
-            <Link to="/contacto" onClick={toggleMenu}>
+            <Link to="/contacto" onClick={closeMenu}>
               Contacto
             </Link>
           </li>

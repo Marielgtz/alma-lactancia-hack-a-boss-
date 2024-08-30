@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./History.css";
 import ActivityFilter from "../components/filters/ActivityFilter";
-import silueta from "../images/Imagen-silueta.png";
+import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
 import { getPastEvents } from "../services/api";
 
 const History = () => {
@@ -37,48 +37,60 @@ const History = () => {
       <Header />
       <main className="history-main">
         <div className="history-header">
-        <p className="history-text">Alma Lactancia</p>
-        <h1 className="history-title">Histórico</h1>
-    
-        <button className="upcoming-activities" onClick={() => navigate('/actividades')}
-        >Próximas actividades
-        </button>
+          <p className="history-text">Alma Lactancia</p>
+          <h1 className="history-title">Histórico</h1>
+          <p className="history-description">
+            En esta sección encontrarás un registro detallado de todas las
+            actividades realizadas en Alma Lactancia. Desde reuniones hasta
+            charlas informativas, este histórico recopila los eventos que han
+            marcado nuestra trayectoria y compromiso con las familias.
+          </p>
+
+          <button
+            className="upcoming-activities"
+            onClick={() => navigate("/actividades")}
+          >
+            Próximas actividades
+          </button>
         </div>
 
         <ActivityFilter />
 
         <ol className="activity-container">
-
-            {
-              /* Map con las actividades recibidas en el fetch */
-              activities.length > 0 ? (
-                activities.map((activity,index) => (
-
-                  <li key={index} className="activity" style={{ backgroundColor: getBackgroundColor(index) }}>
-                    <p>{activity.image ? <img src={activity.image} alt={activity.summary} /> : 'imagen'}</p>
-                    <h1 className="activity-title">{activity.summary || 'Título'}</h1>
-                    <h2 className="activity-date">{activity.exactDate || 'Fecha'}</h2>
-                    <p className="activity-location">{activity.location || 'Lugar'}</p>
-                  </li>
-                ))
-              ) : (
-                <p>No se han podido cargar las actividades pasadas</p>
-              )
-            }
-
-            {/* //! Actividad de ejemplo */}
-            <article className="activity">
-                <img src= {silueta} alt="Logo Alma" className="activity-image" />
-                <h1 className="activity-title">obradoiro: Alimentación complementaria</h1>
-                {/* <p className="activity-author">Por Emma Enríquez (Nutricionista)</p> */}
-                <h2 className="activity-date">Sábado 6 de xullo | 11h</h2>
-                <p className="activity-location">Sala Municipal Celia e Esperanza Brañas Fernández, Culleredo</p>
-                {/* <button className="activity-inscription">Inscribirse</button> */}
-
-            </article>
-
+          {
+            /* Map con las actividades recibidas en el fetch */
+            activities.length > 0 ? (
+              activities.map((activity, index) => (
+                <li
+                  key={index}
+                  className="activity"
+                  style={{ backgroundColor: getBackgroundColor(index) }}
+                >
+                  <div className="activity-image">
+                      {activity.image ? (
+                        <img src={activity.image} alt={activity.summary} />
+                      ) : (
+                        <img src={silueta} alt="Imagen predeterminada" />
+                      )}
+                    </div>
+                  <h1 className="activities-title"
+                  style={{ color: getColor(index) }}
+                  >
+                    {activity.summary || "Título"}
+                  </h1>
+                  <h2 className="activities-date">
+                    {activity.exactDate || "Fecha"}
+                  </h2>
+                  <p className="activities-location">
+                    {activity.location || "Lugar"}
+                  </p>
+                </li>
+              ))
+            ) : (
+              <p>No se han podido cargar las actividades pasadas</p>
+            )
+          }
         </ol>
-
       </main>
       <Footer />
     </div>
@@ -86,7 +98,11 @@ const History = () => {
 };
 
 const getBackgroundColor = (index) => {
-  const colors = ['#b380b5', '#e0bb8e', '#c897b1'];
+  const colors = ["#b380b5", "#e0bb8e"];
+  return colors[index % colors.length];
+};
+const getColor = (index) => {
+  const colors = ["#e0bb8e", "#b380b5"];
   return colors[index % colors.length];
 };
 

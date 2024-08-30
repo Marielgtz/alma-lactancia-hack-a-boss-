@@ -38,6 +38,8 @@ body,
   margin-left: 5rem;
   font-size: 2.5rem;
   margin-bottom: 0;
+  margin-top: 0;
+
 }
 
 .history-text {
@@ -46,12 +48,21 @@ body,
   margin-left: 5rem;
   font-size: 1.1rem;
   width: 100%;
+  margin-bottom: 0;
+}
+
+.history-description{
+  font-family: bellota;
+  margin-left: 5rem;
+  margin-right: 6rem;
+  color: #b380b5;
+  font-weight: bold;
 }
 
 .upcoming-activities {
   position: absolute;
   right: 6rem;
-  top: 4.5rem;
+  top: 2.9rem;
   background-color: #d8e2dc;
   border: none;
   color: #b380b5;
@@ -80,8 +91,6 @@ body,
 .activity {
   flex: 1 1 30%;
   margin: 1rem;
-  padding: 1rem;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilos responsive */
@@ -93,7 +102,6 @@ body,
   }
 
   .history-title {
-    margin-top: 3rem;
     margin-bottom: 2rem;
     margin-left: 6.5rem;
     justify-content: center;
@@ -102,7 +110,15 @@ body,
   }
 
   .history-text {
-    display: none;
+    /* display: none; */
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .history-description {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    text-align: center;
   }
 
   .upcoming-activities {
@@ -117,3 +133,4 @@ body,
 .activity-container {
   justify-content: center;
 }
+
