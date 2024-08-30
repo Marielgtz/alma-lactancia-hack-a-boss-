@@ -258,23 +258,12 @@ export const updatePartnerService = async (partnerData) => {
 };
 
 // Listar todos los eventos pasados
-const apiUrl = import.meta.env.VITE_API_URL;
-const endpoint = '/get-filtered-activities';
-const fullUrl = `${apiUrl}${endpoint}`;
+// Función que trae todas las actividades de la URL dada
+export async function getPastEvents(endpoint) {
+  // Construír la url
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const fullUrl = `${apiUrl}${endpoint}`; 
 
-const activitiesFilters = {
-  // id: "",                  
-  // summary: ""
-  // description: "", 
-  // exactDate: "Miércoles, 10 de Septiembre de 2025, 12:00", 
-  // dateFrom: "Miércoles, 01 de Septiembre de 2025, 12:00",  
-  // dateUntil: "Miércoles, 15 de Septiembre de 2025, 12:00", 
-  // location: "",         
-  // access: ""              
-};
-
-
-export async function getPastEvents() {
   try {
       const response = await fetch(fullUrl, {
           method: 'POST',
@@ -291,3 +280,15 @@ export async function getPastEvents() {
       return null; 
   }
 }
+
+const activitiesFilters = {
+  // id: "",                  
+  // summary: ""
+  // description: "", 
+  // exactDate: "Miércoles, 10 de Septiembre de 2025, 12:00", 
+  // dateFrom: "Miércoles, 01 de Septiembre de 2025, 12:00",  
+  // dateUntil: "Miércoles, 15 de Septiembre de 2025, 12:00", 
+  // location: "",         
+  // access: ""              
+};
+

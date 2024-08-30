@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export function SelectInput({setStatus, eventType, options, text}) {
+export function SelectInput({setStatus, eventType, options, text, onChange}) {
     const [selectOpen, setSelectOpen] = useState(false);
     const [textToDefault, setTextToDefault] = useState('');
     const handleClick = () => {
@@ -15,20 +15,28 @@ export function SelectInput({setStatus, eventType, options, text}) {
       }
     }
 
-function handleChange(e){
-    const {name} = e.target;
-    const value = e.target.value;
-    switch(name){
-      case 'typeEvent':
-        setStatus(value);
-        break;
-      case 'locationEvent':
-        setStatus(value);
-        break;
-      default: 
-        break;
-    }
+// function handleChange(e){
+//     const {name} = e.target;
+//     const value = e.target.value;
+//     switch(name){
+//       case 'typeEvent':
+//         setStatus(value);
+//         break;
+//       case 'locationEvent':
+//         setStatus(value);
+//         break;
+//       default: 
+//         break;
+//     }
+//   }
+
+function handleChange(e) {
+  const { name, value } = e.target;
+  setStatus(value);
+  if (onChange) {
+    onChange(e);
   }
+}
 
   return (
     <div className="filter filter-type">

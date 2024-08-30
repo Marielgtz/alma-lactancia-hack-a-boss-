@@ -11,6 +11,7 @@ const History = () => {
   const navigate = useNavigate();
   const [openInfo, setOpenInfo] = useState(null);
   const [activities, setActivities] = useState([]);
+  const [filteredActivities, setFilteredActivites] = useState([]);
 
   const toggleInfo = (info) => {
     setOpenInfo(info === openInfo ? null : info);
@@ -22,14 +23,21 @@ const History = () => {
 
   //TODO Pasarlo a dentro del componente - Pasar como param la URL (histórico o proximas acts)
   useEffect(() => {
-    async function fetchActivities() {
-      const fetchedActivities = await getPastEvents();
+    async function fetchActivities(endpoint) {
+      const fetchedActivities = await getPastEvents(endpoint);
       if (fetchedActivities) {
-        setActivities(fetchedActivities);
+        // ! ========   Mockup para testeo   =============================================
+        // console.log(fetchedActivities);
+        fetchedActivities[4].access = "member"
+        fetchedActivities[5].access = "member"
+        fetchedActivities[7].access = "member"
+        fetchedActivities[10].location = "Coruña"
+        //! ======================================================
+        setActivities(fetchedActivities); 
       }
     }
 
-    fetchActivities();
+    fetchActivities('/get-filtered-activities');
   }, []);
 
   return (
@@ -45,14 +53,17 @@ const History = () => {
         </button>
         </div>
 
-        <ActivityFilter />
+        <ActivityFilter
+          activities={activities}
+          setFilteredActivites={setFilteredActivites}
+        />
 
         <ol className="activity-container">
 
             {
               /* Map con las actividades recibidas en el fetch */
-              activities.length > 0 ? (
-                activities.map((activity,index) => (
+              filteredActivities.length > 0 ? (
+                filteredActivities.map((activity,index) => (
 
                   <li key={index} className="activity" style={{ backgroundColor: getBackgroundColor(index) }}>
                     <p>{activity.image ? <img src={activity.image} alt={activity.summary} /> : 'imagen'}</p>
