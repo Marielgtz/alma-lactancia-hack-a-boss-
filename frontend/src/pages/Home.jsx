@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
 import silueta from "../images/IlustracionLactancia.png";
+import ButtonUp from "../components/ButtonUp";
 import "./Home.css";
 
 const Home = () => {
@@ -67,6 +68,7 @@ const Home = () => {
     <div className="home-page">
       <Header />
       <main className="main-home">
+      <ButtonUp />
         <div className="img-section">
           <div className="background-image"></div>
           <div className="support-button">

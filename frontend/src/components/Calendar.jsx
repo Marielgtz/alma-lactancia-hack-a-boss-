@@ -149,31 +149,33 @@ const MyCalendar = () => {
         ) : events.length > 0 ? (
           events.map((event) => (
             <div className="activity" key={event.id}>
-              {/* Mostrar archivos adjuntos si están disponibles */}
-              {event.attachments.length > 0 && (
-                <div className="event-attachments">
-                  {event.attachments.map((attachment, index) => (
-                    <div key={index} className="attachment">
-                      {/* Asumiendo que los adjuntos son imágenes */}
-                      <img
-                        key={index}
-                        src={attachment.url}
-                        alt={`attachment-${index}`}
-                        className="attachment-image"
-                      />
-                      {/* En caso de ser otro tipo de archivo */}
-                      <a
-                        href={attachment.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      ></a>
+              <div className="card-inner">
+                <div className="card-front">
+                  {/* Mostrar archivos adjuntos si están disponibles */}
+                  {event.attachments.length > 0 && (
+                    <div className="event-attachments">
+                      {event.attachments.map((attachment, index) => (
+                        <img
+                          key={index}
+                          src={attachment.url}
+                          alt={`attachment-${index}`}
+                          className="attachment-image"
+                        />
+                      ))}
                     </div>
-                  ))}
+                  )}
+                  <p className="event-title">{event.title}</p>
+                  <p className="event-date">{formatEventDate(event.start)}</p>
                 </div>
-              )}
-              <p className="event-title">{event.title}</p>
-              <p className="event-description">{event.description}</p>
-              <p className="event-date">{formatEventDate(event.start)}</p>
+                <div className="card-back">
+                  <p className="event-title">{event.title}</p>
+                  <p className="event-speaker">Por {event.speaker}</p>
+                  <p className="event-date">{formatEventDate(event.start)}</p>
+                  <i className="fas fa-map-marker-alt"></i> {event.location}
+                  <p className="event-type">* Só para socias</p>
+                  <button className="register-button">Inscribirse</button>
+                </div>
+              </div>
             </div>
           ))
         ) : (
