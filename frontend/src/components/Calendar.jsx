@@ -156,6 +156,7 @@ const MyCalendar = () => {
                     <div key={index} className="attachment">
                       {/* Asumiendo que los adjuntos son imágenes */}
                       <img
+                        key={index}
                         src={attachment.url}
                         alt={`attachment-${index}`}
                         className="attachment-image"

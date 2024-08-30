@@ -48,12 +48,12 @@ const Header = () => {
             <a href="/">Inicio</a>
           </li>
           <li className="menu-item">
-            <a href="/">¿Quiénes somos?</a>
+            <Link to="/quienes-somos">¿Quiénes somos?</Link>
           </li>
           <li className="menu-item">
-            <a href="/" onClick={() => toggleSubMenu(1)}>
+            <Link to="/actividades" onClick={() => toggleSubMenu(1)}>
               Actividades
-            </a>
+            </Link>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
                 <a href="/">Próximas Inscripciones</a>
