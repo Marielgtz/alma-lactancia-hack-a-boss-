@@ -92,7 +92,7 @@ body {
   position: absolute;
   top: 100%;
   min-width: 200px;
-  z-index: 999;
+  z-index: 1000;
   background-color: white;
 }
 
@@ -103,6 +103,7 @@ body {
   padding: 10px;
   display: block;
   position: relative;
+  z-index: 1001;
 }
 
 /* Estilo del subrayado en los enlaces del submenú */
@@ -155,7 +156,7 @@ body {
     align-self: flex-end;
     margin-top: 0.8rem;
     margin-right: 1rem;
-    z-index: 2;
+    z-index: 12;
   }
 
   .menu {
@@ -167,7 +168,7 @@ body {
     flex-direction: column;
     position: absolute;
     background-color: #9c6fa0;
-    z-index: 1;
+    z-index: 11;
     text-align: center;
     width: 100%;
     height: 20.5rem;
@@ -181,7 +182,12 @@ body {
   .submenu {
     display: none;
   }
+  
+  .submenu.active {
+    display: block;
+  }
 }
+
 
 @media (min-width: 769px) {
   .menu-toggle {
