@@ -5,39 +5,30 @@ import Footer from "../components/Footer";
 import "./History.css";
 import ActivityFilter from "../components/filters/ActivityFilter";
 import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
-import { getPastEvents } from "../services/api";
+import {getPastEvents} from '../services/api'
+import { createMockupData } from "../services/mockUpService";
 
 const History = () => {
   const navigate = useNavigate();
-  const [openInfo, setOpenInfo] = useState(null);
+  // const [openInfo, setOpenInfo] = useState(null);
   const [activities, setActivities] = useState([]);
   const [filteredActivities, setFilteredActivites] = useState([]);
 
-  const toggleInfo = (info) => {
-    setOpenInfo(info === openInfo ? null : info);
-  };
+  // const toggleInfo = (info) => {
+  //   setOpenInfo(info === openInfo ? null : info);
+  // };
 
-  //TODO IMPLEMENTANDO EL FETCH
-
-  // Accede a env y crea url de fetch
-
-  //TODO Pasarlo a dentro del componente - Pasar como param la URL (histórico o proximas acts)
+  // Función que obtiene la lista de actividades
   useEffect(() => {
-    async function fetchActivities(endpoint) {
+    async function fetchActivities(endpoint, setActivities) {
       const fetchedActivities = await getPastEvents(endpoint);
       if (fetchedActivities) {
-        // ! ========   Mockup para testeo   =============================================
-        // console.log(fetchedActivities);
-        fetchedActivities[4].access = "member"
-        fetchedActivities[5].access = "member"
-        fetchedActivities[7].access = "member"
-        fetchedActivities[10].location = "Coruña"
-        //! ======================================================
-        setActivities(fetchedActivities); 
+        const mockup = createMockupData(fetchedActivities)
+        setActivities(mockup); 
       }
     }
-
-    fetchActivities('/get-filtered-activities');
+    
+    fetchActivities('/get-filtered-activities', setActivities);
   }, []);
 
   return (
@@ -69,9 +60,9 @@ const History = () => {
 
 <ol className="activity-container">
           {
-            /* Map con las actividades recibidas en el fetch */
-            activities.length > 0 ? (
-              activities.map((activity, index) => (
+            /* Map con las actividades filtradas */
+            filteredActivities.length > 0 ? (
+              filteredActivities.map((activity, index) => (
                 <li
                   key={index}
                   className="activity-cards"
@@ -98,7 +89,7 @@ const History = () => {
                 </li>
               ))
             ) : (
-              <p>No se han podido cargar las actividades pasadas</p>
+              <p>No se han encontrado actividades con esos filtros</p>
             )
           }
         </ol>
