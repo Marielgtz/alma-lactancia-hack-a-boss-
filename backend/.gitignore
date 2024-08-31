@@ -10,4 +10,4 @@ uploads/
 # Ignorar el archivo credentials.json
 credentials.json
 
-formPublished.json
+src/assets/formPublished.json
