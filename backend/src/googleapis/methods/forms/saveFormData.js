@@ -17,6 +17,7 @@ const saveFormData = async (spreadsheetId, formData, nextRow, sheetName) => {
             field.label,
             field.type,
         ])
+
         const dataToSave = {
             spreadsheetId,
             range: range,

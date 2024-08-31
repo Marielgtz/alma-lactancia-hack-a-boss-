@@ -16,7 +16,7 @@ const getValues = async (
         try {
             allSheetData = await sheets.spreadsheets.values.get({
                 spreadsheetId,
-                range,
+                range: range || `${range}`,
             })
         } catch (error) {
             generateError(error.errors[0].message)
@@ -51,15 +51,15 @@ const getValues = async (
         let headers //Cabeceras, es decir, fila superior con los nombres de los campos.
         let rowData //Datos de una fila en concreto.
         let rowsData //Datos de varias filas coincidentes.
-        if (fields && fields.field && fields.value) {
-            if (rows && rows.length > 0) {
-                headers = rows[0]
-            } else {
-                generateError(
-                    'No se encontraron filas en los datos de la hoja.'
-                )
-            }
 
+        //Cabeceras:
+        if (rows && rows.length > 0) {
+            headers = rows[0]
+        } else {
+            generateError('No se encontraron filas en los datos de la hoja.')
+        }
+
+        if (fields && fields.field && fields.value) {
             fieldColumnIndex = headers.indexOf(fields.field)
 
             if (fieldColumnIndex === -1) {

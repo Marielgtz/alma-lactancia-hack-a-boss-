@@ -127,12 +127,12 @@ Required fields (in JSON format):
     _All fields are required._
 
 **Forms**
-Path to create an interactive form:
+Path to create an dinamic form:
 Method: post,
 Path: `/create-form`
 Required fields (are sent from FormBuilderComponent)
 
-Path to send data to interactive form:
+Path to send data to dinamic sheet:
 Method: post,
 Path: `/submit-form/:sheetName`
 Required fields (are sent from FormDisplayComponent)
@@ -140,6 +140,15 @@ Required fields (are sent from FormDisplayComponent)
 Path to get all forms:
 Method: get,
 Path: `/get-all-forms`
+(Use by FormDropDownComponent)
+
+Other paths:
+Method:patch `/update-form`
+Method:delete `/delete-form/:formId/:deleteSheet?/:sheetName?`
+Method:get `/get-form/:formId/:publish?`
+Method:get `/get-published-form`
+Method:get `/unpublish-form`
+Method:get `/check-is-published/:formId`
 
 **Collaborators/Teams members**
 
@@ -156,7 +165,7 @@ Required fields (in JSON format):
 -   team (habrá que enviar un booleano, true para miembros del equipo y false para colaboradores externos)<font color="red">(Required)</font>
 
 Method: patch,
-Path: `/update-collaborator/:id/team`
+Path: `/update-collaborator/:id/:team`
 Required fields (id, team) in params:
 Required fields (in JSON format):
 

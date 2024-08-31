@@ -1,18 +1,22 @@
 {
-  "formName": "Charla nocturna",
-  "formId": "69828b67-c605-488a-ac9d-2aa57e278ba3",
+  "formName": "Evento especial",
+  "formId": "567dbc8b-471f-492c-8fa2-f12ce56667ac",
   "fields": [
     {
       "label": "Nombre",
       "type": "text"
     },
     {
-      "label": "Teléfono",
+      "label": "Correo electrónico",
+      "type": "email"
+    },
+    {
+      "label": "Número de socio",
       "type": "number"
     },
     {
-      "label": "Correo electrónico",
-      "type": "email"
+      "label": "Comentarios",
+      "type": "text"
     }
   ]
 }

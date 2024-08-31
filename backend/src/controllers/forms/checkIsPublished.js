@@ -26,6 +26,7 @@ const checkIsPublished = async (req, res, next) => {
 
         res.send({
             isPublished: isPublished,
+            publishedFormId: jsonData.formId,
         })
     } catch (error) {
         next(error)

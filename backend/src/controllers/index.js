@@ -26,6 +26,7 @@ import getPublishedForm from './forms/getPublishedForm.js'
 import unpublishForm from './forms/unpublishForm.js'
 import deleteForm from './forms/deleteForm.js'
 import checkIsPublished from './forms/checkIsPublished.js'
+import updateForm from './forms/updateForm.js'
 
 export {
     newPartner,
@@ -56,4 +57,5 @@ export {
     unpublishForm,
     deleteForm,
     checkIsPublished,
+    updateForm,
 }
