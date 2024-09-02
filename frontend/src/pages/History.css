@@ -21,7 +21,7 @@ body,
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #fdeee7;
+  background-color: #ffeee7;
   position: relative;
 }
 .history-header {
