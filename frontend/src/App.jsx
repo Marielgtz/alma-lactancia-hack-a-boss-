@@ -8,12 +8,14 @@ import Library from './pages/Library'
 import Collaborate from './pages/Collaborate'
 import Contact from './pages/Contact'
 import Prueba from './components/prueba'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
     return (
         <Router>
             <div className='App'>
                 <Routes>
+                    <Route path='*' element={<NotFoundPage/>}/>
                     <Route path='/' element={<Home />} />
                     <Route path='/quienes-somos' element={<About />} />
                     <Route path='/actividades' element={<Activities />} />
