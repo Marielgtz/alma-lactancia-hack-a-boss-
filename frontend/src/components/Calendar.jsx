@@ -35,6 +35,7 @@ const messages = {
 const MyCalendar = () => {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -118,6 +119,7 @@ const MyCalendar = () => {
   // Función para monstrar la descripción del evento en el calendario
   const handleSelectEvent = (event) => {
     setSelectedEvent(event);
+    setSelectedDate(event.start);
   };
 
   const handleSelectSlot = (slotInfo) => {
@@ -127,6 +129,7 @@ const MyCalendar = () => {
         new Date(slotInfo.start).toLocaleDateString()
     );
     setSelectedEvent(event || null);
+    setSelectedDate(slotInfo.start);
   };
 
   const handleDayClick = (slotInfo) => {
@@ -188,7 +191,7 @@ const MyCalendar = () => {
         <div className="calendar-container">
           <div className="event-details">
             {selectedEvent ? (
-              <div>
+              <div className="event-all">
                 <h3 className="event-title">{selectedEvent.title}</h3>
                 <p className="event-date">
                   {new Date(selectedEvent.start)
@@ -203,22 +206,6 @@ const MyCalendar = () => {
                     .replace(",", " |")}
                 </p>
                 <p className="event-description">{selectedEvent.description}</p>
-
-                {/* Mostrar archivos adjuntos si están disponibles */}
-                {selectedEvent.attachments.length > 0 && (
-                  <div className="event-attachments">
-                    <h4>Archivos adjuntos:</h4>
-                    {selectedEvent.attachments.map((attachment, index) => (
-                      <div key={index} className="attachment">
-                        <img
-                          src={attachment.url}
-                          alt={`attachment-${index}`}
-                          className="attachment-image"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             ) : (
               <p className="no-events">
@@ -249,6 +236,14 @@ const MyCalendar = () => {
                 className="calendar"
                 views={{ month: true }}
                 popup={false}
+                dayPropGetter={(date) => {
+                  const isSelected =
+                    selectedDate &&
+                    date.toDateString() === selectedDate.toDateString();
+                  return {
+                    className: isSelected ? "selected-day" : "",
+                  };
+                }}
               />
             )}
           </div>
