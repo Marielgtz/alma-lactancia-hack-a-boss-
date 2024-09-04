@@ -1,5 +1,5 @@
 import { generateError, validationSchemaNewMessage } from '../../utils/index.js'
-import { getValues, insertRow } from '../../googleapis/methods/index.js'
+import { insertRow, allSheetData } from '../../googleapis/methods/index.js'
 
 const saveMessage = async (req, res, next) => {
     try {
@@ -17,14 +17,14 @@ const saveMessage = async (req, res, next) => {
             generateError(error.message)
         }
         const sheetName = 'Contacto'
-        const values = await getValues(sheetId, sheetName)
+        const values = await allSheetData(sheetId, sheetName)
 
-        const { nextRow } = values
+        const { nextEmptyRow } = values
 
         const collaboratorAdded = await insertRow(
             sheetId,
             sheetName,
-            nextRow,
+            nextEmptyRow,
             dataToInsert
         )
         res.send({

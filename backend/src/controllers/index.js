@@ -18,6 +18,15 @@ import googleSignIn from './googleSignIn/googleSignIn.js'
 import checkSession from './googleSignIn/checkSession.js'
 import logout from './googleSignIn/logout.js'
 import getFilteredActivities from './freeActivities/getFilteredActivities.js'
+import createFormController from './forms/createFormController.js'
+import saveFormResponses from './forms/saveFormResponses.js'
+import getAllForms from './forms/getAllForms.js'
+import getFormById from './forms/getFormById.js'
+import getPublishedForm from './forms/getPublishedForm.js'
+import unpublishForm from './forms/unpublishForm.js'
+import deleteForm from './forms/deleteForm.js'
+import checkIsPublished from './forms/checkIsPublished.js'
+import updateForm from './forms/updateForm.js'
 
 export {
     newPartner,
@@ -40,4 +49,13 @@ export {
     checkSession,
     logout,
     getFilteredActivities,
+    createFormController,
+    saveFormResponses,
+    getAllForms,
+    getFormById,
+    getPublishedForm,
+    unpublishForm,
+    deleteForm,
+    checkIsPublished,
+    updateForm,
 }

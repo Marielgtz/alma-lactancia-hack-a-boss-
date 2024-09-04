@@ -1,4 +1,4 @@
-import { getValues, deleteRow } from '../../googleapis/methods/index.js'
+import { deleteRow, getDataToDelete } from '../../googleapis/methods/index.js'
 
 const deleteCollaborator = async (req, res, next) => {
     try {
@@ -16,7 +16,7 @@ const deleteCollaborator = async (req, res, next) => {
                 sheetName: sheetName,
             }
 
-            const data = await getValues(sheetId, sheetName, fields)
+            const data = await getDataToDelete(sheetId, sheetName, fields)
             const { rowToDelete } = data
 
             await deleteRow(rowToDelete)
@@ -30,7 +30,7 @@ const deleteCollaborator = async (req, res, next) => {
                 newValue: '',
                 sheetName: sheetName,
             }
-            const data = await getValues(sheetId, sheetName, fields)
+            const data = await getDataToDelete(sheetId, sheetName, fields)
             const { rowToDelete } = data
             await deleteRow(rowToDelete)
             res.send({ message: 'Miembro eliminado' })

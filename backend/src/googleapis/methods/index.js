@@ -9,6 +9,14 @@ import deleteEvent from './calendar/deleteEvent.js'
 import updateEvent from './calendar/updateEvent.js'
 import getEvent from './calendar/getEvent.js'
 import listEvents from './calendar/listEvents.js'
+import saveFormData from './forms/saveFormData.js'
+import addSheetToSpreadsheet from './addSheetToSpreadsheet.js'
+import configureSheet from './configureSheet.js'
+import deleteSheet from './deleteSheet.js'
+import allSheetData from './allSheetData.js'
+import getCoordinates from './getCoordinates.js'
+import getRowsData from './getRowsData.js'
+import getDataToDelete from './getDataToDelete.js'
 
 export {
     getValues,
@@ -22,4 +30,12 @@ export {
     updateEvent,
     getEvent,
     listEvents,
+    saveFormData,
+    addSheetToSpreadsheet,
+    configureSheet,
+    deleteSheet,
+    allSheetData,
+    getCoordinates,
+    getRowsData,
+    getDataToDelete,
 }

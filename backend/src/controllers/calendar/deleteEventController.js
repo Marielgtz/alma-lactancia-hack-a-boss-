@@ -2,7 +2,7 @@ import {
     deleteEvent,
     deleteRow,
     getEvent,
-    getValues,
+    getDataToDelete,
 } from '../../googleapis/methods/index.js'
 import { generateError } from '../../utils/index.js'
 
@@ -25,7 +25,7 @@ const deleteEventController = async (req, res, next) => {
                 newValue: '',
                 sheetName: sheetName,
             }
-            const response = await getValues(sheetId, sheetName, fields)
+            const response = await getDataToDelete(sheetId, sheetName, fields)
             if (response.error) generateError(response.error)
 
             const { rowToDelete } = response

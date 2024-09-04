@@ -1,6 +1,6 @@
 import { generateError } from '../../utils/index.js'
 import { validationSchemaNewCollaborator } from '../../utils/index.js'
-import { getValues, insertRow } from '../../googleapis/methods/index.js'
+import { insertRow, allSheetData } from '../../googleapis/methods/index.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const newCollaborator = async (req, res, next) => {
@@ -24,14 +24,14 @@ const newCollaborator = async (req, res, next) => {
         }
 
         if (!team) {
-            const values = await getValues(sheetId, 'Colaboradores')
+            const values = await allSheetData(sheetId, 'Colaboradores')
 
-            const { nextRow } = values
+            const { nextEmptyRow } = values
 
             const collaboratorAdded = await insertRow(
                 sheetId,
                 'Colaboradores',
-                nextRow,
+                nextEmptyRow,
                 dataToInsert
             )
             res.send({
@@ -39,14 +39,14 @@ const newCollaborator = async (req, res, next) => {
                 collaboratorAdded,
             })
         } else {
-            const values = await getValues(sheetId, 'Miembros')
+            const values = await allSheetData(sheetId, 'Miembros')
 
-            const { nextRow } = values
+            const { nextEmptyRow } = values
 
             const collaboratorAdded = await insertRow(
                 sheetId,
                 'Miembros',
-                nextRow,
+                nextEmptyRow,
                 dataToInsert
             )
             res.send({

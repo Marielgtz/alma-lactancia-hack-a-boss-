@@ -17,10 +17,12 @@ const auth = new google.auth.GoogleAuth({
     scopes: [
         'https://www.googleapis.com/auth/spreadsheets',
         'https://www.googleapis.com/auth/calendar',
+        'https://www.googleapis.com/auth/forms',
     ],
 })
 
 const sheets = google.sheets({ version: 'v4', auth })
 const calendar = google.calendar({ version: 'v3', auth })
+const forms = google.forms({ version: 'v1', auth })
 
-export { sheets, calendar }
+export { sheets, calendar, forms }

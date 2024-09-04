@@ -1,7 +1,7 @@
 import {
-    getValues,
     insertRow,
     addEvent,
+    allSheetData,
 } from '../../googleapis/methods/index.js'
 import { generateError, eventSchema } from '../../utils/index.js'
 import { v4 as uuidv4 } from 'uuid'
@@ -44,16 +44,11 @@ const createActivity = async (req, res, next) => {
         ]
 
         //Obtener la siguiente fila vacía:
-        const values = await getValues(sheetId, 'Actividades')
-        const { nextRow } = values
+        const values = await allSheetData(sheetId, 'Actividades')
+        const { nextEmptyRow } = values
 
         //Insertar el evento en la hoja de Google:
-        const eventAdded = await insertRow(
-            sheetId,
-            'Actividades',
-            nextRow,
-            dataToInsert
-        )
+        await insertRow(sheetId, 'Actividades', nextEmptyRow, dataToInsert)
 
         //Añadir el evento al calendario:
         const response = await addEvent(req.body)

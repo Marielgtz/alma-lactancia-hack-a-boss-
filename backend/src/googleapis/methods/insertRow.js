@@ -1,5 +1,6 @@
 import { sheets } from '../client.js'
 import { getColumnLetter } from '../../utils/index.js'
+import { generateError } from '../../utils/index.js'
 
 const insertRow = async (spreadsheetId, sheetName, nextRow, values) => {
     try {
@@ -20,7 +21,7 @@ const insertRow = async (spreadsheetId, sheetName, nextRow, values) => {
         const result = await sheets.spreadsheets.values.append(data)
         console.log(`${result.data.updates.updatedCells} cells appended.`)
     } catch (error) {
-        console.error('Error appending data:', error)
+        generateError(`Error appending data:, ${error}`)
     }
 }
 export default insertRow
