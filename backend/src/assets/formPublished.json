@@ -1,22 +1,14 @@
 {
-  "formName": "Evento especial",
-  "formId": "567dbc8b-471f-492c-8fa2-f12ce56667ac",
+  "formName": "Formulario numero uno",
+  "formId": "29884a67-9482-45e0-a3a2-4d5914211d19",
   "fields": [
     {
-      "label": "Pseudónimo",
+      "label": "Nombre",
       "type": "text"
-    },
-    {
-      "label": "Correo electrónico",
-      "type": "email"
     },
     {
       "label": "Número de socio",
       "type": "number"
-    },
-    {
-      "label": "Comentarios",
-      "type": "text"
     }
   ]
 }

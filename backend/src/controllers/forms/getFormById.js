@@ -1,7 +1,8 @@
-import { getValues } from '../../googleapis/methods/index.js'
+import { getRowsData } from '../../googleapis/methods/index.js'
 import groupDataById from '../../utils/groupDataById.js'
 import fs from 'fs/promises'
 import path from 'path'
+import { unnormalizeFieldName } from '../../utils/index.js'
 
 const getFormById = async (req, res, next) => {
     try {
@@ -11,19 +12,24 @@ const getFormById = async (req, res, next) => {
         const fields = {
             field: 'id',
             value: formId,
-            newValue: '',
             sheetName: 'Formularios',
         }
-        const values = await getValues(spreadsheetId, 'Formularios', fields)
+
+        const values = await getRowsData(spreadsheetId, 'Formularios', fields)
         const { rowsData } = values
 
         const form = groupDataById(rowsData)
 
         //Formateo los datos para que coincidan con la estructura esperada en el front:
         const dataToSend = {
-            formName: Object.entries(form)[0][1].formName,
+            formName: unnormalizeFieldName(Object.entries(form)[0][1].formName),
             formId: formId,
-            fields: Object.entries(form)[0][1].fields,
+            fields: Object.entries(form)[0][1].fields.map((field) => {
+                return {
+                    label: unnormalizeFieldName(field.label),
+                    type: field.type,
+                }
+            }),
         }
 
         //Si se publica, se guarda en un JSON para después ser recuperado:

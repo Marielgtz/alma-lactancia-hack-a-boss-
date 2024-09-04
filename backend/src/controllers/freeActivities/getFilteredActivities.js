@@ -1,5 +1,5 @@
 import { generateError, parseCustomDateToISO } from '../../utils/index.js'
-import { getValues } from '../../googleapis/methods/index.js'
+import { allSheetData } from '../../googleapis/methods/index.js'
 
 const getFilteredActivities = async (req, res, next) => {
     try {
@@ -18,14 +18,8 @@ const getFilteredActivities = async (req, res, next) => {
         if (dateUntil) dateUntil = parseCustomDateToISO(dateUntil)
 
         const sheetId = process.env.SPREADSHEET_ID
-        const response = await getValues(sheetId, 'Actividades')
-        const { allSheetData } = response
-
-        const rows = allSheetData.data.values
-
-        if (!rows || rows.length === 0) {
-            generateError('No se encontraron actividades.')
-        }
+        const response = await allSheetData(sheetId, 'Actividades')
+        const { rows } = response
 
         const activities = rows.slice(1).map((row) => ({
             id: row[0],

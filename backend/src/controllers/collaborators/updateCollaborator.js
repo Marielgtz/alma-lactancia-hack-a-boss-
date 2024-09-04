@@ -1,6 +1,6 @@
 import { generateError } from '../../utils/index.js'
 import { validationSchemaNewCollaborator } from '../../utils/index.js'
-import { getValues, updateRow } from '../../googleapis/methods/index.js'
+import { updateRow, getRowsData } from '../../googleapis/methods/index.js'
 import path from 'path'
 import fs from 'fs/promises'
 
@@ -28,7 +28,7 @@ const updateCollaborator = async (req, res, next) => {
                 sheetName: sheetName,
             }
 
-            oldData = await getValues(spreadSheetId, sheetName, fields)
+            oldData = await getRowsData(spreadSheetId, sheetName, fields)
             const { rowData, headers } = oldData
 
             if (oldData.error) {
@@ -53,7 +53,7 @@ const updateCollaborator = async (req, res, next) => {
                 ([key, value]) => value
             )
 
-            dataToUpdate = await getValues(
+            dataToUpdate = await getRowsData(
                 spreadSheetId,
                 sheetName,
                 fields,
@@ -73,7 +73,7 @@ const updateCollaborator = async (req, res, next) => {
                 sheetName: sheetName,
             }
 
-            oldData = await getValues(spreadSheetId, sheetName, fields)
+            oldData = await getRowsData(spreadSheetId, sheetName, fields)
             const { rowData, headers } = oldData
 
             for (let i = 0; i < headers.length; i++) {
@@ -92,7 +92,7 @@ const updateCollaborator = async (req, res, next) => {
             newValuesArray = Object.entries(newData).map(
                 ([key, value]) => value
             )
-            dataToUpdate = await getValues(
+            dataToUpdate = await getRowsData(
                 spreadSheetId,
                 sheetName,
                 fields,

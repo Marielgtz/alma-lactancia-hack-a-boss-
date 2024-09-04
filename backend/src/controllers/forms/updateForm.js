@@ -1,10 +1,12 @@
 import {
     deleteRow,
-    getValues,
     saveFormData,
     updateRow,
+    allSheetData,
+    getDataToDelete,
+    getRowsData,
 } from '../../googleapis/methods/index.js'
-import { getColumnLetter } from '../../utils/index.js'
+import { getColumnLetter, normalizeFieldName } from '../../utils/index.js'
 
 const updateForm = async (req, res, next) => {
     try {
@@ -25,12 +27,18 @@ const updateForm = async (req, res, next) => {
             newValue: '',
             sheetName: 'Formularios',
         }
-        const matchingData = await getValues(
+        const matchingData = await getRowsData(
             spreadsheetId,
             'Formularios',
             fields
         )
-        const { rowsData, rowsToDelete } = matchingData
+        const { rowsData } = matchingData
+        const dataTodelete = await getDataToDelete(
+            spreadsheetId,
+            'Formularios',
+            fields
+        )
+        const { rowsToDelete } = dataTodelete
 
         // Los borro de la hoja:
         await Promise.all(
@@ -40,8 +48,8 @@ const updateForm = async (req, res, next) => {
         )
 
         //Obtengo la siguiente fila vacía en la hoja de Google correspondiente:
-        const values = await getValues(spreadsheetId, 'Formularios')
-        const { nextRow } = values
+        const values = await allSheetData(spreadsheetId, 'Formularios')
+        const { nextEmptyRow } = values
 
         // //Creo el objeto combinado:
         const updatedFormData = {
@@ -51,18 +59,25 @@ const updateForm = async (req, res, next) => {
         }
 
         // //Guardo el formulario actualizado.
-        saveFormData(spreadsheetId, updatedFormData, nextRow, 'Formularios')
+        saveFormData(
+            spreadsheetId,
+            updatedFormData,
+            nextEmptyRow,
+            'Formularios'
+        )
 
         //Manejo de la hoja de resultados:
         //Obtengo las cabeceras antiguas:
-        const resultsSheet = await getValues(
+        const resultsSheet = await allSheetData(
             spreadsheetIdForms,
             updatedFormData.formName
         )
         const { headers } = resultsSheet
 
         //Y las nuevas:
-        const headersToAdd = updatedFormData.fields.map((field) => field.label)
+        const headersToAdd = updatedFormData.fields.map((field) =>
+            normalizeFieldName(field.label)
+        )
 
         //Inserto todas las cabeceras en la hoja de resultados respetando el orden:
         const updatedHeaders = [...headers, ...headersToAdd].reduce(
@@ -100,6 +115,7 @@ const updateForm = async (req, res, next) => {
             apdatedForm: dataToSend,
         })
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

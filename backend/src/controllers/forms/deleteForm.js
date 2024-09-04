@@ -4,12 +4,14 @@ import {
     deleteSheet,
     getSheetId,
 } from '../../googleapis/methods/index.js'
+import { normalizeFieldName } from '../../utils/index.js'
 
 const deleteForm = async (req, res, next) => {
     try {
         const formId = req.params.formId
-        const sheetToDelete = req.params.deleteSheet || undefined
-        const sheetName = req.params.sheetName || undefined
+        const sheetToDelete = req.params.deleteSheet
+        let sheetName = req.params.sheetName
+        sheetName = normalizeFieldName(sheetName)
 
         //Borrar hoja de resultados:
         if (sheetToDelete) {
@@ -27,6 +29,7 @@ const deleteForm = async (req, res, next) => {
             newValue: '',
             sheetName: 'Formularios',
         }
+
         const values = await getValues(spreadsheetId, 'Formularios', fields)
         const { rowsToDelete } = values
 

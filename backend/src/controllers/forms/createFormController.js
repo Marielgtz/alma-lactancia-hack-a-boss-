@@ -1,9 +1,10 @@
 import {
     addSheetToSpreadsheet,
     configureSheet,
-    getValues,
     saveFormData,
+    allSheetData,
 } from '../../googleapis/methods/index.js'
+import normalizeFieldName from '../../utils/normalizeFieldName.js'
 
 const createFormController = async (req, res, next) => {
     try {
@@ -16,20 +17,20 @@ const createFormController = async (req, res, next) => {
                 : formDataString
 
         //Obtener la siguiente fila vacía:
-        const values = await getValues(spreadsheetId, 'Formularios')
-        const { nextRow } = values
+        const values = await allSheetData(spreadsheetId, 'Formularios')
+        const { nextEmptyRow } = values
 
         //Guardo el formulario en una hoja de Google.
-        saveFormData(spreadsheetId, formData, nextRow, 'Formularios')
+        saveFormData(spreadsheetId, formData, nextEmptyRow, 'Formularios')
 
         //Lógica para crear una hoja y obtener el id:
         const newSheetId = await addSheetToSpreadsheet(
             spreadsheetIdForms,
-            formData.formName
+            normalizeFieldName(formData.formName)
         )
         //Inserto los campos en la hoja:
         const formLabels = formData.fields.map((field) => {
-            return field.label
+            return normalizeFieldName(field.label)
         })
         await configureSheet(
             spreadsheetIdForms,

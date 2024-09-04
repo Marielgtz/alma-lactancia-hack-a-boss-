@@ -1,8 +1,12 @@
+import { unnormalizeFieldName } from './index.js'
+
 const groupDataById = (data) => {
     const groupedData = {}
 
     data.forEach((row) => {
-        const [formId, formName, label, type] = row
+        let [formId, formName, label, type] = row
+        formName = unnormalizeFieldName(formName)
+        label = unnormalizeFieldName(label)
         if (!groupedData[formId]) {
             groupedData[formId] = {
                 formName,

@@ -13,6 +13,10 @@ import saveFormData from './forms/saveFormData.js'
 import addSheetToSpreadsheet from './addSheetToSpreadsheet.js'
 import configureSheet from './configureSheet.js'
 import deleteSheet from './deleteSheet.js'
+import allSheetData from './allSheetData.js'
+import getCoordinates from './getCoordinates.js'
+import getRowsData from './getRowsData.js'
+import getDataToDelete from './getDataToDelete.js'
 
 export {
     getValues,
@@ -30,4 +34,8 @@ export {
     addSheetToSpreadsheet,
     configureSheet,
     deleteSheet,
+    allSheetData,
+    getCoordinates,
+    getRowsData,
+    getDataToDelete,
 }

@@ -1,5 +1,6 @@
 import { generateError, getColumnLetter } from '../../../utils/index.js'
 import { sheets } from '../../client.js'
+import { normalizeFieldName } from '../../../utils/index.js'
 
 const saveFormData = async (spreadsheetId, formData, nextRow, sheetName) => {
     try {
@@ -13,8 +14,8 @@ const saveFormData = async (spreadsheetId, formData, nextRow, sheetName) => {
         // Convierto los campos a un formato que entienda Google Sheets
         const rows = fields.map((field) => [
             formId,
-            formName,
-            field.label,
+            normalizeFieldName(formName),
+            normalizeFieldName(field.label),
             field.type,
         ])
 
