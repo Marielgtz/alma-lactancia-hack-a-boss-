@@ -102,6 +102,14 @@ const validationSchemaNewCollaborator = Joi.object({
     team: Joi.alternatives().try(Joi.boolean(), Joi.string()).required(),
 })
 
+//Experiencias:
+const validationSchemaNewExperiences = Joi.object({
+    text: Joi.string().min(50).max(200).required(),
+})
+const validationUpdateExperiences = Joi.object({
+    text: Joi.string().min(50).max(200),
+})
+
 //Exporto las variables:
 export {
     validationSchemaNewPartner,
@@ -111,4 +119,6 @@ export {
     validationSchemaNewCollaborator,
     validationSchemaNewMessage,
     eventSchema,
+    validationSchemaNewExperiences,
+    validationUpdateExperiences,
 }

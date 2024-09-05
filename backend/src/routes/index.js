@@ -6,6 +6,7 @@ import collaborator from './collaboratorRouter.js'
 import contact from './contactRouter.js'
 import captcha from './captchaRouter.js'
 import forms from './formsRouter.js'
+import experiences from './experiencesRouter.js'
 
 export {
     partners,
@@ -16,4 +17,5 @@ export {
     contact,
     captcha,
     forms,
+    experiences,
 }

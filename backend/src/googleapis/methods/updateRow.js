@@ -6,9 +6,9 @@ const updateRow = async (rowToUpdate) => {
 }
 export default updateRow
 
-//Estructura del objeto dataToUpdate:
+//Estructura del objeto rowToUpdate:
 //Ejemplo:
-// const dataToUpdate = {
+// const rowToUpdate = {
 //     spreadsheetId,
 //     range,
 //     valueInputOption,

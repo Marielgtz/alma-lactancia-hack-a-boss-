@@ -15,6 +15,8 @@ import {
     validationSchemaNewCollaborator,
     validationSchemaNewMessage,
     eventSchema,
+    validationSchemaNewExperiences,
+    validationUpdateExperiences,
 } from './validation.js'
 
 export {
@@ -36,4 +38,6 @@ export {
     groupDataById,
     normalizeFieldName,
     unnormalizeFieldName,
+    validationSchemaNewExperiences,
+    validationUpdateExperiences,
 }

@@ -193,12 +193,12 @@ Required fields (in params):
 
 Path to delete an event:
 Method: delete,
-Path: `/delete-calendar-event/:eventId/:delete-from-sheet`
+Path: `/delete-calendar-event/:eventId/:delete-from-sheet?`
 Required field in params: (delete-from-sheet: true or false)
 
 Path to update an event:
 Method: patch,
-Path: `/update-calendar-event/:eventId`
+Path: `/update-calendar-event/:eventId/:update-from-sheet?`
 Required eventId field in params:
 Required eventDetails object in JSON format (The same object as when an event is created)
 
@@ -229,6 +229,28 @@ Required fields (in JSON format):
 -   comments
 
     _All fields are required._
+
+**experiences**
+Method: post,
+Path: `/save-experience`
+Required fields:
+
+-   text
+-   image
+
+    _All fields are required._
+
+Method: post,
+Path: `/update-experience`
+Required fields:
+
+-   text
+-   image
+
+    _All fields are optional._
+
+Method: get,
+Path: `/get-all-experiences`
 
 **captcha**
 Path to save generate captcha:

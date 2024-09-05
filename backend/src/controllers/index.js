@@ -27,6 +27,10 @@ import unpublishForm from './forms/unpublishForm.js'
 import deleteForm from './forms/deleteForm.js'
 import checkIsPublished from './forms/checkIsPublished.js'
 import updateForm from './forms/updateForm.js'
+import saveExperience from './experiences/saveExperience.js'
+import getExperiences from './experiences/getExperiences.js'
+import getExperienceById from './experiences/getExperienceById.js'
+import updateExperience from './experiences/updateExperience.js'
 
 export {
     newPartner,
@@ -58,4 +62,8 @@ export {
     deleteForm,
     checkIsPublished,
     updateForm,
+    saveExperience,
+    getExperiences,
+    getExperienceById,
+    updateExperience,
 }
