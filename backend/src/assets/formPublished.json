@@ -1,14 +1,1 @@
-{
-  "formName": "Formulario numero uno",
-  "formId": "29884a67-9482-45e0-a3a2-4d5914211d19",
-  "fields": [
-    {
-      "label": "Nombre",
-      "type": "text"
-    },
-    {
-      "label": "Número de socio",
-      "type": "number"
-    }
-  ]
-}
+{}

@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv/config'
+import { join } from 'path'
 import cors from 'cors'
 import { sessionMiddleware } from './src/middlewares/index.js'
 import {
@@ -11,6 +12,7 @@ import {
     contact,
     captcha,
     forms,
+    experiences,
 } from './src/routes/index.js'
 import { notFound, manageError } from './src/middlewares/index.js'
 
@@ -27,6 +29,11 @@ app.use(
 )
 app.use(sessionMiddleware)
 
+// Middleware para servir archivos estáticos desde la carpeta "assets/images". La ruta será: "Dirección del back"/images:
+const __dirname = process.cwd()
+const ruta = join(__dirname, 'src', 'assets', 'images')
+app.use('/images', express.static(ruta))
+
 // Rutas
 app.use(partners)
 app.use(activities)
@@ -36,6 +43,7 @@ app.use(collaborator)
 app.use(contact)
 app.use(captcha)
 app.use(forms)
+app.use(experiences)
 
 //Middlewares
 app.use(notFound)
