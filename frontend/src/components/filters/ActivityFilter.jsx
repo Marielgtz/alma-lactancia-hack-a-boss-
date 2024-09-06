@@ -67,14 +67,11 @@ function ActivityFilter({ activities, setFilteredActivites }) {
     }
 
     // TODO Implementar comparación de fechas
-    // activities.forEach(activity => {
-    //   if(activity.start){
-    //     console.log(activity.start);
-        
-    //   }
-    // });
+    // "2024-08-09T10:00:00.000Z"
+    // "Jueves, 30 de Noviembre de 2024, 12:00"
     
     console.log(updatedActivities);
+
     
 
     setFilteredActivites(updatedActivities);
