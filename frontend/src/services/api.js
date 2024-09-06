@@ -1,4 +1,6 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+import formatDate from "../utils/formatDate";
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const handleResponse = async (response) => {
   const json = await response.json();
@@ -292,3 +294,37 @@ const activitiesFilters = {
   // access: ""              
 };
 
+export async function getCalendarEvents(filters) {
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const fullUrl = `${apiUrl}/list-calendar-events`;
+  const requestBody = {
+    maxResults: 10,
+    orderBy: "startTime",
+    singleEvents: true,
+    // timeMin: new Date().toISOString() //Traer los eventos actuales
+  };
+
+  try {
+      const response = await fetch(fullUrl, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody)  
+      });
+
+      const data = await response.json();
+      
+      const calendarEvents = data.response
+      calendarEvents.forEach(calendarEvent => {
+        calendarEvent.dateISO = formatDate(calendarEvent.start.dateTime) 
+        console.log(calendarEvent.dateISO);
+        
+      });
+      
+      return calendarEvents; 
+  } catch (error) {
+      console.error('Error fetching past events:', error);
+      return null; 
+  }
+}

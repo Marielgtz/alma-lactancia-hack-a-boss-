@@ -43,7 +43,7 @@ const MyCalendar = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/list-calendar-events",
+          "http://localhost:3001/list-calendar-events",
           {
             method: "POST", // El método tiene que coincidir con la ruta del servidor
           }
