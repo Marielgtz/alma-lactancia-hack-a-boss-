@@ -97,6 +97,9 @@ const Activities = () => {
                     <p className="activities-location">
                       {activity.location || "Lugar"}
                     </p>
+                    <p className="activities-decription">
+                      {activity.description || "Descripción"}
+                    </p>
                     <button className="activities-inscription">
                       Inscribirse
                     </button>
