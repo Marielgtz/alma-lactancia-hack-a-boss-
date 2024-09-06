@@ -5,9 +5,9 @@ import Footer from "../components/Footer";
 import "./Activities.css";
 import ActivityFilter from "../components/filters/ActivityFilter";
 import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
-import {getPastEvents} from '../services/api'
+import {getCalendarEvents, getPastEvents} from '../services/api'
 import { createMockupData } from "../services/mockUpService";
-
+import { Calendar } from "react-big-calendar";
 
 const Activities = () => {
   const navigate = useNavigate();
@@ -28,8 +28,20 @@ const Activities = () => {
         setActivities(mockup); 
       }
     }
+
+    async function fetchCalendar(setActivities) {
+      const calendarEvents = await getCalendarEvents();
+      if (calendarEvents) {
+        console.log(calendarEvents); 
+        setActivities(calendarEvents)
+      }
+    }
+    console.log(activities, "antes");
+    fetchCalendar(setActivities);
+    console.log(activities);
     
-    fetchActivities('/get-filtered-activities', setActivities);
+    
+    // fetchActivities('/get-filtered-activities', setActivities);
   }, []);
 
   return (
@@ -80,7 +92,7 @@ const Activities = () => {
                       {activity.summary || "Título"}
                     </h1>
                     <h2 className="activities-date">
-                      {activity.exactDate || "Fecha"}
+                      {activity.dateISO || "Fecha"}
                     </h2>
                     <p className="activities-location">
                       {activity.location || "Lugar"}
