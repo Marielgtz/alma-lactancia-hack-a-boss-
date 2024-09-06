@@ -1,1 +1,14 @@
-{}
+{
+  "formName": "Uno más",
+  "formId": "57c562f0-4c2d-46a5-88ff-42536b2bb1ef",
+  "fields": [
+    {
+      "label": "Correo electrónico",
+      "type": "email"
+    },
+    {
+      "label": "Número de teléfono",
+      "type": "number"
+    }
+  ]
+}
