@@ -1,12 +1,3 @@
-html,
-body,
-#root {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
 .activity-page {
   display: flex;
   flex-direction: column;
@@ -93,13 +84,14 @@ body,
   flex: 1 1 30%;
   margin: 1rem;
   padding: 0;
-  max-width: 17rem;
+  max-width: 20rem;
   max-height: 40rem;
   overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
   background-color: #d8e2dc;
   border-radius: 1.5rem;
+  box-sizing: border-box;
 }
 
 .activity-content {
@@ -130,7 +122,6 @@ body,
   text-align: center;
   font-family: outfit;
   color: #b380b5;
-
 }
 
 .activities-date,
@@ -139,6 +130,18 @@ body,
   text-align: center;
   font-family: bellota;
   font-weight: bold;
+  margin: 1;
+}
+
+.activities-decription {
+  flex-grow: 1; /* Permite que el contenido crezca */
+  text-align: center;
+  font-family: bellota;
+  font-weight: bold;
+  color: #b380b5;
+  padding: 0 1rem;
+  overflow-y: auto; /* Habilita el scroll vertical si es necesario */
+  max-height: 100px; /* Ajusta según la cantidad de contenido que desees mostrar sin scroll */
 }
 
 .activities-inscription {
@@ -158,6 +161,18 @@ body,
   background-color: #b380b5;
   border: solid 1px #b380b5;
   color: white;
+}
+
+.no-activities-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: outfit;
+  height: 25vh;
+  text-align: center;
+  font-size: 24px;
+  color: #b380b5;
+  margin: 0;
 }
 
 /* Estilos responsive */

@@ -301,7 +301,7 @@ export async function getCalendarEvents(filters) {
     maxResults: 10,
     orderBy: "startTime",
     singleEvents: true,
-    // timeMin: new Date().toISOString() //Traer los eventos actuales
+    timeMin: new Date().toISOString() //Traer los eventos actuales
   };
 
   try {
