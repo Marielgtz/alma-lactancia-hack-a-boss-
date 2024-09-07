@@ -32,16 +32,12 @@ const Activities = () => {
     async function fetchCalendar(setActivities) {
       const calendarEvents = await getCalendarEvents();
       if (calendarEvents) {
-        console.log(calendarEvents); 
         setActivities(calendarEvents)
       }
     }
-    console.log(activities, "antes");
-    fetchCalendar(setActivities);
-    console.log(activities);
+    fetchCalendar(setActivities);    
     
-    
-    // fetchActivities('/get-filtered-activities', setActivities);
+    // fetchActivities('/get-filtered-activities', setActivities); // Antiguo fetch del histórico (excel)
   }, []);
 
   return (

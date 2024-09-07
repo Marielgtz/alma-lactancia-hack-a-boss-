@@ -2,7 +2,8 @@ import "./ActivityFilter.css";
 import { useState, useEffect } from 'react'
 import { SelectInput } from "./SelectInput";
 import DateFilter from "./DateFilter";
-import parseReceivedDate from "../../services/parseRecievedDate";
+// import parseReceivedDate from "../../services/parseRecievedDate";
+import { compareISO } from "../../services/api";
 
 function ActivityFilter({ activities, setFilteredActivites }) {
 
@@ -14,9 +15,6 @@ function ActivityFilter({ activities, setFilteredActivites }) {
 
   // const categoryEvents = []; //TODO Cancelada por desarrollo
   // ? Como obtener las categorías disponibles?
-
-  // const locations = []; //TODO Cancelada por desarrollo
-  // ? Como obtener las localidades disponibles?
 
   // ! MOCKUPS =========================================================
 
@@ -53,10 +51,14 @@ function ActivityFilter({ activities, setFilteredActivites }) {
     // updatedActivities es una variable a la que se le aplican los filtros que se escogan
     // Una vez aplicados los filtros, se devuelve el array de actividades filtrado
     
+
+    // * FILTRADO POR TIPO DE ACCESO
+
     if (typeEvent) {
       updatedActivities =  updatedActivities.filter(activity => activity.access === typeEvent) 
     } 
 
+    // * FILTRADO POR LOCALIZACIÓN DEL EVENTO
     if (locationEvent) {
       updatedActivities = updatedActivities.filter(activity => {
         // console.log(activity);
@@ -66,17 +68,38 @@ function ActivityFilter({ activities, setFilteredActivites }) {
       })
     }
 
-    // TODO Implementar comparación de fechas
-    // "2024-08-09T10:00:00.000Z"
-    // "Jueves, 30 de Noviembre de 2024, 12:00"
-    
-    console.log(updatedActivities);
+    //* LÓGICA DE COMPARACIÓN DE FECHAS
+    if (eventDateStart) {
+      console.log('Event date start: TRUE');
+      
+      updatedActivities = updatedActivities.filter(activity => {
 
-    
+        // Adecuar fechas al formato ISO
+        const fromDate =`${eventDateStart}T00:00:00`;
+        const eventStart = activity.start.dateTime;
+        
+        return compareISO(fromDate, eventStart) <= 0;
+      }
+      )
+    }
+    if (eventDateEnd) {
+      console.log('Event date end: TRUE');
 
+      updatedActivities = updatedActivities.filter(activity => {
+
+        // Adecuar fechas al formato ISO
+        const limitDate = `${eventDateEnd}T00:00:00`;
+        const eventEnd= activity.end.dateTime;
+        
+        return compareISO(limitDate, eventEnd) > 0;
+      }
+      )
+    }
+    
+    // console.log(updatedActivities);
     setFilteredActivites(updatedActivities);
 
-  }, [typeEvent, locationEvent, activities, setFilteredActivites]);
+  }, [typeEvent, locationEvent, eventDateStart, eventDateEnd, activities, setFilteredActivites]);
 
   //? ===================================================================
 
