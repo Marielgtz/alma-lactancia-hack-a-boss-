@@ -317,14 +317,27 @@ export async function getCalendarEvents(filters) {
       
       const calendarEvents = data.response
       calendarEvents.forEach(calendarEvent => {
-        calendarEvent.dateISO = formatDate(calendarEvent.start.dateTime) 
-        console.log(calendarEvent.dateISO);
-        
+        calendarEvent.dateISO = formatDate(calendarEvent.start.dateTime)         
       });
       
       return calendarEvents; 
   } catch (error) {
       console.error('Error fetching past events:', error);
       return null; 
+  }
+}
+
+// Función para comparar las fechas en formato ISO
+
+export function compareISO(date1, date2) {
+  const d1 = new Date(date1);
+  const d2 = new Date(date2);
+
+  if (d1.getTime() === d2.getTime()) {
+    return 0; // Misma fecha
+  } else if (d1.getTime() > d2.getTime()) {
+    return 1; // Fecha 1 es posterior a fecha 2
+  } else {
+    return -1; // Fecha 2 es anterior a fecha 2
   }
 }

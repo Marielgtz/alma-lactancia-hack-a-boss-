@@ -14,10 +14,7 @@ const Activities = () => {
   // const [openInfo, setOpenInfo] = useState(null);
   const [activities, setActivities] = useState([]);
   const [filteredActivities, setFilteredActivites] = useState([]);
-
-  // const toggleInfo = (info) => {
-  //   setOpenInfo(info === openInfo ? null : info);
-  // };
+  const [notFoundMessage, setNotFoundMessage] = useState("No se han podido cargar las actividades")
 
   // Función que obtiene la lista de actividades
   useEffect(() => {
@@ -32,16 +29,13 @@ const Activities = () => {
     async function fetchCalendar(setActivities) {
       const calendarEvents = await getCalendarEvents();
       if (calendarEvents) {
-        console.log(calendarEvents); 
         setActivities(calendarEvents)
+        // console.log(calendarEvents);
       }
     }
-    console.log(activities, "antes");
-    fetchCalendar(setActivities);
-    console.log(activities);
+    fetchCalendar(setActivities);    
     
-    
-    // fetchActivities('/get-filtered-activities', setActivities);
+    // fetchActivities('/get-filtered-activities', setActivities); // Antiguo fetch del histórico (excel)
   }, []);
 
   return (
@@ -95,7 +89,7 @@ const Activities = () => {
                       {activity.dateISO || "Fecha"}
                     </h2>
                     <p className="activities-location">
-                      {activity.location || "Lugar"}
+                      {activity.location || "Lugar por definir"}
                     </p>
                     <p className="activities-decription">
                       {activity.description || "Descripción"}
@@ -107,22 +101,10 @@ const Activities = () => {
                 </li>
               ))
             ) : (
-              <p>No se han podido cargar las actividades pasadas</p>
+              <p>No se han encontrado actividades</p>
             )
           }
-
-          {/* //! Actividad de ejemplo */}
-          {/* <article className="activity">
-            <img src={silueta} alt="Logo Alma" className="activities-image" />
-            <h1 className="activities-title">
-              obradoiro: Alimentación complementaria
-            </h1>
-            <h2 className="activities-date">Sábado 6 de xullo | 11h</h2>
-            <p className="activities-location">
-              Sala Municipal Celia e Esperanza Brañas Fernández, Culleredo
-            </p>
-            {<button className="activities-inscription">Inscribirse</button>}
-          </article> */}
+          
         </ol>
       </main>
       <Footer />
