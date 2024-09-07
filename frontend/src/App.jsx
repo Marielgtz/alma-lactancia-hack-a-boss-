@@ -13,6 +13,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 import AdminDashboard from "./pages/private/Admin";
 
 function App() {
+  // TODO - Añadir contexto o props que permita pasar funcionalidades de formularios
+
   return (
     <Router>
       <div className="App">
