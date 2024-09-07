@@ -4,45 +4,34 @@ import { SelectInput } from "./SelectInput";
 import DateFilter from "./DateFilter";
 // import parseReceivedDate from "../../services/parseRecievedDate";
 import { compareISO } from "../../services/api";
+import { SearchInput } from "./SearchInput";
 
 function ActivityFilter({ activities, setFilteredActivites }) {
 
   // Variables de React de los filtros (en useState)
   const [typeEvent, setTypeEvent] = useState("");
-  const [locationEvent, setLocationEvent] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
   const [eventDateStart, setEventDateStart] = useState("");
   const [eventDateEnd, setEventDateEnd] = useState("");
 
-  // const categoryEvents = []; //TODO Cancelada por desarrollo
-  // ? Como obtener las categorías disponibles?
-
-  // ! MOCKUPS =========================================================
-
+  // Tipos de entrada según membresía
   const categoryEvents = [
 
     { label: "Entrada libre", value: "free" },
     { label: "Exclusivo Socios", value: "member" }
   ];
 
-  const locations = [
-    { label: "A Coruña", value: "coruña" },
-    { label: "Culleredo", value: "culleredo" },
-    { label: "Pontevedra", value: "pontevedra" }
-  ]
-
-  //! ===================================================================
-
   //? Control en desarrollo =============================================
 
   useEffect(() => {
     let msg = 'Filtro actual: '
     if(typeEvent) msg = msg + "" + typeEvent + ","
-    if(locationEvent) msg = msg + "" + locationEvent + ","
+    if(locationFilter) msg = msg + "" + locationFilter + ","
     if(eventDateStart) msg = msg + "" + eventDateStart + ","
     if(eventDateEnd) msg = msg + "" + eventDateEnd + ","
-    console.log(msg);
+    // console.log(msg);
   
-  },[typeEvent, locationEvent, eventDateStart, eventDateEnd])
+  },[typeEvent, eventDateStart, eventDateEnd])
 
   // ? ==================================================================
 
@@ -59,19 +48,24 @@ function ActivityFilter({ activities, setFilteredActivites }) {
     } 
 
     // * FILTRADO POR LOCALIZACIÓN DEL EVENTO
-    if (locationEvent) {
+    if (locationFilter) {
       updatedActivities = updatedActivities.filter(activity => {
-        // console.log(activity);
-        if (activity.location){
-          return activity.location.toLowerCase().search(locationEvent) !== -1
-        }
-      })
+        // Comprueba si un lugar existe e incluye los caracteres 
+        return activity.location && activity.location.toLowerCase().includes(locationFilter.toLowerCase());
+      });
     }
+
+    // if (locationFilter) {
+    //   updatedActivities = updatedActivities.filter(activity => {
+    //     // console.log(activity);
+    //     if (activity.location){
+    //       return activity.location.toLowerCase().search(locationFilter) !== -1
+    //     }
+    //   })
+    // }
 
     //* LÓGICA DE COMPARACIÓN DE FECHAS
     if (eventDateStart) {
-      console.log('Event date start: TRUE');
-      
       updatedActivities = updatedActivities.filter(activity => {
 
         // Adecuar fechas al formato ISO
@@ -83,8 +77,6 @@ function ActivityFilter({ activities, setFilteredActivites }) {
       )
     }
     if (eventDateEnd) {
-      console.log('Event date end: TRUE');
-
       updatedActivities = updatedActivities.filter(activity => {
 
         // Adecuar fechas al formato ISO
@@ -99,7 +91,7 @@ function ActivityFilter({ activities, setFilteredActivites }) {
     // console.log(updatedActivities);
     setFilteredActivites(updatedActivities);
 
-  }, [typeEvent, locationEvent, eventDateStart, eventDateEnd, activities, setFilteredActivites]);
+  }, [typeEvent, locationFilter, eventDateStart, eventDateEnd, activities, setFilteredActivites]);
 
   //? ===================================================================
 
@@ -113,24 +105,20 @@ function ActivityFilter({ activities, setFilteredActivites }) {
        eventType={"typeEvent"}
        options={categoryEvents}
        onChange={(e) => setTypeEvent(e.target.value)}
-      ></SelectInput>
-
-       <SelectInput 
-       className={"filter filter-type"}
-       setStatus={setLocationEvent}
-       text={"Localidad"}
-       defaultLabel={"Todas las localidades"}
-       eventType={"locationEvent"}
-       options={locations}
-       onChange={(e) => setLocationEvent(e.target.value)}
-      ></SelectInput>
-
+      />
+      <SearchInput 
+      className={"filter filter-type"}
+      setStatus={setLocationFilter}
+      text={"Localidad"}
+      defaultLabel={"Todas las localidades"}
+      eventType={"locationFilter"}
+      onChange={(e) => setLocationFilter(e.target.value)} 
+      />
       <DateFilter
         label="Desde" 
         date={eventDateStart} 
         setDate={setEventDateStart} 
       />
-
       <DateFilter
          label="Hasta" 
          date={eventDateEnd} 
