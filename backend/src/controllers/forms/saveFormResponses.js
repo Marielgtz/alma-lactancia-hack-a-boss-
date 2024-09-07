@@ -1,3 +1,4 @@
+import { sheets } from '../../googleapis/client.js'
 import {
     allSheetData,
     getCoordinates,
@@ -83,12 +84,19 @@ const saveFormResponses = async (req, res, next) => {
                     )
                 } else {
                     //Añado nombre del evento y fecha al correo coincidente:
-                    const columnIndex = rows[1].length + 1
+                    const updateRowRange = `Usuarios!A${valueRowIndex}:Z${valueRowIndex}`
+                    let rowData = await sheets.spreadsheets.values.get({
+                        spreadsheetId,
+                        range: updateRowRange,
+                    })
+
+                    rowData = rowData.data.values[0]
+                    const columnIndex = rowData.length + 1
 
                     const range = `Usuarios!${getColumnLetter(
                         columnIndex
                     )}${valueRowIndex}:${getColumnLetter(
-                        rows[1].length + 2
+                        rowData.length + 2
                     )}${valueRowIndex}`
 
                     const rowToUpdate = {
