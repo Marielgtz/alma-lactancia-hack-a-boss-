@@ -262,7 +262,8 @@
     margin: 0;
     max-width: none;
     text-align: center;
-    height: 45rem;
+    height: 18rem;
+    width: 60rem;
   }
 
   .activity {
