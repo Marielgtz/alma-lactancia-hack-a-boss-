@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
 import silueta from "../images/IlustracionLactancia.png";
+import { useNavigate } from "react-router-dom";
 import "./Contact.css";
 
 const Contact = () => {
@@ -14,7 +15,7 @@ const Contact = () => {
     message: "",
   });
 
-  const [responseMessage, setResponseMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +28,8 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes manejar el envío del formulario, por ejemplo, hacer una llamada a una API
-    setResponseMessage("Formulario enviado correctamente");
+    // Si el envío es exitoso, puedes redirigir al usuario a otra página
+    navigate("/confirmacion"); 
   };
 
   return (
@@ -123,8 +125,6 @@ const Contact = () => {
             <img src={silueta} />
           </div>
         </div>
-
-        {responseMessage && <div id="responseMessage">{responseMessage}</div>}
         <Footer />
       </main>
     </div>
