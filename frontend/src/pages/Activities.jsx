@@ -85,14 +85,14 @@ const Activities = () => {
                     <h1 className="activities-title">
                       {activity.summary || "Título"}
                     </h1>
-                    <h2 className="activities-date">
-                      {activity.dateISO || "Fecha"}
-                    </h2>
-                    <p className="activities-location">
-                      {activity.location || "Lugar por definir"}
-                    </p>
                     <p className="activities-decription">
                       {activity.description || "Descripción"}
+                    </p>
+                    <p className="activities-date">
+                      {activity.dateISO || "Fecha"}
+                    </p>
+                    <p className="activities-location">
+                      {activity.location || "Lugar por definir"}
                     </p>
                     <button className="activities-inscription">
                       Inscribirse
@@ -101,7 +101,7 @@ const Activities = () => {
                 </li>
               ))
             ) : (
-              <p>No se han encontrado actividades</p>
+              <h1 className="no-activities-found">No se han encontrado actividades</h1>
             )
           }
           

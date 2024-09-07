@@ -21,7 +21,7 @@ function handleChange(e) {
        <input
         type="text"
         className="select-input"
-        placeholder="Cualquier localidad"
+        placeholder="Todas las localidades"
         name={eventType}
         id={eventType}
         onChange={(e) => setStatus(e.target.value)}
