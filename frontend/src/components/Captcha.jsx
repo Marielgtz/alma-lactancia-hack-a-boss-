@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const CaptchaComponent = () => {
+const CaptchaComponent = ({ onCaptchaValidation}) => {
   const [captchaSvg, setCaptchaSvg] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
@@ -53,16 +53,20 @@ const CaptchaComponent = () => {
       }
 
       const data = await response.json();
-      setValidationMessage(data.message);
 
       // Si la validación falla, genera un nuevo CAPTCHA
-      if (!data.success) {
-        setValidationMessage("Captcha incorrecto. Generando uno nuevo...");
+      if (data.success) {
+        setValidationMessage("Captcha validado correctamente.");
+        onCaptchaValidation(true); // Informar que el CAPTCHA fue validado correctamente
+      } else {
+        setValidationMessage("Captcha incorrecto. Inténtalo de nuevo.");
+        onCaptchaValidation(false); // Informar que la validación falló
         setCaptchaInput(""); // Limpiar el input
-        fetchCaptcha(); // Generar un nuevo CAPTCHA
-      }
+        fetchCaptcha(); // Generar un nuevo CAPTCHA solo si falla
+      }      
     } catch (error) {
-      setValidationMessage("Captcha inválido. Generando uno nuevo...");
+      setValidationMessage("Error al validar el CAPTCHA. Inténtalo de nuevo.");
+      onCaptchaValidation(false); // Informar que la validación falló
       setCaptchaInput(""); // Limpiar el input
       fetchCaptcha(); // Generar un nuevo CAPTCHA
     }
@@ -83,7 +87,7 @@ const CaptchaComponent = () => {
           className="captcha-input"
         />
         <button className="captcha-button" onClick={handleCaptchaValidation}>
-          Validar CAPTCHA
+          Validar
         </button>
         {validationMessage && <p>{validationMessage}</p>}
       </div>

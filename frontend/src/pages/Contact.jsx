@@ -15,6 +15,7 @@ const Contact = () => {
     message: "",
   });
 
+  const [captchaValid, setCaptchaValid] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -28,8 +29,17 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes manejar el envío del formulario, por ejemplo, hacer una llamada a una API
-    // Si el envío es exitoso, puedes redirigir al usuario a otra página
-    navigate("/confirmacion"); 
+
+    if (!captchaValid) {
+      // Mostrar un mensaje si el captcha no es válido
+      alert("Por favor, valida el CAPTCHA antes de enviar el formulario.");
+      return;
+    }
+
+    console.log("Captcha es válido, redirigiendo...")
+
+    // Redirigir a la página de confirmación
+    navigate("/confirmacion");
   };
 
   return (
@@ -103,7 +113,7 @@ const Contact = () => {
               onChange={handleChange}
             ></textarea>
 
-            <Captcha />
+            <Captcha onCaptchaValidation={setCaptchaValid} />
             <button className="contact-button" type="submit">
               Enviar
             </button>
