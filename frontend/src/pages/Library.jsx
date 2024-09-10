@@ -27,16 +27,14 @@ const Library = () => {
           alimentación complementaria.
         </p>
         <div className="collapsible-main">
-          <div className="collapsible-container-library">
+          <div className="collapsible-container">
             <div
-              className={`collapsible-header-library ${
-                openInfo === "lactancia" ? "open" : ""
-              }`}
+              className="collapsible-header"
               onClick={() => toggleInfo("lactancia")}
             >
-              <span className="collapsible-title-library">Lactancia</span>
+              <span className="collapsible-title">Lactancia</span>
               <span
-                className={`collapsible-arrow-library ${
+                className={`collapsible-arrow ${
                   openInfo === "lactancia" ? "open" : ""
                 }`}
               >
@@ -44,7 +42,7 @@ const Library = () => {
               </span>
             </div>
             {openInfo === "lactancia" && (
-              <div className="collapsible-content-library">
+              <div className="collapsible-content">
                 <h3>RECURSOS ONLINE</h3>
                 <ul>
                   <li>
@@ -91,16 +89,14 @@ const Library = () => {
               </div>
             )}
           </div>
-          <div className="collapsible-container-library">
+          <div className="collapsible-container">
             <div
-              className={`collapsible-header-library ${
-                openInfo === "embarazo" ? "open" : ""
-              }`}
+              className="collapsible-header"
               onClick={() => toggleInfo("embarazo")}
             >
-              <span className="collapsible-title-library">Embarazo</span>
+              <span className="collapsible-title">Embarazo</span>
               <span
-                className={`collapsible-arrow-library ${
+                className={`collapsible-arrow ${
                   openInfo === "embarazo" ? "open" : ""
                 }`}
               >
@@ -108,7 +104,7 @@ const Library = () => {
               </span>
             </div>
             {openInfo === "embarazo" && (
-              <div className="collapsible-content-library">
+              <div className="collapsible-content">
                 <h3>RECURSOS</h3>
                 <ul>
                   <li>
@@ -153,16 +149,14 @@ const Library = () => {
               </div>
             )}
           </div>
-          <div className="collapsible-container-library">
+          <div className="collapsible-container">
             <div
-              className={`collapsible-header-library ${
-                openInfo === "crianza" ? "open" : ""
-              }`}
+              className="collapsible-header"
               onClick={() => toggleInfo("crianza")}
             >
-              <span className="collapsible-title-library">Crianza</span>
+              <span className="collapsible-title">Crianza</span>
               <span
-                className={`collapsible-arrow-library ${
+                className={`collapsible-arrow ${
                   openInfo === "crianza" ? "open" : ""
                 }`}
               >
@@ -170,7 +164,7 @@ const Library = () => {
               </span>
             </div>
             {openInfo === "crianza" && (
-              <div className="collapsible-content-library">
+              <div className="collapsible-content">
                 <h3>LIBROS</h3>
                 <ul>
                   <h4>Crianza:</h4>
@@ -197,18 +191,16 @@ const Library = () => {
               </div>
             )}
           </div>
-          <div className="collapsible-container-library">
+          <div className="collapsible-container">
             <div
-              className={`collapsible-header-library ${
-                openInfo === "alimentacion" ? "open" : ""
-              }`}
+              className="collapsible-header"
               onClick={() => toggleInfo("alimentacion")}
             >
-              <span className="collapsible-title-library">
+              <span className="collapsible-title">
                 Alimentación complementaria
               </span>
               <span
-                className={`collapsible-arrow-library ${
+                className={`collapsible-arrow ${
                   openInfo === "alimentacion" ? "open" : ""
                 }`}
               >
@@ -216,7 +208,7 @@ const Library = () => {
               </span>
             </div>
             {openInfo === "alimentacion" && (
-              <div className="collapsible-content-library">
+              <div className="collapsible-content">
                 <h3>BLOGS</h3>
                 <ul>
                   <li>
@@ -252,16 +244,14 @@ const Library = () => {
               </div>
             )}
           </div>
-          <div className="collapsible-container-library">
+          <div className="collapsible-container">
             <div
-              className={`collapsible-header-library ${
-                openInfo === "hemeroteca" ? "open" : ""
-              }`}
+              className="collapsible-header"
               onClick={() => toggleInfo("hemeroteca")}
             >
-              <span className="collapsible-title-library">Hemeroteca</span>
+              <span className="collapsible-title">Hemeroteca</span>
               <span
-                className={`collapsible-arrow-library ${
+                className={`collapsible-arrow ${
                   openInfo === "hemeroteca" ? "open" : ""
                 }`}
               >
@@ -269,8 +259,8 @@ const Library = () => {
               </span>
             </div>
             {openInfo === "hemeroteca" && (
-              <div className="collapsible-content-library">
-                <p>Antiguo blog de Alma Lactancia ˃</p>
+              <div className="collapsible-content">
+                <p>Antiguo blog de Alma Lactancia  ˃</p>
               </div>
             )}
           </div>

@@ -39,11 +39,7 @@
     display: inline-block; 
     vertical-align: middle; 
   }
-
-  .select-input::placeholder {
-    color: #b380b5;
-  }
-
+  
   /* Estilo en modo móvil */
   @media (max-width: 768px) {
     .filter-container {

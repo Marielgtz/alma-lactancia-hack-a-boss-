@@ -7,8 +7,6 @@ const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
         jsonNumber
     )
     if (!publishedForm?.fields) {
-        console.log(publishedForm);
-        <p>eooo</p>
         return <div>No hay datos para mostrar.</div>
     }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const CaptchaComponent = ({ onCaptchaValidation}) => {
+const CaptchaComponent = () => {
   const [captchaSvg, setCaptchaSvg] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
@@ -9,25 +9,24 @@ const CaptchaComponent = ({ onCaptchaValidation}) => {
   const validateCaptcha = import.meta.env.VITE_API_URL + "/validate-captcha";
   const generateCaptcha = import.meta.env.VITE_API_URL + "/generate-captcha";
 
-  // Obtener el CAPTCHA cuando el componente se monta o cuando sea necesario
-  const fetchCaptcha = async () => {
-    try {
-      const response = await fetch(generateCaptcha, {
-        credentials: "include", // Esto es para que se envíen y reciban cookies
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.text(); // El captcha es un SVG en formato texto
-      setCaptchaSvg(data);
-    } catch (error) {
-      console.error("Error fetching CAPTCHA:", error);
-    }
-  };
-
+  // Obtener el CAPTCHA cuando el componente se monta
   useEffect(() => {
+    const fetchCaptcha = async () => {
+      try {
+        const response = await fetch(generateCaptcha, {
+          credentials: "include", // Esto es para que se envíen y reciban cookies
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.text(); // El captcha es un SVG en formato texto
+        setCaptchaSvg(data);
+      } catch (error) {
+        console.error("Error fetching CAPTCHA:", error);
+      }
+    };
     fetchCaptcha();
-  }, []);
+  }, [generateCaptcha]);
 
   const handleCaptchaInput = (e) => {
     e.preventDefault();
@@ -53,22 +52,9 @@ const CaptchaComponent = ({ onCaptchaValidation}) => {
       }
 
       const data = await response.json();
-
-      // Si la validación falla, genera un nuevo CAPTCHA
-      if (data.success) {
-        setValidationMessage("Captcha validado correctamente.");
-        onCaptchaValidation(true); // Informar que el CAPTCHA fue validado correctamente
-      } else {
-        setValidationMessage("Captcha incorrecto. Inténtalo de nuevo.");
-        onCaptchaValidation(false); // Informar que la validación falló
-        setCaptchaInput(""); // Limpiar el input
-        fetchCaptcha(); // Generar un nuevo CAPTCHA solo si falla
-      }      
+      setValidationMessage(data.message);
     } catch (error) {
-      setValidationMessage("Error al validar el CAPTCHA. Inténtalo de nuevo.");
-      onCaptchaValidation(false); // Informar que la validación falló
-      setCaptchaInput(""); // Limpiar el input
-      fetchCaptcha(); // Generar un nuevo CAPTCHA
+      setValidationMessage("Captcha inválido. Inténtalo de nuevo.");
     }
   };
 
@@ -87,7 +73,7 @@ const CaptchaComponent = ({ onCaptchaValidation}) => {
           className="captcha-input"
         />
         <button className="captcha-button" onClick={handleCaptchaValidation}>
-          Validar
+          Validar CAPTCHA
         </button>
         {validationMessage && <p>{validationMessage}</p>}
       </div>
