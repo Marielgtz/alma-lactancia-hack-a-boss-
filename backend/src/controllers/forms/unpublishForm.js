@@ -1,15 +1,21 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-const unpublishForm = async (_req, res, next) => {
+const unpublishForm = async (req, res, next) => {
     try {
-        const filePath = path.join('src', 'assets', 'formPublished.json')
+        const jsonNumber = req.params.jsonNumber.toString()
+
+        const filePath = path.join(
+            'src',
+            'assets',
+            `formPublished${jsonNumber}.json`
+        )
 
         await fs.writeFile(filePath, JSON.stringify({}, null, 2), 'utf8')
 
         console.log('El archivo JSON ha sido vaciado.')
 
-        res.send({ message: 'Formulario despublicado' })
+        res.send({ message: 'Formulario despublicado', form: {} })
     } catch (error) {
         next(error)
     }

@@ -124,7 +124,6 @@ const saveFormResponses = async (req, res, next) => {
             message: 'Respuestas del formulario guardadas exitosamente',
         })
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
