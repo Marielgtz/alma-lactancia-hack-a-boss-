@@ -32,8 +32,11 @@ const useFormBuilder = (setForms) => {
                 }
             })
             .then((dataFromBack) => {
-                console.log(dataFromBack.message)
-
+                if (dataFromBack?.sheetExists) {
+                    console.log(dataFromBack.message)
+                } else {
+                    console.log(dataFromBack.message)
+                }
                 setForms((prevData) => {
                     return { ...prevData, ...dataFromBack.form }
                 })

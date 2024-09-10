@@ -45,16 +45,22 @@ const useFormDropdown = (
         )
 
     //Publicar formulario:
-    const publishHandler = async (formId) => {
+    const publishHandler = async (formId, jsonNumber) => {
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/get-form/${formId}/publish` //Este último parámetro es opcional, si se envía (un valor truthy), se guardarán los datos en el servidor y estarán disponibles para el endpoint de formulario publicado.
+                `${
+                    import.meta.env.VITE_API_URL
+                }/get-form/${formId}/publish/${jsonNumber}` //Este último parámetro es opcional, si se envía (un valor truthy), se guardarán los datos en el servidor y estarán disponibles para el endpoint de formulario publicado.
             )
 
             if (response.ok) {
                 console.log('Formulario publicado exitosamente')
                 const data = await response.json()
-                setPublishedForm(data.form)
+                setPublishedForm((prevData) => {
+                    const newData = [...prevData]
+                    newData.splice(Number(jsonNumber) - 1, 1, data.form)
+                    return newData
+                })
             } else {
                 console.error('Error al publicar el formulario')
             }
@@ -64,16 +70,21 @@ const useFormDropdown = (
     }
 
     //Despublicar formulario:
-    const unPublishHandler = async () => {
+    const unPublishHandler = async (jsonNumber) => {
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/unpublish-form`
+                `${import.meta.env.VITE_API_URL}/unpublish-form/${
+                    Number(jsonNumber) + 1
+                }`
             )
 
             if (response.ok) {
-                console.log('Formulario despublicado')
                 const data = await response.json()
-                setPublishedForm(data.form)
+                setPublishedForm((prevData) => {
+                    const newData = [...prevData]
+                    newData[jsonNumber] = {}
+                    return newData
+                })
             } else {
                 console.error('Error al despublicar el formulario')
             }
@@ -82,9 +93,11 @@ const useFormDropdown = (
         }
     }
 
-    const checkIsPublishHandler = async (id) => {
+    const checkIsPublishHandler = async (id, jsonNumber) => {
         const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/check-is-published/${id}`
+            `${import.meta.env.VITE_API_URL}/check-is-published/${id}/${
+                Number(jsonNumber) + 1
+            }`
         )
         if (response.ok) {
             const data = await response.json()
@@ -93,7 +106,7 @@ const useFormDropdown = (
                     'El formulario está publicado, ¿quiere despublicarlo?'
                 )
                 if (unPublish) {
-                    unPublishHandler()
+                    unPublishHandler(jsonNumber)
                 }
             }
         } else {
@@ -110,9 +123,9 @@ const useFormDropdown = (
         setIsModalOpen(false)
     }
 
-    const handleYes = async (id, sheetName) => {
+    const handleYes = async (id, sheetName, jsonNumber) => {
         //Compruebo si el formulario que se quiere borrar está publicado:
-        checkIsPublishHandler(id)
+        checkIsPublishHandler(id, jsonNumber)
 
         //Sigo con la lógica de borrado:
         const url = `${
@@ -122,8 +135,8 @@ const useFormDropdown = (
         closeModal()
     }
 
-    const handleNo = (id) => {
-        checkIsPublishHandler(id)
+    const handleNo = (id, jsonNumber) => {
+        checkIsPublishHandler(id, jsonNumber)
         const url = `${import.meta.env.VITE_API_URL}/delete-form/${id}`
         deleteForm(id, url)
         closeModal()
