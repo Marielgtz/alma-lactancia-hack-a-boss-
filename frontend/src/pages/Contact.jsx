@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
 import silueta from "../images/IlustracionLactancia.png";
+import { useNavigate } from "react-router-dom";
 import "./Contact.css";
 
 const Contact = () => {
@@ -14,7 +15,8 @@ const Contact = () => {
     message: "",
   });
 
-  const [responseMessage, setResponseMessage] = useState("");
+  const [captchaValid, setCaptchaValid] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +29,17 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes manejar el envío del formulario, por ejemplo, hacer una llamada a una API
-    setResponseMessage("Formulario enviado correctamente");
+
+    if (!captchaValid) {
+      // Mostrar un mensaje si el captcha no es válido
+      alert("Por favor, valida el CAPTCHA antes de enviar el formulario.");
+      return;
+    }
+
+    console.log("Captcha es válido, redirigiendo...")
+
+    // Redirigir a la página de confirmación
+    navigate("/confirmacion");
   };
 
   return (
@@ -101,7 +113,7 @@ const Contact = () => {
               onChange={handleChange}
             ></textarea>
 
-            <Captcha />
+            <Captcha onCaptchaValidation={setCaptchaValid} />
             <button className="contact-button" type="submit">
               Enviar
             </button>
@@ -123,8 +135,6 @@ const Contact = () => {
             <img src={silueta} />
           </div>
         </div>
-
-        {responseMessage && <div id="responseMessage">{responseMessage}</div>}
         <Footer />
       </main>
     </div>
