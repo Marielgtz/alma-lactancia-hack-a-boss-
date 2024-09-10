@@ -3,7 +3,12 @@ import path from 'path'
 
 const getPublishedForm = async (req, res, next) => {
     try {
-        const filePath = path.join('src', 'assets', 'formPublished.json')
+        const jsonNumber = req.params.jsonNumber
+        const filePath = path.join(
+            'src',
+            'assets',
+            `formPublished${jsonNumber}.json`
+        )
         const data = await fs.readFile(filePath, 'utf8')
         const jsonData = JSON.parse(data)
         res.send({ message: 'Formulario publicado obtenido', form: jsonData })

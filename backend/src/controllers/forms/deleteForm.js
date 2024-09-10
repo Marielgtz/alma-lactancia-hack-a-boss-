@@ -11,7 +11,7 @@ const deleteForm = async (req, res, next) => {
         const formId = req.params.formId
         const sheetToDelete = req.params.deleteSheet
         let sheetName = req.params.sheetName
-        sheetName = normalizeFieldName(sheetName)
+        sheetName = sheetName && normalizeFieldName(sheetName)
 
         //Borrar hoja de resultados:
         if (sheetToDelete) {
@@ -43,6 +43,7 @@ const deleteForm = async (req, res, next) => {
             message: `formulario con id: ${formId} borrado`,
         })
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

@@ -2,13 +2,13 @@ import { sheets } from '../client.js'
 import { getColumnLetter } from '../../utils/index.js'
 import { generateError } from '../../utils/index.js'
 
-const insertRow = async (spreadsheetId, sheetName, nextRow, values) => {
+const insertRow = async (spreadsheetId, sheetName, nextEmptyRow, values) => {
     try {
         const numColumns = values[0].length
         const startColumn = 'A'
         const endColumn = getColumnLetter(numColumns)
 
-        const range = `${sheetName}!${startColumn}${nextRow}:${endColumn}${nextRow}`
+        const range = `${sheetName}!${startColumn}${nextEmptyRow}:${endColumn}${nextEmptyRow}`
 
         const data = {
             spreadsheetId,

@@ -4,8 +4,13 @@ import { generateError } from '../../utils/index.js'
 
 const checkIsPublished = async (req, res, next) => {
     try {
+        const jsonNumber = req.params.jsonNumber.toString()
         const formId = req.params.formId
-        const filePath = path.join('src', 'assets', 'formPublished.json')
+        const filePath = path.join(
+            'src',
+            'assets',
+            `formPublished${jsonNumber}.json`
+        )
         const data = await fs.readFile(filePath, 'utf8')
 
         let jsonData

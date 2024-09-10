@@ -8,6 +8,7 @@ const getFormById = async (req, res, next) => {
     try {
         const formId = req.params.formId
         const publish = req.params.publish
+        const jsonNumber = req.params.jsonNumber
         const spreadsheetId = process.env.SPREADSHEET_ID
         const fields = {
             field: 'id',
@@ -32,9 +33,13 @@ const getFormById = async (req, res, next) => {
             }),
         }
 
-        //Si se publica, se guarda en un JSON para después ser recuperado:
+        //Si se publica, se guarda en un JSON correspondiente, para después ser recuperado:
         if (publish) {
-            const filePath = path.join('src', 'assets', 'formPublished.json')
+            const filePath = path.join(
+                'src',
+                'assets',
+                `formPublished${jsonNumber}.json`
+            )
             await fs.writeFile(filePath, JSON.stringify(dataToSend, null, 2))
             console.log('Form guardado en el archivo formPublished.json')
         }
@@ -43,6 +48,7 @@ const getFormById = async (req, res, next) => {
             form: dataToSend,
         })
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

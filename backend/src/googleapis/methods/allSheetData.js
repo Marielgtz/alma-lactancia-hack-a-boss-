@@ -24,8 +24,7 @@ const allSheetData = async (spreadsheetId, sheetName) => {
             generateError('No se encontraron filas en los datos de la hoja.')
         }
     } catch (error) {
-        console.log(error)
-        generateError('Ha ocurrido un error')
+        generateError(error)
     }
     return { rows, headers, nextEmptyRow }
 }
