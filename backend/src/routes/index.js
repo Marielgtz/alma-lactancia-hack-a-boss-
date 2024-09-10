@@ -7,6 +7,7 @@ import contact from './contactRouter.js'
 import captcha from './captchaRouter.js'
 import forms from './formsRouter.js'
 import experiences from './experiencesRouter.js'
+import instagram from './instagramRouter.js'
 
 export {
     partners,
@@ -18,4 +19,5 @@ export {
     captcha,
     forms,
     experiences,
+    instagram,
 }
