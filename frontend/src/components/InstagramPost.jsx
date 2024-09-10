@@ -1,34 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const InstagramPost = ({ instagramPost }) => {
-    useEffect(() => {
-        const script = document.createElement('script')
-        script.src = 'https://www.instagram.com/embed.js'
-        script.async = true
-        script.onload = () => {
-            window.instgrm.Embeds.process()
-        }
-        document.body.appendChild(script)
+    const containerRef = useRef(null)
 
-        return () => {
-            document.body.removeChild(script)
+    useEffect(() => {
+        // Cargo el script solo una vez en el DOM
+        if (!window.instgrm) {
+            const script = document.createElement('script')
+            script.src = 'https://www.instagram.com/embed.js'
+            script.async = true
+            script.onload = () => {
+                window.instgrm.Embeds.process()
+            }
+            containerRef.current.appendChild(script)
+        } else {
+            window.instgrm.Embeds.process()
         }
     }, [instagramPost])
 
     return (
-        <div>
-            <div dangerouslySetInnerHTML={{ __html: instagramPost }} />
+        <div ref={containerRef}>
+            <ul>
+                {instagramPost.map((post, index) => (
+                    <li key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: post.code }} />
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
 
 export default InstagramPost
-
-//He creado un objeto en el DOM para insertar el código. En este caso lo he metido directamente en el body (líneas 11 y 14) pero para el diseño podéis utilizar cualquier etiqueta. Por ejemplo, en un div con estilos podría ser algo así:
-// const container = document.getElementById('instagram-container');
-// container.appendChild(script);
-// return (
-//     <div id="instagram-container">
-//         <div dangerouslySetInnerHTML={{ __html: instagramPost }} />
-//     </div>
-// );

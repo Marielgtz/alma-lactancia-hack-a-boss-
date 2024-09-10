@@ -13,6 +13,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import AdminDashboard from "./pages/private/Admin";
 
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -32,6 +33,7 @@ function App() {
       </div>
     </Router>
   );
+
 }
 
 export default App;
