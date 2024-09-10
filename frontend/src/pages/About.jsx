@@ -18,6 +18,7 @@ const About = () => {
       <main className="about-main">
         <div className="img-section">
           <div className="background-image2"></div>
+          <h2 className="about-alma">Alma Lactancia</h2>
           <h1 className="about-title">Equipo</h1>
         </div>
         <div className="about-people">
@@ -139,22 +140,24 @@ const About = () => {
         </div>
         <div className="about-support">
           <h1 className="section-title2">Nuestro compromiso y apoyos</h1>
-          <div className="collapsible-container">
+          <div className="collapsible-container-about">
             <div
-              className="collapsible-header"
+              className={`collapsible-header-about ${
+                openInfo === "quehacemos" ? "open" : ""
+              }`}
               onClick={() => toggleInfo("quehacemos")}
             >
               <span className="collapsible-title-about">¿Qué hacemos?</span>
               <span
-                className={`collapsible-arrow ${
-                  openInfo === "quehacemos" ? "open" : ""
+                className={`collapsible-arrow-about ${
+                  openInfo === "quehacemos" ? "open" : "closed"
                 }`}
               >
                 ᐳ
               </span>
             </div>
             {openInfo === "quehacemos" && (
-              <div className="collapsible-content">
+              <div className="collapsible-content-about">
                 <ul>
                   <li>
                     Asesoría en lactancia en las reuniones, además de por correo
@@ -179,22 +182,24 @@ const About = () => {
               </div>
             )}
           </div>
-          <div className="collapsible-container">
+          <div className="collapsible-container-about">
             <div
-              className="collapsible-header"
+              className={`collapsible-header-about ${
+                openInfo === "quenohacemos" ? "open" : ""
+              }`}
               onClick={() => toggleInfo("quenohacemos")}
             >
               <span className="collapsible-title-about">¿Qué no hacemos?</span>
               <span
-                className={`collapsible-arrow ${
-                  openInfo === "quenohacemos" ? "open" : ""
+                className={`collapsible-arrow-about ${
+                  openInfo === "quenohacemos" ? "open" : "closed"
                 }`}
               >
                 ᐳ
               </span>
             </div>
             {openInfo === "quenohacemos" && (
-              <div className="collapsible-content">
+              <div className="collapsible-content-about">
                 <ul>
                   <li>
                     No asesoramos sin datos fiables ni información actualizada.
@@ -206,22 +211,24 @@ const About = () => {
               </div>
             )}
           </div>
-          <div className="collapsible-container">
+          <div className="collapsible-container-about">
             <div
-              className="collapsible-header"
+              className={`collapsible-header-about ${
+                openInfo === "quienapoya" ? "open" : ""
+              }`}
               onClick={() => toggleInfo("quienapoya")}
             >
               <span className="collapsible-title-about">¿Quién nos apoya?</span>
               <span
-                className={`collapsible-arrow ${
-                  openInfo === "quienapoya" ? "open" : ""
+                className={`collapsible-arrow-about ${
+                  openInfo === "quienapoya" ? "open" : "closed"
                 }`}
               >
                 ᐳ
               </span>
             </div>
             {openInfo === "quienapoya" && (
-              <div className="collapsible-content">
+              <div className="collapsible-content-about">
                 <ul>
                   <li>
                     Son varios los organismos locales y provinciales los que nos

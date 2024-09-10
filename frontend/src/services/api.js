@@ -1,4 +1,6 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+import formatDate from "../utils/formatDate";
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const handleResponse = async (response) => {
   const json = await response.json();
@@ -292,3 +294,50 @@ const activitiesFilters = {
   // access: ""              
 };
 
+export async function getCalendarEvents(filters) {
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const fullUrl = `${apiUrl}/list-calendar-events`;
+  const requestBody = {
+    maxResults: 10,
+    orderBy: "startTime",
+    singleEvents: true,
+    timeMin: new Date().toISOString() //Traer los eventos actuales
+  };
+
+  try {
+      const response = await fetch(fullUrl, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody)  
+      });
+
+      const data = await response.json();
+      
+      const calendarEvents = data.response
+      calendarEvents.forEach(calendarEvent => {
+        calendarEvent.dateISO = formatDate(calendarEvent.start.dateTime)         
+      });
+      
+      return calendarEvents; 
+  } catch (error) {
+      console.error('Error fetching past events:', error);
+      return null; 
+  }
+}
+
+// Función para comparar las fechas en formato ISO
+
+export function compareISO(date1, date2) {
+  const d1 = new Date(date1);
+  const d2 = new Date(date2);
+
+  if (d1.getTime() === d2.getTime()) {
+    return 0; // Misma fecha
+  } else if (d1.getTime() > d2.getTime()) {
+    return 1; // Fecha 1 es posterior a fecha 2
+  } else {
+    return -1; // Fecha 2 es anterior a fecha 2
+  }
+}

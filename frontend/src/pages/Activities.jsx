@@ -1,23 +1,44 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import './Activities.css'
-import ActivityFilter from '../components/filters/ActivityFilter'
-import silueta from '../images/Alma_Lactancia_-_Foto_hero.jpg'
-import { getPastEvents } from '../services/api'
-import { createMockupData } from '../services/mockUpService'
-import FormDisplay from '../components/FormDisplay'
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import "./Activities.css";
+import ActivityFilter from "../components/filters/ActivityFilter";
+import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
+import {getCalendarEvents, getPastEvents} from '../services/api'
+import { createMockupData } from "../services/mockUpService";
+import { Calendar } from "react-big-calendar";
 
 const Activities = () => {
-    const navigate = useNavigate()
-    // const [openInfo, setOpenInfo] = useState(null);
-    const [activities, setActivities] = useState([])
-    const [filteredActivities, setFilteredActivites] = useState([])
+  const navigate = useNavigate();
+  // const [openInfo, setOpenInfo] = useState(null);
+  const [activities, setActivities] = useState([]);
+  const [filteredActivities, setFilteredActivites] = useState([]);
+  const [notFoundMessage, setNotFoundMessage] = useState("No se han podido cargar las actividades")
 
-    // const toggleInfo = (info) => {
-    //   setOpenInfo(info === openInfo ? null : info);
-    // };
+  // Función que obtiene la lista de actividades
+  useEffect(() => {
+    async function fetchActivities(endpoint, setActivities) {
+      const fetchedActivities = await getPastEvents(endpoint);
+      if (fetchedActivities) {
+        const mockup = createMockupData(fetchedActivities)
+        setActivities(mockup); 
+      }
+    }
+
+    async function fetchCalendar(setActivities) {
+      const calendarEvents = await getCalendarEvents();
+      if (calendarEvents) {
+        setActivities(calendarEvents)
+        // console.log(calendarEvents);
+      }
+    }
+    fetchCalendar(setActivities);    
+    
+    // fetchActivities('/get-filtered-activities', setActivities); // Antiguo fetch del histórico (excel)
+  }, []);
+
 
     // Función que obtiene la lista de actividades
     useEffect(() => {
@@ -32,6 +53,7 @@ const Activities = () => {
         fetchActivities('/get-filtered-activities', setActivities)
     }, [])
 
+
     return (
         <div className='activity-page'>
             <Header />
@@ -45,6 +67,36 @@ const Activities = () => {
                         nosotros en estos eventos donde compartimos
                         conocimientos, experiencias y apoyo en un ambiente
                         acogedor y enriquecedor.
+
+<ol className="activity-container">
+          {
+            /* Map con las actividades filtradas */
+            filteredActivities.length > 0 ? (
+              filteredActivities.map((activity, index) => (
+                <li
+                  key={index}
+                  className="activity-cards"
+                >
+                  <div className="activity-content">
+                    <div className="activity-image">
+                      {activity.image ? (
+                        <img src={activity.image} alt={activity.summary} />
+                      ) : (
+                        <img src={silueta} alt="Imagen predeterminada" />
+                      )}
+                    </div>
+                    <h1 className="activities-title">
+                      {activity.summary || "Título"}
+                    </h1>
+                    <p className="activities-decription">
+                      {activity.description || "Descripción"}
+                    </p>
+                    <p className="activities-date">
+                      {activity.dateISO || "Fecha"}
+                    </p>
+                    <p className="activities-location">
+                      {activity.location || "Lugar por definir"}
+
                     </p>
 
                     <button
@@ -53,6 +105,7 @@ const Activities = () => {
                     >
                         Histórico
                     </button>
+
                 </div>
 
                 <ActivityFilter
@@ -120,5 +173,21 @@ const Activities = () => {
         </div>
     )
 }
+
+                  </div>
+                </li>
+              ))
+            ) : (
+              <h1 className="no-activities-found">No se han encontrado actividades</h1>
+            )
+          }
+          
+        </ol>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
 
 export default Activities
