@@ -8,12 +8,14 @@ import "./Contact.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+    surname: "",
     email: "",
     subject: "",
-    message: "",
+    comments: "",
   });
+
+  console.log(formData);
 
   const [captchaValid, setCaptchaValid] = useState(false);
   const navigate = useNavigate();
@@ -26,9 +28,8 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario, por ejemplo, hacer una llamada a una API
 
     if (!captchaValid) {
       // Mostrar un mensaje si el captcha no es válido
@@ -36,10 +37,30 @@ const Contact = () => {
       return;
     }
 
-    console.log("Captcha es válido, redirigiendo...")
+    try {
+      // Realizar la solicitud POST al backend
+      const response = await fetch(import.meta.env.VITE_API_URL + "/new-contact-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+        credentials: "include",
+      });
 
-    // Redirigir a la página de confirmación
-    navigate("/confirmacion");
+      if (!response.ok) {
+        throw new Error("Error al enviar el mensaje");
+      }
+
+      const data = await response.json();
+      console.log(data.comments);
+
+      // Redirigir a la página de confirmación
+      navigate("/confirmacion");
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+      alert("Hubo un problema al enviar el mensaje. Inténtalo de nuevo.");
+    }
   };
 
   return (
@@ -51,28 +72,28 @@ const Contact = () => {
           <form id="contact" onSubmit={handleSubmit}>
             <div className="name-fields">
               <div className="name-field">
-                <label htmlFor="firstName">
+                <label htmlFor="name">
                   Nombre completo<span className="required">*</span>
                 </label>
                 <input
                   type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                 />
               </div>
 
               <div className="name-field">
-                <label htmlFor="lastName">
+                <label htmlFor="surname">
                   Apellido completo<span className="required">*</span>
                 </label>
                 <input
                   type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
+                  id="surname"
+                  name="surname"
+                  value={formData.surname}
                   onChange={handleChange}
                   required
                 />
@@ -105,11 +126,11 @@ const Contact = () => {
               required
             />
 
-            <label htmlFor="message">Mensaje</label>
+            <label htmlFor="comments">Mensaje</label>
             <textarea
-              id="message"
-              name="message"
-              value={formData.message}
+              id="comments"
+              name="comments"
+              value={formData.comments}
               onChange={handleChange}
             ></textarea>
 

@@ -29,7 +29,6 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route path="/prueba" element={<Prueba />} />
-
           {/* Rutas del DASHBOARD */}
           <Route path="/dashboard" element={<Layout />}> {/* Esto sería el layout */}
             <Route index element={<AdminDashboard />} /> {/* Al escribir /dashboard se pintará el elemento INDEX */}
@@ -40,7 +39,7 @@ function App() {
             <Route path="history" element={<Prueba />} />
           </Route>
           
-        </Routes>
+      </Routes>
       </div>
     </Router>
   );

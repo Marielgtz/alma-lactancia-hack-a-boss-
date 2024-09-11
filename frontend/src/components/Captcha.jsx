@@ -89,8 +89,8 @@ const CaptchaComponent = ({ onCaptchaValidation}) => {
         <button className="captcha-button" onClick={handleCaptchaValidation}>
           Validar
         </button>
-        {validationMessage && <p>{validationMessage}</p>}
       </div>
+      {validationMessage && <p className="validation-msg">{validationMessage}</p>}
     </div>
   );
 };
