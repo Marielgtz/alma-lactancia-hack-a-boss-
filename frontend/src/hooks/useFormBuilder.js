@@ -15,34 +15,37 @@ const useFormBuilder = (setForms) => {
         const jsonData = {
             formId,
             formName: data.formName,
-            fields: data.fields,
+            fields: [...data.fields, { label: 'partner', type: 'select' }],
         }
         const saveForm = import.meta.env.VITE_API_URL + '/create-form'
-
-        fetch(saveForm, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(jsonData),
-        })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                }
+        try {
+            const response = fetch(saveForm, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonData),
             })
-            .then((dataFromBack) => {
-                if (dataFromBack?.sheetExists) {
-                    console.log(dataFromBack.message)
-                } else {
-                    console.log(dataFromBack.message)
-                }
-                setForms((prevData) => {
-                    return { ...prevData, ...dataFromBack.form }
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json()
+                    }
                 })
-            })
+                .then((dataFromBack) => {
+                    if (dataFromBack?.sheetExists) {
+                        console.log(dataFromBack.message)
+                    } else {
+                        console.log(dataFromBack.message)
+                    }
+                    setForms((prevData) => {
+                        return { ...prevData, ...dataFromBack.form }
+                    })
+                })
 
-        reset()
+            reset()
+        } catch (error) {
+            console.log(error)
+        }
     }
     return {
         onSubmit,

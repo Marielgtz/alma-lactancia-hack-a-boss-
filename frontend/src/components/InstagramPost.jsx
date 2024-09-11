@@ -1,10 +1,18 @@
 import React, { useEffect, useRef } from 'react'
 
-const InstagramPost = ({ instagramPost }) => {
+const InstagramPost = ({ instagramPost, postNumber }) => {
     const containerRef = useRef(null)
+    const scriptRef = useRef(null)
 
     useEffect(() => {
-        // Cargo el script solo una vez en el DOM
+        // Función para limpiar el script de Instagram
+        const cleanupScript = () => {
+            if (scriptRef.current && containerRef.current) {
+                containerRef.current.removeChild(scriptRef.current)
+                scriptRef.current = null
+            }
+        }
+
         if (!window.instgrm) {
             const script = document.createElement('script')
             script.src = 'https://www.instagram.com/embed.js'
@@ -13,20 +21,27 @@ const InstagramPost = ({ instagramPost }) => {
                 window.instgrm.Embeds.process()
             }
             containerRef.current.appendChild(script)
+            scriptRef.current = script
         } else {
             window.instgrm.Embeds.process()
         }
-    }, [instagramPost])
+
+        return () => {
+            cleanupScript()
+        }
+    }, [instagramPost, postNumber])
 
     return (
         <div ref={containerRef}>
-            <ul>
-                {instagramPost.map((post, index) => (
-                    <li key={index}>
-                        <div dangerouslySetInnerHTML={{ __html: post.code }} />
-                    </li>
-                ))}
-            </ul>
+            {instagramPost[Number(postNumber) - 1].code ? (
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: instagramPost[Number(postNumber) - 1].code,
+                    }}
+                />
+            ) : (
+                <p>No se encontró el post.</p>
+            )}
         </div>
     )
 }
