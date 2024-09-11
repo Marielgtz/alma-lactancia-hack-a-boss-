@@ -1,9 +1,10 @@
 import useFormDisplay from '../hooks/useFormDisplay'
 
-const FormDisplay = ({ publishedForm, setPublishedForm }) => {
+const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
     const { sendDataHandler, formRef } = useFormDisplay(
         publishedForm,
-        setPublishedForm
+        setPublishedForm,
+        jsonNumber
     )
     if (!publishedForm?.fields) {
         console.log(publishedForm);

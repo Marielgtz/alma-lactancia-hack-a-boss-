@@ -2,49 +2,36 @@ import "./ActivityFilter.css";
 import { useState, useEffect } from 'react'
 import { SelectInput } from "./SelectInput";
 import DateFilter from "./DateFilter";
-import parseReceivedDate from "../../services/parseRecievedDate";
+// import parseReceivedDate from "../../services/parseRecievedDate";
+import { compareISO } from "../../services/api";
+import { SearchInput } from "./SearchInput";
 
 function ActivityFilter({ activities, setFilteredActivites }) {
 
   // Variables de React de los filtros (en useState)
   const [typeEvent, setTypeEvent] = useState("");
-  const [locationEvent, setLocationEvent] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
   const [eventDateStart, setEventDateStart] = useState("");
   const [eventDateEnd, setEventDateEnd] = useState("");
 
-  // const categoryEvents = []; //TODO Cancelada por desarrollo
-  // ? Como obtener las categorías disponibles?
-
-  // const locations = []; //TODO Cancelada por desarrollo
-  // ? Como obtener las localidades disponibles?
-
-  // ! MOCKUPS =========================================================
-
+  // Tipos de entrada según membresía
   const categoryEvents = [
 
     { label: "Entrada libre", value: "free" },
     { label: "Exclusivo Socios", value: "member" }
   ];
 
-  const locations = [
-    { label: "A Coruña", value: "coruña" },
-    { label: "Culleredo", value: "culleredo" },
-    { label: "Pontevedra", value: "pontevedra" }
-  ]
-
-  //! ===================================================================
-
   //? Control en desarrollo =============================================
 
   useEffect(() => {
     let msg = 'Filtro actual: '
     if(typeEvent) msg = msg + "" + typeEvent + ","
-    if(locationEvent) msg = msg + "" + locationEvent + ","
+    if(locationFilter) msg = msg + "" + locationFilter + ","
     if(eventDateStart) msg = msg + "" + eventDateStart + ","
     if(eventDateEnd) msg = msg + "" + eventDateEnd + ","
-    console.log(msg);
+    // console.log(msg);
   
-  },[typeEvent, locationEvent, eventDateStart, eventDateEnd])
+  },[typeEvent, eventDateStart, eventDateEnd])
 
   // ? ==================================================================
 
@@ -53,30 +40,49 @@ function ActivityFilter({ activities, setFilteredActivites }) {
     // updatedActivities es una variable a la que se le aplican los filtros que se escogan
     // Una vez aplicados los filtros, se devuelve el array de actividades filtrado
     
+
+    // * FILTRADO POR TIPO DE ACCESO
+
     if (typeEvent) {
       updatedActivities =  updatedActivities.filter(activity => activity.access === typeEvent) 
     } 
 
-    if (locationEvent) {
+    // * FILTRADO POR LOCALIZACIÓN DEL EVENTO
+    if (locationFilter) {
       updatedActivities = updatedActivities.filter(activity => {
-        // console.log(activity);
-        if (activity.location){
-          return activity.location.toLowerCase().search(locationEvent) !== -1
-        }
-      })
+        // Comprueba si un lugar existe e incluye los caracteres 
+        return activity.location && activity.location.toLowerCase().includes(locationFilter.toLowerCase());
+      });
     }
 
-    // TODO Implementar comparación de fechas
-    // "2024-08-09T10:00:00.000Z"
-    // "Jueves, 30 de Noviembre de 2024, 12:00"
-    
-    console.log(updatedActivities);
+    //* LÓGICA DE COMPARACIÓN DE FECHAS
+    if (eventDateStart) {
+      updatedActivities = updatedActivities.filter(activity => {
 
-    
+        // Adecuar fechas al formato ISO
+        const fromDate =`${eventDateStart}T00:00:00`;
+        const eventStart = activity.start.dateTime;
+        
+        return compareISO(fromDate, eventStart) <= 0;
+      }
+      )
+    }
+    if (eventDateEnd) {
+      updatedActivities = updatedActivities.filter(activity => {
 
+        // Adecuar fechas al formato ISO
+        const limitDate = `${eventDateEnd}T00:00:00`;
+        const eventEnd= activity.end.dateTime;
+        
+        return compareISO(limitDate, eventEnd) > 0;
+      }
+      )
+    }
+    
+    // console.log(updatedActivities);
     setFilteredActivites(updatedActivities);
 
-  }, [typeEvent, locationEvent, activities, setFilteredActivites]);
+  }, [typeEvent, locationFilter, eventDateStart, eventDateEnd, activities, setFilteredActivites]);
 
   //? ===================================================================
 
@@ -90,24 +96,20 @@ function ActivityFilter({ activities, setFilteredActivites }) {
        eventType={"typeEvent"}
        options={categoryEvents}
        onChange={(e) => setTypeEvent(e.target.value)}
-      ></SelectInput>
-
-       <SelectInput 
-       className={"filter filter-type"}
-       setStatus={setLocationEvent}
-       text={"Localidad"}
-       defaultLabel={"Todas las localidades"}
-       eventType={"locationEvent"}
-       options={locations}
-       onChange={(e) => setLocationEvent(e.target.value)}
-      ></SelectInput>
-
+      />
+      <SearchInput 
+      className={"filter filter-type"}
+      setStatus={setLocationFilter}
+      text={"Localidad"}
+      defaultLabel={"Todas las localidades"}
+      eventType={"locationFilter"}
+      onChange={(e) => setLocationFilter(e.target.value)} 
+      />
       <DateFilter
         label="Desde" 
         date={eventDateStart} 
         setDate={setEventDateStart} 
       />
-
       <DateFilter
          label="Hasta" 
          date={eventDateEnd} 

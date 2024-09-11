@@ -1,19 +1,22 @@
 import { useEffect, useRef } from 'react'
 
-const useFormDisplay = (publishedForm, setPublishedForm) => {
+const useFormDisplay = (publishedForm, setPublishedForm, jsonNumber) => {
     //Para obtener el formulario publicado:
     useEffect(() => {
         const getPublishedForm = async () => {
             try {
                 const response = await fetch(
-                    import.meta.env.VITE_API_URL + '/get-published-form'
+                    import.meta.env.VITE_API_URL +
+                        `/get-published-form/${jsonNumber}`
                 )
 
                 if (response.ok) {
                     const data = await response.json()
-                    setPublishedForm(data.form)
-                } else {
-                    console.error('Error al enviar los datos')
+                    setPublishedForm((prevData) => {
+                        const newData = [...prevData]
+                        newData.splice(Number(jsonNumber) - 1, 1, data.form)
+                        return newData
+                    })
                 }
             } catch (error) {
                 console.log('No hay datos que mostrar:', error)
@@ -49,7 +52,10 @@ const useFormDisplay = (publishedForm, setPublishedForm) => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formValues),
+                    body: JSON.stringify({
+                        ...formValues,
+                        formName: publishedForm.formName,
+                    }),
                 }
             )
 
@@ -57,7 +63,9 @@ const useFormDisplay = (publishedForm, setPublishedForm) => {
                 console.log('Datos enviados exitosamente', formValues)
                 formRef.current.reset()
             } else {
-                console.error('Error al enviar los datos')
+                const errorData = await response.json()
+                const errorMessage = errorData.error || response.statusText
+                throw new Error(errorMessage)
             }
         } catch (error) {
             console.error('Ha ocurrido un error:', error)

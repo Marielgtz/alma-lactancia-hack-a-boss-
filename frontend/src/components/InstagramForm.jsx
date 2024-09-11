@@ -1,5 +1,5 @@
 // src/InstagramForm.js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const InstagramForm = ({ setInstagramPost }) => {
     const [blockquote, setBlockquote] = useState('')

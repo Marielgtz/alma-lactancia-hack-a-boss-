@@ -6,6 +6,7 @@ const EditForm = ({
     setForms,
     setSelectedForm,
     setPublishedForm,
+    publishedForm,
 }) => {
     const { register, handleSubmit, onSubmit, fields, append, remove } =
         useEditForm(
@@ -15,10 +16,16 @@ const EditForm = ({
             setSelectedForm,
             setPublishedForm
         )
+    const publishFormIndex = publishedForm.findIndex(
+        (form) => form.formId === selectedForm?.formId
+    )
+    const handleFormSubmit = (data) => {
+        onSubmit(data, publishFormIndex)
+    }
     return (
         <div>
             <h2>Editor de Formularios</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleFormSubmit)}>
                 <div style={{ marginBottom: '20px' }}>
                     <label htmlFor='formName' style={{ marginRight: '10px' }}>
                         Nombre del Formulario:

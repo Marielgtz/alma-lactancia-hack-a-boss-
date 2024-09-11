@@ -21,7 +21,7 @@ const useEditForm = (
         reset(selectedForm)
     }, [selectedForm, reset])
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data, jsonNumber) => {
         try {
             setEditingForm(false)
             const jsonData = {
@@ -63,7 +63,7 @@ const useEditForm = (
                 const checkPublishedResponse = await fetch(
                     `${import.meta.env.VITE_API_URL}/check-is-published/${
                         selectedForm.formId
-                    }`
+                    }/${Number(jsonNumber) + 1}`
                 )
 
                 if (checkPublishedResponse.ok) {
@@ -73,14 +73,18 @@ const useEditForm = (
                             const publishResponse = await fetch(
                                 `${import.meta.env.VITE_API_URL}/get-form/${
                                     selectedForm.formId
-                                }/publish`
+                                }/publish/${Number(jsonNumber) + 1}`
                             )
 
                             if (publishResponse.ok) {
                                 console.log('Publicación actualizada')
                                 const publishedFormData =
                                     await publishResponse.json()
-                                setPublishedForm(publishedFormData.form)
+                                setPublishedForm((prevData) => {
+                                    const newData = [...prevData]
+                                    newData[jsonNumber] = publishedFormData.form
+                                    return newData
+                                })
                             } else {
                                 console.error(
                                     'Error al actualizar la publicación'

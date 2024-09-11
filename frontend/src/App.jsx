@@ -10,9 +10,11 @@ import Contact from "./pages/Contact";
 import Confirmation from "./pages/MsgConfirmation";
 import Prueba from "./components/prueba";
 import NotFoundPage from "./pages/NotFoundPage";
-import AdminPanel from "./pages/AdminPanel";
+import AdminDashboard from "./pages/private/Admin";
+import Layout from "./pages/private/Layout";
 
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -27,11 +29,21 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route path="/prueba" element={<Prueba />} />
-          <Route path="/dashboard" element={<AdminPanel />} />
-        </Routes>
+          {/* Rutas del DASHBOARD */}
+          <Route path="/dashboard" element={<Layout />}> {/* Esto sería el layout */}
+            <Route index element={<AdminDashboard />} /> {/* Al escribir /dashboard se pintará el elemento INDEX */}
+            <Route path="general" element={<Prueba />} />
+            <Route path="activities" element={<AdminDashboard />} />
+            <Route path="home" element={<Prueba />} />
+            <Route path="about" element={<Prueba />} />
+            <Route path="history" element={<Prueba />} />
+          </Route>
+          
+      </Routes>
       </div>
     </Router>
   );
+
 }
 
 export default App;
