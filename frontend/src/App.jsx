@@ -27,7 +27,7 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route path="/prueba" element={<Prueba />} />
-          <Route path="/panel-administracion" element={<AdminPanel />} />
+          <Route path="/dashboard" element={<AdminPanel />} />
         </Routes>
       </div>
     </Router>

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AdminPanel.css";
 import logo from "../images/logo-alma.png";
 
 const AdminPanel = () => {
+  const { activeTab, setActiveTab } = useState("AJUSTES GENERALES");
+  const handleTabChange = (tabName) => {
+    setActiveTab(tabName);
+  };
+
   return (
     <div className="admin-panel">
+    <div className="admin-header"></div>
       <aside className="sidebar">
         <ul>
           <li>
@@ -26,6 +32,7 @@ const AdminPanel = () => {
             <button className="sidebar-btn">BIBLIOTECA</button>
           </li>
         </ul>
+
         <div className="footer">
           <button className="logout-btn">Cerrar sesión</button>
           <a href="/" className="back-to-site-link">

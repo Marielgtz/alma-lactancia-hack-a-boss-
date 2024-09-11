@@ -1,13 +1,13 @@
 .admin-panel {
   display: flex;
   min-height: 100vh;
-  background-color: #fdeee7;
+  background-color: white;
 }
 
 .sidebar {
   width: 25%;
   background-color: #fdeee7;
-  padding: 20px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -24,7 +24,7 @@
   color: #b380b5;
   padding: 10px;
   margin-bottom: 10px;
-  text-align: left;
+  text-align: center;
   width: 100%;
   cursor: pointer;
   font-size: 16px;
@@ -34,7 +34,8 @@
 }
 
 .sidebar-btn:hover {
-  background-color: ;
+  background-color: #b380b5;
+  color: white;
 }
 
 .footer {
@@ -46,7 +47,6 @@
 .logout-btn {
   background-color: transparent;
   border: none;
-  color: #8e8e8e;
   cursor: pointer;
   color: #b380b5;
 }
@@ -62,22 +62,26 @@
 
 .settings-content {
   width: 75%;
-  padding: 40px;
+  background-color: #fdeee7;
+  padding: 1rem;
 }
 
 h3 {
   color: black;
+  margin-bottom: 1rem;
 }
 
 .logo-section {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  margin-left: 5rem;
+  margin-bottom: 2rem;
 }
 
 .logo-image {
-  max-width: 100px;
-  margin-right: 20px;
+  max-width: 15rem;
+  margin-bottom: 1rem;
+  background-color: #ddd;
 }
 
 .logo-buttons {
@@ -95,7 +99,7 @@ h3 {
 }
 
 .logo-buttons button:hover {
-  background-color: ;
+  background-color: #ddd;
 }
 
 .social-links-form {
@@ -112,10 +116,12 @@ h3 {
 }
 
 .social-links-form input {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-top: 5px;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
   font-size: 14px;
+  background-color: white;
+  border: none;
+  margin-left: 0;
 }
 
 .social-links-form button {
@@ -130,5 +136,5 @@ h3 {
 }
 
 .social-links-form button:hover {
-  background-color: ;
+  background-color: #ddd;
 }
