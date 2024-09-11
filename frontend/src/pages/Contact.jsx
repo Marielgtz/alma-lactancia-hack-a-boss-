@@ -8,12 +8,14 @@ import "./Contact.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+    surname: "",
     email: "",
     subject: "",
-    message: "",
+    comments: "",
   });
+
+  console.log(formData);
 
   const [captchaValid, setCaptchaValid] = useState(false);
   const navigate = useNavigate();
@@ -42,13 +44,7 @@ const Contact = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name: formData.firstName,
-          surname: formData.lastName,
-          email: formData.email,
-          subject: formData.subject,
-          comments: formData.message,
-        }),
+        body: JSON.stringify(formData),
         credentials: "include",
       });
 
@@ -57,7 +53,7 @@ const Contact = () => {
       }
 
       const data = await response.json();
-      console.log(data.message);
+      console.log(data.comments);
 
       // Redirigir a la página de confirmación
       navigate("/confirmacion");
@@ -76,28 +72,28 @@ const Contact = () => {
           <form id="contact" onSubmit={handleSubmit}>
             <div className="name-fields">
               <div className="name-field">
-                <label htmlFor="firstName">
+                <label htmlFor="name">
                   Nombre completo<span className="required">*</span>
                 </label>
                 <input
                   type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                 />
               </div>
 
               <div className="name-field">
-                <label htmlFor="lastName">
+                <label htmlFor="surname">
                   Apellido completo<span className="required">*</span>
                 </label>
                 <input
                   type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
+                  id="surname"
+                  name="surname"
+                  value={formData.surname}
                   onChange={handleChange}
                   required
                 />
@@ -130,11 +126,11 @@ const Contact = () => {
               required
             />
 
-            <label htmlFor="message">Mensaje</label>
+            <label htmlFor="comments">Mensaje</label>
             <textarea
-              id="message"
-              name="message"
-              value={formData.message}
+              id="comments"
+              name="comments"
+              value={formData.comments}
               onChange={handleChange}
             ></textarea>
 

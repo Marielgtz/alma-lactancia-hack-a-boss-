@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import Confirmation from "./pages/MsgConfirmation";
 import Prueba from "./components/prueba";
 import NotFoundPage from "./pages/NotFoundPage";
+import AdminPanel from "./pages/AdminPanel";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route path="/prueba" element={<Prueba />} />
+          <Route path="/panel-administracion" element={<AdminPanel />} />
         </Routes>
       </div>
     </Router>
