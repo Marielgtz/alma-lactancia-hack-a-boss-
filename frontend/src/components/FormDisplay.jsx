@@ -7,8 +7,6 @@ const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
         jsonNumber
     )
     if (!publishedForm?.fields) {
-        console.log(publishedForm);
-        <p>eooo</p>
         return <div>No hay datos para mostrar.</div>
     }
 
@@ -20,14 +18,29 @@ const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
                     <div key={index} style={{ marginBottom: '20px' }}>
                         <label>
                             {field.label}:
-                            <input
-                                type={field.type}
-                                name={field.label
-                                    .toLowerCase()
-                                    .replace(/\s+/g, '_')} // Para sustituir espacios en blanco por guiones bajos
-                                placeholder={field.label}
-                                required
-                            />
+                            {field.type === 'select' ? (
+                                <select
+                                    name={field.label
+                                        .toLowerCase()
+                                        .replace(/\s+/g, '_')}
+                                    required
+                                >
+                                    <option value=''>
+                                        Selecciona una opción
+                                    </option>
+                                    <option value='sí'>Sí</option>
+                                    <option value='no'>No</option>
+                                </select>
+                            ) : (
+                                <input
+                                    type={field.type}
+                                    name={field.label
+                                        .toLowerCase()
+                                        .replace(/\s+/g, '_')} // Para sustituir espacios en blanco por guiones bajos
+                                    placeholder={field.label}
+                                    required
+                                />
+                            )}
                         </label>
                     </div>
                 ))}
