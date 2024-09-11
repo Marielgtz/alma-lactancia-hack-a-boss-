@@ -7,6 +7,7 @@ const getPublishedForm = async (req, res, next) => {
         const filePath = path.join(
             'src',
             'assets',
+            'forms',
             `formPublished${jsonNumber}.json`
         )
         const data = await fs.readFile(filePath, 'utf8')

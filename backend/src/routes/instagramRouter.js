@@ -3,11 +3,13 @@ import {
     getInstagramPost,
     saveInstagramPost,
     unpublishInstagramPost,
+    getAllPosts,
 } from '../controllers/index.js'
 const router = express.Router()
 
 //Ruta para posts de Instagram:
 router.get('/get-instagram-post/:postNumber', getInstagramPost)
+router.get('/get-all-instagram-posts', getAllPosts)
 router.post('/save-instagram-post/:postNumber', saveInstagramPost)
 router.get('/unpublish-instagram-post/:postNumber', unpublishInstagramPost)
 

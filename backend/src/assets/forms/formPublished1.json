@@ -1,0 +1,14 @@
+{
+  "formName": "Reunión5",
+  "formId": "44ef50f5-ede2-4d2d-ad38-ae5b2036d1ae",
+  "fields": [
+    {
+      "label": "Palabra",
+      "type": "text"
+    },
+    {
+      "label": "Partner",
+      "type": "select"
+    }
+  ]
+}

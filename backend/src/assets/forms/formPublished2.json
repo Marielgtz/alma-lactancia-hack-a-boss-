@@ -1,0 +1,18 @@
+{
+  "formName": "Reunión4",
+  "formId": "eac93d61-6001-4867-b503-89aca82d2c38",
+  "fields": [
+    {
+      "label": "Nombre",
+      "type": "text"
+    },
+    {
+      "label": "Correo electrónico",
+      "type": "email"
+    },
+    {
+      "label": "Partner",
+      "type": "select"
+    }
+  ]
+}
