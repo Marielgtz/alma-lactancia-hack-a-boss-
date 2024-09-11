@@ -40,28 +40,38 @@ const EditForm = ({
                 </div>
 
                 <div>
-                    {fields?.map((field, index) => (
-                        <div key={field.id} style={{ marginBottom: '20px' }}>
-                            <input
-                                {...register(`fields[${index}].label`)}
-                                placeholder='Etiqueta del Campo'
-                                style={{ marginRight: '10px' }}
-                            />
-                            <select {...register(`fields[${index}].type`)}>
-                                <option value='text'>Texto</option>
-                                <option value='number'>Número</option>
-                                <option value='email'>Email</option>
-                                <option value='password'>Contraseña</option>
-                            </select>
-                            <button
-                                type='button'
-                                onClick={() => remove(index)}
-                                style={{ marginLeft: '10px' }}
-                            >
-                                Eliminar
-                            </button>
-                        </div>
-                    ))}
+                    {fields?.map(
+                        (field, index) =>
+                            field.label !== 'Partner' && (
+                                <div
+                                    key={field.id}
+                                    style={{ marginBottom: '20px' }}
+                                >
+                                    <input
+                                        {...register(`fields[${index}].label`)}
+                                        placeholder='Etiqueta del Campo'
+                                        style={{ marginRight: '10px' }}
+                                    />
+                                    <select
+                                        {...register(`fields[${index}].type`)}
+                                    >
+                                        <option value='text'>Texto</option>
+                                        <option value='number'>Número</option>
+                                        <option value='email'>Email</option>
+                                        <option value='password'>
+                                            Contraseña
+                                        </option>
+                                    </select>
+                                    <button
+                                        type='button'
+                                        onClick={() => remove(index)}
+                                        style={{ marginLeft: '10px' }}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </div>
+                            )
+                    )}
                 </div>
 
                 <button

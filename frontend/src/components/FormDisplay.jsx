@@ -25,9 +25,7 @@ const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
                                         .replace(/\s+/g, '_')}
                                     required
                                 >
-                                    <option value=''>
-                                        Selecciona una opción
-                                    </option>
+                                    <option value=''>¿Eres socio/a?</option>
                                     <option value='sí'>Sí</option>
                                     <option value='no'>No</option>
                                 </select>
