@@ -31,6 +31,12 @@ import saveExperience from './experiences/saveExperience.js'
 import getExperiences from './experiences/getExperiences.js'
 import getExperienceById from './experiences/getExperienceById.js'
 import updateExperience from './experiences/updateExperience.js'
+import getInstagramPost from './instagramPosts/getInstagramPost.js'
+import saveInstagramPost from './instagramPosts/saveInstagramPost.js'
+import unpublishInstagramPost from './instagramPosts/unpublishInstagramPost.js'
+import saveHomeData from './homeDataController/saveHomeData.js'
+import getHomeData from './homeDataController/getHomeData.js'
+import getAllPosts from './instagramPosts/getAllPosts.js'
 
 export {
     newPartner,
@@ -66,4 +72,10 @@ export {
     getExperiences,
     getExperienceById,
     updateExperience,
+    getInstagramPost,
+    saveInstagramPost,
+    unpublishInstagramPost,
+    saveHomeData,
+    getHomeData,
+    getAllPosts,
 }

@@ -13,6 +13,7 @@ import {
     captcha,
     forms,
     experiences,
+    instagram,
 } from './src/routes/index.js'
 import { notFound, manageError } from './src/middlewares/index.js'
 
@@ -44,6 +45,7 @@ app.use(contact)
 app.use(captcha)
 app.use(forms)
 app.use(experiences)
+app.use(instagram)
 
 //Middlewares
 app.use(notFound)

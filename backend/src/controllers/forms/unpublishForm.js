@@ -8,6 +8,7 @@ const unpublishForm = async (req, res, next) => {
         const filePath = path.join(
             'src',
             'assets',
+            'forms',
             `formPublished${jsonNumber}.json`
         )
 

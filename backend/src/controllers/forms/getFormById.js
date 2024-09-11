@@ -38,6 +38,7 @@ const getFormById = async (req, res, next) => {
             const filePath = path.join(
                 'src',
                 'assets',
+                'forms',
                 `formPublished${jsonNumber}.json`
             )
             await fs.writeFile(filePath, JSON.stringify(dataToSend, null, 2))
