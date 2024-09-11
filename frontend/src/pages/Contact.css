@@ -247,7 +247,7 @@ textarea {
 
   .contact-page .captcha-main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .contact-page .captcha-img {
@@ -259,20 +259,25 @@ textarea {
   .contact-page .captcha-input {
     width: 8.5rem;
     margin-left: 4rem;
-    padding: 0.5rem;
     font-family: outfit;
+    height: 2rem;
   }
 
   .contact-page .captcha-button {
-    margin-top: 1rem;
-    margin-left: 4.2rem;
     border: none;
-    width: 8rem;
+    width: 5rem;
     cursor: pointer;
     font-size: 0.8rem;
     font-family: outfit;
     padding: 0;
     height: 2rem;
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+  }
+
+  .contact-page .validation-msg {
+    margin-left: 4.5rem;
+    font-size: 0.8rem;
   }
 
   .contact-info {
@@ -290,7 +295,7 @@ textarea {
   }
 
   .contact-button {
-    margin-left: 4rem;
+    margin-left: 4.5rem;
     margin-bottom: 2rem;
   }
 

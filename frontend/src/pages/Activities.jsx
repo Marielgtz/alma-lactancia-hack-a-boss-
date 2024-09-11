@@ -57,53 +57,6 @@ const Activities = () => {
                     </p>
                 </div>
 
-                <ol className='activity-container'>
-                    {filteredActivities.length > 0 ? (
-                        filteredActivities.map((activity, index) => (
-                            <li key={index} className='activity-cards'>
-                                <div className='activity-content'>
-                                    <div className='activity-image'>
-                                        {activity.image ? (
-                                            <img
-                                                src={activity.image}
-                                                alt={activity.summary}
-                                            />
-                                        ) : (
-                                            <img
-                                                src={silueta}
-                                                alt='Imagen predeterminada'
-                                            />
-                                        )}
-                                    </div>
-                                    <h1 className='activities-title'>
-                                        {activity.summary || 'Título'}
-                                    </h1>
-                                    <p className='activities-description'>
-                                        {activity.description || 'Descripción'}
-                                    </p>
-                                    <p className='activities-date'>
-                                        {activity.dateISO || 'Fecha'}
-                                    </p>
-                                    <p className='activities-location'>
-                                        {activity.location ||
-                                            'Lugar por definir'}
-                                    </p>
-                                    <button
-                                        className='upcoming-history'
-                                        onClick={() => navigate('/historico')}
-                                    >
-                                        Histórico
-                                    </button>
-                                </div>
-                            </li>
-                        ))
-                    ) : (
-                        <h1 className='no-activities-found'>
-                            {notFoundMessage}
-                        </h1>
-                    )}
-                </ol>
-
                 <ActivityFilter
                     activities={activities}
                     setFilteredActivites={setFilteredActivites}

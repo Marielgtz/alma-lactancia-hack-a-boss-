@@ -55,15 +55,6 @@ function ActivityFilter({ activities, setFilteredActivites }) {
       });
     }
 
-    // if (locationFilter) {
-    //   updatedActivities = updatedActivities.filter(activity => {
-    //     // console.log(activity);
-    //     if (activity.location){
-    //       return activity.location.toLowerCase().search(locationFilter) !== -1
-    //     }
-    //   })
-    // }
-
     //* LÓGICA DE COMPARACIÓN DE FECHAS
     if (eventDateStart) {
       updatedActivities = updatedActivities.filter(activity => {
