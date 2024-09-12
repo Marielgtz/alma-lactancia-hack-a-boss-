@@ -7,7 +7,38 @@ const InstagramForm = ({ setInstagramPost }) => {
     const handlePostNumberChange = (e) => {
         setPostNumber(e.target.value)
     }
+    const handleDeletePost = async (e) => {
+        e.preventDefault()
+        const confirm = window.confirm(
+            `Estás a punto de borrar la publicación ${postNumber}, ¿quieres continuar?`
+        )
+        if (!confirm) return
+        const url = `${
+            import.meta.env.VITE_API_URL
+        }/unpublish-instagram-post/${postNumber}`
 
+        try {
+            const response = await fetch(url, {
+                method: 'DELETE',
+            })
+
+            if (response.ok) {
+                const res = await response.json()
+                console.log(res.message)
+                setInstagramPost((prevData) => {
+                    const newData = [...prevData]
+                    newData[Number(postNumber) - 1] = {}
+                    return newData
+                })
+            } else {
+                const errorData = await response.json()
+                const errorMessage = errorData.error || response.statusText
+                throw new Error(errorMessage)
+            }
+        } catch (error) {
+            console.error('Ha ocurrido un error:', error)
+        }
+    }
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -26,7 +57,7 @@ const InstagramForm = ({ setInstagramPost }) => {
 
             if (response.ok) {
                 const res = await response.json()
-                console.log('Mensaje del servidor:', res.message)
+                console.log(res.message)
             } else {
                 const errorData = await response.json()
                 const errorMessage = errorData.error || response.statusText
@@ -69,6 +100,7 @@ const InstagramForm = ({ setInstagramPost }) => {
                 <option value='6'>Publicación 6</option>
             </select>
             <button type='submit'>Compartir publicación</button>
+            <button onClick={handleDeletePost}>Borrar publicación</button>
         </form>
     )
 }
