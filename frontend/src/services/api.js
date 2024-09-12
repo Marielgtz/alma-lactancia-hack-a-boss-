@@ -112,13 +112,17 @@ export const getCalendarEventService = async (eventId) => {
 export const deleteCalendarEventService = async (eventId) => {
   try {
     const response = await fetch(
-      `${API_BASE_URL}/delete-calendar-event/${eventId}`,
+      `${API_BASE_URL}/delete-calendar-event/${eventId}/true`,
       {
         method: "DELETE",
       }
     );
 
-    return handleResponse(response);
+    console.log('Fetch realizado');
+    
+    const responseFinal = await response.json()
+
+    return responseFinal
   } catch (error) {
     console.error("Error deleting calendar event:", error);
     throw error;
