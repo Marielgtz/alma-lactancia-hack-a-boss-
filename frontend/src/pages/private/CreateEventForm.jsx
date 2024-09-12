@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { createEvent } from '../../services/calendar';
+import { updateCalendarEventService } from '../../services/api';
 
-export default function EventForm({prevData}) {
+export default function EventForm({prevData, eventAction}) {
 
   // Plantilla del formulario de creación en blanco
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ export default function EventForm({prevData}) {
     }));
   };
 
-  const submitNewEvent = (e) => {
+  const submitNewEvent = async (e) => {
     e.preventDefault(); 
 
     const requestBody = {
@@ -60,8 +61,17 @@ export default function EventForm({prevData}) {
       access: formData.access
     };
 
-    console.log("Event data:", requestBody);
-    createEvent(requestBody);
+    console.log("Event data submitted:", eventAction, requestBody);
+
+    if (eventAction === "create") {
+      createEvent(requestBody);
+    } else if (eventAction === "update") {
+      console.log("Actualizando...");
+      const response = await updateCalendarEventService('1vgu1siv9d8srf1sc97n582mv4', requestBody)
+      console.log(response);
+      location.reload()
+      
+    }
     };
 
   return (
@@ -132,7 +142,13 @@ export default function EventForm({prevData}) {
         <option value="free">Free</option>
       </select>
 
-      <button type="submit">Crear evento de prueba</button>
+      <br />
+      <br />
+      {
+        eventAction === "create" 
+        ?( <button type="submit">Crear evento</button>)
+        :( <button type="submit">Modificar evento</button>)
+      }
     </form>
     </details>
   );

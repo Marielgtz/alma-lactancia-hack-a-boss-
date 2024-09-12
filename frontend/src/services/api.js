@@ -118,7 +118,7 @@ export const deleteCalendarEventService = async (eventId) => {
       }
     );
 
-    console.log('Fetch realizado');
+    // console.log('Fetch realizado');
     
     const responseFinal = await response.json()
 
@@ -142,7 +142,8 @@ export const updateCalendarEventService = async (eventId, eventData) => {
       }
     );
 
-    return handleResponse(response);
+    const responseFinal = await response.json()
+    return responseFinal
   } catch (error) {
     console.error("Error updating calendar event:", error);
     throw error;
