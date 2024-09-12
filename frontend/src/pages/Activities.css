@@ -1,0 +1,215 @@
+.activity-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.activity-page .navbar {
+  background-color: #b380b5;
+  height: 10rem;
+  position: relative;
+}
+
+.activity-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffeee7;
+  position: relative;
+}
+
+.activity-header {
+  padding-bottom: 20px;
+}
+
+.activity-title {
+  font-family: outfit;
+  color: #b380b5;
+  margin-left: 5rem;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.activity-text {
+  font-family: outfit;
+  color: #b380b5;
+  margin-left: 5rem;
+  font-size: 1.1rem;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.activity-description {
+  font-family: bellota;
+  margin-left: 5rem;
+  margin-right: 6rem;
+  color: #b380b5;
+  font-weight: bold;
+}
+
+.upcoming-history {
+  position: absolute;
+  right: 6rem;
+  top: 2.9rem;
+  background-color: #d8e2dc;
+  border: none;
+  color: #b380b5;
+  cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: 18rem;
+  height: 2.5rem;
+  font-family: outfit;
+}
+
+.upcoming-history:hover {
+  background-color: #b380b5;
+  color: white;
+}
+
+.activity-container {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.activity-cards {
+  display: flex;
+  flex: 1 1 30%;
+  margin: 1rem;
+  padding: 0;
+  max-width: 20rem;
+  max-height: 40rem;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #d8e2dc;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+}
+
+.activity-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.activity-image {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.activity-image img {
+  width: 100%;
+  height: 200px; /* Ajusta la altura según sea necesario */
+  object-fit: cover;
+  display: block; /* Asegura que la imagen no tenga espacios alrededor */
+}
+
+.activities-title {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  font-family: outfit;
+  color: #b380b5;
+}
+
+.activities-date,
+.activities-location {
+  padding: 0 1rem;
+  text-align: center;
+  font-family: bellota;
+  font-weight: bold;
+  margin: 1;
+}
+
+.activities-decription {
+  flex-grow: 1; /* Permite que el contenido crezca */
+  text-align: center;
+  font-family: bellota;
+  font-weight: bold;
+  color: #b380b5;
+  padding: 0 1rem;
+  overflow-y: auto; /* Habilita el scroll vertical si es necesario */
+  max-height: 100px; /* Ajusta según la cantidad de contenido que desees mostrar sin scroll */
+}
+
+.activities-inscription {
+  margin: 1rem;
+  background-color: #d8e2dc;
+  border: solid 1px;
+  color: #b380b5;
+  cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.1rem 2rem;
+  font-family: outfit;
+}
+
+.activities-inscription:hover {
+  background-color: #b380b5;
+  border: solid 1px #b380b5;
+  color: white;
+}
+
+.no-activities-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: outfit;
+  height: 25vh;
+  text-align: center;
+  font-size: 24px;
+  color: #b380b5;
+  margin: 0;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .activity-page .navbar {
+    background-color: #b380b5;
+    height: 6.5rem;
+  }
+
+  .activity-title {
+    margin-bottom: 2rem;
+    justify-content: center;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .activity-text {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .activity-description {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    text-align: center;
+  }
+
+  .upcoming-history {
+    display: none;
+  }
+
+  .activity-cards {
+    flex: 1 1 100%;
+    margin: 0.5rem;
+  }
+
+  .activity-container {
+    justify-content: center;
+  }
+}

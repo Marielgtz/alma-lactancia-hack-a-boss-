@@ -1,0 +1,83 @@
+.settings-content {
+  width: 75%;
+  background-color: #fdeee7;
+  padding: 1rem;
+  margin-top: 3rem;
+  border-radius: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  margin-left: 4rem;
+  margin-bottom: 2rem;
+}
+
+.logo-image {
+  max-width: 15rem;
+  margin-bottom: 1rem;
+  background-color: #ddd;
+}
+
+.logo-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.logo-buttons button {
+  padding: 10px;
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.logo-buttons button:hover {
+  background-color: #ddd;
+}
+
+.social-links-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.social-links-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: black;
+}
+
+.social-links-form input {
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  font-size: 14px;
+  background-color: white;
+  border: none;
+  margin-left: 0;
+}
+
+.social-links-form button {
+  padding: 10px;
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+.social-links-form button:hover {
+  background-color: #ddd;
+}
