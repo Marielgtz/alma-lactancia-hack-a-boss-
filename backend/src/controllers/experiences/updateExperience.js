@@ -1,4 +1,6 @@
 import { getRowsData, updateRow } from '../../googleapis/methods/index.js'
+import fs from 'fs/promises'
+import path from 'path'
 import {
     generateError,
     validationUpdateExperiences,
@@ -50,6 +52,17 @@ const updateExperience = async (req, res, next) => {
         )
         const { rowToUpdate } = data
         await updateRow(rowToUpdate)
+
+        //Borrar imagen antigua si existe nueva:
+        if (image !== experienceFromBack[2]) {
+            const imagePath = path.join(
+                'src',
+                'assets',
+                'images',
+                experienceFromBack[2]
+            )
+            await fs.unlink(imagePath)
+        }
 
         res.status(200).json({
             message: 'Formulario y hoja de respuestas, actualizados',
