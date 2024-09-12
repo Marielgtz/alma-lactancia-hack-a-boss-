@@ -11,6 +11,6 @@ const router = express.Router()
 router.get('/get-instagram-post/:postNumber', getInstagramPost)
 router.get('/get-all-instagram-posts', getAllPosts)
 router.post('/save-instagram-post/:postNumber', saveInstagramPost)
-router.get('/unpublish-instagram-post/:postNumber', unpublishInstagramPost)
+router.delete('/unpublish-instagram-post/:postNumber', unpublishInstagramPost)
 
 export default router

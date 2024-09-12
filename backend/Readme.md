@@ -13,42 +13,6 @@ The project involves developing a website for "Alma Lactancia," a non-profit org
 
 **Nota importante: Debido al sistema de inserción de datos en las hojas de cálculo de la API de Google es muy importante que los campos en los objetos json se envíen en el mismo orden que aquí se indica.**
 
-**Partners**
-
-Route to register a new member:
-Method: post,
-Path: `/newPartner`
-Required fields (in JSON format):
-
--   nome
--   apelidos
--   enderezo
--   cp
--   cidade
--   provincia
--   telefono
--   correo_electronico
-
-    _All fields are required._
-
-Method: patch,
-Path: `/update-partner`
-Required fields (in JSON format):
-
--   nome
--   apelidos
--   enderezo
--   cp
--   cidade
--   provincia
--   telefono
--   correo_electronico
-
-    _All fields are optional._
-
-Method: delete,
-Path: `/delete-partner`
-
 **Activities**
 Path to create activities:
 Method: post,
@@ -80,20 +44,6 @@ Required fields (in JSON format):
 -   visibility: "private", (Visibilidad del evento, puede ser 'default', 'public' o 'private') <font color="red">(Required)</font>
 -   access: "partners" (Acceso, en este caso para 'socios', puede ser 'partners' o 'free') <font color="red">(Required)</font>
 
-Path to add a partner to an activity:
-Method: post,
-Path: `/join-partner-activity`
-Required fields (in JSON format):
-
--   socio (¿Eres socia de Alma este año? Sí o No) Enviar booleano.
--   nome_nai (Nombre completo de la madre)
--   nome_bebe
--   data_nacemento (fecha de nacimiento del bebé o FPP (fecha probable del parto), formato día/mes/año)
--   centro_saude (Centro de salud del bebé)
--   telefono
--   correo_electronico
--   outros (Temas de interés que te gustaría tratar)
-
     _All fields are required._
 
 Path to get activities by filter params:
@@ -111,20 +61,6 @@ Required fields (in JSON format):
 -   access
 
     _All fields are optional._
-
-Path to add a partner or a non-partner to an free activity:
-Method: post,
-Path: `/join-non-partner-activity`
-Required fields (in JSON format):
-
--   asistencia ( Vendrás a la charla acompañada? Sí o no) Enviar booleano.
--   nome_nai (Nombre completo de la madre)
--   fpp (fecha probable del parto) formato: día/mes/año
--   centro_saude (Centro de salud del bebé)
--   telefono
--   correo_electronico
-
-    _All fields are required._
 
 **Forms**
 Path to create an dinamic form:
@@ -180,6 +116,22 @@ Required fields (in JSON format):
 Method: delete,
 Path: `/delete-collaborator/:id/:team` (En team habrá que enviar "true" si es miembro o "false" si es colaborador)
 Required fields from params.
+
+**Home data**
+
+Route to update home data:
+Method: patch,
+Path: `/update-home-data`
+Required fields (in JSON format):
+
+-   home: {sectionText, imageHome,titleHome} <font color="red">(Required)</font>
+-   generalSettings:{logo,linkInstagram,linkFacebok,email} <font color="red">(Required)</font>
+-   images: (send in formData object)
+    _All JSON fields are optional._
+
+Route to get home data:
+Method: get,
+Get: `/get-home-data`
 
 **Calendar events**
 
