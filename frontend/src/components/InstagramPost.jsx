@@ -40,7 +40,7 @@ const InstagramPost = ({ instagramPost, postNumber }) => {
                     }}
                 />
             ) : (
-                <p>No se encontró el post.</p>
+                <p>{`No se encontró el post ${postNumber}`}</p>
             )}
         </div>
     )
