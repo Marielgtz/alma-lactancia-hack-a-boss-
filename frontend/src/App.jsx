@@ -10,11 +10,16 @@ import Contact from "./pages/Contact";
 import Confirmation from "./pages/MsgConfirmation";
 import Prueba from "./components/prueba";
 import NotFoundPage from "./pages/NotFoundPage";
-import AdminDashboard from "./pages/private/Admin";
+import AdminHome from "./components/private/AdminHome";
+import AdminAbout from "./components/private/AdminAbout";
+import AdminActivities from "./components/private/AdminActivities";
+import AdminHistorical from "./components/private/AdminHistorical";
+import AdminLibrary from "./components/private/AdminLibrary";
 import Layout from "./pages/private/Layout";
+import AdminGeneral from "./components/private/AdminGeneral";
+import AdminDashboard from "./pages/private/AdminDashboard";
 
 function App() {
-
   return (
     <Router>
       <div className="App">
@@ -29,22 +34,24 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route path="/prueba" element={<Prueba />} />
+
           {/* Rutas del DASHBOARD */}
-          <Route path="/dashboard" element={<Layout />}> {/* Esto sería el layout */}
-            <Route index element={<AdminDashboard />} /> {/* Al escribir /dashboard se pintará el elemento INDEX */}
-            <Route path="general" element={<Prueba />} />
-            <Route path="activities" element={<AdminDashboard />} />
-            <Route path="home" element={<Prueba />} />
-            <Route path="about" element={<Prueba />} />
-            <Route path="history" element={<Prueba />} />
+          <Route path="/dashboard" element={<Layout />}>
+            {" "}
+            {/* Esto sería el layout */}
+            <Route index element={<AdminDashboard />} />{" "}
+            {/* Al escribir /dashboard se pintará el elemento INDEX */}
+            <Route path="/dashboard/general" element={<AdminGeneral />} />
+            <Route path="/dashboard/inicio" element={<AdminHome />} />
+            <Route path="dashboard/quienes-somos" element={<AdminAbout />} />
+            <Route path="/dashboard/actividades" element={<AdminActivities />} />
+            <Route path="/dashboard/historico" element={<AdminHistorical />} />
+            <Route path="dashboard/biblioteca" element={<AdminLibrary />} />
           </Route>
-          
-      </Routes>
+        </Routes>
       </div>
     </Router>
   );
-
-
 }
 
-export default App
+export default App;

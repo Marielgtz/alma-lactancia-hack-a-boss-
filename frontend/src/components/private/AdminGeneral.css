@@ -1,69 +1,12 @@
-.admin-panel {
-  display: flex;
-  min-height: 100vh;
-  background-color: white;
-}
-
-.sidebar {
-  width: 25%;
-  background-color: #fdeee7;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar-btn {
-  background-color: white;
-  border: none;
-  color: #b380b5;
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  width: 100%;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-  font-family: outfit;
-  font-weight: bold;
-}
-
-.sidebar-btn:hover {
-  background-color: #b380b5;
-  color: white;
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.logout-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #b380b5;
-}
-
-.back-to-site-link {
-  color: #b380b5;
-  text-decoration: none;
-}
-
-.back-to-site-link:hover {
-  text-decoration: underline;
-}
-
 .settings-content {
   width: 75%;
   background-color: #fdeee7;
   padding: 1rem;
+  margin-top: 3rem;
+  border-radius: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 }
 
 h3 {
@@ -74,7 +17,7 @@ h3 {
 .logo-section {
   display: flex;
   flex-direction: column;
-  margin-left: 5rem;
+  margin-left: 4rem;
   margin-bottom: 2rem;
 }
 
