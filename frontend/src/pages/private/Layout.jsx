@@ -1,10 +1,14 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import AdminDashboard from "./AdminDashboard";
 
-function Layout() {
+const Layout = () => {
   return (
-    <Outlet />
-  )
-}
+    <div>
+      <AdminDashboard /> {/* Aquí se renderiza el sidebar */}
+      <Outlet /> {/* Aquí se renderizan las rutas hijas */}
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;

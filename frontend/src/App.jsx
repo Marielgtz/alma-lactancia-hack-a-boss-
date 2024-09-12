@@ -41,12 +41,12 @@ function App() {
             {/* Esto sería el layout */}
             <Route index element={<AdminDashboard />} />{" "}
             {/* Al escribir /dashboard se pintará el elemento INDEX */}
-            <Route path="/dashboard/general" element={<AdminGeneral />} />
-            <Route path="/dashboard/inicio" element={<AdminHome />} />
-            <Route path="dashboard/quienes-somos" element={<AdminAbout />} />
-            <Route path="/dashboard/actividades" element={<AdminActivities />} />
-            <Route path="/dashboard/historico" element={<AdminHistorical />} />
-            <Route path="dashboard/biblioteca" element={<AdminLibrary />} />
+            <Route path="general" element={<AdminGeneral />} />
+            <Route path="inicio" element={<AdminHome />} />
+            <Route path="quienes-somos" element={<AdminAbout />} />
+            <Route path="actividades" element={<AdminActivities />} />
+            <Route path="historico" element={<AdminHistorical />} />
+            <Route path="biblioteca" element={<AdminLibrary />} />
           </Route>
         </Routes>
       </div>
