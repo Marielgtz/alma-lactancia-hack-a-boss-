@@ -1,0 +1,13 @@
+ol {
+    max-width: 80%;
+}
+.admin-list {
+    list-style-type: none;
+    display: grid;
+    gap: 1rem;
+
+    grid-template-columns: 1fr 1fr 1fr 100px 100px;
+
+    /* align-items: center;
+    justify-content: space-between */
+}

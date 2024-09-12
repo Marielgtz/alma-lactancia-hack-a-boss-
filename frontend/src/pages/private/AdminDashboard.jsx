@@ -69,8 +69,8 @@ const AdminDashboard = () => {
               className="sidebar-btn"
               onClick={() =>
                 handleTabChange(
-                  "proximas-actividades",
-                  "/dashboard/proximas-actividades"
+                  "actividades",
+                  "/dashboard/actividades"
                 )
               }
             >
