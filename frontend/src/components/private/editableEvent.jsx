@@ -3,10 +3,15 @@ import { deleteCalendarEventService, getCalendarEvents } from '../../services/ap
 
 function EditableEvent({eventData}) {
     async function handleDelete(){
-    console.log(eventData.id);
+    console.log("Eliminando evento...", {
+      título: eventData.summary,
+      lugar: eventData.location,
+      fecha: eventData.start.dateTime
+    });
     
        const response = await deleteCalendarEventService(eventData.id);
        console.log(response);
+       location.reload();
     }
 
     async function handleUpdate() {

@@ -12,6 +12,7 @@ const AdminActivities = () => {
   useEffect(() => {
     async function getEvents() {
       const calendarEvents = await getCalendarEvents();
+      console.log(calendarEvents);
       setEventsList(calendarEvents)
     }
 
@@ -23,7 +24,7 @@ const AdminActivities = () => {
     <div>
       <h1>Actividades del administrador</h1>
       {/* Contenido de las actividades aquí */}
-      <EventForm />
+      <EventForm eventAction={"update"}/>
 
       <details>
             <summary>Lista de eventos</summary>
