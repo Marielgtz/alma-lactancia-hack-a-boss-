@@ -7,7 +7,7 @@ const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
         jsonNumber
     )
     if (!publishedForm?.fields) {
-        return <div>No hay datos para mostrar.</div>
+        return <div>{`Publica un formulario en la ranura: ${jsonNumber}`}</div>
     }
 
     return (
