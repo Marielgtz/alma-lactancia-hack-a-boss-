@@ -12,7 +12,7 @@ const ButtonUp = () => {
 
     const handleScroll = () => {
       const y = window.scrollY;
-      console.log(y);
+      // console.log(y);
       if (y >= 50) {
         $btnUp.classList.remove("hide");
         $btnUp.classList.add("active");

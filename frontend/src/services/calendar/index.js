@@ -1,3 +1,9 @@
+//* Fetch para borrar eventos
+export async function deleteEvent(requestBody) {
+  console.log(requestBody);
+  
+}
+
 //* Fetch para crear eventos
 export async function createEvent(requestBody) {
   console.log(requestBody);
@@ -83,4 +89,4 @@ export async function modifyEvent(newEventData) {
   //       visibility: "public", 
   //       access: "partners" 
   //     }
-      
+  
