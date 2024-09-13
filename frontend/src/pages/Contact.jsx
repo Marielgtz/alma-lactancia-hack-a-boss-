@@ -4,9 +4,12 @@ import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
 import silueta from "../images/IlustracionLactancia.png";
 import { useNavigate } from "react-router-dom";
+import useContactInfo from "../hooks/useContactInfo";
+impo
 import "./Contact.css";
 
 const Contact = () => {
+  const contactInfo = useContactInfo();
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -62,6 +65,10 @@ const Contact = () => {
       alert("Hubo un problema al enviar el mensaje. Inténtalo de nuevo.");
     }
   };
+
+  const instagramLink = contactInfo?.linkInstagram || '';
+  const facebookLink = contactInfo?.linkFacebok || '';
+  const email = contactInfo?.email || '';
 
   return (
     <div className="contact-page">
@@ -145,13 +152,19 @@ const Contact = () => {
             <p>ALMA a través de cualquiera de los</p>
             <p>siguientes medios:</p>
             <p>
-              <i className="fas fa-envelope"></i> almalactancia@gmail.com
+              <a href={email} className="contact-info-icon">
+                <i className="fas fa-envelope"></i> almalactancia@gmail.com
+              </a>
             </p>
             <p>
-              <i className="fab fa-instagram"></i> alma_lactancia
+              <a href={instagramLink} className="contact-info-icon" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-instagram"></i> alma_lactancia
+              </a>
             </p>
             <p>
-              <i className="fab fa-facebook"></i> /AlmaLactanciaMaterna
+              <a href={facebookLink} className="contact-info-icon" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-facebook"></i> /AlmaLactanciaMaterna
+              </a>
             </p>
             <img src={silueta} />
           </div>

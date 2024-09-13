@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import useContactInfo from "../hooks/useContactInfo";
 import logo from "../images/logo-alma.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 const Header = () => {
+  const contactInfo = useContactInfo();
+
   const [activeIndex, setActiveIndex] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -17,6 +20,10 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
+
+  const instagramLink = contactInfo?.linkInstagram || '#';
+  const facebookLink = contactInfo?.linkFacebok || '#';
+
   return (
     <header>
       <nav className="navbar">
@@ -26,7 +33,7 @@ const Header = () => {
         </div>
         <div className={`social-media ${menuOpen ? "active" : ""}`}>
           <a
-            href="https://www.instagram.com/alma_lactancia/"
+            href={instagramLink}
             target="_blank"
             rel="noopener noreferrer"
             className="social-media-item"
@@ -34,7 +41,7 @@ const Header = () => {
             <FontAwesomeIcon icon={faInstagram} size="2x" />
           </a>
           <a
-            href="https://www.facebook.com/AlmaLactanciaMaterna/?locale=es_ES"
+            href={facebookLink}
             target="_blank"
             rel="noopener noreferrer"
             className="social-media-item"
