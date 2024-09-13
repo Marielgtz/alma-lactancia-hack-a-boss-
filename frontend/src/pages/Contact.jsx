@@ -5,7 +5,6 @@ import Captcha from "../components/Captcha";
 import silueta from "../images/IlustracionLactancia.png";
 import { useNavigate } from "react-router-dom";
 import useContactInfo from "../hooks/useContactInfo";
-impo
 import "./Contact.css";
 
 const Contact = () => {
