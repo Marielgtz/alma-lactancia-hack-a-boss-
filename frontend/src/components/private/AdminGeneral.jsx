@@ -100,7 +100,6 @@ const AdminGeneral = () => {
         <h3>Logotipo</h3>
         <img src={file ? URL.createObjectURL(file) : logo} alt="Logo" className="logo-image" />
         <div className="logo-buttons">
-          <button onClick={() => setFile(null)}>Eliminar</button>
           <input type="file" onChange={handleFileChange} />
           <button onClick={() => validateAndUpdateField('logo', file)}>Actualizar Logotipo</button>
         </div>
