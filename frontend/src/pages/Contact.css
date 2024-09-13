@@ -154,9 +154,14 @@ textarea {
   align-items: center;
 }
 
-.contact-info i {
+.contact-info a {
   margin-right: 0.5rem;
   color: #b380b5;
+}
+
+.contact-info-icon {
+  text-decoration: none; 
+  color: inherit; 
 }
 
 .contact-info img {

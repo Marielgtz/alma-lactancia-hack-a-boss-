@@ -3,16 +3,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import logo from "../images/logo-alma.png";
 import { Link } from "react-router-dom";
+import useContactInfo from "../hooks/useContactInfo";
 import "./Footer.css";
 
 const Footer = () => {
   const backURL = import.meta.env.VITE_API_URL;
   const clientId = import.meta.env.VITE_CLIENT_ID;
   const googleURL = import.meta.env.VITE_GOOGLE_URL;
+  const contactInfo = useContactInfo();
 
   const handleLogin = () => {
     window.location.href = `${googleURL}?client_id=${clientId}&redirect_uri=${backURL}/auth/callback&response_type=code&scope=email%20profile`;
   };
+
+  const instagramLink = contactInfo?.linkInstagram || '#';
+  const facebookLink = contactInfo?.linkFacebok || '#';
 
   return (
     <footer className="App-footer">
@@ -65,14 +70,14 @@ const Footer = () => {
           <h3>Síguenos :)</h3>
           <div className="social-media">
             <a
-              href="https://www.instagram.com/alma_lactancia/"
+              href={instagramLink}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FontAwesomeIcon icon={faInstagram} size="2x" />
             </a>
             <a
-              href="https://www.facebook.com/AlmaLactanciaMaterna/?locale=es_ES"
+              href={facebookLink}
               target="_blank"
               rel="noopener noreferrer"
             >
