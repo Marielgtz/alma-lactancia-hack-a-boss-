@@ -7,19 +7,19 @@ const useDynamicTitle = () => {
   const location = useLocation();
   switch (location.pathname) {
     case "/dashboard/general":
-      return "ajustes-generales";
+      return "AJUSTES GENERALES";
     case "/dashboard/inicio":
-      return "inicio";
+      return "INICIO";
     case "/dashboard/quienes-somos":
-      return "quienes-somos";
+      return "QUIÉNES SOMOS";
     case "/dashboard/proximas-actividades":
-      return "proximas-actividades";
+      return "PRÓXIMAS ACTIVIDADES";
     case "/dashboard/historico":
-      return "historico";
+      return "HISTÓRICO";
     case "/dashboard/biblioteca":
-      return "biblioteca";
+      return "BIBLIOTECA";
     default:
-      return "ajustes-generales";
+      return "AJUSTES GENERALES";
   }
 };
 
@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   const activeTab = useDynamicTitle();
 
   const handleTabChange = (path) => {
-    navigate(path);
+    navigate(`/dashboard/${path}`);
   };
 
   return (
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
           <li>
             <button
               className="sidebar-btn"
-              onClick={() => handleTabChange("general", "/dashboard/general")}
+              onClick={() => handleTabChange("general")}
             >
               AJUSTES GENERALES
             </button>
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
           <li>
             <button
               className="sidebar-btn"
-              onClick={() => handleTabChange("inicio", "/dashboard/inicio")}
+              onClick={() => handleTabChange("inicio")}
             >
               INICIO
             </button>
@@ -57,22 +57,15 @@ const AdminDashboard = () => {
           <li>
             <button
               className="sidebar-btn"
-              onClick={() =>
-                handleTabChange("quienes-somos", "/dashboard/quienes-somos")
-              }
+              onClick={() => handleTabChange("quienes-somos")}
             >
-              ¿QUIÉNES SOMOS?
+              QUIÉNES SOMOS
             </button>
           </li>
           <li>
             <button
               className="sidebar-btn"
-              onClick={() =>
-                handleTabChange(
-                  "actividades",
-                  "/dashboard/actividades"
-                )
-              }
+              onClick={() => handleTabChange("proximas-actividades")}
             >
               PRÓXIMAS ACTIVIDADES
             </button>
@@ -80,9 +73,7 @@ const AdminDashboard = () => {
           <li>
             <button
               className="sidebar-btn"
-              onClick={() =>
-                handleTabChange("historico", "/dashboard/historico")
-              }
+              onClick={() => handleTabChange("historico")}
             >
               HISTÓRICO
             </button>
@@ -90,9 +81,7 @@ const AdminDashboard = () => {
           <li>
             <button
               className="sidebar-btn"
-              onClick={() =>
-                handleTabChange("biblioteca", "/dashboard/biblioteca")
-              }
+              onClick={() => handleTabChange("biblioteca")}
             >
               BIBLIOTECA
             </button>
@@ -106,11 +95,6 @@ const AdminDashboard = () => {
           </a>
         </div>
       </aside>
-
-      {/* Aquí se renderizará el contenido de las rutas hijas */}
-      <div className="admin-content">
-        <Outlet />
-      </div>
     </div>
   );
 };

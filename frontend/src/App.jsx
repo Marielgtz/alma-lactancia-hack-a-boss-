@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"; // Asegúrate de importar Navigate
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Activities from "./pages/Activities";
@@ -17,7 +17,7 @@ import AdminHistorical from "./components/private/AdminHistorical";
 import AdminLibrary from "./components/private/AdminLibrary";
 import Layout from "./pages/private/Layout";
 import AdminGeneral from "./components/private/AdminGeneral";
-import AdminDashboard from "./pages/private/AdminDashboard";
+//import AdminDashboard from "./pages/private/AdminDashboard";
 
 function App() {
   return (
@@ -37,16 +37,13 @@ function App() {
 
           {/* Rutas del DASHBOARD */}
           <Route path="/dashboard" element={<Layout />}>
-            {" "}
-            {/* Esto sería el layout */}
-            <Route index element={<AdminDashboard />} />{" "}
-            {/* Al escribir /dashboard se pintará el elemento INDEX */}
-            <Route path="/dashboard/general" element={<AdminGeneral />} />
-            <Route path="/dashboard/inicio" element={<AdminHome />} />
-            <Route path="dashboard/quienes-somos" element={<AdminAbout />} />
-            <Route path="/dashboard/actividades" element={<AdminActivities />} />
-            <Route path="/dashboard/historico" element={<AdminHistorical />} />
-            <Route path="dashboard/biblioteca" element={<AdminLibrary />} />
+            {/* Redireccionar a 'general' cuando se accede a /dashboard */}
+            <Route path="general" element={<AdminGeneral />} />
+            <Route path="inicio" element={<AdminHome />} />
+            <Route path="quienes-somos" element={<AdminAbout />} />
+            <Route path="actividades" element={<AdminActivities />} />
+            <Route path="historico" element={<AdminHistorical />} />
+            <Route path="biblioteca" element={<AdminLibrary />} />
           </Route>
         </Routes>
       </div>
