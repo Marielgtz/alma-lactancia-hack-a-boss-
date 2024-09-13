@@ -1,12 +1,12 @@
 .settings-content {
-  width: 75%;
+  width: 75vw;
+  height: 87.5vh;
   background-color: #fdeee7;
   padding: 1rem;
   margin-top: 3rem;
   border-radius: 1.5rem;
   margin-left: 1rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
 }
 
 h3 {
@@ -17,7 +17,7 @@ h3 {
 .logo-section {
   display: flex;
   flex-direction: column;
-  margin-left: 4rem;
+  margin-left: 5rem;
   margin-bottom: 2rem;
 }
 

@@ -95,11 +95,6 @@ const AdminDashboard = () => {
           </a>
         </div>
       </aside>
-
-      {/* Aquí se renderizará el contenido de las rutas hijas */}
-      <div className="admin-content">
-        <Outlet />
-      </div>
     </div>
   );
 };
