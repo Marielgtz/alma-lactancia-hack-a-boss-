@@ -10,12 +10,16 @@ import {
 } from '../controllers/index.js'
 
 const upload = multer({ storage: storage, limits, fileFilter })
+const uploadImages = upload.fields([
+    { name: 'imageHome', maxCount: 1 },
+    { name: 'logo', maxCount: 1 },
+])
 const router = express.Router()
 
 router.get('/auth/callback', googleSignIn)
 router.get('/check-session', checkSession)
 router.post('/logout', logout)
-router.patch('/update-home-data', upload.array('images', 4), saveHomeData)
+router.patch('/update-home-data', uploadImages, saveHomeData)
 router.get('/get-home-data', getHomeData)
 
 export default router

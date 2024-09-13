@@ -12,8 +12,9 @@ const homeData = async (req, res, next) => {
         let imageHome = oldJsonData.home.imageHome || 'sin imagen'
         let logo = oldJsonData.generalSettings.logo || 'sin imagen'
         if (req.files) {
-            imageHome = req.files[0].filename
-            logo = req.files[1].filename
+            if (req.files['imageHome'])
+                imageHome = req.files['imageHome'][0].filename
+            if (req.files['logo']) logo = req.files['logo'][0].filename
         }
 
         //Creo el objeto combinado:
@@ -36,9 +37,9 @@ const homeData = async (req, res, next) => {
         //Borro las imágenes físicas si las nuevas son diferentes a las antiguas:
         if (req.files) {
             if (
-                req.files[0]?.filename &&
+                req.files['imageHome'] &&
                 oldJsonData.home.imageHome !== 'sin imagen' &&
-                req.files[0]?.filename !== oldJsonData.home.imageHome
+                req.files['imageHome'] !== oldJsonData.home.imageHome
             ) {
                 const imageHomePath = path.join(
                     'src',
@@ -49,9 +50,9 @@ const homeData = async (req, res, next) => {
                 await fs.unlink(imageHomePath)
             }
             if (
-                req.files[1]?.filename &&
+                req.files['logo'] &&
                 oldJsonData.generalSettings.logo !== 'sin imagen' &&
-                req.files[1]?.filename !== oldJsonData.generalSettings.logo
+                req.files['logo'] !== oldJsonData.generalSettings.logo
             ) {
                 const imageLogoPath = path.join(
                     'src',
@@ -74,7 +75,7 @@ const homeData = async (req, res, next) => {
 }
 export default homeData
 
-//req.files será un array de objetos, cada objeto con cada imagen que se reciba desde el front:
+//Si las imágenes llegan agrupadas en un solo campo desde el front, req.files (que es a donde lo envía Multer) será un array de objetos, cada uno con estas propiedades:
 // [
 //     {
 //       fieldname: 'images',
@@ -96,14 +97,32 @@ export default homeData
 //       path: 'uploads/images-1661288000002.png',
 //       size: 23456
 //     },
-//     {
-//       fieldname: 'images',
-//       originalname: 'image3.gif',
-//       encoding: '7bit',
-//       mimetype: 'image/gif',
-//       destination: './uploads',
-//       filename: 'images-1661288000003.gif',
-//       path: 'uploads/images-1661288000003.gif',
-//       size: 34567
-//     }
 //   ]
+
+//Si llegan con campos diferentes, (ejemplo: imageMain y ImagenThumnail) vendrán así:
+// {
+//     "imageMain": [
+//       {
+//         "fieldname": "imageMain",
+//         "originalname": "main-image.jpg",
+//         "encoding": "7bit",
+//         "mimetype": "image/jpeg",
+//         "destination": "./uploads",
+//         "filename": "main-image-1661288000001.jpg",
+//         "path": "uploads/main-image-1661288000001.jpg",
+//         "size": 12345
+//       }
+//     ],
+//     "imageThumbnail": [
+//       {
+//         "fieldname": "imageThumbnail",
+//         "originalname": "thumbnail-image.png",
+//         "encoding": "7bit",
+//         "mimetype": "image/png",
+//         "destination": "./uploads",
+//         "filename": "thumbnail-image-1661288000002.png",
+//         "path": "uploads/thumbnail-image-1661288000002.png",
+//         "size": 23456
+//       }
+//     ]
+//   }
