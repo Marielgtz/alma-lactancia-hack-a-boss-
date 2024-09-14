@@ -21,15 +21,18 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
-
-  const instagramLink = contactInfo?.linkInstagram || '#';
-  const facebookLink = contactInfo?.linkFacebok || '';
-  const logo = contactInfo?.logo 
+  const instagramLink = contactInfo?.linkInstagram || "#";
+  const facebookLink = contactInfo?.linkFacebok || "";
+  const logo = contactInfo?.logo;
 
   return (
     <header>
       <nav className="navbar">
-        <img src={API_BASE_URL+"/images/" + contactInfo?.logo} alt="Logo Alma" className="logo" />
+        <img
+          src={API_BASE_URL + "/images/" + contactInfo?.logo}
+          alt="Logo Alma"
+          className="logo"
+        />
         <div className="menu-toggle" onClick={toggleMenu}>
           {menuOpen ? "✕" : "☰"}
         </div>
@@ -60,9 +63,7 @@ const Header = () => {
             <Link to="/quienes-somos">¿Quiénes somos?</Link>
           </li>
           <li className="menu-item">
-            <a onClick={() => toggleSubMenu(1)}>
-              Actividades
-            </a>
+            <a onClick={() => toggleSubMenu(1)}>Actividades</a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
                 <a href="/actividades">Próximas Inscripciones</a>
