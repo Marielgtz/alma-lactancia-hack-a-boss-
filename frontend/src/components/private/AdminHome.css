@@ -1,0 +1,40 @@
+.section {
+  display: none;
+}
+
+/* Estilo para hacer visible una sección */
+.section.visible {
+  display: block;
+}
+
+.settings-content h1 {
+  font-family: outfit;
+  color: #b380b5;
+  font-size: 20px;
+  margin-bottom: 2rem;
+}
+
+.panel-nav-btn {
+  display: flex;
+  gap: 15px;
+}
+
+.adminHome-btn {
+  background-color: white;
+  border: none;
+  color: #b380b5;
+  padding: 5px;
+  width: 25%;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 10px;
+  font-family: outfit;
+  font-weight: bold;
+}
+
+.adminHome-btn:hover {
+  background-color: #b380b5;
+  color: white;
+}

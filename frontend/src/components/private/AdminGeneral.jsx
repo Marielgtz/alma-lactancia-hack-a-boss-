@@ -58,7 +58,12 @@ const AdminGeneral = () => {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
-        });
+          
+        }).then(response => {
+          const { generalSettings } = response.data.data;
+          setSettings(generalSettings);
+        })
+        .catch(error => console.error('Error al obtener los datos:', error));
       } else {
         // Si es texto (como Instagram, Facebook, Email), envía JSON
         const updateData = {
@@ -98,7 +103,7 @@ const AdminGeneral = () => {
       )}
       <div className="logo-section">
         <h3>Logotipo</h3>
-        <img src={file ? URL.createObjectURL(file) : logo} alt="Logo" className="logo-image" />
+        <img src={API_BASE_URL+"/images/" + settings?.logo} alt="Logo" className="logo-image" />
         <div className="logo-buttons">
           <button onClick={() => setFile(null)}>Eliminar</button>
           <input type="file" onChange={handleFileChange} />
