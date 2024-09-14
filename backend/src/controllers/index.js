@@ -1,6 +1,3 @@
-import newPartner from './partners/newPartNer.js'
-import deletePartner from './partners/deletePartner.js'
-import updatePartner from './partners/updatePartner.js'
 import newCollaborator from './collaborators/newCollaborator.js'
 import deleteCollaborator from './collaborators/deleteCollaborator.js'
 import updateCollaborator from './collaborators/updateCollaborator.js'
@@ -37,9 +34,6 @@ import getHomeData from './homeDataController/getHomeData.js'
 import getAllPosts from './instagramPosts/getAllPosts.js'
 
 export {
-    newPartner,
-    updatePartner,
-    deletePartner,
     createActivity,
     newCollaborator,
     deleteCollaborator,

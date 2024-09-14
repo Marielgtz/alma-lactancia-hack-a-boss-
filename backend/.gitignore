@@ -4,11 +4,12 @@
 # Ignorar la carpeta node_modules
 node_modules/
 
-# Ignorar la carpeta uploads
-uploads/
-
 # Ignorar el archivo credentials.json
 credentials.json
 
-src/assets/formPublished.json
-src/assets/images
+# Ignorar el contenido de esas carpetas, pero no las carpetas mismas (dentro han de tener un archivo .gitkeep)
+src/assets/forms/*
+src/assets/images/*
+src/assets/homeData/*
+src/assets/instagramPosts/*
+!src/assets/images/.gitkeep
