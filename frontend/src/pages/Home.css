@@ -4,7 +4,6 @@ body,
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 .home-page {
@@ -12,13 +11,14 @@ body,
   flex-direction: column;
   position: relative;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .header {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   z-index: 1;
   background: transparent;
 }
@@ -39,7 +39,7 @@ body,
   background-size: cover;
   background-position: center;
   height: 90vh;
-  width: 100vw;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -152,68 +152,83 @@ body,
 }
 
 .experience-title {
-  font-family: "Outfit", sans-serif;
+  font-family: outfit;
   color: #b380b5;
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   margin-left: 2em;
 }
 
-.experience-container {
+.experience-carousel {
   display: flex;
-  flex-direction: row;
-  gap: 5rem;
-}
-
-.prev-arrow,
-.next-arrow {
-  background-color: transparent;
-  color: black;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin: 0 1rem;
-  position: relative;
-  width: 10%;
-}
-
-.experience-cards-container {
-  display: flex;
+  align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 70rem;
+  position: relative;
+}
+
+.experience-cards {
+  display: flex;
+  gap: 2rem;
+  overflow: hidden;
 }
 
 .experience-card {
-  background-color: #edf2ef;
+  background-color: #d8e2dc;
   border-radius: 1.5rem;
   padding: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  transition: transform 0.5s ease;
-  width: 100%;
-  max-width: 70rem;
+  justify-content: space-between;
+  width: 20rem;
+  max-width: 100%;
+  text-align: center;
 }
 
-.experience-image {
+.experience-card img {
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 15rem;
+  height: 8rem;
   object-fit: cover;
   margin-bottom: 1rem;
 }
 
-.experience-text {
-  font-family: bellota;
-  text-align: center;
+.experience-card h3 {
+  font-family: outfit;
+  font-size: 1.5rem;
   color: #333;
+  margin-bottom: 0.5rem;
 }
 
-.experience-text strong {
-  display: block;
-  margin-top: 0.5rem;
-  font-weight: bold;
+.experience-card p {
+  font-family: bellota;
+  color: #333;
+  font-size: 1rem;
+}
+
+.carousel-control {
+  background-color: transparent;
+  color: grey;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 1rem;
+  z-index: 1;
+}
+
+.carousel-control:hover {
+  color: #b380b5;
+}
+
+.carousel-control.prev {
+  left: 2rem;
+}
+
+.carousel-control.next {
+  right: 2rem;
 }
 
 /* Estilos responsive */
@@ -324,42 +339,37 @@ body,
   }
 
   .experience-section {
-    padding: 0.5rem;
-    height: 20rem;
-    margin-bottom: 4rem;
+    padding: 1rem;
   }
 
-  .experience-title {
-    text-align: center;
-    justify-content: center;
-    margin-left: 0;
-    color: #b380b5;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    font-family: outfit;
-  }
-
-  .experience-container {
-    display: flex;
+  .experience-carousel {
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    height: 15rem;
+  }
+
+  .experience-cards {
+    flex-direction: column;
   }
 
   .experience-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    height: 15rem;
-  }
-  
-  .experience-text {
-    font-size: 0.8rem;
+    width: 100%;
+    max-width: none;
   }
 
+  .experience-card img {
+    width: 10rem;
+    height: 5rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .carousel-control.prev {
+    left: -1rem;
+  }
+
+  .carousel-control.next {
+    right: -1rem;
+  }
 }
