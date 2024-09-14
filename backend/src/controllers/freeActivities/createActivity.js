@@ -30,10 +30,15 @@ const createActivity = async (req, res, next) => {
             generateError(error.message)
         }
 
+        //Añadir el evento al calendario:
+        const response = await addEvent(req.body)
+        if (!response.id) {
+            generateError('Error al crear el evento en Google Calendar')
+        }
         //Formato de datos para insertar en la hoja de Google:
         const dataToInsert = [
             [
-                id,
+                response.id,
                 summary,
                 description,
                 formattedStartDate,
@@ -49,13 +54,6 @@ const createActivity = async (req, res, next) => {
 
         //Insertar el evento en la hoja de Google:
         await insertRow(sheetId, 'Actividades', nextEmptyRow, dataToInsert)
-
-        //Añadir el evento al calendario:
-        const response = await addEvent(req.body)
-        if (!response.id) {
-            generateError('Error al crear el evento en Google Calendar')
-        }
-
         res.send({
             message: 'Actividad creada y subida al calendario correctamente',
             response,

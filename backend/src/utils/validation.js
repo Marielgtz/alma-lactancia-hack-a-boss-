@@ -55,30 +55,6 @@ const eventSchema = Joi.object({
     return value
 }, 'End Date Validation')
 
-//Unirse a las actividades:
-const validationSchemaPartnerActivity = Joi.object({
-    socio: Joi.boolean().required(),
-    nome_bebe: Joi.string().max(15).required(),
-    nome_nai: Joi.string().max(30).required(),
-    data_nacemento: Joi.string()
-        .pattern(/^(\d{2})\/(\d{2})\/(\d{4})$/)
-        .required(),
-    centro_saude: Joi.string().max(50).required(),
-    outros: Joi.string().max(255).required(),
-    telefono: Joi.string().min(9).required(),
-    correo_electronico: Joi.string().email().required(),
-})
-const validationSchemaJoinNonPartnerActivity = Joi.object({
-    asistencia: Joi.boolean().required(),
-    nome_nai: Joi.string().max(30).required(),
-    fpp: Joi.string()
-        .pattern(/^(\d{2})\/(\d{2})\/(\d{4})$/)
-        .required(),
-    centro_saude: Joi.string().max(50).required(),
-    telefono: Joi.string().min(9).required(),
-    correo_electronico: Joi.string().email().required(),
-})
-
 //Administradores/as
 const validationSchemaLogin = Joi.object({
     correo_electronico: Joi.string().email().required(),
@@ -113,8 +89,6 @@ const validationUpdateExperiences = Joi.object({
 //Exporto las variables:
 export {
     validationSchemaNewPartner,
-    validationSchemaPartnerActivity,
-    validationSchemaJoinNonPartnerActivity,
     validationSchemaLogin,
     validationSchemaNewCollaborator,
     validationSchemaNewMessage,

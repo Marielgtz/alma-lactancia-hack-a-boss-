@@ -8,8 +8,6 @@ import groupDataById from './groupDataById.js'
 import normalizeFieldName from './normalizeFieldName.js'
 import unnormalizeFieldName from './UnnormalizeFieldName.js'
 import {
-    validationSchemaPartnerActivity,
-    validationSchemaJoinNonPartnerActivity,
     validationSchemaNewPartner,
     validationSchemaLogin,
     validationSchemaNewCollaborator,
@@ -22,8 +20,6 @@ import {
 export {
     validationSchemaNewPartner,
     generateError,
-    validationSchemaPartnerActivity,
-    validationSchemaJoinNonPartnerActivity,
     validationSchemaLogin,
     getColumnLetter,
     validationSchemaNewCollaborator,

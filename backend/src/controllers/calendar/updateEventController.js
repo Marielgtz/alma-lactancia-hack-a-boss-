@@ -1,10 +1,16 @@
-import { updateEvent, getEvent } from '../../googleapis/methods/index.js'
-import { filterProperties } from '../../utils/index.js'
+import {
+    updateEvent,
+    getEvent,
+    getRowsData,
+    updateRow,
+} from '../../googleapis/methods/index.js'
+import { filterProperties, formatDate } from '../../utils/index.js'
 
 const updateEventController = async (req, res, next) => {
     try {
         const eventId = req.params.eventId
         const updatedData = req.body
+        const sheetId = process.env.SPREADSHEET_ID
 
         //Traigo el evento del calendario:
         const existingEvent = await getEvent(eventId)
@@ -43,11 +49,37 @@ const updateEventController = async (req, res, next) => {
                 ...filteredUpdatedData.end,
             },
         }
-
+        //Lo actualizo:
         const response = await updateEvent(eventId, mergedEvent)
+
+        //Actualizo el evento en la hoja de cálculo de Google:
+        const fields = {
+            field: 'id',
+            value: eventId,
+            newValue: '',
+            sheetName: 'Actividades',
+        }
+        let rowValuesToUpdate = [
+            eventId,
+            mergedEvent.summary,
+            mergedEvent.description,
+            formatDate(mergedEvent.start.dateTime),
+            formatDate(mergedEvent.end.dateTime),
+            mergedEvent.location,
+            mergedEvent.acces,
+        ]
+        const dataToUpdate = await getRowsData(
+            sheetId,
+            'Actividades',
+            fields,
+            rowValuesToUpdate
+        )
+        const { rowToUpdate } = dataToUpdate
+        await updateRow(rowToUpdate)
+
         res.send({
-            message: 'Evento actualizado en el calendario',
-            response: response,
+            message: 'Evento actualizado',
+            data: response,
         })
     } catch (error) {
         next(error)
@@ -82,4 +114,5 @@ export default updateEventController
 //     },
 //     visibility: "private",
 //     access: "partners"
+//     id:"id"
 // };
