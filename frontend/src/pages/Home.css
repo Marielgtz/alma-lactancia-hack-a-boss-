@@ -70,8 +70,6 @@ body,
   font-weight: bold;
   color: #f5f5f5;
   font-family: outfit;
-  margin-bottom: 3em;
-  margin-left: 1.8em;
 }
 
 .activities-button {
@@ -85,6 +83,8 @@ body,
   width: 18rem;
   height: 2.5rem;
   font-family: outfit;
+  margin-top: -1em;
+  margin-bottom: 1em;
 }
 
 .activities-button:hover {
