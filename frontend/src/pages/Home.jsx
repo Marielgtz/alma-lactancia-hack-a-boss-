@@ -71,6 +71,12 @@ const Home = () => {
     }
   };
 
+  const experiencesToShow = experiences.slice(0, 4); // Solo muestra un máximo de 4 experiencias
+  const visibleExperiences = experiencesToShow.slice(
+    currentIndex,
+    currentIndex + cardsToShow
+  );
+
   const handleActivitiesClick = () => {
     navigate("/actividades");
   };
@@ -89,7 +95,12 @@ const Home = () => {
             <p>
               Apoyando la lactancia, <br /> fortaleciendo familias
             </p>
-            <button className="activities-button" onClick={handleActivitiesClick}>Nuestras actividades</button>
+            <button
+              className="activities-button"
+              onClick={handleActivitiesClick}
+            >
+              Nuestras actividades
+            </button>
           </div>
         </div>
         <div className="content">

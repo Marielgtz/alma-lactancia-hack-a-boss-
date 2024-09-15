@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import fedalma from "../images/cropped-logo_fedalma_200.png";
@@ -7,6 +7,51 @@ import "./About.css";
 
 const About = () => {
   const [openInfo, setOpenInfo] = useState(null);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [externalCollaborators, setExternalCollaborators] = useState([]);
+
+  useEffect(() => {
+    // Fetch team members
+    const fetchTeamMembers = async () => {
+      try {
+        const response = await fetch("/api/collaborators?team=true");
+
+        // Imprime el contenido completo de la respuesta para verificar que es un JSON válido
+        console.log("Team members response:", response);
+
+        if (!response.ok) {
+          throw new Error("Error fetching team members");
+        }
+
+        const data = await response.json(); // Aquí podría estar el problema
+        setTeamMembers(data);
+      } catch (error) {
+        console.error("Error fetching team members:", error);
+      }
+    };
+
+    // Fetch external collaborators
+    const fetchExternalCollaborators = async () => {
+      try {
+        const response = await fetch("/api/collaborators?team=false");
+
+        // Imprime el contenido completo de la respuesta para verificar que es un JSON válido
+        console.log("External collaborators response:", response);
+
+        if (!response.ok) {
+          throw new Error("Error fetching external collaborators");
+        }
+
+        const data = await response.json(); // Aquí podría estar el problema
+        setExternalCollaborators(data);
+      } catch (error) {
+        console.error("Error fetching external collaborators:", error);
+      }
+    };
+
+    fetchTeamMembers();
+    fetchExternalCollaborators();
+  }, []);
 
   const toggleInfo = (info) => {
     setOpenInfo(info === openInfo ? null : info);
@@ -21,123 +66,48 @@ const About = () => {
           <h2 className="about-alma">Alma Lactancia</h2>
           <h1 className="about-title">Equipo</h1>
         </div>
+
+        {/* Sección del equipo */}
         <div className="about-people">
-          <div className="person-card">
-            <div className="person-card-inner">
-              <div className="person-card-front">
-                <img src="ruta-a-la-imagen" className="person-image" />
-                <div className="person-info">
-                  <h3>Eva González Souto</h3>
-                  <p>Asesora de Lactancia, Gestora de Redes y Asesora Online</p>
+          {teamMembers.slice(0, 6).map((member) => (
+            <div key={member.id} className="person-card">
+              <div className="person-card-inner">
+                <div className="person-card-front">
+                  <img
+                    src={`/images/${member.collaboratorImage}`}
+                    className="person-image"
+                  />
+                  <div className="person-info">
+                    <h3>{member.name}</h3>
+                    <p>{member.role}</p>
+                  </div>
+                </div>
+                <div className="person-card-back">
+                  <p>{member.description}</p>
                 </div>
               </div>
-              <div className="person-card-back">
-                <p>
-                  Asesora de Lactancia, Gestora de Redes y Asesora Online.
-                  Participé en la fundación de ALMA con otras 11 mujeres en mayo
-                  de 2009...
-                </p>
-              </div>
             </div>
-          </div>
-          <div className="person-card">
-            <div className="person-card-inner">
-              <div className="person-card-front">
-                <img src="ruta-a-la-imagen" className="person-image" />
-                <div className="person-info">
-                  <h3>Eva González Souto</h3>
-                  <p>Asesora de Lactancia, Gestora de Redes y Asesora Online</p>
-                </div>
-              </div>
-              <div className="person-card-back">
-                <p>
-                  Asesora de Lactancia, Gestora de Redes y Asesora Online.
-                  Participé en la fundación de ALMA con otras 11 mujeres en mayo
-                  de 2009...
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="person-card">
-            <div className="person-card-inner">
-              <div className="person-card-front">
-                <img src="ruta-a-la-imagen" className="person-image" />
-                <div className="person-info">
-                  <h3>Eva González Souto</h3>
-                  <p>Asesora de Lactancia, Gestora de Redes y Asesora Online</p>
-                </div>
-              </div>
-              <div className="person-card-back">
-                <p>
-                  Asesora de Lactancia, Gestora de Redes y Asesora Online.
-                  Participé en la fundación de ALMA con otras 11 mujeres en mayo
-                  de 2009...
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="person-card">
-            <div className="person-card-inner">
-              <div className="person-card-front">
-                <img src="ruta-a-la-imagen" className="person-image" />
-                <div className="person-info">
-                  <h3>Eva González Souto</h3>
-                  <p>Asesora de Lactancia, Gestora de Redes y Asesora Online</p>
-                </div>
-              </div>
-              <div className="person-card-back">
-                <p>
-                  Asesora de Lactancia, Gestora de Redes y Asesora Online.
-                  Participé en la fundación de ALMA con otras 11 mujeres en mayo
-                  de 2009...
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="person-card">
-            <div className="person-card-inner">
-              <div className="person-card-front">
-                <img src="ruta-a-la-imagen" className="person-image" />
-                <div className="person-info">
-                  <h3>Eva González Souto</h3>
-                  <p>Asesora de Lactancia, Gestora de Redes y Asesora Online</p>
-                </div>
-              </div>
-              <div className="person-card-back">
-                <p>
-                  Asesora de Lactancia, Gestora de Redes y Asesora Online.
-                  Participé en la fundación de ALMA con otras 11 mujeres en mayo
-                  de 2009...
-                </p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
+
+        {/* Sección de colaboraciones externas */}
         <h1 className="section-title1">Colaboraciones externas</h1>
         <div className="about-collab">
           <div className="collab-container">
-            <div className="collab-card">
-              <img src="ruta-a-la-imagen" className="collab-image" />
-              <h3>Alba Sánchez Ansede</h3>
-              <p>Madre Colaboradora</p>
-            </div>
-            <div className="collab-card">
-              <img src="ruta-a-la-imagen" className="collab-image" />
-              <h3>Alba Sánchez Ansede</h3>
-              <p>Madre Colaboradora</p>
-            </div>
-            <div className="collab-card">
-              <img src="ruta-a-la-imagen" className="collab-image" />
-              <h3>Alba Sánchez Ansede</h3>
-              <p>Madre Colaboradora</p>
-            </div>
-            <div className="collab-card">
-              <img src="ruta-a-la-imagen" className="collab-image" />
-              <h3>Alba Sánchez Ansede</h3>
-              <p>Madre Colaboradora</p>
-            </div>
+            {externalCollaborators.map((collaborator) => (
+              <div key={collaborator.id} className="collab-card">
+                <img
+                  src={`/images/${collaborator.collaboratorImage}`}
+                  className="collab-image"
+                />
+                <h3>{collaborator.name}</h3>
+                <p>{collaborator.role}</p>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Sección de apoyo */}
         <div className="about-support">
           <h1 className="section-title2">Nuestro compromiso y apoyos</h1>
           <div className="collapsible-container-about">
@@ -254,6 +224,8 @@ const About = () => {
             )}
           </div>
         </div>
+
+        {/* Entidades colaboradoras */}
         <h1 className="section-title3">Entidades colaboradoras</h1>
         <div className="about-img">
           <img src={fedalma} className="fedalma-img" />
