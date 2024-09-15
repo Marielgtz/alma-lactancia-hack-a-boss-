@@ -4,7 +4,6 @@ body,
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 .about-page {
@@ -12,6 +11,7 @@ body,
   flex-direction: column;
   position: relative;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .about-page .navbar {

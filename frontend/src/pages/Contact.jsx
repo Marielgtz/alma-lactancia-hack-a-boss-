@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
 import silueta from "../images/IlustracionLactancia.png";
 import { useNavigate } from "react-router-dom";
-import useContactInfo from "../hooks/useContactInfo";
+import useContactInfo from "../hooks/useContactInfo.js";
 import "./Contact.css";
 
 const Contact = () => {
@@ -152,17 +152,17 @@ const Contact = () => {
             <p>siguientes medios:</p>
             <p>
               <a href={email} className="contact-info-icon">
-                <i className="fas fa-envelope"></i> almalactancia@gmail.com
+                <i className="fas fa-envelope"></i> {email}
               </a>
             </p>
             <p>
               <a href={instagramLink} className="contact-info-icon" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-instagram"></i> alma_lactancia
+                <i className="fab fa-instagram"></i> {instagramLink}
               </a>
             </p>
             <p>
               <a href={facebookLink} className="contact-info-icon" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-facebook"></i> /AlmaLactanciaMaterna
+                <i className="fab fa-facebook"></i> {facebookLink}
               </a>
             </p>
             <img src={silueta} />

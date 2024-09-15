@@ -4,11 +4,17 @@ import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
 import silueta from "../images/IlustracionLactancia.png";
 import ButtonUp from "../components/ButtonUp";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
   const [cardsToShow, setCardsToShow] = useState(2);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [experiences, setExperiences] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateCardsToShow = () => {
@@ -25,26 +31,27 @@ const Home = () => {
     return () => window.removeEventListener("resize", updateCardsToShow);
   }, []);
 
-  const experiences = [
-    {
-      id: 1,
-      name: "Alba Debutt",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      image: "ruta-a-tu-imagen-1.jpg",
-    },
-    {
-      id: 2,
-      name: "Sofia Vergeron",
-      text: "Nunc placerat eu metus ac hendrerit.",
-      image: "ruta-a-tu-imagen-2.jpg",
-    },
-    {
-      id: 3,
-      name: "Otra Persona",
-      text: "Otro ejemplo de texto.",
-      image: "ruta-a-tu-imagen-3.jpg",
-    },
-  ];
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "http://localhost:3001/get-all-experiences"
+        );
+        if (!response.ok) {
+          throw new Error("Error al obtener las experiencias");
+        }
+        const data = await response.json();
+        setExperiences(data.experiences);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExperiences();
+  }, []);
 
   const totalExperiences = experiences.length;
 
@@ -64,18 +71,25 @@ const Home = () => {
     }
   };
 
+  const handleActivitiesClick = () => {
+    navigate("/actividades");
+  };
+
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div className="home-page">
       <Header />
       <main className="main-home">
-      <ButtonUp />
+        <ButtonUp />
         <div className="img-section">
           <div className="background-image"></div>
           <div className="support-button">
             <p>
               Apoyando la lactancia, <br /> fortaleciendo familias
             </p>
-            <button className="activities-button">Nuestras actividades</button>
+            <button className="activities-button" onClick={handleActivitiesClick}>Nuestras actividades</button>
           </div>
         </div>
         <div className="content">
@@ -135,27 +149,26 @@ const Home = () => {
         </div>
         <div className="experience-section">
           <h2 className="experience-title">Experiencias reales</h2>
-          <div className="experience-container">
-            <button className="prev-arrow" onClick={prevSlide}>
-              &#8249;
+          <div className="experience-carousel">
+            <button className="carousel-control prev" onClick={prevSlide}>
+              &#10094; {/* Left Arrow */}
             </button>
-            {experiences
-              .slice(currentIndex, currentIndex + cardsToShow)
-              .map((exp) => (
-                <div className="experience-card" key={exp.id}>
-                  <img
-                    src={exp.image}
-                    className="experience-image"
-                  />
-                  <p className="experience-text">
-                    {exp.text}
-                    <br />
-                    <strong>{exp.name}</strong>
-                  </p>
-                </div>
-              ))}
-            <button className="next-arrow" onClick={nextSlide}>
-              &#8250;
+            <div className="experience-cards">
+              {experiences
+                .slice(currentIndex, currentIndex + cardsToShow)
+                .map((experience) => (
+                  <div key={experience.id} className="experience-card">
+                    <img
+                      src={`http://localhost:3001/images/${experience.image}`}
+                      alt={experience.name}
+                    />
+                    <h3>{experience.name}</h3>
+                    <p>{experience.text}</p>
+                  </div>
+                ))}
+            </div>
+            <button className="carousel-control next" onClick={nextSlide}>
+              &#10095; {/* Right Arrow */}
             </button>
           </div>
         </div>

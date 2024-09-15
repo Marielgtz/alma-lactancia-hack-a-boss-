@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import useContactInfo from "../hooks/useContactInfo";
+import useContactInfo from "../hooks/useContactInfo.js";
 import logo from "../images/logo-alma.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 const Header = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
   const contactInfo = useContactInfo();
 
   const [activeIndex, setActiveIndex] = useState(null);
@@ -20,14 +21,18 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
-
-  const instagramLink = contactInfo?.linkInstagram || '#';
-  const facebookLink = contactInfo?.linkFacebok || '#';
+  const instagramLink = contactInfo?.linkInstagram || "#";
+  const facebookLink = contactInfo?.linkFacebok || "";
+  const logo = contactInfo?.logo;
 
   return (
     <header>
       <nav className="navbar">
-        <img src={logo} alt="Logo Alma" className="logo" />
+        <img
+          src={API_BASE_URL + "/images/" + contactInfo?.logo}
+          alt="Logo Alma"
+          className="logo"
+        />
         <div className="menu-toggle" onClick={toggleMenu}>
           {menuOpen ? "✕" : "☰"}
         </div>
@@ -58,9 +63,7 @@ const Header = () => {
             <Link to="/quienes-somos">¿Quiénes somos?</Link>
           </li>
           <li className="menu-item">
-            <a onClick={() => toggleSubMenu(1)}>
-              Actividades
-            </a>
+            <a onClick={() => toggleSubMenu(1)}>Actividades</a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
                 <a href="/actividades">Próximas Inscripciones</a>
