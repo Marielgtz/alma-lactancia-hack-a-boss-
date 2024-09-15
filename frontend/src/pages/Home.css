@@ -56,15 +56,22 @@ body,
   background: rgba(0, 0, 0, 0.3);
 }
 
-.support-button p {
-  display: flex;
+.support-button {
   position: absolute;
-  top: 26.5rem;
-  left: 4.5rem;
+  bottom: 3em;
+  left: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.support-button p {
   font-size: 2.5rem;
   font-weight: bold;
   color: #f5f5f5;
   font-family: outfit;
+  margin-bottom: 3em;
+  margin-left: 1.8em;
 }
 
 .activities-button {
