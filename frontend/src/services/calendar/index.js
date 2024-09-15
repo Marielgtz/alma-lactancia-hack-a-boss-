@@ -6,8 +6,6 @@ export async function deleteEvent(requestBody) {
 
 //* Fetch para crear eventos
 export async function createEvent(requestBody) {
-  console.log(requestBody);
-  // console.log(requestBodyExample);
   
   const response = await fetch(`http://localhost:3001/create-activity`,
   {
@@ -27,7 +25,6 @@ export async function createEvent(requestBody) {
     return;
   }
 
-  console.log('Creando nuevo evento...');
    
   const data = await response.json()
   console.log(data); 

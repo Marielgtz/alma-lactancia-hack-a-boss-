@@ -34,7 +34,7 @@ export default function EventForm({prevData, onCreate, onModify}) {
         access: prevData.access
       });
     } else if (!prevData.id) {
-      setFormData({})
+      setFormData(defaultFormData)
     }
   }, [prevData]);
 
@@ -60,7 +60,8 @@ export default function EventForm({prevData, onCreate, onModify}) {
 
   const submitNewEvent = async (e) => {
     e.preventDefault(); 
-
+    console.log(formData);
+    
     // Adecuar los datos del formulario al estándar de Google
     const requestBody = {
       summary: formData.summary,
@@ -85,10 +86,9 @@ export default function EventForm({prevData, onCreate, onModify}) {
       access: formData.access
     };
 
-    console.log("Event data submitted:", formAction, requestBody);
-
     // TODO - Mejorar gestión de errores
     if (formAction === "create") {
+      console.log('Creando...');
       const response = await createEvent(requestBody);
       console.log(response);
       if (response) {

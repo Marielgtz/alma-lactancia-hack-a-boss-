@@ -9,7 +9,8 @@ function EditableEvent({eventData, setFormEvent, onDelete}) {
       fecha: eventData.start.dateTime
     });
 
-        console.log("Deleting...", eventData.id);
+        console.log("Borrando...");
+    
         // TODO - Mostrar proceso de borrado (loading)
         
        const response = await deleteCalendarEventService(eventData.id);
