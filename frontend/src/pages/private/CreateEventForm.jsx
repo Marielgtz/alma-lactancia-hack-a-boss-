@@ -60,7 +60,6 @@ export default function EventForm({prevData, onCreate, onModify}) {
 
   const submitNewEvent = async (e) => {
     e.preventDefault(); 
-    console.log(formData);
     
     // Adecuar los datos del formulario al estándar de Google
     const requestBody = {
