@@ -11,3 +11,13 @@ ol {
     /* align-items: center;
     justify-content: space-between */
 }
+
+.dateTime-settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden {
+    display: none;
+}

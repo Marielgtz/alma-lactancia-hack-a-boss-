@@ -27,8 +27,8 @@ export async function createEvent(requestBody) {
     return;
   }
 
-  console.log("kept going");
-  
+  console.log('Creando nuevo evento...');
+   
   const data = await response.json()
   console.log(data); 
   }
@@ -62,7 +62,7 @@ export async function modifyEvent(newEventData) {
   }
 
   const data = await response.json()
-  console.log(data); 
+  return data;
 }
 
 // PETICIÓN DE PRUEBA, CREAR O MODIFICAR UN EVENTO

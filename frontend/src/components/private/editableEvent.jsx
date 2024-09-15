@@ -1,21 +1,27 @@
 import React from 'react'
-import { deleteCalendarEventService, getCalendarEvents } from '../../services/api'
+import { deleteCalendarEventService } from '../../services/api'
 
-function EditableEvent({eventData}) {
+function EditableEvent({eventData, setFormEvent, onDelete}) {
     async function handleDelete(){
     console.log("Eliminando evento...", {
       título: eventData.summary,
       lugar: eventData.location,
       fecha: eventData.start.dateTime
     });
-    
+
+        console.log("Deleting...", eventData.id);
+        // TODO - Mostrar proceso de borrado (loading)
+        
        const response = await deleteCalendarEventService(eventData.id);
        console.log(response);
-       location.reload();
-    }
+
+       if (response.message.includes('Evento eliminado')){
+       onDelete(eventData.id)
+       };
+    };
 
     async function handleUpdate() {
-        
+      setFormEvent(eventData)
     }
 
   return (
