@@ -64,7 +64,7 @@ const AdminActivities = () => {
           return(
             <EditableEvent 
             key={event.id} 
-            eventData={event} s
+            eventData={event}
             etFormEvent={setFormEvent} 
             setFormEvent={setFormEvent}
             onDelete={() => deleteEvent(event.id)}/>
