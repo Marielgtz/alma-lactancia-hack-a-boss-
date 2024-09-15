@@ -75,7 +75,6 @@ body,
 }
 
 .activities-button {
-  position: absolute;
   background-color: #d8e2dc;
   border: none;
   color: #b380b5;
@@ -85,9 +84,6 @@ body,
   font-weight: bold;
   width: 18rem;
   height: 2.5rem;
-  justify-content: center;
-  bottom: 3em;
-  margin-left: 3em;
   font-family: outfit;
 }
 
@@ -249,6 +245,103 @@ body,
 }
 
 /* Estilos responsive */
+/* Tablet */
+@media (max-width: 1024px) {
+  .img-section,
+  .background-image {
+    height: 100vh;
+  }
+
+  .img-silueta {
+    display: none;
+  }
+
+  .support-button {
+    bottom: 2em;
+    left: 2em;
+  }
+
+  .support-button p {
+    font-size: 2rem;
+  }
+
+  .activities-button {
+    width: 16rem;
+    font-size: 1.2em;
+  }
+
+  .content {
+    padding: 1.5em;
+  }
+
+  .section-title {
+    margin-left: 1em;
+    font-size: 1.5rem;
+  }
+
+  .centered-container {
+    align-items: center;
+  }
+
+  .section-text0,
+  .section-text1,
+  .section-text2,
+  .section-text3,
+  .section-text4 {
+    max-width: 90%;
+    margin-left: 0;
+    font-size: 0.9rem;
+  }
+
+  .img-silueta {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    width: 25vw;
+    height: auto;
+  }
+
+  .experience-section {
+    padding: 1.5rem;
+  }
+
+  .experience-title {
+    font-size: 1.8rem;
+    margin-left: 1em;
+    margin-bottom: 2rem;
+  }
+
+  .experience-card {
+    width: 18rem;
+  }
+
+  .experience-card img {
+    width: 12rem;
+    height: 7rem;
+  }
+
+  .experience-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .experience-card p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+  }
+
+  .carousel-control.prev {
+    left: 1rem;
+  }
+
+  .carousel-control.next {
+    right: 1rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .img-section {
     position: relative;
@@ -267,29 +360,20 @@ body,
     right: 0;
   }
 
+  .support-button {
+    bottom: 1em;
+    left: 1em;
+    right: 1em;
+  }
+
   .support-button p {
-    position: absolute;
-    top: 15rem;
-    left: 1.5rem;
     font-size: 1.5rem;
-    font-weight: bold;
-    font-family: outfit;
   }
 
   .activities-button {
-    position: absolute;
-    background-color: #d8e2dc;
-    color: #b380b5;
-    width: 12rem;
-    height: 2rem;
-    bottom: 3rem;
-    margin: 0 auto;
-    font-size: 1rem;
-    left: 1rem;
-    border: none;
-    border-radius: 3em;
-    cursor: pointer;
-    font-family: outfit;
+    width: 100%;
+    max-width: 14rem;
+    font-size: 1em;
   }
 
   .activities-button:hover {
