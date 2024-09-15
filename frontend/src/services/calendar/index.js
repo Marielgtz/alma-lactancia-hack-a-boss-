@@ -27,42 +27,34 @@ export async function createEvent(requestBody) {
     return;
   }
 
-  console.log("kept going");
-  
+  console.log('Creando nuevo evento...');
+   
   const data = await response.json()
   console.log(data); 
   }
 
 export async function modifyEvent(newEventData) {
-  const eventId = "fk7hvhcnf6is3382a4jr9h80ok" //! Para desarrollo
+  console.warn('Error en api');
 
-  // ? ========================================================================
-
-  const requestBodyExample = {
-    summary: "Título alternativo"
-  }
-
-  //? =========================================================================
-
-
-  const response = await fetch(`http://localhost:3001/update-calendar-event/${eventId}`,
+  const response = await fetch(`http://localhost:3001/update-calendar-event/${newEventData.id}`,
     {
         method: 'PATCH',
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestBodyExample)
-        // body: requestBodyExample
+        body: JSON.stringify(newEventData)
     })
-  
+    
+    
     if (!response.ok) {
       console.warn("Error en el fetch:", response);
       return;
   }
 
   const data = await response.json()
-  console.log(data); 
+  
+  return data;
 }
 
 // PETICIÓN DE PRUEBA, CREAR O MODIFICAR UN EVENTO

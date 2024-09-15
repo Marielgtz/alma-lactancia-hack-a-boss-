@@ -1,31 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createEvent } from '../../services/calendar';
 import { updateCalendarEventService } from '../../services/api';
 
-export default function EventForm({prevData, eventAction}) {
+export default function EventForm({prevData, onCreate, onModify}) {  
+  const defaultFormData = {
+    summary: '',
+    description: '',
+    startDateTime: '',
+    endDateTime: '',
+    location: '',
+    access: 'free', // Valor por defecto
+  };
 
-  // Plantilla del formulario de creación en blanco
-  const [formData, setFormData] = useState({
-    summary: "",
-    description: "",
-    startDateTime: "",
-    endDateTime: "",
-    location: "",
-    // visibility: "private",
-    access: "partners",
-  });
+  const [formAction, setFormAction] = useState('create')
+  const [formData, setFormData] = useState(defaultFormData);
 
-  if (prevData){
-    setFormData({
-    summary: prevData.summary,
-    description: prevData.description,
-    startDateTime: prevData.startDateTime,
-    endDateTime: prevData.endDateTime,
-    location: prevData.location,
-    // visibility: prevData.visibility,
-    access: prevData.access,
-    })
-  }
+  // Función que adapta la fecha al input del formulario
+  const formatDateTimeForInput = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:MM'
+  };
+  
+  useEffect(() => {
+    if (prevData.id) {
+      setFormAction('update')
+      setFormData({
+        summary: prevData.summary || '',
+        description: prevData.description || '',
+        startDateTime: formatDateTimeForInput(prevData.start?.dateTime), // Formateado para mostrar en input
+        endDateTime: formatDateTimeForInput(prevData.end?.dateTime), // Formateado para mostrar en input
+        location: prevData.location || '',
+        access: prevData.access
+      });
+    } else if (!prevData.id) {
+      setFormData({})
+    }
+  }, [prevData]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,9 +46,22 @@ export default function EventForm({prevData, eventAction}) {
     }));
   };
 
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    console.log('Cancelando modificaciones...');
+    
+    // Vaciar el form (reiniciar a estado por defecto)
+    setFormData(defaultFormData);
+
+    // Reiniciar form a modo "crear evento"
+    setFormAction('create');
+  };
+
   const submitNewEvent = async (e) => {
     e.preventDefault(); 
 
+    // Adecuar los datos del formulario al estándar de Google
     const requestBody = {
       summary: formData.summary,
       description: formData.description,
@@ -61,23 +85,41 @@ export default function EventForm({prevData, eventAction}) {
       access: formData.access
     };
 
-    console.log("Event data submitted:", eventAction, requestBody);
+    console.log("Event data submitted:", formAction, requestBody);
 
-    if (eventAction === "create") {
-      createEvent(requestBody);
-    } else if (eventAction === "update") {
-      console.log("Actualizando...");
-      const response = await updateCalendarEventService('1vgu1siv9d8srf1sc97n582mv4', requestBody)
+    // TODO - Mejorar gestión de errores
+    if (formAction === "create") {
+      const response = await createEvent(requestBody);
       console.log(response);
-      location.reload()
+      if (response) {
       
+        // Vaciar el form (reiniciar a estado por defecto)
+        setFormData(defaultFormData);
+
+        // Actualizar lista
+        onCreate(requestBody)
+
+      }
+     
+    // TODO - Mejorar gestión de errores
+    } else if (formAction === "update") {
+      console.log("Actualizando...");
+      const response = await updateCalendarEventService(prevData.id, requestBody)
+      console.log(response);         
+      
+      // Vaciar el form (reiniciar a estado por defecto)
+      setFormData(defaultFormData);
+      setFormAction('Create')
+
+      // Actualizar lista (con respuesta del back)
+      onModify(response.response)
     }
     };
 
   return (
-    <details><summary>Create Event</summary>
     <form onSubmit={submitNewEvent}>
-      <h2>Crear Evento</h2>
+      {formAction === "create" && <h2>Crear Evento</h2>}
+      {formAction === "update" && <h2>Modificar Evento</h2>}
 
       <label>Título del evento:</label>
       <input
@@ -95,7 +137,8 @@ export default function EventForm({prevData, eventAction}) {
         onChange={handleChange}
       />
 
-      <label>Fecha y hora de inicio:</label>
+      <div className='dateTime-settings'>
+      <label>Inicio:</label>
       <input
         type="datetime-local"
         name="startDateTime"
@@ -104,7 +147,7 @@ export default function EventForm({prevData, eventAction}) {
         required
       />
 
-      <label>Fecha y hora de finalización:</label>
+      <label>Finalización:</label>
       <input
         type="datetime-local"
         name="endDateTime"
@@ -112,6 +155,7 @@ export default function EventForm({prevData, eventAction}) {
         onChange={handleChange}
         required
       />
+      </div>
 
       <label>Localización:</label>
       <input
@@ -145,11 +189,15 @@ export default function EventForm({prevData, eventAction}) {
       <br />
       <br />
       {
-        eventAction === "create" 
-        ?( <button type="submit">Crear evento</button>)
-        :( <button type="submit">Modificar evento</button>)
+        formAction === "update" 
+        ?(
+          <>
+          <button type="submit">Modificar evento</button>
+          <button onClick={handleReset}>Cancelar modificaciones</button>
+          </>
+        )
+        :(<button type="submit">Crear evento</button>)
       }
     </form>
-    </details>
   );
 }

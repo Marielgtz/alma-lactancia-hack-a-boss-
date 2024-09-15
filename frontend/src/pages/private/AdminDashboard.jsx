@@ -12,7 +12,7 @@ const useDynamicTitle = () => {
       return "INICIO";
     case "/dashboard/quienes-somos":
       return "QUIÉNES SOMOS";
-    case "/dashboard/proximas-actividades":
+    case "/dashboard/actividades":
       return "PRÓXIMAS ACTIVIDADES";
     case "/dashboard/historico":
       return "HISTÓRICO";
@@ -65,7 +65,7 @@ const AdminDashboard = () => {
           <li>
             <button
               className="sidebar-btn"
-              onClick={() => handleTabChange("proximas-actividades")}
+              onClick={() => handleTabChange("actividades")}
             >
               PRÓXIMAS ACTIVIDADES
             </button>
