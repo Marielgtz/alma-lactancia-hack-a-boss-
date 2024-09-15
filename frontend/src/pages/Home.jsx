@@ -4,6 +4,7 @@ import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
 import silueta from "../images/IlustracionLactancia.png";
 import ButtonUp from "../components/ButtonUp";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
@@ -12,6 +13,8 @@ const Home = () => {
   const [experiences, setExperiences] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateCardsToShow = () => {
@@ -68,7 +71,11 @@ const Home = () => {
     }
   };
 
-  if (loading) return <p>Cargando experiencias...</p>;
+  const handleActivitiesClick = () => {
+    navigate("/actividades");
+  };
+
+  if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -82,7 +89,7 @@ const Home = () => {
             <p>
               Apoyando la lactancia, <br /> fortaleciendo familias
             </p>
-            <button className="activities-button">Nuestras actividades</button>
+            <button className="activities-button" onClick={handleActivitiesClick}>Nuestras actividades</button>
           </div>
         </div>
         <div className="content">
