@@ -11,6 +11,7 @@ const useContactInfo = () => {
       .then((response) => {
         const { generalSettings } = response.data.form;
         setContactInfo(generalSettings);
+        console.log(response.data);
       })
       .catch((error) => console.error("Error al obtener datos:", error));
   }, [API_BASE_URL]);

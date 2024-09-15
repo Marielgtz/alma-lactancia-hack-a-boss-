@@ -80,7 +80,7 @@ body {
 
 /* Cambia el color del texto y subrayado en hover */
 .menu-item > a:hover {
-  color: #9c6fa0; /* Cambia el color del texto al pasar el mouse */
+  text-decoration: underline;
 }
 
 /* Estilo de la lista de submenú */
