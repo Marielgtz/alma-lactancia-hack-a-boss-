@@ -54,7 +54,6 @@ const MyCalendar = () => {
         }
 
         const data = await response.json();
-        console.log("Datos recibidos:", data);
 
         // Verifica si data es un array o un objeto que contiene un array
         const eventsArray = Array.isArray(data.response)
@@ -76,12 +75,6 @@ const MyCalendar = () => {
 
         const futureEvents = formattedEvents.filter((event) => {
           const eventStart = new Date(event.start); // Convierte la fecha del evento
-          console.log(
-            "Event Start:",
-            eventStart.toISOString(),
-            "Now:",
-            now.toISOString()
-          );
           return eventStart.getTime() >= now.getTime(); // Compara ambas fechas en milisegundos
         });
 
