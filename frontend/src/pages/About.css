@@ -103,7 +103,6 @@ body,
 .about-people {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
   justify-content: space-around;
   margin-bottom: 2rem;
   background-color: #fdeee7;
@@ -111,7 +110,7 @@ body,
 
 .person-card {
   width: 18rem;
-  height: 23rem;
+  height: 22rem;
   margin-left: 2rem;
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
@@ -275,7 +274,7 @@ body,
   border-radius: 1rem;
   padding: 1rem;
   width: 12rem;
-  height: 12rem;
+  height: 14rem;
   text-align: center;
 }
 

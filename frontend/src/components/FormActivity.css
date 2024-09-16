@@ -1,0 +1,85 @@
+.registration-form {
+  width: 100%;
+  padding: 3em;
+  font-family: outfit;
+  font-size: 1.2em;
+  margin-left: 2em;
+}
+
+.registration-title {
+  font-family: outfit;
+  color: #b380b5;
+  font-weight: lighter;
+}
+
+.registration-h1 {
+  font-family: bellota;
+  color: #b380b5;
+}
+
+.registration-summary {
+  font-family: outfit;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.registration-date {
+  font-family: outfit;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.registration-h2 {
+  font-family: outfit;
+  font-size: 1em;
+}
+
+.registration-label {
+  color: black;
+  font-family: outfit;
+  margin-top: 2em;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-input {
+  margin-left: 0;
+  border-radius: 0.5em;
+  background-color: white;
+  width: 30%;
+}
+
+.registration-check {
+  width: 1.5em;
+  padding: 0;
+  margin-left: 4em;
+}
+
+.registration-yes {
+  font-weight: 500;
+  color: black;
+  margin-left: 0.2em;
+  margin-top: -2em;
+  width: 3em;
+}
+
+.registration-no {
+  font-weight: 500;
+  color: black;
+  margin-left: 0.2em;
+  margin-top: -2em;
+  width: 3em;
+}
+
+.registration-button {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-radius: 0.3em;
+  background-color: white;
+  color: black;
+  width: 10%;
+  font-family: outfit;
+  font-size: 0.9em;
+  cursor: pointer;
+}
