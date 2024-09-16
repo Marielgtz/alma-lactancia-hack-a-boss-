@@ -83,7 +83,7 @@ const FormActivity = () => {
         </label>
         <label className="registration-label">
           ¿Eres soci@?
-          <div>
+          <div className="registration-member">
             <label className="registration-yes">
               <input
                 type="radio"
@@ -110,16 +110,16 @@ const FormActivity = () => {
             </label>
           </div>
         </label>
-        <label className="registration-label">
-          <input
-            type="checkbox"
-            name="acceptPrivacyPolicy"
-            checked={formData.acceptPrivacyPolicy}
-            onChange={handleChange}
-            required
-          />
-          He leído y acepto la política de privacidad
-        </label>
+          <label className="registration-privacy">
+            <input
+              type="checkbox"
+              name="acceptPrivacyPolicy"
+              checked={formData.acceptPrivacyPolicy}
+              onChange={handleChange}
+              required
+            />
+            He leído y acepto la política de privacidad
+          </label>
         <button className="registration-button" type="submit">
           Inscribirse
         </button>
