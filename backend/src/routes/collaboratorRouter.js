@@ -4,6 +4,7 @@ import {
     newCollaborator,
     deleteCollaborator,
     updateCollaborator,
+    getAllCollaborators,
 } from '../controllers/index.js'
 import { storage, limits, fileFilter } from '../utils/index.js'
 
@@ -19,6 +20,7 @@ router.post(
     newCollaborator
 )
 router.delete('/delete-collaborator/:id/:team', deleteCollaborator)
+router.get('/get-all-collaborators/:team', getAllCollaborators)
 router.patch(
     '/update-collaborator/:id/:team',
     upload.single('collaborator-image'),
