@@ -107,6 +107,11 @@
   height: 2rem;
 }
 
+.register-button:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
 .section-title-calendar {
   text-align: center;
   color: #b380b5;

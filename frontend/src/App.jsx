@@ -18,6 +18,7 @@ import AdminLibrary from "./components/private/AdminLibrary";
 import Layout from "./pages/private/Layout";
 import AdminGeneral from "./components/private/AdminGeneral";
 //import AdminDashboard from "./pages/private/AdminDashboard";
+import FormActivityPage from "./pages/FormActivityPage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route path="/prueba" element={<Prueba />} />
+          <Route path="/formulario-inscripcion" element={<FormActivityPage />} />
 
           {/* Rutas del DASHBOARD */}
           <Route path="/dashboard" element={<Layout />}>

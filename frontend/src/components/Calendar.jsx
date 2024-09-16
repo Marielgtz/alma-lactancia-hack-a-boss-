@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import CustomToolbar from "./CustomToolbar";
 import "moment/locale/es";
@@ -39,13 +40,15 @@ const MyCalendar = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
           "http://localhost:3001/list-calendar-events",
           {
-            method: "POST", // El método tiene que coincidir con la ruta del servidor
+            method: "POST",
           }
         );
 
@@ -134,6 +137,10 @@ const MyCalendar = () => {
     setSelectedEvent(event || null);
   };
 
+  const handleEnrollClick = (event) => {
+    navigate("/formulario-inscripcion", { state: { activity: event } });
+  };
+
   return (
     <div className="calendar-section">
       <h2 className="section-title-activity">Próximas actividades</h2>
@@ -169,7 +176,12 @@ const MyCalendar = () => {
                   <p className="event-date">{formatEventDate(event.start)}</p>
                   <i className="fas fa-map-marker-alt"></i> {event.location}
                   <p className="event-type">* Só para socias</p>
-                  <button className="register-button">Inscribirse</button>
+                  <button
+                    className="register-button"
+                    onClick={() => handleEnrollClick(event)}
+                  >
+                    Inscribirse
+                  </button>
                 </div>
               </div>
             </div>
