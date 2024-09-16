@@ -32,6 +32,7 @@ import unpublishInstagramPost from './instagramPosts/unpublishInstagramPost.js'
 import saveHomeData from './homeDataController/saveHomeData.js'
 import getHomeData from './homeDataController/getHomeData.js'
 import getAllPosts from './instagramPosts/getAllPosts.js'
+import getAllCollaborators from './collaborators/getAllCollaborators.js'
 
 export {
     createActivity,
@@ -68,4 +69,5 @@ export {
     saveHomeData,
     getHomeData,
     getAllPosts,
+    getAllCollaborators,
 }

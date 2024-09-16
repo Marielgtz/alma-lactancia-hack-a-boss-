@@ -1,4 +1,3 @@
-import partners from './partnersRouter.js'
 import activities from './activitiesRouter.js'
 import login from './adminRouter.js'
 import calendar from './calendarRouter.js'
@@ -10,7 +9,6 @@ import experiences from './experiencesRouter.js'
 import instagram from './instagramRouter.js'
 
 export {
-    partners,
     activities,
     login,
     calendar,

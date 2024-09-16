@@ -4,7 +4,6 @@ import { join } from 'path'
 import cors from 'cors'
 import { sessionMiddleware } from './src/middlewares/index.js'
 import {
-    partners,
     activities,
     login,
     calendar,
@@ -36,7 +35,6 @@ const ruta = join(__dirname, 'src', 'assets', 'images')
 app.use('/images', express.static(ruta))
 
 // Rutas
-app.use(partners)
 app.use(activities)
 app.use(login)
 app.use(calendar)
