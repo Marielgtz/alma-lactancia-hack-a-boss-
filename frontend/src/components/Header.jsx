@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import useContactInfo from "../hooks/useContactInfo.js";
-import logo from "../images/logo-alma.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import logo from "../images/logo-alma.png";
 
 const Header = () => {
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -23,13 +23,12 @@ const Header = () => {
 
   const instagramLink = contactInfo?.linkInstagram || "#";
   const facebookLink = contactInfo?.linkFacebok || "";
-  const logo = contactInfo?.logo;
 
   return (
     <header>
       <nav className="navbar">
         <img
-          src={API_BASE_URL + "/images/" + contactInfo?.logo}
+          src={logo}
           alt="Logo Alma"
           className="logo"
         />

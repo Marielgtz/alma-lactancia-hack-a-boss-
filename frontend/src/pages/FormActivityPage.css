@@ -23,3 +23,7 @@ body,
 .register-main {
   background-color: #fdeee7;
 }
+
+.register-page .navbar {
+  position: relative;
+}
