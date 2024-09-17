@@ -1,20 +1,33 @@
+import React from "react";
 import useFormDisplay from "../hooks/useFormDisplay";
 
-const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber,  }) => {
+const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
   const { sendDataHandler, formRef } = useFormDisplay(
     publishedForm,
     setPublishedForm,
     jsonNumber
   );
-  if (!publishedForm?.fields) {
+
+  // Comprobar el contenido de publishedForm
+  console.log("Contenido de publishedForm:", publishedForm);
+
+  // Asegúrate de acceder al primer elemento del array
+  const formToDisplay = publishedForm[0]; // Accede al primer formulario en el array
+
+  // Verificación del formulario
+  if (
+    !formToDisplay ||
+    !formToDisplay.fields ||
+    formToDisplay.fields.length === 0
+  ) {
     return <div>{`Publica un formulario en la ranura: ${jsonNumber}`}</div>;
   }
 
   return (
     <div>
-      <h2>{publishedForm.formName}</h2>
+      <h2>{formToDisplay.formName}</h2>
       <form ref={formRef} onSubmit={sendDataHandler}>
-        {publishedForm.fields.map((field, index) => (
+        {formToDisplay.fields.map((field, index) => (
           <div key={index} style={{ marginBottom: "20px" }}>
             <label>
               {field.label}:
@@ -30,7 +43,7 @@ const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber,  }) => {
               ) : (
                 <input
                   type={field.type}
-                  name={field.label.toLowerCase().replace(/\s+/g, "_")} // Para sustituir espacios en blanco por guiones bajos
+                  name={field.label.toLowerCase().replace(/\s+/g, "_")}
                   placeholder={field.label}
                   required
                 />
