@@ -33,6 +33,7 @@ import saveHomeData from './homeDataController/saveHomeData.js'
 import getHomeData from './homeDataController/getHomeData.js'
 import getAllPosts from './instagramPosts/getAllPosts.js'
 import getAllCollaborators from './collaborators/getAllCollaborators.js'
+import cancelEvent from './calendar/cancelEvent.js'
 
 export {
     createActivity,
@@ -70,4 +71,5 @@ export {
     getHomeData,
     getAllPosts,
     getAllCollaborators,
+    cancelEvent,
 }

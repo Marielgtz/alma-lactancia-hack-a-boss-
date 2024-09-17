@@ -4,6 +4,7 @@ import {
     updateEventController,
     listEventsController,
     getEventController,
+    cancelEvent,
 } from '../controllers/index.js'
 const router = express.Router()
 
@@ -14,6 +15,7 @@ router.delete(
 )
 router.patch('/update-calendar-event/:eventId', updateEventController)
 router.post('/list-calendar-events', listEventsController)
+router.get('/cancel-calendar-event/:eventId', cancelEvent)
 router.get('/get-calendar-event/:eventId', getEventController)
 
 export default router

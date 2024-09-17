@@ -4,13 +4,11 @@ import {
     allSheetData,
 } from '../../googleapis/methods/index.js'
 import { generateError, eventSchema } from '../../utils/index.js'
-import { v4 as uuidv4 } from 'uuid'
 import { formatDate } from '../../utils/index.js'
 
 const createActivity = async (req, res, next) => {
     try {
         const sheetId = process.env.SPREADSHEET_ID
-        const id = uuidv4()
         const { summary, description, start, end, location, access } = req.body
 
         let accessDataSheet
@@ -45,6 +43,7 @@ const createActivity = async (req, res, next) => {
                 formattedEndtDate,
                 location,
                 accessDataSheet,
+                'confirmed',
             ],
         ]
 

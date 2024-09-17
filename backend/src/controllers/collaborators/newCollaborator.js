@@ -23,7 +23,7 @@ const newCollaborator = async (req, res, next) => {
             generateError(error.message)
         }
 
-        if (!team) {
+        if (team !== 'true') {
             const values = await allSheetData(sheetId, 'Colaboradores')
 
             const { nextEmptyRow } = values
