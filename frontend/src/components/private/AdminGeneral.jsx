@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import logo from "../../images/logo-alma.png";
 import "./AdminGeneral.css";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -103,7 +102,7 @@ const AdminGeneral = () => {
       )}
       <div className="logo-section">
         <h3>Logotipo</h3>
-        <img src={API_BASE_URL+"/images/" + settings?.logo} alt="Logo" className="logo-image" />
+        <img src={file ? URL.createObjectURL(file) : API_BASE_URL + "/images/" + (settings?.logo)} alt="Logo" className="logo-image" />
         <div className="logo-buttons">
           <input type="file" onChange={handleFileChange} />
           <button onClick={() => validateAndUpdateField('logo', file)}>Actualizar Logotipo</button>

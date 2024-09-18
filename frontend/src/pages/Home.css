@@ -35,26 +35,22 @@ body,
 }
 
 .background-image {
-  background-image: url("/src/images/Alma_Lactancia_-_Foto_hero.jpg");
-  background-size: cover;
-  background-position: center;
+  position: relative;
   height: 90vh;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  overflow: hidden; 
 }
 
-.background-image::before {
-  content: "";
+.background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  filter: brightness(70%);
 }
+
 
 .support-button {
   position: absolute;
@@ -70,6 +66,9 @@ body,
   font-weight: bold;
   color: #f5f5f5;
   font-family: outfit;
+  max-width: 40rem;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .activities-button {
@@ -114,35 +113,7 @@ body,
   flex-direction: column;
 }
 
-.section-text0 {
-  max-width: 70rem;
-  line-height: 1.7;
-  font-family: bellota;
-  margin-left: 3.5rem;
-}
-
-.section-text1 {
-  max-width: 70rem;
-  line-height: 1.7;
-  font-family: bellota;
-  margin-left: 3.5rem;
-}
-
-.section-text2 {
-  max-width: 70rem;
-  line-height: 1.7;
-  font-family: bellota;
-  margin-left: 3.5rem;
-}
-
-.section-text3 {
-  max-width: 60rem;
-  line-height: 1.7;
-  font-family: bellota;
-  margin-left: 3.5rem;
-}
-
-.section-text4 {
+.sectionText-nosotras {
   max-width: 60rem;
   line-height: 1.7;
   font-family: bellota;
@@ -283,11 +254,7 @@ body,
     align-items: center;
   }
 
-  .section-text0,
-  .section-text1,
-  .section-text2,
-  .section-text3,
-  .section-text4 {
+  .sectionText-nosotras {
     max-width: 90%;
     margin-left: 0;
     font-size: 0.9rem;
@@ -349,15 +316,11 @@ body,
   }
 
   .background-image {
-    background-image: url("/src/images/Alma_Lactancia_-_Foto_hero.jpg");
-    background-size: cover;
-    background-position: center;
     height: 50vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+  }
+
+  .background-image img {
+    height: 50vh; 
   }
 
   .support-button {
@@ -395,39 +358,7 @@ body,
     margin-left: 2em;
   }
 
-  .section-text0 {
-    font-size: 0.75em;
-    text-align: center;
-    max-width: 100%;
-    margin-left: -1.5em;
-    font-family: bellota;
-  }
-
-  .section-text1 {
-    font-size: 0.75em;
-    text-align: center;
-    max-width: 100%;
-    margin-left: -1.5em;
-    font-family: bellota;
-  }
-
-  .section-text2 {
-    font-size: 0.75em;
-    text-align: center;
-    max-width: 100%;
-    margin-left: -1.5em;
-    font-family: bellota;
-  }
-
-  .section-text3 {
-    font-size: 0.75em;
-    text-align: center;
-    max-width: 100%;
-    margin-left: -1.5em;
-    font-family: bellota;
-  }
-
-  .section-text4 {
+  .sectionText-nosotras {
     font-size: 0.75em;
     text-align: center;
     max-width: 100%;

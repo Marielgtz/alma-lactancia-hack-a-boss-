@@ -106,9 +106,9 @@ h3 {
 }
 
 .popup-message.error {
-  background-color: #F44336; /* Rojo para errores */
+  background-color: #F44336;
 }
 
 .popup-message.success {
-  background-color: #4CAF50; /* Verde para éxito */
+  background-color: #4CAF50;
 }
