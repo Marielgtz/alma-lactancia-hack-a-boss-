@@ -7,12 +7,16 @@ const AdminAbout = () => {
   const [collaborators, setCollaborators] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
   const [toEdit, setToEdit] = useState({});  // Initialize toEdit as an empty object
+  // const [formAction, setFormAction] = useState("")
 
   async function fetchCollaborators() {
+    console.log("Cargando colaboradores...");
     const fetchedCollaborators = await getAllCollaboratorsService(false);
     const fetchedTeamMembers = await getAllCollaboratorsService(true);
     setCollaborators(fetchedCollaborators);    
     setTeamMembers(fetchedTeamMembers);
+    console.log("Colaboradores cargados");
+    
   }
 
   useEffect(() => {
@@ -28,14 +32,15 @@ const AdminAbout = () => {
   // }, [isEditMode]);
 
   useEffect(() => {
-    console.log(toEdit);
+    console.log(toEdit.id);
+
   }, [toEdit]);
 
   function toggleEditMode(collaboratorData, isMember) {
     setIsEditMode((prevValue) => !prevValue);
     collaboratorData.hierarchy = isMember
-    ? 'Equipo'
-    : 'Colaboración';
+    ? 'Miembro del equipo'
+    : 'Colaboración externa';
     setToEdit(collaboratorData); 
     
   }
@@ -45,37 +50,52 @@ const AdminAbout = () => {
       <div className={isEditMode ? 'hidden' : ''}>
         <h1>Gestión de miembros</h1>
 
-        <p>Elige qué persona quieres editar</p>
-        <ol>
-          {teamMembers.map((member) => (
-            <li key={member.id}>
+        <div id='team-collaborators'>
+          <p>Elige qué persona quieres editar</p>
+          <ol>
+            {teamMembers.map((member) => (
+              <li key={member.id}>
+                <button
+                  onClick={() => toggleEditMode(member, true)}  
+                >
+                  {`${member.name} ${member.surname}`}
+                </button>
+              </li>
+            ))}
+            <li>
               <button
-                onClick={() => toggleEditMode(member, true)}  
-              >
-                {`${member.name} ${member.surname}`}
-              </button>
+                onClick={() => toggleEditMode({}, true)}
+              >Nueva colaboradora</button>
             </li>
-          ))}
-        </ol>
-
-        <p>Elige qué colaboradora quieres editar</p>
-        <ol>
-          {collaborators.map((collaborator) => (
-            <li key={collaborator.id}>
+          </ol>
+        </div>
+        
+        <div id='external-collaborators'>
+          <p>Elige qué colaboradora quieres editar</p>
+          <ol>
+            {collaborators.map((collaborator) => (
+              <li key={collaborator.id}>
+                <button
+                  onClick={() => toggleEditMode(collaborator, false)}  
+                >
+                  {`${collaborator.name} ${collaborator.surname}`}
+                </button>
+              </li>
+            ))}
+            <li>
               <button
-                onClick={() => toggleEditMode(collaborator, false)}  
-              >
-                {`${collaborator.name} ${collaborator.surname}`}
-              </button>
+                onClick={() => toggleEditMode({}, false)}
+              >Nueva colaboradora</button>
             </li>
-          ))}
-        </ol>
+          </ol>
+        </div>
       </div>
 
-      <div className={!isEditMode ? 'hidden' : ''}>
+      <div id='edit-collaborator-div' className={!isEditMode ? 'hidden' : ''}>
         <button onClick={() => toggleEditMode({})}>Volver atrás</button>
-        <p>Estás editando a {`${toEdit.name || ''} ${toEdit.surname || ''}`}</p>
-        <p>Rol: {toEdit.hierarchy}</p>
+        <p>Editando: {`${toEdit.name || 'Nueva'} ${toEdit.surname || 'colaboradora'}`}</p>
+        <p>Rango: {toEdit.hierarchy}</p>
+        <p></p>
         <EditCollaboratorForm collaboratorData={toEdit} />
       </div>
     </main>

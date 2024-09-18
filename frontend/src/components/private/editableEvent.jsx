@@ -27,13 +27,16 @@ function EditableEvent({eventData, setFormEvent, onDelete}) {
 
   return (
     <>
-    <li key={eventData.id} className='admin-list'>
+    <li>
+      <button>{`${eventData.summary} | ${eventData.location} | ${eventData.start.dateTime}`}</button>
+    </li>
+    {/* <li key={eventData.id} className='admin-list'>
     <h2>{eventData.summary}</h2>
     <p>{eventData.location}</p>
     <p>{eventData.start.dateTime}</p>
     <button onClick={handleDelete}>Borrar</button>
     <button onClick={handleUpdate}>Modificar</button>
-  </li>
+  </li> */}
     </>
   )
 }

@@ -168,13 +168,17 @@ export const getAllCollaboratorsService = async (isTeamMember) => {
 }
 
 export const newCollaboratorService = async (formData) => {
+  console.log('api:', formData);
   try {
+    
     const response = await fetch(`${API_BASE_URL}/new-collaborator`, {
       method: "POST",
       body: formData,
     });
 
-    return handleResponse(response);
+    // return handleResponse(response);
+    const data = response.json();
+    return data;
   } catch (error) {
     console.error("Error creating new collaborator:", error);
     throw error;
@@ -198,6 +202,8 @@ export const deleteCollaboratorService = async (id, team) => {
 };
 
 export const updateCollaboratorService = async (id, team, formData) => {
+  console.log(id);
+  
   try {
     const response = await fetch(
       `${API_BASE_URL}/update-collaborator/${id}/${team}`,
@@ -207,7 +213,9 @@ export const updateCollaboratorService = async (id, team, formData) => {
       }
     );
 
-    return handleResponse(response);
+    // return handleResponse(response);
+    const data = response.json();
+    return data;
   } catch (error) {
     console.error("Error updating collaborator:", error);
     throw error;

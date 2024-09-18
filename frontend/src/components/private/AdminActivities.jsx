@@ -6,14 +6,19 @@ import EditableEvent from './editableEvent';
 
 const AdminActivities = () => {
   // Sacar los eventos
-  const [isHidden, setIsHidden] = useState(true);
-  const [isFormHidden, setIsFormHidden] = useState(true);
+  // const [isHidden, setIsHidden] = useState(true);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [eventsList, setEventsList] = useState([]);
   const [formEvent, setFormEvent] = useState({});
 
-  const toggleHidden = () => {
-    setIsHidden(prevState => !prevState);
-  };
+  function toggleEditMode(collaboratorData, isMember) {
+    setIsEditMode((prevValue) => !prevValue);
+    collaboratorData.hierarchy = isMember
+    ? 'Miembro del equipo'
+    : 'Colaboración externa';
+    setToEdit(collaboratorData); 
+    
+  }
 
   // TODO - Que el formulario aparezca y desaparezca?
   const toggleFormHidden = () => {
@@ -55,26 +60,32 @@ const AdminActivities = () => {
 
   return (
     <main className='settings-content'>
-    <div>
-      <h1>Gestor de actividades</h1>
-      <button onClick={toggleHidden}>Modificar Actividades</button>
-
-        <ol className={isHidden ? 'hidden' : ''}>
-        {eventsList.map((event)=>{
-          return(
-            <EditableEvent 
-            key={event.id} 
-            eventData={event}
-            etFormEvent={setFormEvent} 
-            setFormEvent={setFormEvent}
-            onDelete={() => deleteEvent(event.id)}/>
-          )
-        })}
-        </ol>
-
-
-        <EventForm prevData={formEvent} onCreate={createEvent} onModify={modifyEvent}/>
-    </div>
+      <h1>Actividades</h1>
+      <div id='activities-display' className={isEditMode ? 'hidden' : ''}>
+          <ol className=''>
+          {eventsList.map((event)=>{
+            return(
+              <>
+              <EditableEvent 
+              key={event.id} 
+              eventData={event}
+              etFormEvent={setFormEvent} 
+              setFormEvent={setFormEvent}
+              onDelete={() => deleteEvent(event.id)}/>
+              </>
+            )
+          })}
+          </ol>
+          <button
+            onClick={() => toggleEditMode()}
+          >Crear actividad</button>
+      </div>
+      <div className={!isEditMode ? 'hidden' : ''}>
+          <button
+            onClick={() => toggleEditMode()}
+          >Volver atrás</button>
+          <EventForm prevData={formEvent} onCreate={createEvent} onModify={modifyEvent}/>
+      </div>
     </main>
   );
 };

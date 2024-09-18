@@ -1,33 +1,45 @@
 import React, { useEffect, useState } from 'react';
+import { newCollaboratorService, updateCollaboratorService } from '../../services/api';
 
 const EditCollaboratorForm = ({ collaboratorData }) => {
-  // Initialize state with the collaboratorData
   const [collaborator, setCollaborator] = useState(collaboratorData);
 
-  // Update the collaborator state if collaboratorData prop changes
+  // Los datos previos que se mostrarán en el form (en caso de editar)
   useEffect(() => {
     setCollaborator(collaboratorData);
   }, [collaboratorData]);
 
-  useEffect(() => {
-    console.log(collaborator);  // To check the updated collaborator state
-  }, [collaborator]);
+  // useEffect(() => {
+  //   console.log(collaborator); 
+  // }, [collaborator]);
 
-  // Handle form input changes
+  // Gestiona cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCollaborator((prevState) => ({
       ...prevState,
-      [name]: value,  // Dynamically update the value of the corresponding field
+      [name]: value, 
     }));
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  // Envío del formulario
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Updated collaborator:', collaborator);
 
-    // TODO: Add logic to submit the updated collaborator data to an API
+    // TODO: Función de modificar en back
+    console.log(collaborator.id ? 'Modificar usuario' : 'Usuario no existente');
+
+    if (collaborator.id) {
+      const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'true' : 'false';
+      const responseMsg = await updateCollaboratorService(collaborator.id, isTeam, collaborator);
+      console.log(responseMsg);
+      
+    } else {      
+      const responseMsg = await newCollaboratorService({"name": 'Lara'});
+      console.log(responseMsg);
+    }
+    
   };
 
   return (
