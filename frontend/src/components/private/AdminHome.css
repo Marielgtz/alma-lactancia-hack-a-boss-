@@ -19,6 +19,13 @@
   gap: 15px;
 }
 
+.titleEditHome{
+    font-size: 1.5rem;
+    font-family: outfit;
+    border-top: solid 1px black;
+    padding-top: 1rem;
+}
+
 .adminHome-btn {
   background-color: white;
   border: none;
@@ -37,4 +44,84 @@
 .adminHome-btn:hover {
   background-color: #b380b5;
   color: white;
+}
+
+/* AdminHome.css */
+
+/* Estilo para la imagen del Hero */
+.hero-image {
+  width: 300px; /* Ancho fijo */
+  height: 200px; /* Alto fijo */
+  object-fit: cover; /* Mantiene las proporciones */
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* Estilo para los botones de imagen */
+.image-buttons {
+  margin-bottom: 20px;
+}
+
+.image-buttons button {
+  padding: 10px;
+  background-color: #fff;
+  color:#000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.image-buttons button:hover {
+  background-color: #ced4da;
+}
+
+/* Estilo para el input de título */
+.title-input {
+  margin-bottom: 20px;
+}
+
+.editTitle-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  margin: 0 0 20px 0;
+}
+
+.editAdminHome-btn {
+  padding: 5px;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editAdminHome-btn:hover {
+  background-color: #b380b5;
+  color: white;
+}
+
+.cancelAdminHome-btn{
+    background-color: transparent;
+    border: none;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+/* Estilo para el textarea */
+.editNosotras-textarea {
+  width: 70%; /* Ajusta el ancho del textarea */
+  height: 200px; /* Altura fija para el textarea */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 0 0 20px 0;
+  resize: none; /* Evita el redimensionamiento del textarea */
+}
+
+/* Estilo para el mensaje de límite de caracteres */
+p {
+  font-size: 14px;
+  color: #6c757d;
 }

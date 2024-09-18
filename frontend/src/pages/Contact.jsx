@@ -8,7 +8,7 @@ import useContactInfo from "../hooks/useContactInfo.js";
 import "./Contact.css";
 
 const Contact = () => {
-  const contactInfo = useContactInfo();
+  const { generalSettings } = useContactInfo();
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -65,9 +65,9 @@ const Contact = () => {
     }
   };
 
-  const instagramLink = contactInfo?.linkInstagram || '';
-  const facebookLink = contactInfo?.linkFacebok || '';
-  const email = contactInfo?.email || '';
+  const instagramLink = generalSettings?.linkInstagram || '';
+  const facebookLink = generalSettings?.linkFacebok || '';
+  const email = generalSettings?.email || '';
 
   return (
     <div className="contact-page">

@@ -10,14 +10,14 @@ const Footer = () => {
   const backURL = import.meta.env.VITE_API_URL;
   const clientId = import.meta.env.VITE_CLIENT_ID;
   const googleURL = import.meta.env.VITE_GOOGLE_URL;
-  const contactInfo = useContactInfo();
+  const { generalSettings } = useContactInfo();
 
   const handleLogin = () => {
     window.location.href = `${googleURL}?client_id=${clientId}&redirect_uri=${backURL}/auth/callback&response_type=code&scope=email%20profile`;
   };
 
-  const instagramLink = contactInfo?.linkInstagram || '#';
-  const facebookLink = contactInfo?.linkFacebok || '#';
+  const instagramLink = generalSettings?.linkInstagram || '#';
+  const facebookLink = generalSettings?.linkFacebok || '#';
 
   return (
     <footer className="App-footer">
