@@ -10,6 +10,5 @@ credentials.json
 # Ignorar el contenido de esas carpetas, pero no las carpetas mismas (dentro han de tener un archivo .gitkeep)
 src/assets/forms/*
 src/assets/images/*
-src/assets/homeData/*
 src/assets/instagramPosts/*
 !src/assets/images/.gitkeep
