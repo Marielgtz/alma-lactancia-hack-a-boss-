@@ -11,46 +11,30 @@ const About = () => {
   const [externalCollaborators, setExternalCollaborators] = useState([]);
 
   useEffect(() => {
-    // Fetch team members
-    const fetchTeamMembers = async () => {
+    const fetchCollaborators = async () => {
       try {
-        const response = await fetch("/api/collaborators?team=true");
+        const [teamResponse, externalResponse] = await Promise.all([
+          fetch("http://localhost:3001/get-all-collaborators/true"),
+          fetch("http://localhost:3001/get-all-collaborators/false"),
+        ]);
 
-        // Imprime el contenido completo de la respuesta para verificar que es un JSON válido
-        console.log("Team members response:", response);
-
-        if (!response.ok) {
-          throw new Error("Error fetching team members");
+        if (!teamResponse.ok || !externalResponse.ok) {
+          const errorResponse = await teamResponse.text(); // Obtener texto de la respuesta
+          throw new Error(
+            `Error al obtener los colaboradores: ${errorResponse}`
+          );
         }
 
-        const data = await response.json(); // Aquí podría estar el problema
-        setTeamMembers(data);
+        const teamData = await teamResponse.json();
+        const externalData = await externalResponse.json();
+        setTeamMembers(teamData.data);
+        setExternalCollaborators(externalData.data);
       } catch (error) {
-        console.error("Error fetching team members:", error);
+        console.error("Error al obtener los colaboradores:", error);
       }
     };
 
-    // Fetch external collaborators
-    const fetchExternalCollaborators = async () => {
-      try {
-        const response = await fetch("/api/collaborators?team=false");
-
-        // Imprime el contenido completo de la respuesta para verificar que es un JSON válido
-        console.log("External collaborators response:", response);
-
-        if (!response.ok) {
-          throw new Error("Error fetching external collaborators");
-        }
-
-        const data = await response.json(); // Aquí podría estar el problema
-        setExternalCollaborators(data);
-      } catch (error) {
-        console.error("Error fetching external collaborators:", error);
-      }
-    };
-
-    fetchTeamMembers();
-    fetchExternalCollaborators();
+    fetchCollaborators();
   }, []);
 
   const toggleInfo = (info) => {
@@ -94,7 +78,7 @@ const About = () => {
         <h1 className="section-title1">Colaboraciones externas</h1>
         <div className="about-collab">
           <div className="collab-container">
-            {externalCollaborators.map((collaborator) => (
+            {externalCollaborators.slice(0, 5).map((collaborator) => (
               <div key={collaborator.id} className="collab-card">
                 <img
                   src={`/images/${collaborator.collaboratorImage}`}

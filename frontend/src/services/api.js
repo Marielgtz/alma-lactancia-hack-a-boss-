@@ -153,6 +153,20 @@ export const updateCalendarEventService = async (eventId, eventData) => {
 };
 
 // Colaboradores
+export const getAllCollaboratorsService = async (isTeamMember) => {
+  const isTeamMemberParam = isTeamMember ? isTeamMember : "false" // Por defecto siempre trae a los miembros 
+  try {
+    const response = await fetch(`${API_BASE_URL}/get-all-collaborators/${isTeamMemberParam}`, {
+      method: "GET"
+    });
+
+    return handleResponse(response);
+  } catch (error) {
+    console.error("Error obtaining collaborators list:", error)
+    throw error;
+  }
+}
+
 export const newCollaboratorService = async (formData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/new-collaborator`, {

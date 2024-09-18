@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
-import logo from "../images/logo-alma.png";
 import { Link } from "react-router-dom";
 import useContactInfo from "../hooks/useContactInfo.js";
+import logo from "../images/logo-alma.png";
 import "./Footer.css";
 
 const Footer = () => {

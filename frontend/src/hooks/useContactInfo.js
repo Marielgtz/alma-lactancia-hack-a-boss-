@@ -12,10 +12,9 @@ const useContactInfo = () => {
     axios
       .get(`${API_BASE_URL}/get-home-data`)
       .then((response) => {
+
         const { generalSettings, home } = response.data.form;
         setContactInfo({ generalSettings, home });
-        console.log("General Settings:", generalSettings);
-        console.log("Home Data:", home);
       })
       .catch((error) => console.error("Error al obtener datos:", error));
   }, [API_BASE_URL]);
