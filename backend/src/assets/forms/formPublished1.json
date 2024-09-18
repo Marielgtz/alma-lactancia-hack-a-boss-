@@ -1,14 +1,18 @@
 {
-  "formName": "Reunión5",
-  "formId": "44ef50f5-ede2-4d2d-ad38-ae5b2036d1ae",
+  "formName": "Reunión3",
+  "formId": "0d6d367b-bf4d-4759-9cb9-887e7fdeb38f",
   "fields": [
     {
-      "label": "Palabra",
+      "label": "Nombre",
       "type": "text"
     },
     {
-      "label": "Partner",
-      "type": "select"
+      "label": "Pensamiento",
+      "type": "text"
+    },
+    {
+      "label": "Correo electrónico",
+      "type": "email"
     }
   ]
 }
