@@ -34,6 +34,7 @@ import getHomeData from './homeDataController/getHomeData.js'
 import getAllPosts from './instagramPosts/getAllPosts.js'
 import getAllCollaborators from './collaborators/getAllCollaborators.js'
 import cancelEvent from './calendar/cancelEvent.js'
+import checkIsPublishedInstagram from './instagramPosts/checkIsPublishedInstagram.js'
 
 export {
     createActivity,
@@ -72,4 +73,5 @@ export {
     getAllPosts,
     getAllCollaborators,
     cancelEvent,
+    checkIsPublishedInstagram,
 }
