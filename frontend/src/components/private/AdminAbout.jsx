@@ -32,7 +32,12 @@ const AdminAbout = () => {
   // }, [isEditMode]);
 
   useEffect(() => {
-    console.log(toEdit.id);
+    if (toEdit.id) {
+      console.log('Colaborador previo cargado');
+    } else {
+      console.log('Sin datos previos');
+      
+    }
 
   }, [toEdit]);
 
@@ -65,7 +70,7 @@ const AdminAbout = () => {
             <li>
               <button
                 onClick={() => toggleEditMode({}, true)}
-              >Nueva colaboradora</button>
+              >➕ Nueva colaboradora </button>
             </li>
           </ol>
         </div>
@@ -85,7 +90,7 @@ const AdminAbout = () => {
             <li>
               <button
                 onClick={() => toggleEditMode({}, false)}
-              >Nueva colaboradora</button>
+              >➕ Nueva colaboradora</button>
             </li>
           </ol>
         </div>

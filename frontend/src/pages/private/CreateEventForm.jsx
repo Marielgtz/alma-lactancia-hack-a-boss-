@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { createEvent } from '../../services/calendar';
 import { updateCalendarEventService } from '../../services/api';
 
-export default function EventForm({prevData, onCreate, onModify}) {  
-  const defaultFormData = {
+export default function EventForm({toEdit, onCreate, onModify}) {
+  // const [prevActivity, setPrevActivity] = useState(toEdit);  
+  const defaultActivity = {
     summary: '',
     description: '',
     startDateTime: '',
@@ -13,34 +14,30 @@ export default function EventForm({prevData, onCreate, onModify}) {
   };
 
   const [formAction, setFormAction] = useState('create')
-  const [formData, setFormData] = useState(defaultFormData);
+  const [activity, setActivity] = useState(toEdit);
 
   // Función que adapta la fecha al input del formulario
-  const formatDateTimeForInput = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:MM'
-  };
+  // const formatDateTimeForInput = (dateString) => {
+  //   if (!dateString) return '';
+  //   const date = new Date(dateString);
+  //   return date.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:MM'
+  // };
   
   useEffect(() => {
-    if (prevData.id) {
-      setFormAction('update')
-      setFormData({
-        summary: prevData.summary || '',
-        description: prevData.description || '',
-        startDateTime: formatDateTimeForInput(prevData.start?.dateTime), // Formateado para mostrar en input
-        endDateTime: formatDateTimeForInput(prevData.end?.dateTime), // Formateado para mostrar en input
-        location: prevData.location || '',
-        access: prevData.access
-      });
-    } else if (!prevData.id) {
-      setFormData({})
+    if (toEdit?.id) {
+      console.log('Datos previos de la actividad cargados');
+      setActivity(toEdit)
+      //TODO - ¿Cómo adaptar la fecha para que se coloque en el form?
+    } else {
+      console.log('Sin datos previos');
+      setActivity(toEdit);
     }
-  }, [prevData]);
+  }, [toEdit])
 
   const handleChange = (e) => {
+    // Actualizar dinámicamente el objeto "activity"
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
+    setActivity((prevData) => ({
       ...prevData,
       [name]: type === 'checkbox' ? checked : value,
     }));
@@ -52,7 +49,7 @@ export default function EventForm({prevData, onCreate, onModify}) {
     console.log('Cancelando modificaciones...');
     
     // Vaciar el form (reiniciar a estado por defecto)
-    setFormData(defaultFormData);
+    setActivity(defaultActivity);
 
     // Reiniciar form a modo "crear evento"
     setFormAction('create');
@@ -63,17 +60,17 @@ export default function EventForm({prevData, onCreate, onModify}) {
 
     // Adecuar los datos del formulario al estándar de Google
     const requestBody = {
-      summary: formData.summary,
-      description: formData.description,
+      summary: activity.summary,
+      description: activity.description,
       start: {
-        dateTime: `${formData.startDateTime}:00+02:00`,
+        dateTime: `${activity.startDateTime}:00+02:00`,
         timeZone: "Europe/Madrid"
       },
       end: {
-        dateTime: `${formData.endDateTime}:00+02:00`,
+        dateTime: `${activity.endDateTime}:00+02:00`,
         timeZone: "Europe/Madrid"
       },
-      location: formData.location,
+      location: activity.location,
       reminders: {
         useDefault: false,
         overrides: [
@@ -82,41 +79,41 @@ export default function EventForm({prevData, onCreate, onModify}) {
         ]
       },
       visibility: "private",
-      access: formData.access
+      access: activity.access
     };
 
     console.log("Event data submitted:", formAction, requestBody);
 
-    // TODO - Mejorar gestión de errores
-    if (formAction === "create") {
+    if (toEdit?.id) {
+      // Lógica de modificar una actividad
+      console.log('Actualizando evento...');
+
+      const response = await updateCalendarEventService(toEdit.id, requestBody)
+      console.log(response);         
+      
+      setActivity(defaultActivity); // Vaciar el form
+
+      // Actualizar lista (con respuesta del back) //! Solo debería activarse si fue bien
+      // onModify(response.response) //TODO Revisar funcionamiento
+     
+    } else if (!toEdit?.id) {
+      // Lógica de crear una nueva actividad
+      console.log("Creando evento...");
       const response = await createEvent(requestBody);
       console.log(response);
       if (response) {
       
         // Vaciar el form (reiniciar a estado por defecto)
-        setFormData(defaultFormData);
+        setActivity(defaultActivity); // Vaciar el form
 
-        // Actualizar lista
-        onCreate(requestBody)
+        // Actualizar lista //! Solo debería activarse si fue bien
+        //onCreate(requestBody) //TODO Revisar funcionamiento
 
       }
-     
-    // TODO - Mejorar gestión de errores
-    } else if (formAction === "update") {
-      console.log("Actualizando...");
-      const response = await updateCalendarEventService(prevData.id, requestBody)
-      console.log(response);         
-      
-      // Vaciar el form (reiniciar a estado por defecto)
-      setFormData(defaultFormData);
-      setFormAction('Create')
-
-      // Actualizar lista (con respuesta del back)
-      onModify(response.response)
     }
     };
 
-  return (
+  return ( //! Quitar los <BR/> al acabar desarrollo
     <form onSubmit={submitNewEvent}>
       {formAction === "create" && <h2>Crear Evento</h2>}
       {formAction === "update" && <h2>Modificar Evento</h2>}
@@ -125,7 +122,7 @@ export default function EventForm({prevData, onCreate, onModify}) {
       <input
         type="text"
         name="summary"
-        value={formData.summary}
+        value={activity?.summary || ''}
         onChange={handleChange}
         required
       />
@@ -133,7 +130,7 @@ export default function EventForm({prevData, onCreate, onModify}) {
       <label>Descripción:</label>
       <textarea
         name="description"
-        value={formData.description}
+        value={activity?.description || ''}
         onChange={handleChange}
       />
 
@@ -142,7 +139,7 @@ export default function EventForm({prevData, onCreate, onModify}) {
       <input
         type="datetime-local"
         name="startDateTime"
-        value={formData.startDateTime}
+        value={(activity?.startDateTime)}
         onChange={handleChange}
         required
       />
@@ -151,7 +148,7 @@ export default function EventForm({prevData, onCreate, onModify}) {
       <input
         type="datetime-local"
         name="endDateTime"
-        value={formData.endDateTime}
+        value={activity?.endDateTime}
         onChange={handleChange}
         required
       />
@@ -161,14 +158,14 @@ export default function EventForm({prevData, onCreate, onModify}) {
       <input
         type="text"
         name="location"
-        value={formData.location}
+        value={activity?.location || ''}
         onChange={handleChange}
       />
 
       {/* <label>Visibilidad:</label>
       <select
         name="visibility"
-        value={formData.visibility}
+        value={activity.visibility}
         onChange={handleChange}
       >
         <option value="default">Default</option>
@@ -179,7 +176,7 @@ export default function EventForm({prevData, onCreate, onModify}) {
       <label>Acceso:</label>
       <select
         name="access"
-        value={formData.access}
+        value={activity?.access || ''}
         onChange={handleChange}
       >
         <option value="partners">Partners (Socios)</option>
@@ -188,16 +185,8 @@ export default function EventForm({prevData, onCreate, onModify}) {
 
       <br />
       <br />
-      {
-        formAction === "update" 
-        ?(
-          <>
-          <button type="submit">Modificar evento</button>
-          <button onClick={handleReset}>Cancelar modificaciones</button>
-          </>
-        )
-        :(<button type="submit">Crear evento</button>)
-      }
+      
+      <button type="submit">Guardar Cambios</button>
     </form>
   );
 }
