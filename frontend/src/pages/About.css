@@ -14,15 +14,6 @@ body,
   overflow-x: hidden;
 }
 
-.about-page .navbar {
-  position: absolute;
-  background-color: transparent;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100vw;
-}
-
 .about-main {
   flex: 1;
   display: flex;
@@ -402,7 +393,7 @@ h3 {
 
   .section-title3 {
     text-align: center;
-    justify-content: center;    
+    justify-content: center;
   }
 
   .about-img {
@@ -420,6 +411,4 @@ h3 {
   .fedegalma-img {
     width: 13rem;
   }
-
-
 }
