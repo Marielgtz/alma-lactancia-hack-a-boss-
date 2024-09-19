@@ -168,12 +168,23 @@ export const getAllCollaboratorsService = async (isTeamMember) => {
 }
 
 export const newCollaboratorService = async (formData) => {
-  console.log('api:', formData);
+  // console.log('api colaboradores:', formData);
+  const objForzado = {
+    name: "lara",
+    surname:"Perez",
+    description:"Opcional",
+    team: true
+  }
+
+  console.log('Obj forzado api:', objForzado);
+  
   try {
-    
     const response = await fetch(`${API_BASE_URL}/new-collaborator`, {
       method: "POST",
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(objForzado),
     });
 
     // return handleResponse(response);

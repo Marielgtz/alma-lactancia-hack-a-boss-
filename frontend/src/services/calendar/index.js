@@ -27,10 +27,8 @@ export async function createEvent(requestBody) {
     return;
   }
 
-  console.log('Creando nuevo evento...');
-   
   const data = await response.json()
-  console.log(data); 
+  return data;
   }
 
 export async function modifyEvent(newEventData) {

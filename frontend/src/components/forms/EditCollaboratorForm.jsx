@@ -25,18 +25,20 @@ const EditCollaboratorForm = ({ collaboratorData }) => {
   // Envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Logs desarrollo
     console.log('Updated collaborator:', collaborator);
-
-    // TODO: Función de modificar en back
-    console.log(collaborator.id ? 'Modificar usuario' : 'Usuario no existente');
+    console.log(collaborator.id ? 'Modificar colaborador' : 'Colaborador no existente');
 
     if (collaborator.id) {
+      // Servicio de editar colaborador
       const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'true' : 'false';
       const responseMsg = await updateCollaboratorService(collaborator.id, isTeam, collaborator);
       console.log(responseMsg);
       
     } else {      
-      const responseMsg = await newCollaboratorService({"name": 'Lara'});
+      // Servicio de crear colaborador //!
+      // const responseMsg = await newCollaboratorService({"name": 'Lara'}); //! Nombre forzado para testear
+      const responseMsg = await newCollaboratorService(collaborator); //! Nombre forzado para testear
       console.log(responseMsg);
     }
     

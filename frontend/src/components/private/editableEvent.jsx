@@ -1,7 +1,7 @@
 import React from 'react'
 import { deleteCalendarEventService } from '../../services/api'
 
-function EditableEvent({eventData, setFormEvent, onDelete}) {
+function EditableEvent({eventData, setFormEvent, onDelete, setToEdit, onClick}) {
     async function handleDelete(){
     console.log("Eliminando evento...", {
       título: eventData.summary,
@@ -28,7 +28,9 @@ function EditableEvent({eventData, setFormEvent, onDelete}) {
   return (
     <>
     <li>
-      <button>{`${eventData.summary} | ${eventData.location} | ${eventData.start.dateTime}`}</button>
+      <button
+        onClick={onClick}
+      >{`${eventData.summary} | ${eventData.location} | ${eventData.start.dateTime}`}</button>
     </li>
     {/* <li key={eventData.id} className='admin-list'>
     <h2>{eventData.summary}</h2>
