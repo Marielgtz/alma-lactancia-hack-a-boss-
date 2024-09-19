@@ -4,7 +4,6 @@ body,
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 .about-page {
@@ -12,15 +11,7 @@ body,
   flex-direction: column;
   position: relative;
   min-height: 100vh;
-}
-
-.about-page .navbar {
-  position: absolute;
-  background-color: transparent;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100vw;
+  overflow-x: hidden;
 }
 
 .about-main {
@@ -103,7 +94,6 @@ body,
 .about-people {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
   justify-content: space-around;
   margin-bottom: 2rem;
   background-color: #fdeee7;
@@ -111,7 +101,7 @@ body,
 
 .person-card {
   width: 18rem;
-  height: 23rem;
+  height: 22rem;
   margin-left: 2rem;
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
@@ -258,7 +248,7 @@ body,
 .about-collab {
   text-align: center;
   margin-top: 2rem;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   margin-left: 3.3rem;
   margin-right: 3.3rem;
 }
@@ -267,6 +257,7 @@ body,
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .collab-card {
@@ -274,7 +265,7 @@ body,
   border-radius: 1rem;
   padding: 1rem;
   width: 12rem;
-  height: 12rem;
+  height: 14rem;
   text-align: center;
 }
 
@@ -402,7 +393,7 @@ h3 {
 
   .section-title3 {
     text-align: center;
-    justify-content: center;    
+    justify-content: center;
   }
 
   .about-img {
@@ -420,6 +411,4 @@ h3 {
   .fedegalma-img {
     width: 13rem;
   }
-
-
 }

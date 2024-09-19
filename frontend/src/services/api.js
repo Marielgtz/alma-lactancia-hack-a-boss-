@@ -110,16 +110,22 @@ export const getCalendarEventService = async (eventId) => {
 };
 
 export const deleteCalendarEventService = async (eventId) => {
+  console.log(eventId);
   try {
     const response = await fetch(
-      `${API_BASE_URL}/delete-calendar-event/${eventId}`,
+      `${API_BASE_URL}/delete-calendar-event/${eventId}/true`,
       {
         method: "DELETE",
       }
     );
 
-    return handleResponse(response);
+    console.log('Fetch realizado');
+    
+    const data = await response.json()
+
+    return data
   } catch (error) {
+    
     console.error("Error deleting calendar event:", error);
     throw error;
   }
@@ -138,7 +144,8 @@ export const updateCalendarEventService = async (eventId, eventData) => {
       }
     );
 
-    return handleResponse(response);
+    const responseFinal = await response.json()
+    return responseFinal
   } catch (error) {
     console.error("Error updating calendar event:", error);
     throw error;
@@ -146,14 +153,32 @@ export const updateCalendarEventService = async (eventId, eventData) => {
 };
 
 // Colaboradores
-export const newCollaboratorService = async (formData) => {
+export const getAllCollaboratorsService = async (isTeamMember) => {
+  const isTeamMemberParam = isTeamMember ? isTeamMember : "false" // Por defecto siempre trae a los miembros 
   try {
+    const response = await fetch(`${API_BASE_URL}/get-all-collaborators/${isTeamMemberParam}`, {
+      method: "GET"
+    });
+
+    return handleResponse(response);
+  } catch (error) {
+    console.error("Error obtaining collaborators list:", error)
+    throw error;
+  }
+}
+
+export const newCollaboratorService = async (formData) => {
+  console.log('api:', formData);
+  try {
+    
     const response = await fetch(`${API_BASE_URL}/new-collaborator`, {
       method: "POST",
       body: formData,
     });
 
-    return handleResponse(response);
+    // return handleResponse(response);
+    const data = response.json();
+    return data;
   } catch (error) {
     console.error("Error creating new collaborator:", error);
     throw error;
@@ -177,6 +202,8 @@ export const deleteCollaboratorService = async (id, team) => {
 };
 
 export const updateCollaboratorService = async (id, team, formData) => {
+  console.log(id);
+  
   try {
     const response = await fetch(
       `${API_BASE_URL}/update-collaborator/${id}/${team}`,
@@ -186,7 +213,9 @@ export const updateCollaboratorService = async (id, team, formData) => {
       }
     );
 
-    return handleResponse(response);
+    // return handleResponse(response);
+    const data = response.json();
+    return data;
   } catch (error) {
     console.error("Error updating collaborator:", error);
     throw error;

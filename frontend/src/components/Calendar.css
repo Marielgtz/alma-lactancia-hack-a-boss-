@@ -8,7 +8,7 @@
   width: 100vw;
   margin-top: 1rem;
   margin-bottom: 3rem;
-  margin-left: 5rem;
+  margin-left: 2rem;
 }
 
 .activity {
@@ -105,6 +105,11 @@
   border: 1px solid #b380b5;
   width: 12rem;
   height: 2rem;
+}
+
+.register-button:hover {
+  cursor: pointer;
+  background-color: white;
 }
 
 .section-title-calendar {

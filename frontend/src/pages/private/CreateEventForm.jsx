@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createEvent } from '../../services/calendar';
+import { updateCalendarEventService } from '../../services/api';
 
-export default function EventForm() {
-  const [formData, setFormData] = useState({
-    summary: "",
-    description: "",
-    startDateTime: "",
-    startTimeZone: "Europe/Madrid",
-    endDateTime: "",
-    endTimeZone: "Europe/Madrid",
-    location: "",
-    attendees: [{ email: "" }],
-    useDefaultReminders: false,
-    emailReminder: 1440,
-    popupReminder: 10,
-    visibility: "private",
-    access: "partners",
-  });
+export default function EventForm({prevData, onCreate, onModify}) {  
+  const defaultFormData = {
+    summary: '',
+    description: '',
+    startDateTime: '',
+    endDateTime: '',
+    location: '',
+    access: 'free', // Valor por defecto
+  };
+
+  const [formAction, setFormAction] = useState('create')
+  const [formData, setFormData] = useState(defaultFormData);
+
+  // Función que adapta la fecha al input del formulario
+  const formatDateTimeForInput = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:MM'
+  };
+  
+  useEffect(() => {
+    if (prevData.id) {
+      setFormAction('update')
+      setFormData({
+        summary: prevData.summary || '',
+        description: prevData.description || '',
+        startDateTime: formatDateTimeForInput(prevData.start?.dateTime), // Formateado para mostrar en input
+        endDateTime: formatDateTimeForInput(prevData.end?.dateTime), // Formateado para mostrar en input
+        location: prevData.location || '',
+        access: prevData.access
+      });
+    } else if (!prevData.id) {
+      setFormData({})
+    }
+  }, [prevData]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,68 +46,80 @@ export default function EventForm() {
     }));
   };
 
-  const handleAttendeeChange = (index, e) => {
-    const newAttendees = formData.attendees.map((attendee, i) => {
-      if (i === index) {
-        return { email: e.target.value };
-      }
-      return attendee;
-    });
-    setFormData((prevData) => ({
-      ...prevData,
-      attendees: newAttendees,
-    }));
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    console.log('Cancelando modificaciones...');
+    
+    // Vaciar el form (reiniciar a estado por defecto)
+    setFormData(defaultFormData);
+
+    // Reiniciar form a modo "crear evento"
+    setFormAction('create');
   };
 
-  const addAttendee = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      attendees: [...prevData.attendees, { email: "" }]
-    }));
-  };
-
-  const removeAttendee = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      attendees: prevData.attendees.filter((_, i) => i !== index),
-    }));
-  };
-
-  const submitNewEvent = (e) => {
+  const submitNewEvent = async (e) => {
     e.preventDefault(); 
 
+    // Adecuar los datos del formulario al estándar de Google
     const requestBody = {
       summary: formData.summary,
       description: formData.description,
       start: {
         dateTime: `${formData.startDateTime}:00+02:00`,
-        timeZone: formData.startTimeZone
+        timeZone: "Europe/Madrid"
       },
       end: {
         dateTime: `${formData.endDateTime}:00+02:00`,
-        timeZone: formData.endTimeZone
+        timeZone: "Europe/Madrid"
       },
       location: formData.location,
-    //   ...(formData.attendees.length > 0 && { attendees: formData.attendees }),
       reminders: {
-        useDefault: formData.useDefaultReminders,
+        useDefault: false,
         overrides: [
-          { method: "email", minutes: formData.emailReminder },
-          { method: "popup", minutes: formData.popupReminder }
+          { method: "email", minutes: 1440 },
+          { method: "popup", minutes: 60 }
         ]
       },
-      visibility: formData.visibility,
+      visibility: "private",
       access: formData.access
     };
 
-    // console.log("Event data:", requestBody);
-    createEvent(requestBody);
+    console.log("Event data submitted:", formAction, requestBody);
+
+    // TODO - Mejorar gestión de errores
+    if (formAction === "create") {
+      const response = await createEvent(requestBody);
+      console.log(response);
+      if (response) {
+      
+        // Vaciar el form (reiniciar a estado por defecto)
+        setFormData(defaultFormData);
+
+        // Actualizar lista
+        onCreate(requestBody)
+
+      }
+     
+    // TODO - Mejorar gestión de errores
+    } else if (formAction === "update") {
+      console.log("Actualizando...");
+      const response = await updateCalendarEventService(prevData.id, requestBody)
+      console.log(response);         
+      
+      // Vaciar el form (reiniciar a estado por defecto)
+      setFormData(defaultFormData);
+      setFormAction('Create')
+
+      // Actualizar lista (con respuesta del back)
+      onModify(response.response)
+    }
     };
 
   return (
-    <details><summary>Create Event</summary>
     <form onSubmit={submitNewEvent}>
-      <h2>Crear Evento</h2>
+      {formAction === "create" && <h2>Crear Evento</h2>}
+      {formAction === "update" && <h2>Modificar Evento</h2>}
 
       <label>Título del evento:</label>
       <input
@@ -105,7 +137,8 @@ export default function EventForm() {
         onChange={handleChange}
       />
 
-      <label>Fecha y hora de inicio:</label>
+      <div className='dateTime-settings'>
+      <label>Inicio:</label>
       <input
         type="datetime-local"
         name="startDateTime"
@@ -114,15 +147,7 @@ export default function EventForm() {
         required
       />
 
-      <label>Zona horaria de inicio:</label>
-      <input
-        type="text"
-        name="startTimeZone"
-        value={formData.startTimeZone}
-        onChange={handleChange}
-      />
-
-      <label>Fecha y hora de finalización:</label>
+      <label>Finalización:</label>
       <input
         type="datetime-local"
         name="endDateTime"
@@ -130,14 +155,7 @@ export default function EventForm() {
         onChange={handleChange}
         required
       />
-
-      <label>Zona horaria de finalización:</label>
-      <input
-        type="text"
-        name="endTimeZone"
-        value={formData.endTimeZone}
-        onChange={handleChange}
-      />
+      </div>
 
       <label>Localización:</label>
       <input
@@ -147,57 +165,7 @@ export default function EventForm() {
         onChange={handleChange}
       />
 
-      <label>Asistentes:</label>
-      {formData.attendees.map((attendee, index) => (
-        <div key={index}>
-          <input
-            type="email"
-            value={attendee.email}
-            onChange={(e) => handleAttendeeChange(index, e)}
-            placeholder={`Email del asistente ${index + 1}`}
-          />
-          {index > 0 && (
-            <button type="button" onClick={() => removeAttendee(index)}>
-              Eliminar
-            </button>
-          )}
-        </div>
-      ))}
-      <button type="button" onClick={addAttendee}>
-        Añadir asistente
-      </button>
-
-      <label>
-        <input
-          type="checkbox"
-          name="useDefaultReminders"
-          checked={formData.useDefaultReminders}
-          onChange={handleChange}
-        />
-        Usar recordatorios por defecto
-      </label>
-
-      {!formData.useDefaultReminders && (
-        <>
-          <label>Recordatorio por email (minutos antes):</label>
-          <input
-            type="number"
-            name="emailReminder"
-            value={formData.emailReminder}
-            onChange={handleChange}
-          />
-
-          <label>Recordatorio popup (minutos antes):</label>
-          <input
-            type="number"
-            name="popupReminder"
-            value={formData.popupReminder}
-            onChange={handleChange}
-          />
-        </>
-      )}
-
-      <label>Visibilidad:</label>
+      {/* <label>Visibilidad:</label>
       <select
         name="visibility"
         value={formData.visibility}
@@ -206,7 +174,7 @@ export default function EventForm() {
         <option value="default">Default</option>
         <option value="public">Public</option>
         <option value="private">Private</option>
-      </select>
+      </select> */}
 
       <label>Acceso:</label>
       <select
@@ -218,8 +186,18 @@ export default function EventForm() {
         <option value="free">Free</option>
       </select>
 
-      <button type="submit">Crear evento de prueba</button>
+      <br />
+      <br />
+      {
+        formAction === "update" 
+        ?(
+          <>
+          <button type="submit">Modificar evento</button>
+          <button onClick={handleReset}>Cancelar modificaciones</button>
+          </>
+        )
+        :(<button type="submit">Crear evento</button>)
+      }
     </form>
-    </details>
   );
 }

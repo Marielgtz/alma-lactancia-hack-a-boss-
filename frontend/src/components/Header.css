@@ -14,30 +14,45 @@ body {
   right: 0;
   flex-direction: column;
   font-family: outfit;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* Estilo del logo */
 .logo {
-  height: 6em;
+  height: 4em;
   z-index: 1;
   position: absolute;
   align-self: flex-start;
-  margin-top: 2em;
+  margin-top: 1em;
   margin-left: 1rem;
 }
 
-/* social media*/
+/* Toggle del menú (icono hamburguesa) */
+.menu-toggle {
+  display: none;
+}
+
+/* Redes sociales */
 .social-media {
   display: flex;
   justify-content: center;
   align-self: flex-end;
 }
 
-/* Social media icons styling */
+/* Estilo de los iconos de redes sociales */
 .social-media a {
   color: white;
-  margin: 0 1em;
+  margin: 0 0.5em;
   margin-top: -1em;
+}
+.social-media a svg {
+  width: 1.5rem; /* Ajustar el ancho del icono */
+  height: 1.5rem; /* Ajustar la altura del icono */
+}
+
+.social-media a svg:hover {
+  color: #e0bb8e;
 }
 
 /* Estilo de la lista de menú principal */
@@ -67,7 +82,7 @@ body {
   z-index: 999;
 }
 
-/* Estilo del subrayado en los enlaces del menú principal */
+/* Subrayado en los enlaces del menú principal */
 .menu-item > a::after {
   content: "";
   position: absolute;
@@ -76,11 +91,12 @@ body {
   left: 0;
   bottom: -2px; /* Posiciona el subrayado justo debajo del texto */
   background-color: transparent; /* Sin color de fondo para el subrayado */
+  transition: background-color 0.3s ease;
 }
 
 /* Cambia el color del texto y subrayado en hover */
-.menu-item > a:hover {
-  color: #9c6fa0; /* Cambia el color del texto al pasar el mouse */
+.menu-item > a:hover::after {
+  background-color: white; /* Color de subrayado al hacer hover */
 }
 
 /* Estilo de la lista de submenú */
@@ -106,25 +122,10 @@ body {
   z-index: 1001;
 }
 
-/* Estilo del subrayado en los enlaces del submenú */
-.submenu li a::after {
-  position: absolute;
-  width: 100%; /* Ajusta el subrayado al ancho del texto */
-  height: 2px; /* Grosor del subrayado */
-  left: 0;
-  bottom: -2px; /* Posiciona el subrayado justo debajo del texto */
-  background-color: transparent; /* Sin color de fondo para el subrayado */
-}
-
 /* Cambia el color del texto en el submenú al pasar el mouse */
 .submenu li a:hover {
-  color: #9c6fa0; /* Cambia el color del texto al pasar el mouse */
-}
-
-/* Estilo para el submenú de "Actividades por años" */
-.menu-item .menu-item .submenu {
-  top: 0; /* Mantiene el submenú al nivel del menú principal */
-  left: 100%; /* Posiciona el submenú a la derecha del menú principal */
+  color: #9c6fa0;
+  background-color: #f2f2f2;
 }
 
 /* Mostrar el submenú cuando se hace hover sobre el elemento del menú */
@@ -137,6 +138,10 @@ body {
   .navbar {
     font-family: outfit;
     width: 100vw;
+    position: relative;
+    background-color: #9c6fa0;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .logo {
@@ -144,8 +149,23 @@ body {
     margin-top: 0.5em;
   }
 
+  .social-media {
+    margin: 10px;
+  }
+
   .social-media-item {
-    visibility: hidden;
+    visibility: visible; /* Asegura que los iconos de redes sociales sean visibles en móviles */
+    font-size: 0.9rem;
+  }
+
+  .social-media a {
+    color: white;
+    margin: 0.1em;
+  }
+
+  .social-media a svg {
+    width: 1.5rem; /* Ajustar el ancho del icono */
+    height: 1.5rem; /* Ajustar la altura del icono */
   }
 
   .menu-toggle {
@@ -155,42 +175,80 @@ body {
     font-size: 2rem;
     align-self: flex-end;
     margin-top: 0.8rem;
-    margin-right: 1rem;
+    margin-right: 0.7rem;
     z-index: 12;
   }
 
   .menu {
     display: none;
+    flex-direction: column;
+    width: 100%; /* Se ajusta al ancho completo del contenedor */
+    position: relative; /* Asegura que el menú esté en relación con el contenedor */
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
   }
 
   .menu.active {
     display: flex;
-    flex-direction: column;
-    position: absolute;
     background-color: #9c6fa0;
     z-index: 11;
     text-align: center;
     width: 100%;
-    height: 20.5rem;
-    margin-top: 0;
+    height: auto; /* Ajusta la altura según el contenido */
+    margin-top: 0; /* Elimina el margen superior */
   }
 
   .menu-item > a {
     color: white;
+    padding: 1.5rem 0;
+    width: 100%;
+    text-decoration: none;
+    display: block; /* Asegura que el enlace ocupa todo el espacio del item */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para fondo y color */
+    box-sizing: border-box;
+  }
+
+  .menu-item > a:hover {
+    background-color: #b380b5; /* Fondo lila al hacer hover */
+    color: white; /* Color del texto blanco al hacer hover */
   }
 
   .submenu {
     display: none;
+    background-color: #9c6fa0; /* Fondo lila */
+    width: 100%;
+    color: white; /* Texto blanco */
+    position: relative;
+    margin-top: 0; /* Asegura que el submenú esté pegado al menú principal */
+    z-index: 999;
+    box-sizing: border-box;
   }
-  
+
+  /* Cambia el color del texto en el submenú al pasar el mouse */
+  .submenu li a {
+    color: white; /* Texto blanco en submenú */
+    padding: 10px;
+    display: block;
+    box-sizing: border-box;
+    color: #9c6fa0; /* Texto blanco con fondo lila al pasar el mouse */
+    background-color: white;
+  }
+
+  .submenu li a:hover {
+    color: white; /* Texto blanco con fondo lila al pasar el mouse */
+    background-color: #e0bb8e;
+  }
+
   .submenu.active {
     display: block;
   }
-}
 
-
-@media (min-width: 769px) {
-  .menu-toggle {
-    display: none;
+  .menu-toggle-close {
+    position: absolute;
+    top: 1rem; /* Ajusta según sea necesario */
+    right: 1rem; /* Ajusta según sea necesario */
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 13; /* Asegura que el icono esté por encima del menú */
   }
 }

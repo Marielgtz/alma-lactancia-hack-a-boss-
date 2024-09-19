@@ -73,7 +73,9 @@
   width: 2.5rem;
   height: 2.5rem;
 }
-
+.social-media a svg:hover {
+  color: #e0bb8e;
+}
 .admin {
   display: flex;
   flex-direction: column;
@@ -107,14 +109,16 @@
 /* Estilos responsive */
 @media (max-width: 768px) {
   .App-footer {
-    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
     min-height: auto;
   }
 
   .footer-logo img {
     height: 4em;
-    margin-left: 14em;
-    margin-top: 0.5rem;
+    margin: 0;
   }
 
   .footer-content {
@@ -154,4 +158,3 @@
     font-size: 0.7rem;
   }
 }
-
