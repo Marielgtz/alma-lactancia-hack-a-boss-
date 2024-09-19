@@ -6,7 +6,7 @@ import EditForm from './EditForm'
 import FormDisplay from './FormDisplay'
 import FormDropdown from './FormDropdown'
 
-const Prueba = () => {
+const Prueba = ({ instagramPost, setInstagramPost }) => {
     const formList = Array.from({ length: 4 }, () => {
         return {}
     }) //Número de formularios que se pueden crear.
@@ -14,36 +14,36 @@ const Prueba = () => {
         return {}
     }) //Número de publicaciones de Instagram que se podrán publicar.
 
-    const [instagramPost, setInstagramPost] = useState(instagramPostList)
+    // const [instagramPost, setInstagramPost] = useState(instagramPostList)
     const [publishedForm, setPublishedForm] = useState(formList)
     const [forms, setForms] = useState({})
     const [editingForm, setEditingForm] = useState(false)
     const [selectedForm, setSelectedForm] = useState(null)
 
-    useEffect(() => {
-        const fetchInstagramPost = async () => {
-            const url = `${
-                import.meta.env.VITE_API_URL
-            }/get-all-instagram-posts`
+    // useEffect(() => {
+    //     const fetchInstagramPost = async () => {
+    //         const url = `${
+    //             import.meta.env.VITE_API_URL
+    //         }/get-all-instagram-posts`
 
-            try {
-                const response = await fetch(url)
+    //         try {
+    //             const response = await fetch(url)
 
-                if (response.ok) {
-                    const res = await response.json()
-                    console.log(res.message)
-                    setInstagramPost(res.posts)
-                } else {
-                    const errorData = await response.json()
-                    const errorMessage = errorData.error || response.statusText
-                    throw new Error(errorMessage)
-                }
-            } catch (error) {
-                console.error('Ha ocurrido un error:', error)
-            }
-        }
-        fetchInstagramPost()
-    }, [])
+    //             if (response.ok) {
+    //                 const res = await response.json()
+    //                 console.log(res.message)
+    //                 setInstagramPost(res.posts)
+    //             } else {
+    //                 const errorData = await response.json()
+    //                 const errorMessage = errorData.error || response.statusText
+    //                 throw new Error(errorMessage)
+    //             }
+    //         } catch (error) {
+    //             console.error('Ha ocurrido un error:', error)
+    //         }
+    //     }
+    //     fetchInstagramPost()
+    // }, [])
 
     return (
         <div>
