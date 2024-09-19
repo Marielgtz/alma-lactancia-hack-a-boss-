@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,7 +27,36 @@ import AdminGeneral from "./components/private/AdminGeneral";
 import FormActivityPage from "./pages/FormActivityPage";
 
 function App() {
-  const [publishedForm, setPublishedForm] = useState({ fields: [] });
+   const instagramPostList = Array.from({ length: 6 }, () => {
+        return {}
+    }) //Número de publica
+    const [instagramPost, setInstagramPost] = useState(instagramPostList)
+    const [publishedForm, setPublishedForm] = useState({ fields: [] });
+    useEffect(() => {
+        const fetchInstagramPost = async () => {
+            const url = `${
+                import.meta.env.VITE_API_URL
+            }/get-all-instagram-posts`
+
+            try {
+                const response = await fetch(url)
+
+                if (response.ok) {
+                    const res = await response.json()
+                    console.log(res.message)
+                    setInstagramPost(res.posts)
+                } else {
+                    const errorData = await response.json()
+                    const errorMessage = errorData.error || response.statusText
+                    throw new Error(errorMessage)
+                }
+            } catch (error) {
+                console.error('Ha ocurrido un error:', error)
+            }
+        }
+        fetchInstagramPost()
+    }, [])
+
 
   return (
     <Router>
@@ -36,12 +66,28 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/quienes-somos" element={<About />} />
           <Route path="/actividades" element={<Activities />} />
-          <Route path="/historico" element={<History />} />
+         <Route
+                        path='/historico'
+                        element={
+                            <History
+                                instagramPost={instagramPost}
+                                instagramPostList={instagramPostList}
+                            />
+                        }
+                    />
           <Route path="/biblioteca" element={<Library />} />
           <Route path="/colabora" element={<Collaborate />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
-          <Route path="/prueba" element={<Prueba />} />
+          <Route
+                        path='/prueba'
+                        element={
+                            <Prueba
+                                instagramPost={instagramPost}
+                                setInstagramPost={setInstagramPost}
+                            />
+                        }
+                    />
 
           {/* Pasar el estado publishedForm a FormActivityPage */}
           <Route
@@ -68,6 +114,7 @@ function App() {
       </div>
     </Router>
   );
+
 }
 
 export default App;
