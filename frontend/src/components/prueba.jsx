@@ -6,16 +6,21 @@ import EditForm from './EditForm'
 import FormDisplay from './FormDisplay'
 import FormDropdown from './FormDropdown'
 
-const Prueba = ({ instagramPost, setInstagramPost }) => {
+const Prueba = ({
+    // instagramPost,
+    // setInstagramPost,
+    publishedForm,
+    setPublishedForm,
+}) => {
     const formList = Array.from({ length: 4 }, () => {
         return {}
     }) //Número de formularios que se pueden crear.
-    const instagramPostList = Array.from({ length: 6 }, () => {
-        return {}
-    }) //Número de publicaciones de Instagram que se podrán publicar.
+    // const instagramPostList = Array.from({ length: 6 }, () => {
+    //     return {}
+    // }) //Número de publicaciones de Instagram que se podrán publicar.
 
     // const [instagramPost, setInstagramPost] = useState(instagramPostList)
-    const [publishedForm, setPublishedForm] = useState(formList)
+    // const [publishedForm, setPublishedForm] = useState(formList)
     const [forms, setForms] = useState({})
     const [editingForm, setEditingForm] = useState(false)
     const [selectedForm, setSelectedForm] = useState(null)
@@ -47,7 +52,7 @@ const Prueba = ({ instagramPost, setInstagramPost }) => {
 
     return (
         <div>
-            <h1>Publicaciones Instagram</h1>
+            {/* <h1>Publicaciones Instagram</h1>
             <InstagramForm setInstagramPost={setInstagramPost} />
             <ul>
                 {instagramPostList.map((_, index) => {
@@ -60,7 +65,7 @@ const Prueba = ({ instagramPost, setInstagramPost }) => {
                         </li>
                     )
                 })}
-            </ul>
+            </ul> */}
 
             <h1>Formularios</h1>
             {editingForm ? (

@@ -1,12 +1,8 @@
-import React from 'react';
+import React from 'react'
+import InstagramForm from '../InstagramForm'
 
-const AdminHistorical = () => {
-  return (
-    <div>
-      <h1>Histórico del administrador</h1>
-      {/* Contenido del histórico aquí */}
-    </div>
-  );
-};
+const AdminHistorical = ({ instagramPost, setInstagramPost }) => {
+    return <InstagramForm setInstagramPost={setInstagramPost} />
+}
 
-export default AdminHistorical;
+export default AdminHistorical
