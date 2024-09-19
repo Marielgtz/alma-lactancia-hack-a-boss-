@@ -5,6 +5,16 @@ body,
   margin: 0;
   padding: 0;
 }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+.spinner {
+  color: #b380b5; /* Cambia este color al que desees (lila) */
+}
 
 .home-page {
   display: flex;
@@ -38,19 +48,18 @@ body,
   position: relative;
   height: 90vh;
   width: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .background-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   filter: brightness(70%);
 }
-
 
 .support-button {
   position: absolute;
@@ -320,7 +329,7 @@ body,
   }
 
   .background-image img {
-    height: 50vh; 
+    height: 50vh;
   }
 
   .support-button {
