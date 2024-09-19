@@ -73,7 +73,9 @@
   width: 2.5rem;
   height: 2.5rem;
 }
-
+.social-media a svg:hover {
+  color: #e0bb8e;
+}
 .admin {
   display: flex;
   flex-direction: column;
@@ -154,4 +156,3 @@
     font-size: 0.7rem;
   }
 }
-

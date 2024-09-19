@@ -15,17 +15,17 @@ const Library = () => {
       <Header />
       <main className="library-main">
         <h1 className="library-title">Biblioteca</h1>
-        <p className="library-text">
-          Bienvenidos a nuestra biblioteca de recursos, un espacio dedicado a
-          ofrecer información confiable y actualizada sobre la lactancia materna
-          y temas relacionados.
-          <br />
-          Aquí encontrarás una cuidada selección de recursos diseñados para
-          acompañarte en cada etapa dedicado la maternidad, desde el embarazo
-          hasta la crianza y la
-          <br />
-          alimentación complementaria.
-        </p>
+        <div className="contenedor-texto-biblioteca">
+          <p className="library-text">
+            Bienvenidos a nuestra biblioteca de recursos, un espacio dedicado a
+            ofrecer información confiable y actualizada sobre la lactancia
+            materna y temas relacionados.
+            <br />
+            Aquí encontrarás una cuidada selección de recursos diseñados para
+            acompañarte en cada etapa dedicado la maternidad, desde el embarazo
+            hasta la crianza y la alimentación complementaria.
+          </p>
+        </div>
         <div className="collapsible-main">
           <div className="collapsible-container-library">
             <div

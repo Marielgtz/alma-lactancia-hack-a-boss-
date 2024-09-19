@@ -8,7 +8,6 @@ import logoAlma from "../images/logo-alma.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
-
 const Header = () => {
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
   const { generalSettings } = useContactInfo();
@@ -24,45 +23,47 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
-
   const instagramLink = generalSettings?.linkInstagram || "";
   const facebookLink = generalSettings?.linkFacebok || "";
-  const logoSrc = generalSettings?.logo ? `${API_BASE_URL}/images/${generalSettings.logo}` : logoAlma;
-  
+  const logoSrc = generalSettings?.logo
+    ? `${API_BASE_URL}/images/${generalSettings.logo}`
+    : logoAlma;
 
   return (
     <header>
       <nav className="navbar">
-        <img
-          src={logoSrc}
-          alt="Logo Alma"
-          className="logo"
-        />
+        <Link to="/" className="logo">
+          <img src={logoSrc} alt="Logo de Alma" className="logo" />
+        </Link>
         <div className="menu-toggle" onClick={toggleMenu}>
           {menuOpen ? "✕" : "☰"}
         </div>
         <div className={`social-media ${menuOpen ? "active" : ""}`}>
-          <a
-            href={instagramLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-media-item"
-          >
-            <FontAwesomeIcon icon={faInstagram} size="2x" />
-          </a>
-          <a
-            href={facebookLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-media-item"
-          >
-            <FontAwesomeIcon icon={faFacebookF} size="2x" />
-          </a>
+          {instagramLink && (
+            <a
+              href={instagramLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-media-item"
+            >
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
+          )}
+          {facebookLink && (
+            <a
+              href={facebookLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-media-item"
+            >
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+          )}
         </div>
         {/* Inicio de la lista de elementos del menú */}
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
-            <a href="/">Inicio</a>
+            <Link to="/">Inicio</Link>
           </li>
           <li className="menu-item">
             <Link to="/quienes-somos">¿Quiénes somos?</Link>
@@ -71,10 +72,10 @@ const Header = () => {
             <a onClick={() => toggleSubMenu(1)}>Actividades</a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
-                <a href="/actividades">Próximas Inscripciones</a>
+                <Link to="/actividades">Próximas actividades</Link>
               </li>
               <li>
-                <a href="/historico">Histórico</a>
+                <Link to="/historico">Histórico</Link>
               </li>
             </ul>
           </li>
