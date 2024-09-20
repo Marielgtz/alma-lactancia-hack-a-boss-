@@ -14,6 +14,8 @@ const Library = () => {
     <div className="library-page">
       <Header />
       <main className="library-main">
+        <p className="alma-text">Alma Lactancia</p>
+
         <h1 className="library-title">Biblioteca</h1>
         <div className="contenedor-texto-biblioteca">
           <p className="library-text">

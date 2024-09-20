@@ -87,6 +87,7 @@ textarea {
 }
 
 .contact-page .captcha-img {
+  width: 100%;
   margin-left: 5rem;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
