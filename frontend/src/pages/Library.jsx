@@ -272,7 +272,16 @@ const Library = () => {
             </div>
             {openInfo === "hemeroteca" && (
               <div className="collapsible-content-library">
-                <p>Antiguo blog de Alma Lactancia ˃</p>
+                <p>
+                  <a
+                    className="link-antiguo-blog-al"
+                    href="https://almalactancia.blogspot.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visita el antiguo blog de Alma Lactancia ➡️
+                  </a>
+                </p>
               </div>
             )}
           </div>
