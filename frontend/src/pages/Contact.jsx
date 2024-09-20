@@ -41,14 +41,17 @@ const Contact = () => {
 
     try {
       // Realizar la solicitud POST al backend
-      const response = await fetch(import.meta.env.VITE_API_URL + "/new-contact-message", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: "include",
-      });
+      const response = await fetch(
+        import.meta.env.VITE_API_URL + "/new-contact-message",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Error al enviar el mensaje");
@@ -65,9 +68,9 @@ const Contact = () => {
     }
   };
 
-  const instagramLink = generalSettings?.linkInstagram || '';
-  const facebookLink = generalSettings?.linkFacebok || '';
-  const email = generalSettings?.email || '';
+  const instagramLink = generalSettings?.linkInstagram || "";
+  const facebookLink = generalSettings?.linkFacebok || "";
+  const email = generalSettings?.email || "";
 
   return (
     <div className="contact-page">
@@ -147,21 +150,32 @@ const Contact = () => {
           </form>
 
           <div className="contact-info">
-            <p>También podéis contactar con la Asociación</p>
-            <p>ALMA a través de cualquiera de los</p>
-            <p>siguientes medios:</p>
+            <p>
+              También podéis contactar con la Asociación ALMA a través de
+              cualquiera de los siguientes medios:
+            </p>
             <p>
               <a href={email} className="contact-info-icon">
                 <i className="fas fa-envelope"></i> {email}
               </a>
             </p>
             <p>
-              <a href={instagramLink} className="contact-info-icon" target="_blank" rel="noopener noreferrer">
+              <a
+                href={instagramLink}
+                className="contact-info-icon"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i className="fab fa-instagram"></i> {instagramLink}
               </a>
             </p>
             <p>
-              <a href={facebookLink} className="contact-info-icon" target="_blank" rel="noopener noreferrer">
+              <a
+                href={facebookLink}
+                className="contact-info-icon"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i className="fab fa-facebook"></i> {facebookLink}
               </a>
             </p>
