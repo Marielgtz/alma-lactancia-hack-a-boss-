@@ -93,7 +93,7 @@ textarea {
 }
 
 .contact-page .captcha-input {
-  width: 9rem;
+  width: 15rem;
   margin-left: 5rem;
   padding: 0.5rem;
   font-family: outfit;
@@ -244,10 +244,10 @@ textarea {
   }
 
   .contact-page .captcha-input {
-    width: 8.5rem;
+    width: 15rem;
     margin-left: 4rem;
     font-family: outfit;
-    height: 2rem;
+    height: 1rem;
   }
 
   .contact-button {
@@ -328,10 +328,10 @@ textarea {
   }
 
   .contact-page .captcha-input {
-    width: 8.5rem;
+    width: 14rem;
     margin-left: 4rem;
     font-family: outfit;
-    height: 2rem;
+    height: 1rem;
   }
 
   .contact-button {
