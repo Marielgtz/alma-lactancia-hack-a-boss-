@@ -16,7 +16,7 @@ body,
 
 .library-page .navbar {
   background-color: #b380b5;
-  height: 10rem;
+  height: 6.5rem;
   position: relative;
 }
 
@@ -25,6 +25,7 @@ body,
   display: flex;
   flex-direction: column;
   background-color: #ffeee7;
+  padding-bottom: 5%;
 }
 .alma-text {
   margin-top: 2rem;
