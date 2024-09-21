@@ -14,8 +14,8 @@ const About = () => {
     const fetchCollaborators = async () => {
       try {
         const [teamResponse, externalResponse] = await Promise.all([
-          fetch("http://localhost:3001/get-all-collaborators/true"),
           fetch("http://localhost:3001/get-all-collaborators/false"),
+          fetch("http://localhost:3001/get-all-collaborators/true"),
         ]);
 
         if (!teamResponse.ok || !externalResponse.ok) {
