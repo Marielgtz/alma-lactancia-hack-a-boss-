@@ -17,19 +17,19 @@ const AdminActivities = () => {
     setToEdit(activityData);     
   }
 
-  // TODO - Que el formulario aparezca y desaparezca?
-  const toggleFormHidden = () => {
-    setIsFormHidden(prevState => !prevState); 
-  };
+  async function getEvents() {
+    const calendarEvents = await getCalendarEvents();
+    // console.log(calendarEvents);
+    setEventsList(calendarEvents)
+  }
+
+  // // TODO - Que el formulario aparezca y desaparezca?
+  // const toggleFormHidden = () => {
+  //   setIsFormHidden(prevState => !prevState); 
+  // };
 
   useEffect(() => {
-    async function getEvents() {
-      const calendarEvents = await getCalendarEvents();
-      // console.log(calendarEvents);
-      setEventsList(calendarEvents)
-    }
-
-    getEvents();
+    getEvents(); // Con carga de la página
   },[])
 
   // useEffect(() => {
@@ -43,14 +43,17 @@ const AdminActivities = () => {
     setEventsList(prevEvents => prevEvents.filter(event => event.id !== eventId));
   }
 
-  function modifyEvent(updatedEvent) {
-    setEventsList(prevEvents =>
-      prevEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event)
-    );
+  function modifyEvent() {
+    // setEventsList(prevEvents =>
+    //   prevEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event)
+    // );
+    toggleEditMode({});
+    getEvents();
   }
 
-  function createEvent(newEvent) {
-    setEventsList(prevEvents => [...prevEvents, newEvent]);
+  function createEvent() {
+    toggleEditMode({});
+    getEvents();
   }
 
 

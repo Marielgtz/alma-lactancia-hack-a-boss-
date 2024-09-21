@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createEvent } from '../../services/calendar';
 import { updateCalendarEventService } from '../../services/api';
+import formatDate from '../../utils/formatDate';
 
 export default function EventForm({toEdit, onCreate, onModify}) {
   // const [prevActivity, setPrevActivity] = useState(toEdit);  
@@ -13,8 +14,9 @@ export default function EventForm({toEdit, onCreate, onModify}) {
     access: 'free', // Valor por defecto
   };
 
-  const [formAction, setFormAction] = useState('create')
   const [activity, setActivity] = useState(toEdit);
+  console.log(activity);
+  
 
   // Función que adapta la fecha al input del formulario
   // const formatDateTimeForInput = (dateString) => {
@@ -26,8 +28,11 @@ export default function EventForm({toEdit, onCreate, onModify}) {
   useEffect(() => {
     if (toEdit?.id) {
       console.log('Datos previos de la actividad cargados');
-      setActivity(toEdit)
-      //TODO - ¿Cómo adaptar la fecha para que se coloque en el form?
+      const adaptedData = toEdit
+      adaptedData.parsedStart = formatDate(adaptedData.start.dateTime, "local")
+      adaptedData.parsedEnd = formatDate(adaptedData.end.dateTime, "local")
+
+      setActivity(adaptedData)  //TODO - ¿Cómo adaptar la fecha para que se coloque en el form?
     } else {
       console.log('Sin datos previos');
       setActivity(toEdit);
@@ -44,16 +49,16 @@ export default function EventForm({toEdit, onCreate, onModify}) {
   };
 
 
-  const handleReset = (e) => {
-    e.preventDefault();
-    console.log('Cancelando modificaciones...');
+  // const handleReset = (e) => {
+  //   e.preventDefault();
+  //   console.log('Cancelando modificaciones...');
     
-    // Vaciar el form (reiniciar a estado por defecto)
-    setActivity(defaultActivity);
+  //   // Vaciar el form (reiniciar a estado por defecto)
+  //   setActivity(defaultActivity);
 
-    // Reiniciar form a modo "crear evento"
-    setFormAction('create');
-  };
+  //   // Reiniciar form a modo "crear evento"
+  //   setFormAction('create');
+  // };
 
   const submitNewEvent = async (e) => {
     e.preventDefault(); 
@@ -82,7 +87,7 @@ export default function EventForm({toEdit, onCreate, onModify}) {
       access: activity.access
     };
 
-    console.log("Event data submitted:", formAction, requestBody);
+    console.log("Event data submitted:", requestBody);
 
     if (toEdit?.id) {
       // Lógica de modificar una actividad
@@ -91,33 +96,32 @@ export default function EventForm({toEdit, onCreate, onModify}) {
       const response = await updateCalendarEventService(toEdit.id, requestBody)
       console.log(response);         
       
-      setActivity(defaultActivity); // Vaciar el form
+      // setActivity(defaultActivity); //? Vaciar el form
 
       // Actualizar lista (con respuesta del back) //! Solo debería activarse si fue bien
-      // onModify(response.response) //TODO Revisar funcionamiento
+      onModify() //TODO Revisar funcionamiento
      
     } else if (!toEdit?.id) {
       // Lógica de crear una nueva actividad
       console.log("Creando evento...");
       const response = await createEvent(requestBody);
       console.log(response);
-      if (response) {
+      if (response.message === "Actividad creada y subida al calendario correctamente") {
       
-        // Vaciar el form (reiniciar a estado por defecto)
-        setActivity(defaultActivity); // Vaciar el form
+        // Limpiar form y actualizar lista en dashboard //! Solo debería activarse si fue bien
+        onCreate(requestBody) //TODO Revisar funcionamiento
 
-        // Actualizar lista //! Solo debería activarse si fue bien
-        //onCreate(requestBody) //TODO Revisar funcionamiento
-
+      }
+      else {
+        console.log("Se ha producido un error en la petición de creación...")
       }
     }
     };
 
+  
+
   return ( //! Quitar los <BR/> al acabar desarrollo
     <form onSubmit={submitNewEvent}>
-      {formAction === "create" && <h2>Crear Evento</h2>}
-      {formAction === "update" && <h2>Modificar Evento</h2>}
-
       <label>Título del evento:</label>
       <input
         type="text"
@@ -139,7 +143,7 @@ export default function EventForm({toEdit, onCreate, onModify}) {
       <input
         type="datetime-local"
         name="startDateTime"
-        value={(activity?.startDateTime)}
+        value={(activity?.parsedStart)}
         onChange={handleChange}
         required
       />
@@ -148,7 +152,7 @@ export default function EventForm({toEdit, onCreate, onModify}) {
       <input
         type="datetime-local"
         name="endDateTime"
-        value={activity?.endDateTime}
+        value={activity?.parsedEnd}
         onChange={handleChange}
         required
       />
@@ -178,9 +182,10 @@ export default function EventForm({toEdit, onCreate, onModify}) {
         name="access"
         value={activity?.access || ''}
         onChange={handleChange}
-      >
-        <option value="partners">Partners (Socios)</option>
-        <option value="free">Free</option>
+      > 
+        <option value="default">Seleccionar</option>
+        <option value="partners">Solo socios</option>
+        <option value="free">Público</option>
       </select>
 
       <br />
