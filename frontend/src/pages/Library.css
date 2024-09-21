@@ -25,6 +25,7 @@ body,
   display: flex;
   flex-direction: column;
   background-color: #ffeee7;
+  padding-bottom: 5%;
 }
 .alma-text {
   margin-top: 2rem;
