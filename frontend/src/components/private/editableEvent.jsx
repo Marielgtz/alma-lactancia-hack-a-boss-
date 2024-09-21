@@ -1,5 +1,6 @@
 import React from 'react'
 import { deleteCalendarEventService } from '../../services/api'
+import formatDate from '../../utils/formatDate';
 
 function EditableEvent({eventData, setFormEvent, onDelete, setToEdit, onClick}) {
     async function handleDelete(){
@@ -25,12 +26,14 @@ function EditableEvent({eventData, setFormEvent, onDelete, setToEdit, onClick}) 
       setFormEvent(eventData)
     }
 
+    eventData.parsedDate = formatDate(eventData.start.dateTime, "short")
+
   return (
     <>
     <li>
       <button
         onClick={onClick}
-      >{`${eventData.summary} | ${eventData.location} | ${eventData.start.dateTime}`}</button>
+      >{`${eventData.summary} | ${eventData.location} | ${eventData.parsedDate}`}</button>
     </li>
     {/* <li key={eventData.id} className='admin-list'>
     <h2>{eventData.summary}</h2>
