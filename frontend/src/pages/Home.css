@@ -173,7 +173,7 @@ body,
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 20rem;
+  width: 30rem;
   max-width: 100%;
   text-align: center;
 }
@@ -197,6 +197,7 @@ body,
   font-family: bellota;
   color: #333;
   font-size: 1rem;
+  text-align: left;
 }
 
 .carousel-control {
@@ -218,10 +219,13 @@ body,
 
 .carousel-control.prev {
   left: 2rem;
+  color: #b380b5;
+  width: 2px;
 }
 
 .carousel-control.next {
   right: 2rem;
+  color: #b380b5;
 }
 
 /* Estilos responsive */
@@ -388,11 +392,14 @@ body,
   }
 
   .experience-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
   }
 
   .experience-card {
-    width: 100%;
+    width: 80%;
     max-width: none;
   }
 
