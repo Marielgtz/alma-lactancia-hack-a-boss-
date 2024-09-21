@@ -1,18 +1,1 @@
-{
-  "formName": "Reunión3",
-  "formId": "0d6d367b-bf4d-4759-9cb9-887e7fdeb38f",
-  "fields": [
-    {
-      "label": "Nombre",
-      "type": "text"
-    },
-    {
-      "label": "Pensamiento",
-      "type": "text"
-    },
-    {
-      "label": "Correo electrónico",
-      "type": "email"
-    }
-  ]
-}
+{}

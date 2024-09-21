@@ -25,6 +25,7 @@ const getFormById = async (req, res, next) => {
         const dataToSend = {
             formName: unnormalizeFieldName(Object.entries(form)[0][1].formName),
             formId: formId,
+            publishNumber: jsonNumber,
             fields: Object.entries(form)[0][1].fields.map((field) => {
                 return {
                     label: unnormalizeFieldName(field.label),

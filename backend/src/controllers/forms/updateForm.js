@@ -10,9 +10,21 @@ import { getColumnLetter, normalizeFieldName } from '../../utils/index.js'
 
 const updateForm = async (req, res, next) => {
     try {
-        const formDataString = req.body
         const spreadsheetId = process.env.SPREADSHEET_ID
         const spreadsheetIdForms = process.env.SPREADSHEET_ID_FORMS
+
+        //Poner el selector de socios/no socios al final de los campos:
+        const unlessPartnerSelect = req.body.fields.filter((field) => {
+            if (field.label !== 'Partner' && field.label !== 'partner')
+                return field
+        })
+        const partnerSelect = req.body.fields.find(
+            (field) => field.label === 'Partner' || field.label === 'partner'
+        )
+        const formDataString = {
+            ...req.body,
+            fields: [...unlessPartnerSelect, partnerSelect && partnerSelect],
+        }
 
         //Datos nuevos:
         const formData =

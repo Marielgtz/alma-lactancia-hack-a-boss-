@@ -1,11 +1,14 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { generateError } from '../../utils/index.js'
 
 const checkIsPublished = async (req, res, next) => {
     try {
         const jsonNumber = req.params.jsonNumber.toString()
         const formId = req.params.formId
+        const checkIsFile = req.params.checkIsFile
+        let jsonData
+        let isPublished
+
         const filePath = path.join(
             'src',
             'assets',
@@ -14,20 +17,20 @@ const checkIsPublished = async (req, res, next) => {
         )
         const data = await fs.readFile(filePath, 'utf8')
 
-        let jsonData
-        let isPublished
-        try {
+        if (!checkIsFile) {
             jsonData = JSON.parse(data)
-        } catch (err) {
-            generateError(`Error al parsear el JSON: ${err.message}`)
-        }
 
-        if (jsonData && jsonData.formId === formId) {
-            console.log('El formId coincide.')
-            isPublished = true
+            if (jsonData && jsonData.formId === formId) {
+                console.log('El formId coincide.')
+                isPublished = true
+            } else {
+                console.log('El formId no coincide.')
+                isPublished = false
+            }
         } else {
-            console.log('El formId no coincide.')
-            isPublished = false
+            jsonData = JSON.parse(data)
+            if (Object.keys(jsonData).length === 0) isPublished = false
+            else isPublished = true
         }
 
         res.send({
