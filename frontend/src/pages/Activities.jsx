@@ -7,6 +7,7 @@ import ActivityFilter from "../components/filters/ActivityFilter";
 import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
 import { getCalendarEvents, getPastEvents } from "../services/api";
 import { createMockupData } from "../services/mockUpService";
+import formatDate from "../utils/formatDate";
 
 const Activities = () => {
   const navigate = useNavigate();
@@ -41,15 +42,15 @@ const Activities = () => {
   }, []);
 
   useEffect(() => {
-    async function fetchActivities(endpoint, setActivities) {
-      const fetchedActivities = await getPastEvents(endpoint);
+    async function fetchActivities(setActivities) {
+      const fetchedActivities = await getCalendarEvents();
       if (fetchedActivities) {
         const mockup = createMockupData(fetchedActivities);
         setActivities(mockup);
       }
     }
 
-    fetchActivities("/get-filtered-activities", setActivities);
+    fetchActivities(setActivities); // Obtiene todas las actividades futuras
   }, []);
 
   const handleEnrollClick = (activity) => {
@@ -72,14 +73,17 @@ const Activities = () => {
           </p>
         </div>
 
-        <ActivityFilter
+        {/* <ActivityFilter
           activities={activities}
           setFilteredActivites={setFilteredActivites}
-        />
+        /> */}
 
         <ol className="activity-container">
-          {filteredActivities.length > 0 ? (
-            filteredActivities.map((activity, index) => (
+          {activities.length > 0 ? (
+            activities.map((activity, index) => {
+              activity.parsedDate = formatDate(activity.start.dateTime)
+
+              return (
               <li key={index} className="activity-cards">
                 <div className="activity-content">
                   <div className="activity-image">
@@ -93,7 +97,7 @@ const Activities = () => {
                     {activity.summary || "Título"}
                   </h1>
                   <h2 className="activities-date">
-                    {activity.exactDate || "Fecha"}
+                    {activity.parsedDate || "Fecha"}
                   </h2>
                   <p className="activities-location">
                     {activity.location || "Lugar"}
@@ -106,7 +110,7 @@ const Activities = () => {
                   </button>
                 </div>
               </li>
-            ))
+            )})
           ) : (
             <p>No se han podido cargar las actividades pasadas</p>
           )}
