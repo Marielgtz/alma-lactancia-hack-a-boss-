@@ -16,8 +16,9 @@ const Footer = () => {
     window.location.href = `${googleURL}?client_id=${clientId}&redirect_uri=${backURL}/auth/callback&response_type=code&scope=email%20profile`;
   };
 
-  const instagramLink = generalSettings?.linkInstagram || "#";
-  const facebookLink = generalSettings?.linkFacebook || "#"; // Corrigiendo typo en 'linkFacebok'
+  const instagramLink = generalSettings?.linkInstagram || "";
+  const facebookLink = generalSettings?.linkFacebok || ""; 
+  const email = generalSettings?.email || "";
 
   return (
     <div className="contenedor-principal-footer">
@@ -25,8 +26,8 @@ const Footer = () => {
         <div className="columna izquierda-footer">
           <p className="pregunta-footer">¿Nos ponemos en contacto?</p>
           <p className="email-footer">
-            <a href="mailto:almalactancia@gmail.com" className="email-footer">
-              almalactancia@gmail.com
+            <a href={`mailto:${email}`} className="email-footer">
+              {email}
             </a>
           </p>
           <div className="social-media-footer">
