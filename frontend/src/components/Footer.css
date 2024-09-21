@@ -28,6 +28,7 @@
   color: #333;
   margin-top: 0;
   text-decoration: none;
+  z-index: 999;
 }
 .email-footer a:hover {
   font-size: 2.5rem;
@@ -157,4 +158,55 @@
 
 .admin-links a {
   font-size: 0.7rem;
+}
+
+/*MOBILE*/
+@media (max-width: 768px) {
+  .contenedor-principal-footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #d8e2dc;
+    overflow: hidden;
+    font-family: Outfit;
+    width: 100%;
+  }
+
+  .fila-footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .izquierda-footer {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .derecha-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .logo-mascara {
+    max-width: 300px;
+    height: auto;
+  }
+
+  .footer-menu ul,
+  .admin-links-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .copyright-footer {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .email-footer a {
+    font-size: 2rem;
+  }
 }

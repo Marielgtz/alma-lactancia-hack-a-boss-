@@ -173,7 +173,7 @@ body,
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 20rem;
+  width: 30rem;
   max-width: 100%;
   text-align: center;
 }
@@ -197,6 +197,7 @@ body,
   font-family: bellota;
   color: #333;
   font-size: 1rem;
+  text-align: left;
 }
 
 .carousel-control {
