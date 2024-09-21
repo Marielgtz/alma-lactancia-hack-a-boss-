@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getCalendarEvents } from '../services/api'
 
 const useFormDropdown = (
     forms,
@@ -9,6 +10,7 @@ const useFormDropdown = (
 ) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
+    const [publishedActivities, setPublishedActivities] = useState('')
 
     //Obtener los formularios creados:
     useEffect(() => {
@@ -20,6 +22,41 @@ const useFormDropdown = (
             .catch((error) => {
                 console.error('Error al obtener los formularios:', error)
             })
+        const getPublishedForm = async (jsonNumber) => {
+            try {
+                const response = await fetch(
+                    import.meta.env.VITE_API_URL +
+                        `/get-published-form/${jsonNumber}`
+                )
+                if (response.ok) {
+                    const data = await response.json()
+                    setPublishedForm((prevData) => {
+                        const newData = [...prevData]
+                        newData.splice(Number(jsonNumber) - 1, 1, data.form)
+                        return newData
+                    })
+                } else {
+                    console.error('Error al enviar los datos')
+                }
+            } catch (error) {
+                console.log('No hay datos que mostrar:', error)
+            }
+        }
+        Array.from({ length: 4 }, (_, index) => {
+            getPublishedForm(index + 1)
+        })
+    }, [])
+
+    //Los eventos publicados (para asociarlos a las hojas al publicar)
+    useEffect(() => {
+        async function fetchCalendar() {
+            const calendarEvents = await getCalendarEvents()
+            if (calendarEvents) {
+                setPublishedActivities(calendarEvents)
+            }
+        }
+
+        fetchCalendar()
     }, [])
 
     //Seleccionar un formulario de la lista:
@@ -85,6 +122,7 @@ const useFormDropdown = (
                     newData[jsonNumber] = {}
                     return newData
                 })
+                console.log(data.message)
             } else {
                 console.error('Error al despublicar el formulario')
             }
@@ -191,6 +229,7 @@ const useFormDropdown = (
         setSearchTerm,
         filteredFormEntries,
         editFormHandler,
+        publishedActivities,
     }
 }
 export default useFormDropdown

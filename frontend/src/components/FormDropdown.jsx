@@ -12,7 +12,6 @@ const FormDropdown = ({
 }) => {
     const {
         handleSelectForm,
-        formEntries,
         publishHandler,
         unPublishHandler,
         handleYes,
@@ -24,6 +23,7 @@ const FormDropdown = ({
         setSearchTerm,
         filteredFormEntries,
         editFormHandler,
+        publishedActivities,
     } = useFormDropdown(
         forms,
         setForms,
@@ -58,49 +58,58 @@ const FormDropdown = ({
                 <div>
                     <h3>Formulario: {selectedForm?.formName}</h3>
                     <ul>
-                        {selectedForm?.fields.map((field, index) => (
-                            <li key={index}>{field.label}</li>
-                        ))}
+                        {selectedForm?.fields.map((field, index) => {
+                            if (
+                                field.label !== 'Partner' &&
+                                field.label !== 'partner'
+                            )
+                                return <li key={index}>{field.label}</li>
+                        })}
                     </ul>
 
                     {publishFormIndex !== -1 ? (
-                        <button
-                            onClick={() =>
-                                unPublishHandler(publishFormIndex.toString())
-                            }
-                        >
-                            Despublicar
-                        </button>
+                        <>
+                            <p>
+                                {`Asociado al evento: ${publishedActivities[publishFormIndex].summary}`}
+                            </p>
+                            <button
+                                onClick={() =>
+                                    unPublishHandler(
+                                        publishFormIndex.toString()
+                                    )
+                                }
+                            >
+                                Despublicar
+                            </button>
+                        </>
                     ) : (
                         <>
-                            <button
-                                onClick={() =>
-                                    publishHandler(selectedForm?.formId, 1)
-                                }
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault()
+                                    publishHandler(
+                                        selectedForm?.formId,
+                                        e.target.elements.activity.value
+                                    )
+                                }}
                             >
-                                Publicar Evento 1
-                            </button>
-                            <button
-                                onClick={() =>
-                                    publishHandler(selectedForm?.formId, 2)
-                                }
-                            >
-                                Publicar Evento 2
-                            </button>
-                            <button
-                                onClick={() =>
-                                    publishHandler(selectedForm?.formId, 3)
-                                }
-                            >
-                                Publicar Evento 3
-                            </button>
-                            <button
-                                onClick={() =>
-                                    publishHandler(selectedForm?.formId, 4)
-                                }
-                            >
-                                Publicar Evento 4
-                            </button>
+                                <select name='activity' id='activity'>
+                                    <option value=''>Seleccione evento</option>
+                                    {publishedActivities.map(
+                                        (activity, index) => {
+                                            return (
+                                                <option
+                                                    key={index}
+                                                    value={index + 1}
+                                                >
+                                                    {activity.summary}
+                                                </option>
+                                            )
+                                        }
+                                    )}
+                                </select>
+                                <button>Publicar formulario</button>
+                            </form>
                         </>
                     )}
                     <button onClick={editFormHandler}>Editar</button>

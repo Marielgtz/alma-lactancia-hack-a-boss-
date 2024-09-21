@@ -1,23 +1,17 @@
 import useFormDisplay from '../hooks/useFormDisplay'
 
-const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
-    const { sendDataHandler, formRef } = useFormDisplay(
-        publishedForm,
-        setPublishedForm,
-        jsonNumber
-    )
-    if (!publishedForm?.fields) {
-        return <div>{`Publica un formulario en la ranura: ${jsonNumber}`}</div>
+const FormDisplay = ({ jsonNumber }) => {
+    const { sendDataHandler, formRef, formToShow } = useFormDisplay(jsonNumber)
+    if (!formToShow?.fields) {
+        return <div>No hay datos para mostrar.</div>
     }
-
     return (
         <div>
-            <h2>{publishedForm.formName}</h2>
+            <h2>{formToShow.formName}</h2>
             <form ref={formRef} onSubmit={sendDataHandler}>
-                {publishedForm.fields.map((field, index) => (
+                {formToShow.fields.map((field, index) => (
                     <div key={index} style={{ marginBottom: '20px' }}>
                         <label>
-                            {field.label}:
                             {field.type === 'select' ? (
                                 <select
                                     name={field.label
@@ -47,5 +41,4 @@ const FormDisplay = ({ publishedForm, setPublishedForm, jsonNumber }) => {
         </div>
     )
 }
-
 export default FormDisplay
