@@ -1,60 +1,56 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import './History.css'
-import ActivityFilter from '../components/filters/ActivityFilter'
-import silueta from '../images/Alma_Lactancia_-_Foto_hero.jpg'
-import { getPastEvents } from '../services/api'
-import { createMockupData } from '../services/mockUpService'
-import InstagramPost from '../components/InstagramPost'
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import "./History.css";
+import InstagramPost from "../components/InstagramPost";
 
 const History = ({ instagramPost, instagramPostList }) => {
-    const navigate = useNavigate()
-    // const [openInfo, setOpenInfo] = useState(null);
-    const [activities, setActivities] = useState([])
-    const [filteredActivities, setFilteredActivites] = useState([])
+  const navigate = useNavigate();
 
-    // const toggleInfo = (info) => {
-    //   setOpenInfo(info === openInfo ? null : info);
-    // };
+  return (
+    <div className="history-page">
+      <Header />
+      <main className="history-main">
+        <div className="history-header">
+          <p className="history-text">Alma Lactancia</p>
+          <h1 className="history-title">Histórico</h1>
+          <p className="history-description">
+            En esta sección encontrarás un registro detallado de todas las
+            actividades realizadas en Alma Lactancia. Desde reuniones hasta
+            charlas informativas, este histórico recopila los eventos que han
+            marcado nuestra trayectoria y compromiso con las familias.
+          </p>
+          <button
+            className="upcoming-activities"
+            onClick={() => navigate("/actividades")}
+          >
+            Próximas actividades
+          </button>
+          <h2 className="history-subtitle">
+            Explora los momentos más destacados que nos han ayudado a promover y
+            fortalecer la lactancia materna en nuestra comunidad.
+          </h2>
+        </div>
 
-    // Función que obtiene la lista de actividades
-    useEffect(() => {
-        async function fetchActivities(endpoint, setActivities) {
-            const fetchedActivities = await getPastEvents(endpoint)
-            if (fetchedActivities) {
-                const mockup = createMockupData(fetchedActivities)
-                setActivities(mockup)
+        <ol className="instagram-container">
+          {instagramPostList.map((post, index) => {
+            if (Object.keys(instagramPost[index]).length > 0) {
+              return (
+                <li className="instagram-cards" key={index}>
+                  <InstagramPost
+                    instagramPost={instagramPost}
+                    postNumber={index + 1}
+                  />
+                </li>
+              );
             }
-        }
+          })}
+        </ol>
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
-        fetchActivities('/get-filtered-activities', setActivities)
-    }, [])
-
-    return (
-        <ul>
-            {instagramPostList.map((_, index) => {
-                return (
-                    <li key={index}>
-                        <InstagramPost
-                            instagramPost={instagramPost}
-                            postNumber={index + 1}
-                        />
-                    </li>
-                )
-            })}
-        </ul>
-    )
-}
-
-const getBackgroundColor = (index) => {
-    const colors = ['#b380b5', '#e0bb8e']
-    return colors[index % colors.length]
-}
-const getColor = (index) => {
-    const colors = ['#e0bb8e', '#b380b5']
-    return colors[index % colors.length]
-}
-
-export default History
+export default History;

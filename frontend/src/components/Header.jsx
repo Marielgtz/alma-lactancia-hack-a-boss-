@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Header.css";
 import useContactInfo from "../hooks/useContactInfo.js";
 
@@ -63,31 +63,47 @@ const Header = () => {
         {/* Inicio de la lista de elementos del menú */}
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
-            <Link to="/">Inicio</Link>
+            <NavLink to="/" activeClassName="active">
+              Inicio
+            </NavLink>
           </li>
           <li className="menu-item">
-            <Link to="/quienes-somos">¿Quiénes somos?</Link>
+            <NavLink to="/quienes-somos" activeClassName="active">
+              ¿Quiénes somos?
+            </NavLink>
           </li>
           <li className="menu-item">
             <a onClick={() => toggleSubMenu(1)}>Actividades</a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
-                <Link to="/actividades">Próximas actividades</Link>
+                <NavLink to="/actividades" activeClassName="active">
+                  Próximas actividades
+                </NavLink>
               </li>
               <li>
-                <Link to="/historico">Histórico</Link>
+                <NavLink to="/historico" activeClassName="active">
+                  Histórico
+                </NavLink>
               </li>
             </ul>
           </li>
           <li className="menu-item">
-            <Link to="/biblioteca" onClick={toggleMenu}>
+            <NavLink
+              to="/biblioteca"
+              activeClassName="active"
+              onClick={toggleMenu}
+            >
               Biblioteca
-            </Link>
+            </NavLink>
           </li>
           <li className="menu-item">
-            <Link to="/contacto" onClick={toggleMenu}>
+            <NavLink
+              to="/contacto"
+              activeClassName="active"
+              onClick={toggleMenu}
+            >
               Contacto
-            </Link>
+            </NavLink>
           </li>
         </ul>
         {/* Fin de la lista de elementos del menú */}

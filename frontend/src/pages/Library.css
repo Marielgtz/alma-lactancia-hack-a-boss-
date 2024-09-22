@@ -140,3 +140,11 @@ body,
   border-radius: 10px;
   margin-right: 2px;
 }
+
+@media (min-width: 1600px) {
+  .library-page .navbar {
+    background-color: #b380b5;
+    height: 9rem;
+    position: relative;
+  }
+}

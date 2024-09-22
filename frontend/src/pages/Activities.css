@@ -39,6 +39,7 @@
   font-size: 1.1rem;
   width: 100%;
   margin-bottom: 0;
+  margin-top: 2rem;
 }
 
 .activity-description {
@@ -74,18 +75,18 @@
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
+  margin-bottom: 30px;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   justify-content: center;
+  max-width: 1200px;
 }
 
 .activity-cards {
-  display: flex;
   flex: 1 1 30%;
   margin: 1rem;
-  padding: 0;
   max-width: 20rem;
-  max-height: 40rem;
+  height: auto;
   overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
@@ -116,23 +117,32 @@
 }
 
 .activities-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 0.8rem 0rem 0.8rem;
   text-align: center;
   font-family: outfit;
   color: #b380b5;
 }
 
-.activities-date,
-.activities-location {
+.activities-date {
   padding: 0 1rem;
   text-align: center;
   font-family: bellota;
+  font-size: 0.9rem;
   font-weight: bold;
   margin: 1;
 }
-
+.activities-location {
+  font-family: Outfit;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 1;
+  color: #333;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
 .activities-decription {
   flex-grow: 1; /* Permite que el contenido crezca */
   text-align: center;
@@ -211,5 +221,13 @@
 
   .activity-container {
     justify-content: center;
+  }
+}
+
+@media (min-width: 1600px) {
+  .activity-page .navbar {
+    background-color: #b380b5;
+    height: 9rem;
+    position: relative;
   }
 }
