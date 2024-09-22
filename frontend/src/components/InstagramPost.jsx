@@ -10,7 +10,9 @@ const InstagramPost = ({ instagramPost, postNumber }) => {
                         __html: instagramPost[Number(postNumber) - 1].code,
                     }}
                 />
-            ): <div style={{ display: 'none' }} />}
+            ): <p className="no-post-message">
+            No hay ninguna publicación. Por favor, agrega una con su código de inserción.
+        </p>}
         </div>
     )
 }
