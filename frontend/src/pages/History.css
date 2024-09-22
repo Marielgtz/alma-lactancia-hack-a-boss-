@@ -134,3 +134,11 @@
     grid-template-columns: 1fr; /* 1 columna en móvil */
   }
 }
+
+@media (min-width: 1200px) {
+  .history-page .navbar {
+    background-color: #b380b5;
+    height: 9rem;
+    position: relative;
+  }
+}

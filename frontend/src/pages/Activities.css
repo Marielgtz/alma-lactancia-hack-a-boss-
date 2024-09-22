@@ -223,3 +223,11 @@
     justify-content: center;
   }
 }
+
+@media (min-width: 1200px) {
+  .activity-page .navbar {
+    background-color: #b380b5;
+    height: 9rem;
+    position: relative;
+  }
+}
