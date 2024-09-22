@@ -4,6 +4,7 @@ import './AdminActivities.css'
 import EventForm from '../../pages/private/CreateEventForm';
 import EditableEvent from './editableEvent';
 import formatDate from '../../utils/formatDate';
+import './editableList.css'
 
 const AdminActivities = () => {
   // Sacar los eventos
@@ -58,15 +59,16 @@ const AdminActivities = () => {
           <h1>Creador de actividades</h1>
           <button
             onClick={() => toggleEditMode()}
-            className='list-btn'
-          >➕ Crear nueva actividad</button>
+            className='confirm-btn'
+          >Crear nueva actividad</button>
       </div>
       <div className={!isEditMode ? 'hidden' : ''}>
           <button
             onClick={() => toggleEditMode({})}
+            className='confirm-btn'
           >Volver atrás</button>
         <p>Editando: {toEdit?.summary || 'Nueva actividad'}</p>
-        <p>Fecha: { toEdit.start ? formatDate(toEdit.start.dateTime) : 'Fecha no especificada'}</p>
+        <p>Fecha: { toEdit?.start ? formatDate(toEdit.start.dateTime) : 'Fecha no especificada'}</p>
 
         <EventForm 
           toEdit={toEdit} 

@@ -110,7 +110,7 @@ export const getCalendarEventService = async (eventId) => {
 };
 
 export const deleteCalendarEventService = async (eventId) => {
-  console.log(eventId);
+  // console.log(eventId);
   try {
     const response = await fetch(
       `${API_BASE_URL}/delete-calendar-event/${eventId}/true`,
@@ -205,7 +205,9 @@ export const deleteCollaboratorService = async (id, team) => {
       }
     );
 
-    return handleResponse(response);
+    // return handleResponse(response);
+    const data = response.json();
+    return data;
   } catch (error) {
     console.error("Error deleting collaborator:", error);
     throw error;

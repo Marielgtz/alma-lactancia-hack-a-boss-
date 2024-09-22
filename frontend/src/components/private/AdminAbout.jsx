@@ -74,9 +74,9 @@ const AdminAbout = () => {
             ))}
             <li>
               <button
-                className='list-btn'
+                className='confirm-btn'
                 onClick={() => toggleEditMode({}, false)}
-              >➕ Nueva colaboradora </button>
+              >Nueva colaboradora </button>
             </li>
           </ol>
         </div>
@@ -96,16 +96,19 @@ const AdminAbout = () => {
             ))}
             <li>
               <button
-                className='list-btn'
+                className='confirm-btn'
                 onClick={() => toggleEditMode({}, true)}
-              >➕ Nueva colaboradora</button>
+              >Nueva colaboradora</button>
             </li>
           </ol>
         </div>
       </div>
 
       <div id='edit-collaborator-div' className={!isEditMode ? 'hidden' : ''}>
-        <button onClick={() => toggleEditMode({})}>Volver atrás</button>
+        <button 
+          onClick={() => toggleEditMode({})}
+          className='confirm-btn'
+        >Volver atrás</button>
         <p>Editando: {`${toEdit.name || 'Nueva'} ${toEdit.surname || 'colaboradora'}`}</p>
         <p>Rango: {toEdit.hierarchy}</p>
         <p></p>
