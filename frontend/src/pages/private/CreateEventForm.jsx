@@ -3,8 +3,7 @@ import { createEvent } from '../../services/calendar';
 import { updateCalendarEventService } from '../../services/api';
 import formatDate from '../../utils/formatDate';
 
-export default function EventForm({toEdit, onCreate, onModify}) {
-  // const [prevActivity, setPrevActivity] = useState(toEdit);  
+export default function EventForm({toEdit, onSuccess}) {
   const defaultActivity = {
     summary: '',
     description: '',
@@ -14,27 +13,20 @@ export default function EventForm({toEdit, onCreate, onModify}) {
     access: 'free', // Valor por defecto
   };
 
-  const [activity, setActivity] = useState(toEdit);
-  console.log(activity);
-  
-
-  // Función que adapta la fecha al input del formulario
-  // const formatDateTimeForInput = (dateString) => {
-  //   if (!dateString) return '';
-  //   const date = new Date(dateString);
-  //   return date.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:MM'
-  // };
+  const [activity, setActivity] = useState(toEdit || defaultActivity);
   
   useEffect(() => {
-    if (toEdit?.id) {
-      console.log('Datos previos de la actividad cargados');
-      const adaptedData = toEdit
-      adaptedData.parsedStart = formatDate(adaptedData.start.dateTime, "local")
-      adaptedData.parsedEnd = formatDate(adaptedData.end.dateTime, "local")
+    if (toEdit?.id) { // Si existe una actividad previa (modificando)
+      // console.log('Datos previos de la actividad cargados');
+      const adaptedData = { 
+        ...toEdit,
+        parsedStart:formatDate(toEdit.start.dateTime, "local"), // Fecha adaptada a input
+        parsedEnd:formatDate(toEdit.end.dateTime, "local") // Fecha adaptada a input
+      };
 
-      setActivity(adaptedData)  //TODO - ¿Cómo adaptar la fecha para que se coloque en el form?
-    } else {
-      console.log('Sin datos previos');
+      setActivity(adaptedData)
+    } else { // Si no existe actividad previa (creación)
+      // console.log('Sin datos previos');
       setActivity(toEdit);
     }
   }, [toEdit])
@@ -48,31 +40,21 @@ export default function EventForm({toEdit, onCreate, onModify}) {
     }));
   };
 
-
-  // const handleReset = (e) => {
-  //   e.preventDefault();
-  //   console.log('Cancelando modificaciones...');
-    
-  //   // Vaciar el form (reiniciar a estado por defecto)
-  //   setActivity(defaultActivity);
-
-  //   // Reiniciar form a modo "crear evento"
-  //   setFormAction('create');
-  // };
-
   const submitNewEvent = async (e) => {
     e.preventDefault(); 
+    console.log(activity.access);
+    
 
     // Adecuar los datos del formulario al estándar de Google
     const requestBody = {
       summary: activity.summary,
       description: activity.description,
       start: {
-        dateTime: `${activity.startDateTime}:00+02:00`,
+        dateTime: activity.start.dateTime || `${activity.startDateTime }:00+02:00`,
         timeZone: "Europe/Madrid"
       },
       end: {
-        dateTime: `${activity.endDateTime}:00+02:00`,
+        dateTime: activity.end.dateTime || `${activity.endDateTime}:00+02:00`,
         timeZone: "Europe/Madrid"
       },
       location: activity.location,
@@ -89,28 +71,28 @@ export default function EventForm({toEdit, onCreate, onModify}) {
 
     console.log("Event data submitted:", requestBody);
 
-    if (toEdit?.id) {
-      // Lógica de modificar una actividad
+  
+    if (toEdit?.id) { //* Lógica de modificar una actividad
       console.log('Actualizando evento...');
 
       const response = await updateCalendarEventService(toEdit.id, requestBody)
-      console.log(response);         
-      
-      // setActivity(defaultActivity); //? Vaciar el form
-
-      // Actualizar lista (con respuesta del back) //! Solo debería activarse si fue bien
-      onModify() //TODO Revisar funcionamiento
+      if (response.error){
+        console.error('NO SE HA ACTUALIZADO:', response.error);
+      } 
+      else {
+        // console.log(response);
+        console.log('ÉXITO');
+        onSuccess();
+      }
      
-    } else if (!toEdit?.id) {
-      // Lógica de crear una nueva actividad
+    } else if (!toEdit?.id) { //* Lógica de crear una nueva actividad
       console.log("Creando evento...");
+
       const response = await createEvent(requestBody);
       console.log(response);
-      if (response.message === "Actividad creada y subida al calendario correctamente") {
-      
-        // Limpiar form y actualizar lista en dashboard //! Solo debería activarse si fue bien
-        onCreate(requestBody) //TODO Revisar funcionamiento
-
+      if (response.message === "Actividad creada y subida al calendario correctamente") { 
+        console.log('ÉXITO');
+        onSuccess();
       }
       else {
         console.log("Se ha producido un error en la petición de creación...")
@@ -143,7 +125,7 @@ export default function EventForm({toEdit, onCreate, onModify}) {
       <input
         type="datetime-local"
         name="startDateTime"
-        value={(activity?.parsedStart)}
+        value={activity?.parsedStart}
         onChange={handleChange}
         required
       />

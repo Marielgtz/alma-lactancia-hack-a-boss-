@@ -11,12 +11,17 @@ const AdminAbout = () => {
 
   async function fetchCollaborators() {
     console.log("Cargando colaboradores...");
-    const fetchedCollaborators = await getAllCollaboratorsService(false);
-    const fetchedTeamMembers = await getAllCollaboratorsService(true);
+    const fetchedCollaborators = await getAllCollaboratorsService(true);
+    const fetchedTeamMembers = await getAllCollaboratorsService(false);
     setCollaborators(fetchedCollaborators);    
     setTeamMembers(fetchedTeamMembers);
     console.log("Colaboradores cargados");
     
+  }
+
+  function refreshCollaboratorsList() {
+    toggleEditMode({});
+    fetchCollaborators();
   }
 
   useEffect(() => {
@@ -31,15 +36,14 @@ const AdminAbout = () => {
   //   console.log(isEditMode);
   // }, [isEditMode]);
 
-  useEffect(() => {
-    if (toEdit.id) {
-      console.log('Colaborador previo cargado');
-    } else {
-      console.log('Sin datos previos');
-      
-    }
+  // useEffect(() => {
+  //   if (toEdit.id) {
+  //     console.log('Colaborador previo cargado');
+  //   } else {
+  //     console.log('Sin datos previos');
+  //   }
 
-  }, [toEdit]);
+  // }, [toEdit]);
 
   function toggleEditMode(collaboratorData, isMember) {
     setIsEditMode((prevValue) => !prevValue);
@@ -51,17 +55,18 @@ const AdminAbout = () => {
   }
 
   return (
-    <main className='settings-content'>
+    <main className='settings-content collaborators-admin'>
       <div className={isEditMode ? 'hidden' : ''}>
         <h1>Gestión de miembros</h1>
 
-        <div id='team-collaborators'>
+        <div id='team'>
           <p>Elige qué persona quieres editar</p>
           <ol>
             {teamMembers.map((member) => (
               <li key={member.id}>
                 <button
-                  onClick={() => toggleEditMode(member, true)}  
+                  className='list-btn'
+                  onClick={() => toggleEditMode(member, false)}  
                 >
                   {`${member.name} ${member.surname}`}
                 </button>
@@ -69,19 +74,21 @@ const AdminAbout = () => {
             ))}
             <li>
               <button
-                onClick={() => toggleEditMode({}, true)}
+                className='list-btn'
+                onClick={() => toggleEditMode({}, false)}
               >➕ Nueva colaboradora </button>
             </li>
           </ol>
         </div>
         
-        <div id='external-collaborators'>
+        <div id='external'>
           <p>Elige qué colaboradora quieres editar</p>
           <ol>
             {collaborators.map((collaborator) => (
               <li key={collaborator.id}>
                 <button
-                  onClick={() => toggleEditMode(collaborator, false)}  
+                  className='list-btn'
+                  onClick={() => toggleEditMode(collaborator, true)}  
                 >
                   {`${collaborator.name} ${collaborator.surname}`}
                 </button>
@@ -89,7 +96,8 @@ const AdminAbout = () => {
             ))}
             <li>
               <button
-                onClick={() => toggleEditMode({}, false)}
+                className='list-btn'
+                onClick={() => toggleEditMode({}, true)}
               >➕ Nueva colaboradora</button>
             </li>
           </ol>
@@ -101,7 +109,10 @@ const AdminAbout = () => {
         <p>Editando: {`${toEdit.name || 'Nueva'} ${toEdit.surname || 'colaboradora'}`}</p>
         <p>Rango: {toEdit.hierarchy}</p>
         <p></p>
-        <EditCollaboratorForm collaboratorData={toEdit} />
+        <EditCollaboratorForm 
+          collaboratorData={toEdit} 
+          onSuccess={refreshCollaboratorsList}
+        />
       </div>
     </main>
   );

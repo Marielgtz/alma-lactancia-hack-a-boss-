@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { newCollaboratorService, updateCollaboratorService } from '../../services/api';
 
-const EditCollaboratorForm = ({ collaboratorData }) => {
+const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
   const [collaborator, setCollaborator] = useState(collaboratorData);
 
   // Los datos previos que se mostrarán en el form (en caso de editar)
@@ -29,17 +29,25 @@ const EditCollaboratorForm = ({ collaboratorData }) => {
     console.log('Updated collaborator:', collaborator);
     console.log(collaborator.id ? 'Modificar colaborador' : 'Colaborador no existente');
 
-    if (collaborator.id) {
-      // Servicio de editar colaborador
-      const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'true' : 'false';
+    if (collaborator.id) {  // Servicio de editar colaborador (si existe un id previo)
+      const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'false' : 'true';
       const responseMsg = await updateCollaboratorService(collaborator.id, isTeam, collaborator);
+
+      // Actualizar lista (con respuesta del back)
+      if (responseMsg.error) {
+        console.error('NO SE HA ACTUALIZADO:', responseMsg.error)
+        //TODO Lógica error
+      }
+      else { //TODO - Crear requisito de "éxito"
+        console.log('ÉXITO');
+        onSuccess(); //! Solo debería activarse si fue bien
+      }
+    } else {  // Servicio de crear colaborador (si no existe id previo)
+      const responseMsg = await newCollaboratorService(collaborator); 
       console.log(responseMsg);
-      
-    } else {      
-      // Servicio de crear colaborador //!
-      // const responseMsg = await newCollaboratorService({"name": 'Lara'}); //! Nombre forzado para testear
-      const responseMsg = await newCollaboratorService(collaborator); //! Nombre forzado para testear
-      console.log(responseMsg);
+
+      // Actualizar lista (con respuesta del back)
+      onSuccess(); //! Solo debería activarse si fue bien
     }
     
   };

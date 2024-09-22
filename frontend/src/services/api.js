@@ -212,15 +212,16 @@ export const deleteCollaboratorService = async (id, team) => {
   }
 };
 
-export const updateCollaboratorService = async (id, team, formData) => {
-  console.log(id);
-  
+export const updateCollaboratorService = async (id, team, formData) => {  
   try {
     const response = await fetch(
       `${API_BASE_URL}/update-collaborator/${id}/${team}`,
       {
         method: "PATCH",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       }
     );
 
