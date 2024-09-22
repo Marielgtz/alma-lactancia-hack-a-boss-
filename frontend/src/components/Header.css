@@ -254,7 +254,7 @@ body {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
   .navbar {
     font-size: 1.6rem;
   }

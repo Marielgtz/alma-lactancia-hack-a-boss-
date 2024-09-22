@@ -141,7 +141,7 @@ body,
   margin-right: 2px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
   .library-page .navbar {
     background-color: #b380b5;
     height: 9rem;

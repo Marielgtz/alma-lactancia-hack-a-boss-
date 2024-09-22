@@ -423,8 +423,8 @@ body,
   }
 }
 
-/* Pantallas muy grandes (mínimo 1200px) */
-@media (min-width: 1200px) {
+/* Pantallas muy grandes (mínimo 1600px) */
+@media (min-width: 1600px) {
   .support-button {
     position: absolute;
     bottom: 3em;
