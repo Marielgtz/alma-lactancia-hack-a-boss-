@@ -82,7 +82,9 @@ body {
   position: relative;
   z-index: 999;
 }
-
+.menu-item > a.active {
+  color: #dcbf95; /* Color del texto activo */
+}
 /* Subrayado en los enlaces del menú principal */
 .menu-item > a::after {
   content: "";
