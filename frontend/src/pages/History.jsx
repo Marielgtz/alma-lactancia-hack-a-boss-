@@ -27,21 +27,24 @@ const History = ({ instagramPost, instagramPostList }) => {
           >
             Próximas actividades
           </button>
-          <h2 className="history-subtitle">Explora los momentos más destacados que nos han ayudado a promover y fortalecer la lactancia materna en nuestra comunidad.</h2>
+          <h2 className="history-subtitle">
+            Explora los momentos más destacados que nos han ayudado a promover y
+            fortalecer la lactancia materna en nuestra comunidad.
+          </h2>
         </div>
 
         <ol className="instagram-container">
           {instagramPostList.map((post, index) => {
             if (Object.keys(instagramPost[index]).length > 0) {
-                return (
-                    <li className="instagram-cards" key={index}>
-                      <InstagramPost
-                        instagramPost={instagramPost}
-                        postNumber={index + 1}
-                      />
-                    </li>
-                  ); 
-            }  
+              return (
+                <li className="instagram-cards" key={index}>
+                  <InstagramPost
+                    instagramPost={instagramPost}
+                    postNumber={index + 1}
+                  />
+                </li>
+              );
+            }
           })}
         </ol>
       </main>
