@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { newCollaboratorService, updateCollaboratorService } from '../../services/api';
+import { deleteCollaboratorService, newCollaboratorService, updateCollaboratorService } from '../../services/api';
 
 const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
   const [collaborator, setCollaborator] = useState(collaboratorData);
@@ -22,12 +22,28 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
     }));
   };
 
+  // Gestionar eliminación de colaboradores
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'false' : 'true';
+    const responseMsg = await deleteCollaboratorService(collaborator.id, isTeam);
+    // console.log(responseMsg);
+
+    if (responseMsg.error) {
+      console.error('NO SE HA ELIMINADO:', responseMsg.error);
+      // TODO - Lógica error
+    }
+    else { //TODO - Crear requisito de "éxito"
+      console.log('ÉXITO');
+      onSuccess();
+    }
+  }
+
   // Envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logs desarrollo
-    console.log('Updated collaborator:', collaborator);
-    console.log(collaborator.id ? 'Modificar colaborador' : 'Colaborador no existente');
+    // console.log('Updated collaborator:', collaborator);
 
     if (collaborator.id) {  // Servicio de editar colaborador (si existe un id previo)
       const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'false' : 'true';
@@ -40,7 +56,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
       }
       else { //TODO - Crear requisito de "éxito"
         console.log('ÉXITO');
-        onSuccess(); //! Solo debería activarse si fue bien
+        onSuccess();
       }
     } else {  // Servicio de crear colaborador (si no existe id previo)
       const responseMsg = await newCollaboratorService(collaborator); 
@@ -109,7 +125,8 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
         />
       </div>
 
-      <button type="submit">Guardar Cambios</button>
+      <button type="submit" className='confirm-btn'>Guardar Cambios</button>
+      <button onClick={handleDelete} className='cancel-btn'>Eliminar colaborador</button>
     </form>
   );
 };
