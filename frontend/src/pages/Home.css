@@ -246,12 +246,12 @@ body,
   }
 
   .support-button p {
-    font-size: 2rem;
+    font-size: 3.5rem;
   }
 
   .activities-button {
-    width: 16rem;
-    font-size: 1.2em;
+    width: 26rem;
+    font-size: 1.5em;
   }
 
   .content {
@@ -260,7 +260,7 @@ body,
 
   .section-title {
     margin-left: 1em;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 
   .centered-container {
@@ -270,7 +270,7 @@ body,
   .sectionText-nosotras {
     max-width: 90%;
     margin-left: 0;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
   }
 
   .img-silueta {
@@ -343,7 +343,8 @@ body,
   }
 
   .support-button p {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    max-width: 30rem;
   }
 
   .activities-button {
@@ -363,7 +364,7 @@ body,
     color: #b380b5;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: outfit;
   }
 
@@ -372,7 +373,7 @@ body,
   }
 
   .sectionText-nosotras {
-    font-size: 0.75em;
+    font-size: 1.5em;
     text-align: center;
     max-width: 100%;
     margin-left: -1.5em;
@@ -419,5 +420,100 @@ body,
 
   .carousel-control.next {
     right: -1rem;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1200px) */
+@media (min-width: 1200px) {
+  .support-button {
+    position: absolute;
+    bottom: 3em;
+    left: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-button p {
+    font-size: 5.5rem;
+    font-weight: bold;
+    color: #f5f5f5;
+    max-width: 60rem;
+    font-family: outfit;
+  }
+
+  .activities-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36rem;
+    height: 5rem;
+    font-size: 2em;
+    padding: 0;
+    margin-top: -1em;
+    margin-bottom: 1em;
+  }
+
+  .content {
+    padding: 1.5em;
+  }
+
+  .section-title {
+    margin-left: 1em;
+    font-size: 4rem;
+  }
+
+  .centered-container {
+    align-items: left;
+  }
+
+  .sectionText-nosotras {
+    max-width: 90%;
+    margin-left: 2em;
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .img-silueta {
+    display: none;
+  }
+
+  .experience-section {
+    padding: 1.5rem;
+  }
+
+  .experience-title {
+    font-size: 1.8rem;
+    margin-left: 1em;
+    margin-bottom: 2rem;
+  }
+
+  .experience-card {
+    width: 18rem;
+  }
+
+  .experience-card img {
+    width: 12rem;
+    height: 7rem;
+  }
+
+  .experience-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .experience-card p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+  }
+
+  .carousel-control.prev {
+    left: 1rem;
+  }
+
+  .carousel-control.next {
+    right: 1rem;
   }
 }
