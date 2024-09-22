@@ -107,10 +107,10 @@ body,
 }
 
 .section-title {
-  margin-left: 2em;
+  margin-left: 1.4em;
   color: #b380b5;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 2.5rem;
   margin-bottom: 0.2em;
   font-family: outfit;
 }
@@ -132,7 +132,7 @@ body,
 .img-silueta {
   display: flex;
   position: relative;
-  margin-left: 66rem;
+  margin-left: 64rem;
   margin-top: -18rem;
   width: 17vw;
   height: 45vh;
@@ -147,7 +147,7 @@ body,
 .experience-title {
   font-family: outfit;
   color: #b380b5;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 3rem;
   margin-left: 2em;
 }
