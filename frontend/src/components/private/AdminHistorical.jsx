@@ -1,11 +1,32 @@
-import React from 'react';
 
-const AdminHistorical = () => {
+import React, { useState } from "react";
+import InstagramForm from "../InstagramForm";
+import InstagramPost from "../InstagramPost";
+import "./AdminHistorical.css"
+
+const AdminHistorical = ({ instagramPost, setInstagramPost }) => {
+  const [selectedPostNumber, setSelectedPostNumber] = useState(null);
+
+
   return (
-    <div>
-      <h1>Histórico del administrador</h1>
-      {/* Contenido del histórico aquí */}
-    </div>
+    <main className="settings-content">
+      <h1>
+        Introduce el código de inserción de instagram para publicar en la
+        sección "Histórico"
+      </h1>
+      <InstagramForm
+        setInstagramPost={setInstagramPost}
+        setSelectedPostNumber={setSelectedPostNumber}
+      />
+      <div className="instagram-post-container">
+        {selectedPostNumber && (
+          <InstagramPost
+            instagramPost={instagramPost}
+            postNumber={selectedPostNumber}
+          />
+        )}
+      </div>
+    </main>
   );
 };
 

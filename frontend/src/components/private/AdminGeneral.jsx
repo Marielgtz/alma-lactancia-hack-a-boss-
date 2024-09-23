@@ -13,7 +13,7 @@ const AdminGeneral = () => {
   });
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("success"); // success or error
+  const [messageType, setMessageType] = useState("success");
 
   useEffect(() => {
     axios.get(`${API_BASE_URL}/get-home-data`)

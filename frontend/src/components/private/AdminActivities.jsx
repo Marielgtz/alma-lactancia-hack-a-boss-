@@ -3,88 +3,77 @@ import { getCalendarEvents } from '../../services/api';
 import './AdminActivities.css'
 import EventForm from '../../pages/private/CreateEventForm';
 import EditableEvent from './editableEvent';
+import formatDate from '../../utils/formatDate';
+import './editableList.css'
 
 const AdminActivities = () => {
   // Sacar los eventos
-  // const [isHidden, setIsHidden] = useState(true);
+  const [toEdit, setToEdit] = useState({})
   const [isEditMode, setIsEditMode] = useState(false);
   const [eventsList, setEventsList] = useState([]);
-  const [formEvent, setFormEvent] = useState({});
 
-  function toggleEditMode(collaboratorData, isMember) {
+  function toggleEditMode(activityData) {
     setIsEditMode((prevValue) => !prevValue);
-    collaboratorData.hierarchy = isMember
-    ? 'Miembro del equipo'
-    : 'Colaboración externa';
-    setToEdit(collaboratorData); 
-    
+    setToEdit(activityData);     
   }
 
-  // TODO - Que el formulario aparezca y desaparezca?
-  const toggleFormHidden = () => {
-    setIsFormHidden(prevState => !prevState); 
-  };
+  async function getEvents() {
+    const calendarEvents = await getCalendarEvents();
+    // console.log(calendarEvents);
+    setEventsList(calendarEvents)
+  }
 
   useEffect(() => {
-    async function getEvents() {
-      const calendarEvents = await getCalendarEvents();
-      console.log(calendarEvents);
-      setEventsList(calendarEvents)
-    }
-
-    getEvents();
+    getEvents(); // Con carga de la página
   },[])
 
-  useEffect(() => {
-    console.log("New data form:", formEvent);
-    
-  }, [formEvent])
-
-
   // Funciones para actualizar la lista al gestionar eventos
-
   function deleteEvent(eventId) {
     setEventsList(prevEvents => prevEvents.filter(event => event.id !== eventId));
   }
 
-  function modifyEvent(updatedEvent) {
-    setEventsList(prevEvents =>
-      prevEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event)
-    );
+  function refreshEventsList() {
+    toggleEditMode({});
+    getEvents();
   }
-
-  function createEvent() {
-    setEventsList(prevEvents => [...prevEvents, newEvent]);
-  }
-
 
   return (
     <main className='settings-content'>
       <h1>Actividades</h1>
       <div id='activities-display' className={isEditMode ? 'hidden' : ''}>
-          <ol className=''>
-          {eventsList.map((event)=>{
+        <p>Selecciona la actividad que deseas editar:</p>
+          <ol>
+          {eventsList.map((activity)=>{
             return(
-              <>
               <EditableEvent 
-              key={event.id} 
-              eventData={event}
-              etFormEvent={setFormEvent} 
-              setFormEvent={setFormEvent}
-              onDelete={() => deleteEvent(event.id)}/>
-              </>
+              key={activity.id} 
+              onClick={() => toggleEditMode(activity)}
+
+              setToEdit={setToEdit}
+              eventData={activity}
+              onDelete={() => deleteEvent(activity.id)}/>
             )
           })}
           </ol>
+
+          <h1>Creador de actividades</h1>
           <button
             onClick={() => toggleEditMode()}
-          >Crear actividad</button>
+            className='confirm-btn'
+          >Crear nueva actividad</button>
       </div>
       <div className={!isEditMode ? 'hidden' : ''}>
           <button
-            onClick={() => toggleEditMode()}
+            onClick={() => toggleEditMode({})}
+            className='confirm-btn'
           >Volver atrás</button>
-          <EventForm prevData={formEvent} onCreate={createEvent} onModify={modifyEvent}/>
+        <p>Editando: {toEdit?.summary || 'Nueva actividad'}</p>
+        <p>Fecha: { toEdit?.start ? formatDate(toEdit.start.dateTime) : 'Fecha no especificada'}</p>
+
+        <EventForm 
+          toEdit={toEdit} 
+          onSuccess={refreshEventsList}
+        />
       </div>
     </main>
   );

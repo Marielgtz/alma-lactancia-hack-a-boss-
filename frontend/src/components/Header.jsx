@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Header.css";
 import useContactInfo from "../hooks/useContactInfo.js";
 import logoAlma from "../images/logo-alma.png";
@@ -30,56 +30,78 @@ const Header = () => {
   return (
     <header>
       <nav className="navbar">
-        <img src={logoSrc} alt="Logo Alma" className="logo" />
+        <Link to="/" className="logo">
+          <img src={logoSrc} alt="Logo de Alma" className="logo" />
+        </Link>
         <div className="menu-toggle" onClick={toggleMenu}>
           {menuOpen ? "✕" : "☰"}
         </div>
         <div className={`social-media ${menuOpen ? "active" : ""}`}>
-          <a
-            href={instagramLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-media-item"
-          >
-            <FontAwesomeIcon icon={faInstagram} size="2x" />
-          </a>
-          <a
-            href={facebookLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-media-item"
-          >
-            <FontAwesomeIcon icon={faFacebookF} size="2x" />
-          </a>
+          {instagramLink && (
+            <a
+              href={instagramLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-media-item"
+            >
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
+          )}
+          {facebookLink && (
+            <a
+              href={facebookLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-media-item"
+            >
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+          )}
         </div>
         {/* Inicio de la lista de elementos del menú */}
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
-            <a href="/">Inicio</a>
+            <NavLink to="/" activeClassName="active">
+              Inicio
+            </NavLink>
           </li>
           <li className="menu-item">
-            <Link to="/quienes-somos">¿Quiénes somos?</Link>
+            <NavLink to="/quienes-somos" activeClassName="active">
+              ¿Quiénes somos?
+            </NavLink>
           </li>
           <li className="menu-item">
             <a onClick={() => toggleSubMenu(1)}>Actividades</a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
-                <a href="/actividades">Próximas Inscripciones</a>
+                <NavLink to="/actividades" activeClassName="active">
+                  Próximas actividades
+                </NavLink>
               </li>
               <li>
-                <a href="/historico">Histórico</a>
+                <NavLink to="/historico" activeClassName="active">
+                  Histórico
+                </NavLink>
               </li>
             </ul>
           </li>
           <li className="menu-item">
-            <Link to="/biblioteca" onClick={toggleMenu}>
+            <NavLink
+              to="/biblioteca"
+              activeClassName="active"
+              onClick={toggleMenu}
+            >
               Biblioteca
-            </Link>
+            </NavLink>
           </li>
           <li className="menu-item">
-            <Link to="/contacto" onClick={toggleMenu}>
+            <NavLink
+              to="/contacto"
+              activeClassName="active"
+              onClick={toggleMenu}
+            >
               Contacto
-            </Link>
+            </NavLink>
           </li>
         </ul>
         {/* Fin de la lista de elementos del menú */}

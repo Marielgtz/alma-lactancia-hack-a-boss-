@@ -7,6 +7,9 @@ import imageHome from "../images/Alma_Lactancia_-_Foto_hero.jpg";
 import ButtonUp from "../components/ButtonUp";
 import useContactInfo from "../hooks/useContactInfo.js";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 import "./Home.css";
 
 const Home = () => {
@@ -23,7 +26,6 @@ const Home = () => {
     : imageHome;
   const textsNosotras = home?.sectionText ? home.sectionText.split("\n") : [];
   const titleCTA = home?.titleHome || "";
-  
 
   const navigate = useNavigate();
 
@@ -92,7 +94,12 @@ const Home = () => {
     navigate("/actividades");
   };
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading)
+    return (
+      <div className="loading-container">
+        <FontAwesomeIcon icon={faSpinner} className="spinner" spin size="2x" />
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -109,9 +116,7 @@ const Home = () => {
             />
           </div>
           <div className="support-button">
-            <p>
-              {titleCTA}
-            </p>
+            <p>{titleCTA}</p>
             <button
               className="activities-button"
               onClick={handleActivitiesClick}

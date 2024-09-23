@@ -1,37 +1,22 @@
-import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import FormDisplay from "../components/FormDisplay";
-import "./FormActivityPage.css";
+import React from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import FormDisplay from '../components/FormDisplay'
+import './FormActivityPage.css'
+import { useParams } from 'react-router-dom'
 
-const FormActivityPage = ({ publishedForm, setPublishedForm }) => {
+const FormActivityPage = () => {
+    const { activityNumber } = useParams()
 
-  const formList = Array.from({ length: 4 }, () => {
-    return {}
-})
+    return (
+        <div className='register-page'>
+            <Header />
+            <main className='register-main'>
+                <FormDisplay jsonNumber={activityNumber} />
+            </main>
+            <Footer />
+        </div>
+    )
+}
 
-  return (
-    <div className="register-page">
-      <Header />
-      <main className="register-main">
-        {/* Pasamos publishedForm y setPublishedForm como props */}
-        <ul>
-          {formList.map((_, index) => {
-            return (
-              <li key={index}>
-                <FormDisplay
-                  publishedForm={publishedForm[index] && publishedForm[index]}
-                  setPublishedForm={setPublishedForm}
-                  jsonNumber={index + 1}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default FormActivityPage;
+export default FormActivityPage
