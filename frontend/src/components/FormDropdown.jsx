@@ -1,11 +1,33 @@
-import useFormDropdown from '../hooks/useFormDropdown'
-import CustomDialog from '../components/customDialog'
+import useFormDropdown from "../hooks/useFormDropdown";
+import CustomDialog from "../components/customDialog";
 
 const FormDropdown = ({
+  forms,
+  setForms,
+  setPublishedForm,
+  publishedForm,
+  setEditingForm,
+  setSelectedForm,
+  selectedForm,
+}) => {
+  const {
+    handleSelectForm,
+    formEntries,
+    publishHandler,
+    unPublishHandler,
+    handleYes,
+    handleNo,
+    handleCancel,
+    isModalOpen,
+    openModal,
+    searchTerm,
+    setSearchTerm,
+    filteredFormEntries,
+    editFormHandler,
+  } = useFormDropdown(
     forms,
     setForms,
     setPublishedForm,
-    publishedForm,
     setEditingForm,
     setSelectedForm,
     selectedForm,
@@ -34,10 +56,27 @@ const FormDropdown = ({
         selectedForm
     )
 
-    const publishFormIndex = publishedForm.findIndex(
-        (form) => form.formId === selectedForm?.formId
-    )
-    return (
+  const publishFormIndex = publishedForm.findIndex(
+    (form) => form.formId === selectedForm?.formId
+  );
+  return (
+    <div>
+      <h2>Seleccione un formulario:</h2>
+      <ul>
+        {filteredFormEntries?.map(([formId, form], index) => (
+          <li key={index} onClick={() => handleSelectForm(formId)}>
+            {form.formName}
+          </li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        placeholder="Buscar formulario..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
+      />
+      {selectedForm && (
         <div>
             <h2>Seleccione un formulario:</h2>
             <ul>
@@ -135,7 +174,9 @@ const FormDropdown = ({
                 </div>
             )}
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
-export default FormDropdown
+export default FormDropdown;

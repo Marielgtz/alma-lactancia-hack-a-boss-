@@ -18,11 +18,11 @@
   gap: 15px;
 }
 
-.titleEditHome{
-    font-size: 1.5rem;
-    font-family: outfit;
-    border-top: solid 1px black;
-    padding-top: 1rem;
+.titleEditHome {
+  font-size: 1.5rem;
+  font-family: outfit;
+  border-top: solid 1px black;
+  padding-top: 1rem;
 }
 
 .adminHome-btn {
@@ -60,7 +60,7 @@
 .image-buttons button {
   padding: 10px;
   background-color: #fff;
-  color:#000000;
+  color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -96,11 +96,11 @@
   color: white;
 }
 
-.cancelAdminHome-btn{
-    background-color: transparent;
-    border: none;
-    margin-left: 20px;
-    cursor: pointer;
+.cancelAdminHome-btn {
+  background-color: transparent;
+  border: none;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 .editNosotras-textarea {
@@ -117,3 +117,50 @@ p {
   font-size: 14px;
   color: #6c757d;
 }
+
+/* Sección experiencias */
+
+h2 {
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}
+
+label[for="experienceText"] {
+  margin-left: 1rem;
+}
+
+#experienceText {
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+}
+
+label[for="experienceImage"] {
+  margin-left: 1rem;
+}
+
+#experienceImage {
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+}
+
+.admin-btn-exp {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+}
+
+h3 {
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+
+.list-exp {
+  list-style: none;
+  margin-left: -1.4rem;
+  display: flex;
+}
+
+
+
+

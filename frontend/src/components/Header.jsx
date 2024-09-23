@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "./Header.css";
 import useContactInfo from "../hooks/useContactInfo.js";
-
 import logoAlma from "../images/logo-alma.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 

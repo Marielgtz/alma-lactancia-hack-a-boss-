@@ -22,6 +22,7 @@ const useFormDisplay = (jsonNumber) => {
         }
         getPublishedForm()
     }, [])
+    
     // Ref para el formulario
     const formRef = useRef(null)
     //Para enviar los resultados del formulario:
@@ -35,6 +36,7 @@ const useFormDisplay = (jsonNumber) => {
             }
             return acc
         }, {})
+
         try {
             const response = await fetch(
                 import.meta.env.VITE_API_URL +
@@ -51,6 +53,7 @@ const useFormDisplay = (jsonNumber) => {
                     }),
                 }
             )
+
             if (response.ok) {
                 console.log('Datos enviados exitosamente', formValues)
                 formRef.current.reset()
@@ -65,4 +68,5 @@ const useFormDisplay = (jsonNumber) => {
     }
     return { sendDataHandler, formRef, formToShow }
 }
+
 export default useFormDisplay

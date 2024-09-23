@@ -12,6 +12,7 @@ const FormDisplay = ({ jsonNumber }) => {
                 {formToShow.fields.map((field, index) => (
                     <div key={index} style={{ marginBottom: '20px' }}>
                         <label>
+
                             {field.type === 'select' ? (
                                 <select
                                     name={field.label
@@ -41,4 +42,5 @@ const FormDisplay = ({ jsonNumber }) => {
         </div>
     )
 }
+
 export default FormDisplay
