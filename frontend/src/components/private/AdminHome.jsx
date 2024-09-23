@@ -353,7 +353,7 @@ const AdminHome = () => {
             homeData.experiences.map((experience, index) => (
               <li key={index}>
                 <img
-                  src={`${API_BASE_URL}/${experience.image}`}
+                  src={`${API_BASE_URL}/src/assets/images/${experience.image}`}
                   alt={experience.image}
                 />
                 <p>{experience.text}</p>
