@@ -7,13 +7,16 @@ const useInstagramPost = (instagramPost, postNumber) => {
 
         useEffect(() => {
             // Función para limpiar el script de Instagram
+            if (!instagramPost || Object.keys(instagramPost).length === 0) {
+                return
+            }
             const cleanupScript = () => {
                 if (scriptRef.current && containerRef.current) {
                     containerRef.current.removeChild(scriptRef.current)
                     scriptRef.current = null
                 }
             }
-
+            if (containerRef.current) {
             if (!window.instgrm) {
                 const script = document.createElement('script')
                 script.src = 'https://www.instagram.com/embed.js'
@@ -25,7 +28,7 @@ const useInstagramPost = (instagramPost, postNumber) => {
                 scriptRef.current = script
             } else {
                 window.instgrm.Embeds.process()
-            }
+            }}
 
             return () => {
                 cleanupScript()

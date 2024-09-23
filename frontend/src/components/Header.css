@@ -16,15 +16,16 @@ body {
   font-family: outfit;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 50px;
+  font-size: 1.1rem;
 }
 
 /* Estilo del logo */
 .logo {
-  height: 4em;
+  height: 5em;
   z-index: 1;
   position: absolute;
   align-self: flex-start;
-  margin-top: 1em;
   margin-left: 1rem;
 }
 
@@ -81,7 +82,9 @@ body {
   position: relative;
   z-index: 999;
 }
-
+.menu-item > a.active {
+  color: #dcbf95; /* Color del texto activo */
+}
 /* Subrayado en los enlaces del menú principal */
 .menu-item > a::after {
   content: "";
@@ -140,8 +143,8 @@ body {
     width: 100vw;
     position: relative;
     background-color: #9c6fa0;
-    padding-left: 0px;
-    padding-right: 0px;
+
+    padding: 0;
   }
 
   .logo {
@@ -250,5 +253,15 @@ body {
     cursor: pointer;
     font-size: 2rem;
     z-index: 13; /* Asegura que el icono esté por encima del menú */
+  }
+}
+
+@media (min-width: 1600px) {
+  .navbar {
+    font-size: 1.6rem;
+  }
+  .social-media a svg {
+    width: 2.5rem; /* Ajustar el ancho del icono */
+    height: 2.5rem; /* Ajustar la altura del icono */
   }
 }

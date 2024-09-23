@@ -16,7 +16,7 @@ body,
 
 .library-page .navbar {
   background-color: #b380b5;
-  height: 10rem;
+  height: 6.5rem;
   position: relative;
 }
 
@@ -25,8 +25,17 @@ body,
   display: flex;
   flex-direction: column;
   background-color: #ffeee7;
+  padding-bottom: 5%;
 }
-
+.alma-text {
+  margin-top: 2rem;
+  font-family: outfit;
+  color: #b380b5;
+  margin-left: 5rem;
+  font-size: 1.1rem;
+  width: 100%;
+  margin-bottom: 0;
+}
 .library-title {
   font-family: outfit;
   color: #b380b5;
@@ -36,7 +45,6 @@ body,
 }
 .contenedor-texto-biblioteca {
   max-width: 100%; /* Asegura que el contenedor no exceda el ancho de la página */
-  padding: 1rem; /* Añade algo de espacio interior para evitar que el texto toque los bordes */
   box-sizing: border-box; /* Incluye padding en el cálculo del ancho total */
   margin: 0 auto; /* Centra el contenedor en el medio si hay un ancho máximo */
 }
@@ -45,40 +53,37 @@ body,
   color: #b380b5;
   margin-left: 5rem;
   margin-right: 6rem;
-
   font-size: 1.1rem;
 }
 
 .collapsible-main {
-  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Centrar horizontalmente */
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .collapsible-container-library {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
   border: 1px solid #b380b5;
-  border-radius: 0.5rem;
-  margin-left: 5rem;
-  margin-right: 6rem;
-  margin-top: 1rem;
-  padding: 0.4rem;
   overflow: hidden;
-  position: relative;
 }
 
 .collapsible-header-library {
+  font-family: outfit;
+  padding: 1rem;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
 }
 
 .collapsible-header-library.open {
   background-color: #d8e2dc;
-  border: none;
-}
-
-.collapsible-header-library.open .collapsible-title-library {
-  border-bottom: 1.5px solid #a37fc2;
+  border-bottom: 3.5px solid #a37fc2;
 }
 
 .collapsible-title-library {
@@ -110,47 +115,36 @@ body,
 }
 
 .collapsible-content-library {
-  padding: 1rem;
-  font-family: bellota;
-  width: 100%;
   background-color: #d8e2dc;
+  font-family: outfit;
+  line-height: 1.5rem;
+  padding: 1rem;
 }
 
 .collapsible-content-library ul {
   background-color: #d8e2dc;
+  font-family: Bellota;
   margin: 0;
-  padding: 1rem;
+  padding-left: 1rem;
   margin-left: 1rem;
 }
+.link-antiguo-blog-al {
+  text-decoration: none;
+  padding: 5px;
+  font-family: Bellota;
+}
+.link-antiguo-blog-al:hover {
+  color: white;
+  font-family: Bellota;
+  background-color: #b380b5;
+  border-radius: 10px;
+  margin-right: 2px;
+}
 
-/* Estilos responsive */
-@media (max-width: 768px) {
+@media (min-width: 1600px) {
   .library-page .navbar {
     background-color: #b380b5;
-    height: 6.5rem;
+    height: 9rem;
     position: relative;
-  }
-
-  .library-title {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    margin-left: 6.5rem;
-    justify-content: center;
-  }
-
-  .library-text {
-    display: none;
-  }
-
-  .collapsible-container-library {
-    width: 14rem;
-    justify-content: center;
-  }
-
-  .collapsible-content-library {
-    padding: 1rem;
-    font-family: bellota;
-    display: block;
-    width: 80%;
   }
 }

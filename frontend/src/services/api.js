@@ -113,25 +113,28 @@ export const getCalendarEventService = async (eventId) => {
 }
 
 export const deleteCalendarEventService = async (eventId) => {
-    console.log(eventId)
-    try {
-        const response = await fetch(
-            `${API_BASE_URL}/delete-calendar-event/${eventId}/true`,
-            {
-                method: 'DELETE',
-            }
-        )
 
-        console.log('Fetch realizado')
+  // console.log(eventId);
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/delete-calendar-event/${eventId}/true`,
+      {
+        method: "DELETE",
+      }
+    );
 
-        const data = await response.json()
+    console.log('Fetch realizado');
+    
+    const data = await response.json()
 
-        return data
-    } catch (error) {
-        console.error('Error deleting calendar event:', error)
-        throw error
-    }
-}
+    return data
+  } catch (error) {
+    
+    console.error("Error deleting calendar event:", error);
+    throw error;
+  }
+};
+
 
 export const updateCalendarEventService = async (eventId, eventData) => {
     try {
@@ -202,41 +205,46 @@ export const newCollaboratorService = async (formData) => {
 }
 
 export const deleteCollaboratorService = async (id, team) => {
-    try {
-        const response = await fetch(
-            `${API_BASE_URL}/delete-collaborator/${id}/${team}`,
-            {
-                method: 'DELETE',
-            }
-        )
 
-        return handleResponse(response)
-    } catch (error) {
-        console.error('Error deleting collaborator:', error)
-        throw error
-    }
-}
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/delete-collaborator/${id}/${team}`,
+      {
+        method: "DELETE",
+      }
+    );
 
-export const updateCollaboratorService = async (id, team, formData) => {
-    console.log(id)
+    // return handleResponse(response);
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error("Error deleting collaborator:", error);
+    throw error;
+  }
+};
 
-    try {
-        const response = await fetch(
-            `${API_BASE_URL}/update-collaborator/${id}/${team}`,
-            {
-                method: 'PATCH',
-                body: formData,
-            }
-        )
+export const updateCollaboratorService = async (id, team, formData) => {  
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/update-collaborator/${id}/${team}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
 
-        // return handleResponse(response);
-        const data = response.json()
-        return data
-    } catch (error) {
-        console.error('Error updating collaborator:', error)
-        throw error
-    }
-}
+    // return handleResponse(response);
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating collaborator:", error);
+    throw error;
+  }
+};
+
 
 // Contacto
 export const saveMessageService = async (messageData) => {
@@ -329,6 +337,7 @@ export async function getPastEvents(endpoint) {
 }
 
 const activitiesFilters = {
+
     // id: "",
     // summary: ""
     // description: "",
@@ -370,6 +379,7 @@ export async function getCalendarEvents(numberOfEvents = 20) {
         console.error('Error fetching past events:', error)
         return null
     }
+
 }
 
 // Función para comparar las fechas en formato ISO

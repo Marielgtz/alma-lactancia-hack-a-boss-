@@ -2,7 +2,6 @@
   display: none;
 }
 
-/* Estilo para hacer visible una sección */
 .section.visible {
   display: block;
 }
@@ -46,18 +45,14 @@
   color: white;
 }
 
-/* AdminHome.css */
-
-/* Estilo para la imagen del Hero */
 .hero-image {
-  width: 300px; /* Ancho fijo */
-  height: 200px; /* Alto fijo */
-  object-fit: cover; /* Mantiene las proporciones */
+  width: 300px;
+  height: 200px; 
+  object-fit: cover; 
   margin-bottom: 10px;
   border-radius: 5px;
 }
 
-/* Estilo para los botones de imagen */
 .image-buttons {
   margin-bottom: 20px;
 }
@@ -75,7 +70,6 @@
   background-color: #ced4da;
 }
 
-/* Estilo para el input de título */
 .title-input {
   margin-bottom: 20px;
 }
@@ -109,18 +103,16 @@
     cursor: pointer;
 }
 
-/* Estilo para el textarea */
 .editNosotras-textarea {
-  width: 70%; /* Ajusta el ancho del textarea */
-  height: 200px; /* Altura fija para el textarea */
+  width: 70%; 
+  height: 200px; 
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
   margin: 0 0 20px 0;
-  resize: none; /* Evita el redimensionamiento del textarea */
+  resize: none; 
 }
 
-/* Estilo para el mensaje de límite de caracteres */
 p {
   font-size: 14px;
   color: #6c757d;

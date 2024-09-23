@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import './Activities.css'
-// import ActivityFilter from '../components/filters/ActivityFilter'
-import silueta from '../images/Alma_Lactancia_-_Foto_hero.jpg'
-import { getCalendarEvents, getPastEvents } from '../services/api'
-// import { createMockupData } from '../services/mockUpService'
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import "./Activities.css";
+import ActivityFilter from "../components/filters/ActivityFilter";
+import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
+import { getCalendarEvents, getPastEvents } from "../services/api";
+import { createMockupData } from "../services/mockUpService";
+import formatDate from "../utils/formatDate";
+
 
 const Activities = ({ activities, setActivities }) => {
     const navigate = useNavigate()
@@ -32,6 +35,7 @@ const Activities = ({ activities, setActivities }) => {
     //             setActivities(mockup)
     //         }
     //     }
+
 
     //     fetchActivities('/get-filtered-activities', setActivities)
     // }, [])
@@ -61,6 +65,7 @@ const Activities = ({ activities, setActivities }) => {
             console.log(`Ha ocurrido un error: ${error.message}`)
         }
 
+
         navigate(`/formulario-inscripcion/${activity.id}/${activityNumber}`, {
             state: { activity },
         })
@@ -81,6 +86,7 @@ const Activities = ({ activities, setActivities }) => {
                         acogedor y enriquecedor.
                     </p>
                 </div>
+
 
                 {/* {<ActivityFilter
                     activities={activities}
@@ -138,14 +144,17 @@ const Activities = ({ activities, setActivities }) => {
                                 </li>
                             )
                         })
+
                     ) : (
                         <p>No se han podido cargar las actividades pasadas</p>
                     )}
+
                 </ol>
             </main>
             <Footer />
         </div>
     )
 }
+
 
 export default Activities

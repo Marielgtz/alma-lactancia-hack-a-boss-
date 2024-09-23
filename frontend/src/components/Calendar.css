@@ -112,10 +112,12 @@
 }
 
 .section-title-calendar {
-    text-align: center;
-    color: #b380b5;
-    font-size: 1.7rem;
-    font-family: outfit;
+
+  text-align: center;
+  color: #b380b5;
+  font-size: 2.5rem;
+  font-family: outfit;
+
 }
 
 .calendar-content {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./AdminHome.css";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-const MAX_CHARACTERS = 1800; // Límite máximo de caracteres
+const MAX_CHARACTERS = 1800;
 
 const AdminHome = () => {
   const [visibleSection, setVisibleSection] = useState(null);
@@ -11,13 +11,13 @@ const AdminHome = () => {
     imageHome: "",
     titleHome: ""
   });
-  const [file, setFile] = useState(null); // Para la nueva imagen del Hero
+  const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("success"); // Mensaje de éxito o error
+  const [messageType, setMessageType] = useState("success");
   const [charactersRemaining, setCharactersRemaining] = useState(MAX_CHARACTERS);
-  const [originalTitle, setOriginalTitle] = useState(""); // Estado para almacenar el valor original de titleHome
-  const [originalText, setOriginalText] = useState(""); // Estado para almacenar el valor original de sectionText
-  const fileInputRef = useRef(null); // Referencia para el input de archivo
+  const [originalTitle, setOriginalTitle] = useState("");
+  const [originalText, setOriginalText] = useState("");
+  const fileInputRef = useRef(null);
 
   // Cargar datos desde el backend
   useEffect(() => {
@@ -26,9 +26,9 @@ const AdminHome = () => {
       .then(data => {
         const { home } = data.form;
         setHomeData(home);
-        setOriginalTitle(home.titleHome); // Guardar el título original
-        setOriginalText(home.sectionText); // Guardar el texto original
-        setCharactersRemaining(MAX_CHARACTERS - home.sectionText.length); // Inicializar el contador con los caracteres restantes
+        setOriginalTitle(home.titleHome);
+        setOriginalText(home.sectionText);
+        setCharactersRemaining(MAX_CHARACTERS - home.sectionText.length);
       })
       .catch(error => console.error("Error al obtener los datos:", error));
   }, []);
@@ -38,14 +38,14 @@ const AdminHome = () => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
-      validateAndUpdateField("imageHome", selectedFile); // Actualizar la imagen automáticamente después de seleccionarla
+      validateAndUpdateField("imageHome", selectedFile);
     }
   };
 
   // Simular clic en el input de archivo
   const handleImageClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); // Abrir diálogo para seleccionar la imagen
+      fileInputRef.current.click();
     }
   };
 
@@ -57,7 +57,7 @@ const AdminHome = () => {
         ...prevData,
         sectionText: newText
       }));
-      setCharactersRemaining(MAX_CHARACTERS - newText.length); // Actualizar el contador de caracteres restantes
+      setCharactersRemaining(MAX_CHARACTERS - newText.length);
     }
   };
 
@@ -73,22 +73,21 @@ const AdminHome = () => {
   const handleCancelText = () => {
     setHomeData(prevData => ({
       ...prevData,
-      sectionText: originalText // Revertir al texto original
+      sectionText: originalText
     }));
-    setCharactersRemaining(MAX_CHARACTERS - originalText.length); // Actualizar el contador de caracteres restantes
+    setCharactersRemaining(MAX_CHARACTERS - originalText.length);
   };
 
   // Cancelar cambios en el título
   const handleCancelTitle = () => {
     setHomeData(prevData => ({
       ...prevData,
-      titleHome: originalTitle // Revertir al título original
+      titleHome: originalTitle
     }));
   };
 
   // Validar y actualizar imagen o texto en el backend
   const validateAndUpdateField = async (fieldName, value) => {
-    // Validar campos vacíos
     if (fieldName !== "imageHome" && !value) {
       setMessageType("error");
       setMessage(`El campo ${fieldName} no puede estar vacío`);
@@ -100,9 +99,8 @@ const AdminHome = () => {
 
     try {
       if (fieldName === "imageHome" && file) {
-        // Si es una imagen, usa FormData para enviar el archivo
         const formData = new FormData();
-        formData.append("imageHome", value); // `value` es el archivo seleccionado
+        formData.append("imageHome", value); 
 
         await fetch(`${API_BASE_URL}/update-home-data`, {
           method: "PATCH",
@@ -203,7 +201,7 @@ const AdminHome = () => {
           <button className="editAdminHome-btn" onClick={() => validateAndUpdateField("titleHome", homeData.titleHome)}>
           Guardar
           </button>
-          <button className="cancelAdminHome-btn" onClick={handleCancelTitle}>X Cancelar</button> {/* Botón para cancelar cambios */}
+          <button className="cancelAdminHome-btn" onClick={handleCancelTitle}>X Cancelar</button> 
         </div>
       </div>
 
@@ -215,13 +213,13 @@ const AdminHome = () => {
           value={homeData.sectionText || ""}
           onChange={handleTextChange}
           placeholder="Escribe el texto para la sección Nosotras"
-          maxLength={MAX_CHARACTERS} // Limitar a 1800 caracteres
+          maxLength={MAX_CHARACTERS}
         />
-        <p>{charactersRemaining} caracteres restantes (Máximo 1800 caracteres)</p> {/* Mensaje indicando el límite y caracteres restantes */}
+        <p>{charactersRemaining} caracteres restantes (Máximo 1800 caracteres)</p> 
         <button className="editAdminHome-btn" onClick={() => validateAndUpdateField("sectionText", homeData.sectionText)}>
           Guardar
         </button>
-        <button className="cancelAdminHome-btn" onClick={handleCancelText}>X Cancelar</button> {/* Botón para cancelar cambios */}
+        <button className="cancelAdminHome-btn" onClick={handleCancelText}>X Cancelar</button>
       </div>
 
       {/* Contenido para cambiar experiencias */}

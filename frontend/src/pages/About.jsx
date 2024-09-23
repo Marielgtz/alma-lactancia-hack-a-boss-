@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import fedalma from "../images/cropped-logo_fedalma_200.png";
 import fedegalma from "../images/logo-fedegalma1-300x102.jpg";
+import defaultPicture from "../images/pexels-olly-774909.jpg";
+import test_Rosa from "../images/pexels-guilhermealmeida-1858175.jpg";
 import "./About.css";
 
 const About = () => {
@@ -14,8 +16,8 @@ const About = () => {
     const fetchCollaborators = async () => {
       try {
         const [teamResponse, externalResponse] = await Promise.all([
-          fetch("http://localhost:3001/get-all-collaborators/true"),
           fetch("http://localhost:3001/get-all-collaborators/false"),
+          fetch("http://localhost:3001/get-all-collaborators/true"),
         ]);
 
         if (!teamResponse.ok || !externalResponse.ok) {
@@ -29,6 +31,9 @@ const About = () => {
         const externalData = await externalResponse.json();
         setTeamMembers(teamData.data);
         setExternalCollaborators(externalData.data);
+
+        console.log(teamMembers); //TODO - Sin imagen
+        console.log(externalCollaborators); //TODO - Sin imagen
       } catch (error) {
         console.error("Error al obtener los colaboradores:", error);
       }
@@ -57,10 +62,21 @@ const About = () => {
             <div key={member.id} className="person-card">
               <div className="person-card-inner">
                 <div className="person-card-front">
-                  <img
-                    src={`/images/${member.collaboratorImage}`}
-                    className="person-image"
-                  />
+                  {/* //! Estilos in-line */}
+                  <div style={{ maxHeight: "60%" }}>
+                    <img
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "top",
+                      }}
+                      // src={member.image === 'Sin imagen'? defaultPicture : `/images/${member.image}`}
+                      src={test_Rosa}
+                      className="person-image"
+                    />
+                  </div>
+
                   <div className="person-info">
                     <h3>{member.name}</h3>
                     <p>{member.role}</p>
@@ -81,7 +97,11 @@ const About = () => {
             {externalCollaborators.slice(0, 5).map((collaborator) => (
               <div key={collaborator.id} className="collab-card">
                 <img
-                  src={`/images/${collaborator.collaboratorImage}`}
+                  src={
+                    collaborator.image === "Sin imagen"
+                      ? defaultPicture
+                      : `/images/${collaborator.image}`
+                  }
                   className="collab-image"
                 />
                 <h3>{collaborator.name}</h3>

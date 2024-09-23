@@ -1,0 +1,44 @@
+li {
+  list-style: none;
+}
+
+.list-btn {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    font-family: outfit;
+    font-weight: bold;
+  }
+
+  .list-btn:hover {
+    background-color: #b380b5;
+    color: white;
+  }
+
+  .confirm-btn {
+    padding: 5px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #b380b5;
+    color: white;
+  }
+  
+  .cancel-btn{
+      background-color: transparent;
+      border: none;
+      margin-left: 20px;
+      cursor: pointer;
+  }

@@ -1,29 +1,34 @@
 .no-publication-message {
-    color: #b380b5;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-top: 20px;
+
+  color: #b380b5;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .instagram-post-container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    max-height: 480px;
-    overflow: auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  max-height: 480px; 
+  overflow:auto
+  
 }
 
 .instagram-post-container .instagram-post {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    max-height: 100%;
+  max-width: 400px; 
+  width: 100%; 
+  height: auto; 
+  max-height: 100%; 
 }
 
+
 .no-post-message {
-    font-family: outfit;
-    color: #b380b5;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-top: 20px;
+  font-family: outfit;
+  color: #b380b5;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
 }
+
+
