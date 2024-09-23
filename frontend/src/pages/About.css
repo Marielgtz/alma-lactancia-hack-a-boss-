@@ -69,23 +69,28 @@ body,
 }
 
 .section-title1 {
-  text-align: left;
+  font-family: Outfit;
+  font-size: 2.5rem;
+  text-align: center;
   color: #b380b5;
   font-weight: bold;
-  margin-left: 3em;
   margin-bottom: 0.3rem;
 }
 
 .section-title2 {
-  text-align: left;
+  font-family: Outfit;
+  font-size: 2.5rem;
+  text-align: center;
   color: #b380b5;
   font-weight: bold;
   margin-bottom: 3rem;
-  margin-left: 2em;
   margin-top: 0;
 }
 
 .section-title3 {
+  font-family: Outfit;
+  font-size: 2.5rem;
+
   text-align: center;
   color: #b380b5;
   font-weight: bold;
@@ -147,11 +152,13 @@ body,
 }
 
 .person-info h3 {
+  font-size: 1.5rem;
   margin: 1rem 0;
   color: white;
 }
 
 .person-info p {
+  font-family: Outfit;
   margin: 0;
   color: white;
 }
@@ -167,6 +174,8 @@ body,
 }
 
 .person-card-back p {
+  font-family: Bellota;
+  padding: 1.5rem;
   color: black;
 }
 
@@ -255,12 +264,17 @@ body,
 
 .collab-container {
   display: flex;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
 
 .collab-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: #fdeee7;
   border-radius: 1rem;
   padding: 1rem;
@@ -273,17 +287,20 @@ body,
   width: 100px;
   height: 100px;
   border-radius: 5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 h3 {
+  font-family: Outfit;
   font-size: 1rem;
   color: #b380b5;
   margin-bottom: 0.5rem;
 }
 
 .collab-card p {
-  font-size: 0.9rem;
+  font-family: Bellota;
+  font-size: 1rem;
+  font-weight: bold;
   color: #b380b5;
   margin: 0;
 }
