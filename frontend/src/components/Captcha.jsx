@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const CaptchaComponent = ({ onCaptchaValidation}) => {
+const CaptchaComponent = ({ onCaptchaValidation }) => {
   const [captchaSvg, setCaptchaSvg] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
@@ -63,7 +63,7 @@ const CaptchaComponent = ({ onCaptchaValidation}) => {
         onCaptchaValidation(false); // Informar que la validación falló
         setCaptchaInput(""); // Limpiar el input
         fetchCaptcha(); // Generar un nuevo CAPTCHA solo si falla
-      }      
+      }
     } catch (error) {
       setValidationMessage("Error al validar el CAPTCHA. Inténtalo de nuevo.");
       onCaptchaValidation(false); // Informar que la validación falló
@@ -90,7 +90,9 @@ const CaptchaComponent = ({ onCaptchaValidation}) => {
           Validar
         </button>
       </div>
-      {validationMessage && <p className="validation-msg">{validationMessage}</p>}
+      {validationMessage && (
+        <p className="validation-msg">{validationMessage}</p>
+      )}
     </div>
   );
 };

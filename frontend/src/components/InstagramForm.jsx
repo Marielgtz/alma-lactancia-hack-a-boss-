@@ -1,93 +1,32 @@
-import { useState } from 'react'
+import useInstagramForm from '../hooks/useInstagramForm'
+import "./InstagramForm.css"
 
-const InstagramForm = ({ setInstagramPost }) => {
-    const [blockquote, setBlockquote] = useState('')
-    const [postNumber, setPostNumber] = useState('')
 
-    const handlePostNumberChange = (e) => {
-        setPostNumber(e.target.value)
-    }
-    const handleDeletePost = async (e) => {
-        e.preventDefault()
-        const confirm = window.confirm(
-            `Estás a punto de borrar la publicación ${postNumber}, ¿quieres continuar?`
-        )
-        if (!confirm) return
-        const url = `${
-            import.meta.env.VITE_API_URL
-        }/unpublish-instagram-post/${postNumber}`
+const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
+    const {
+        blockquote,
+        setBlockquote,
+        postNumber,
+        handlePostNumberChange,
+        handleSubmit,
+        handleDeletePost,
+    } = useInstagramForm(setInstagramPost)
 
-        try {
-            const response = await fetch(url, {
-                method: 'DELETE',
-            })
+    const handlePostChange = (e) => {
 
-            if (response.ok) {
-                const res = await response.json()
-                console.log(res.message)
-                setInstagramPost((prevData) => {
-                    const newData = [...prevData]
-                    newData[Number(postNumber) - 1] = {}
-                    return newData
-                })
-            } else {
-                const errorData = await response.json()
-                const errorMessage = errorData.error || response.statusText
-                throw new Error(errorMessage)
-            }
-        } catch (error) {
-            console.error('Ha ocurrido un error:', error)
-        }
-    }
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+        handlePostNumberChange(e);
+        setSelectedPostNumber(e.target.value); 
+    };
 
-        const url = `${
-            import.meta.env.VITE_API_URL
-        }/save-instagram-post/${postNumber}`
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ code: blockquote }),
-            })
-
-            if (response.ok) {
-                const res = await response.json()
-                console.log(res.message)
-            } else {
-                const errorData = await response.json()
-                const errorMessage = errorData.error || response.statusText
-                throw new Error(errorMessage)
-            }
-        } catch (error) {
-            console.error('Ha ocurrido un error:', error)
-        }
-
-        setInstagramPost((prevData) => {
-            const newData = [...prevData]
-            newData[Number(postNumber) - 1] = { code: blockquote }
-            return newData
-        })
-
-        setBlockquote('')
-    }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type='text'
-                required
-                value={blockquote}
-                onChange={(e) => setBlockquote(e.target.value)}
-                placeholder='Introduce el código de inserción de Instagram'
-            />
+        <form className='instagram-form-container' onSubmit={handleSubmit}>
+            <div className='instagram-form-input-select'>
+
             <select
+                className='instagram-form-select'
                 name='postNumber'
-                onChange={handlePostNumberChange}
+                onChange={handlePostChange}
                 value={postNumber}
                 required
             >
@@ -99,8 +38,20 @@ const InstagramForm = ({ setInstagramPost }) => {
                 <option value='5'>Publicación 5</option>
                 <option value='6'>Publicación 6</option>
             </select>
-            <button type='submit'>Compartir publicación</button>
-            <button onClick={handleDeletePost}>Borrar publicación</button>
+            <input
+                className='instagram-form-input'
+                type='text'
+                required
+                value={blockquote}
+                onChange={(e) => setBlockquote(e.target.value)}
+                placeholder='Introduce el código de inserción de Instagram'
+            />
+            </div>
+            <div className='instagram-form-buttons'>
+            <button className='instagram-form-button-submit' type='submit'>Compartir publicación</button>
+                <button className='instagram-form-button-delete' onClick={handleDeletePost}>X Borrar publicación</button>
+                </div>
+
         </form>
     )
 }

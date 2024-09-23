@@ -1,131 +1,130 @@
 import React, { useEffect, useState } from 'react';
 import { createEvent } from '../../services/calendar';
-import { updateCalendarEventService } from '../../services/api';
+import { deleteCalendarEventService, updateCalendarEventService } from '../../services/api';
+import formatDate from '../../utils/formatDate';
 
-export default function EventForm({prevData, onCreate, onModify}) {  
-  const defaultFormData = {
+export default function EventForm({ toEdit, onSuccess }) {
+  const defaultActivity = {
     summary: '',
     description: '',
     startDateTime: '',
     endDateTime: '',
     location: '',
     access: 'free', // Valor por defecto
+    parsedStart: '', 
+    parsedEnd: '', 
   };
 
-  const [formAction, setFormAction] = useState('create')
-  const [formData, setFormData] = useState(defaultFormData);
+  const [activity, setActivity] = useState(toEdit || defaultActivity);
 
-  // Función que adapta la fecha al input del formulario
-  const formatDateTimeForInput = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:MM'
-  };
-  
   useEffect(() => {
-    if (prevData.id) {
-      setFormAction('update')
-      setFormData({
-        summary: prevData.summary || '',
-        description: prevData.description || '',
-        startDateTime: formatDateTimeForInput(prevData.start?.dateTime), // Formateado para mostrar en input
-        endDateTime: formatDateTimeForInput(prevData.end?.dateTime), // Formateado para mostrar en input
-        location: prevData.location || '',
-        access: prevData.access
-      });
-    } else if (!prevData.id) {
-      setFormData({})
+    if (toEdit?.id) {
+      // Si editamos un evento existende, autorrellenar las fechas
+      const adaptedData = {
+        ...toEdit,
+        parsedStart: formatDate(toEdit.start.dateTime, 'local'),
+        parsedEnd: formatDate(toEdit.end.dateTime, 'local'),
+      };
+      setActivity(adaptedData);
+    } else {
+      setActivity(defaultActivity);
     }
-  }, [prevData]);
+  }, [toEdit]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
+
+    setActivity((prevData) => {
+      if (name === 'parsedStart') {
+        return {
+          ...prevData,
+          parsedStart: value, // Actualizar campo visual
+          startDateTime: new Date(value).toISOString(), 
+        };
+      }
+      if (name === 'parsedEnd') {
+        return {
+          ...prevData,
+          parsedEnd: value, // Actualizar campo visual
+          endDateTime: new Date(value).toISOString(),
+        };
+      }
+
+      return {
+        ...prevData,
+        [name]: type === 'checkbox' ? checked : value,
+      };
+    });
   };
 
-
-  const handleReset = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    console.log('Cancelando modificaciones...');
-    
-    // Vaciar el form (reiniciar a estado por defecto)
-    setFormData(defaultFormData);
+    console.log('Deleting...', activity.id);
 
-    // Reiniciar form a modo "crear evento"
-    setFormAction('create');
+    const responseMsg = await deleteCalendarEventService(activity.id);
+    if (responseMsg.error) {
+      console.error('NO SE HA ELIMINADO:', responseMsg.error);
+    } else {
+      console.log('ÉXITO');
+      onSuccess();
+    }
   };
 
   const submitNewEvent = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
+    // console.log(activity.access); //? Da siempre undefined?
 
-    // Adecuar los datos del formulario al estándar de Google
     const requestBody = {
-      summary: formData.summary,
-      description: formData.description,
+      summary: activity.summary,
+      description: activity.description,
       start: {
-        dateTime: `${formData.startDateTime}:00+02:00`,
-        timeZone: "Europe/Madrid"
+        dateTime: activity.start?.dateTime || activity.startDateTime,
+        timeZone: 'Europe/Madrid',
       },
       end: {
-        dateTime: `${formData.endDateTime}:00+02:00`,
-        timeZone: "Europe/Madrid"
+        dateTime: activity.end?.dateTime || activity.endDateTime,
+        timeZone: 'Europe/Madrid',
       },
-      location: formData.location,
+      location: activity.location,
       reminders: {
         useDefault: false,
         overrides: [
-          { method: "email", minutes: 1440 },
-          { method: "popup", minutes: 60 }
-        ]
+          { method: 'email', minutes: 1440 },
+          { method: 'popup', minutes: 60 },
+        ],
       },
-      visibility: "private",
-      access: formData.access
+      visibility: 'private',
+      access: activity.access,
     };
 
-    console.log("Event data submitted:", formAction, requestBody);
+    // console.log('Event data submitted:', requestBody);
 
-    // TODO - Mejorar gestión de errores
-    if (formAction === "create") {
-      const response = await createEvent(requestBody);
-      console.log(response);
-      if (response) {
-      
-        // Vaciar el form (reiniciar a estado por defecto)
-        setFormData(defaultFormData);
-
-        // Actualizar lista
-        onCreate(requestBody)
-
+    if (toEdit?.id) {
+      const response = await updateCalendarEventService(toEdit.id, requestBody);
+      if (response.error) {
+        console.error('NO SE HA ACTUALIZADO:', response.error);
+      } else {
+        console.log('ÉXITO');
+        onSuccess();
       }
-     
-    // TODO - Mejorar gestión de errores
-    } else if (formAction === "update") {
-      console.log("Actualizando...");
-      const response = await updateCalendarEventService(prevData.id, requestBody)
-      console.log(response);         
-      
-      // Vaciar el form (reiniciar a estado por defecto)
-      setFormData(defaultFormData);
-      setFormAction('Create')
-
-      // Actualizar lista (con respuesta del back)
-      onModify(response.response)
+    } else if (!toEdit?.id) {
+      const response = await createEvent(requestBody);
+      if (response.message === 'Actividad creada y subida al calendario correctamente') {
+        console.log('ÉXITO');
+        onSuccess();
+      } else {
+        console.log('Se ha producido un error en la petición de creación...');
+      }
     }
-    };
+  };
 
   return (
     <form onSubmit={submitNewEvent}>
-      {formAction === "create" && <h2>Crear Evento</h2>}
-      {formAction === "update" && <h2>Modificar Evento</h2>}
-
       <label>Título del evento:</label>
       <input
         type="text"
         name="summary"
-        value={formData.summary}
+        value={activity?.summary || ''}
         onChange={handleChange}
         required
       />
@@ -133,71 +132,50 @@ export default function EventForm({prevData, onCreate, onModify}) {
       <label>Descripción:</label>
       <textarea
         name="description"
-        value={formData.description}
+        value={activity?.description || ''}
         onChange={handleChange}
       />
 
-      <div className='dateTime-settings'>
-      <label>Inicio:</label>
-      <input
-        type="datetime-local"
-        name="startDateTime"
-        value={formData.startDateTime}
-        onChange={handleChange}
-        required
-      />
+      <div className="dateTime-settings">
+        <label>Inicio:</label>
+        <input
+          type="datetime-local"
+          name="parsedStart"
+          value={activity?.parsedStart}
+          onChange={handleChange}
+          required
+        />
 
-      <label>Finalización:</label>
-      <input
-        type="datetime-local"
-        name="endDateTime"
-        value={formData.endDateTime}
-        onChange={handleChange}
-        required
-      />
+        <label>Finalización:</label>
+        <input
+          type="datetime-local"
+          name="parsedEnd"
+          value={activity?.parsedEnd}
+          onChange={handleChange}
+          required
+        />
       </div>
 
       <label>Localización:</label>
       <input
         type="text"
         name="location"
-        value={formData.location}
+        value={activity?.location || ''}
         onChange={handleChange}
       />
 
-      {/* <label>Visibilidad:</label>
-      <select
-        name="visibility"
-        value={formData.visibility}
-        onChange={handleChange}
-      >
-        <option value="default">Default</option>
-        <option value="public">Public</option>
-        <option value="private">Private</option>
-      </select> */}
-
       <label>Acceso:</label>
-      <select
-        name="access"
-        value={formData.access}
-        onChange={handleChange}
-      >
-        <option value="partners">Partners (Socios)</option>
-        <option value="free">Free</option>
+      <select name="access" value={activity?.access || ''} onChange={handleChange}>
+        <option value="default">Seleccionar</option>
+        <option value="partners">Solo socios</option>
+        <option value="free">Público</option>
       </select>
 
       <br />
       <br />
-      {
-        formAction === "update" 
-        ?(
-          <>
-          <button type="submit">Modificar evento</button>
-          <button onClick={handleReset}>Cancelar modificaciones</button>
-          </>
-        )
-        :(<button type="submit">Crear evento</button>)
-      }
+
+      <button type="submit" className='confirm-btn'>Guardar Cambios</button>
+      <button onClick={handleDelete} className='cancel-btn'>Eliminar actividad</button>
     </form>
   );
 }

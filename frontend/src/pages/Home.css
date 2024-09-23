@@ -5,6 +5,16 @@ body,
   margin: 0;
   padding: 0;
 }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+.spinner {
+  color: #b380b5; /* Cambia este color al que desees (lila) */
+}
 
 .home-page {
   display: flex;
@@ -38,19 +48,18 @@ body,
   position: relative;
   height: 90vh;
   width: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .background-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   filter: brightness(70%);
 }
-
 
 .support-button {
   position: absolute;
@@ -98,10 +107,10 @@ body,
 }
 
 .section-title {
-  margin-left: 2em;
+  margin-left: 1.4em;
   color: #b380b5;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 2.5rem;
   margin-bottom: 0.2em;
   font-family: outfit;
 }
@@ -123,7 +132,7 @@ body,
 .img-silueta {
   display: flex;
   position: relative;
-  margin-left: 66rem;
+  margin-left: 64rem;
   margin-top: -18rem;
   width: 17vw;
   height: 45vh;
@@ -138,7 +147,7 @@ body,
 .experience-title {
   font-family: outfit;
   color: #b380b5;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 3rem;
   margin-left: 2em;
 }
@@ -164,7 +173,7 @@ body,
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 20rem;
+  width: 30rem;
   max-width: 100%;
   text-align: center;
 }
@@ -177,17 +186,11 @@ body,
   margin-bottom: 1rem;
 }
 
-.experience-card h3 {
-  font-family: outfit;
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
 .experience-card p {
   font-family: bellota;
   color: #333;
   font-size: 1rem;
+  text-align: left;
 }
 
 .carousel-control {
@@ -209,10 +212,13 @@ body,
 
 .carousel-control.prev {
   left: 2rem;
+  color: #b380b5;
+  width: 2px;
 }
 
 .carousel-control.next {
   right: 2rem;
+  color: #b380b5;
 }
 
 /* Estilos responsive */
@@ -233,12 +239,12 @@ body,
   }
 
   .support-button p {
-    font-size: 2rem;
+    font-size: 3.5rem;
   }
 
   .activities-button {
-    width: 16rem;
-    font-size: 1.2em;
+    width: 26rem;
+    font-size: 1.5em;
   }
 
   .content {
@@ -247,7 +253,7 @@ body,
 
   .section-title {
     margin-left: 1em;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 
   .centered-container {
@@ -257,7 +263,7 @@ body,
   .sectionText-nosotras {
     max-width: 90%;
     margin-left: 0;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
   }
 
   .img-silueta {
@@ -320,7 +326,7 @@ body,
   }
 
   .background-image img {
-    height: 50vh; 
+    height: 50vh;
   }
 
   .support-button {
@@ -330,7 +336,8 @@ body,
   }
 
   .support-button p {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    max-width: 30rem;
   }
 
   .activities-button {
@@ -350,7 +357,7 @@ body,
     color: #b380b5;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: outfit;
   }
 
@@ -359,7 +366,7 @@ body,
   }
 
   .sectionText-nosotras {
-    font-size: 0.75em;
+    font-size: 1.5em;
     text-align: center;
     max-width: 100%;
     margin-left: -1.5em;
@@ -379,11 +386,14 @@ body,
   }
 
   .experience-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
   }
 
   .experience-card {
-    width: 100%;
+    width: 80%;
     max-width: none;
   }
 
@@ -403,5 +413,100 @@ body,
 
   .carousel-control.next {
     right: -1rem;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1600px) */
+@media (min-width: 1600px) {
+  .support-button {
+    position: absolute;
+    bottom: 3em;
+    left: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-button p {
+    font-size: 5.5rem;
+    font-weight: bold;
+    color: #f5f5f5;
+    max-width: 60rem;
+    font-family: outfit;
+  }
+
+  .activities-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36rem;
+    height: 5rem;
+    font-size: 2em;
+    padding: 0;
+    margin-top: -1em;
+    margin-bottom: 1em;
+  }
+
+  .content {
+    padding: 1.5em;
+  }
+
+  .section-title {
+    margin-left: 1em;
+    font-size: 4rem;
+  }
+
+  .centered-container {
+    align-items: left;
+  }
+
+  .sectionText-nosotras {
+    max-width: 90%;
+    margin-left: 2em;
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .img-silueta {
+    display: none;
+  }
+
+  .experience-section {
+    padding: 1.5rem;
+  }
+
+  .experience-title {
+    font-size: 1.8rem;
+    margin-left: 1em;
+    margin-bottom: 2rem;
+  }
+
+  .experience-card {
+    width: 18rem;
+  }
+
+  .experience-card img {
+    width: 12rem;
+    height: 7rem;
+  }
+
+  .experience-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .experience-card p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+  }
+
+  .carousel-control.prev {
+    left: 1rem;
+  }
+
+  .carousel-control.next {
+    right: 1rem;
   }
 }

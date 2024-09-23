@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./AdminHome.css";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-const MAX_CHARACTERS = 1800; // Límite máximo de caracteres
+const MAX_CHARACTERS = 1800;
 
 const AdminHome = () => {
   const [visibleSection, setVisibleSection] = useState(null);
@@ -12,7 +12,7 @@ const AdminHome = () => {
     titleHome: "",
     experiences: [],
   });
-  const [file, setFile] = useState(null); // Para la nueva imagen del Hero
+  const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("success"); // Mensaje de éxito o error
   const [charactersRemaining, setCharactersRemaining] =
@@ -20,6 +20,7 @@ const AdminHome = () => {
   const [originalTitle, setOriginalTitle] = useState(""); // Estado para almacenar el valor original de titleHome
   const [originalText, setOriginalText] = useState(""); // Estado para almacenar el valor original de sectionText
   const fileInputRef = useRef(null); // Referencia para el input de archivo
+  const experienceFileInputRef = useRef(null); // Referencia para el input de imagen de experiencia
   const [newExperience, setNewExperience] = useState({
     text: "",
     image: null,
@@ -32,9 +33,9 @@ const AdminHome = () => {
       .then((data) => {
         const { home } = data.form;
         setHomeData(home);
-        setOriginalTitle(home.titleHome); // Guardar el título original
-        setOriginalText(home.sectionText); // Guardar el texto original
-        setCharactersRemaining(MAX_CHARACTERS - home.sectionText.length); // Inicializar el contador con los caracteres restantes
+        setOriginalTitle(home.titleHome);
+        setOriginalText(home.sectionText);
+        setCharactersRemaining(MAX_CHARACTERS - home.sectionText.length);
       })
       .catch((error) => console.error("Error al obtener los datos:", error));
   }, []);
@@ -49,6 +50,7 @@ const AdminHome = () => {
           ...prevData,
           experiences: data.experiences,
         }));
+        setCharactersRemaining(MAX_CHARACTERS - newExperience.text.length);
       })
       .catch((error) =>
         console.error("Error al obtener las experiencias", error)
@@ -60,7 +62,7 @@ const AdminHome = () => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
-      validateAndUpdateField("imageHome", selectedFile); // Actualizar la imagen automáticamente después de seleccionarla
+      validateAndUpdateField("imageHome", selectedFile);
     }
   };
 
@@ -79,7 +81,14 @@ const AdminHome = () => {
   // Simular clic en el input de archivo
   const handleImageClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); // Abrir diálogo para seleccionar la imagen
+      fileInputRef.current.click();
+    }
+  };
+
+  // Simular click en el input de imagen de experiencia
+  const handleExperienceImageClick = () => {
+    if (experienceFileInputRef.current) {
+      experienceFileInputRef.current.click();
     }
   };
 
@@ -91,7 +100,7 @@ const AdminHome = () => {
         ...prevData,
         sectionText: newText,
       }));
-      setCharactersRemaining(MAX_CHARACTERS - newText.length); // Actualizar el contador de caracteres restantes
+      setCharactersRemaining(MAX_CHARACTERS - newText.length);
     }
   };
 
@@ -102,6 +111,7 @@ const AdminHome = () => {
       ...prevExperience,
       text: value,
     }));
+    setCharactersRemaining(MAX_CHARACTERS - value.length);
   };
 
   // Manejar el cambio del título del Hero
@@ -116,22 +126,21 @@ const AdminHome = () => {
   const handleCancelText = () => {
     setHomeData((prevData) => ({
       ...prevData,
-      sectionText: originalText, // Revertir al texto original
+      sectionText: originalText,
     }));
-    setCharactersRemaining(MAX_CHARACTERS - originalText.length); // Actualizar el contador de caracteres restantes
+    setCharactersRemaining(MAX_CHARACTERS - originalText.length);
   };
 
   // Cancelar cambios en el título
   const handleCancelTitle = () => {
     setHomeData((prevData) => ({
       ...prevData,
-      titleHome: originalTitle, // Revertir al título original
+      titleHome: originalTitle,
     }));
   };
 
   // Validar y actualizar imagen o texto en el backend
   const validateAndUpdateField = async (fieldName, value) => {
-    // Validar campos vacíos
     if (fieldName !== "imageHome" && !value) {
       setMessageType("error");
       setMessage(`El campo ${fieldName} no puede estar vacío`);
@@ -143,9 +152,8 @@ const AdminHome = () => {
 
     try {
       if (fieldName === "imageHome" && file) {
-        // Si es una imagen, usa FormData para enviar el archivo
         const formData = new FormData();
-        formData.append("imageHome", value); // `value` es el archivo seleccionado
+        formData.append("imageHome", value);
 
         await fetch(`${API_BASE_URL}/update-home-data`, {
           method: "PATCH",
@@ -254,43 +262,45 @@ const AdminHome = () => {
 
       {/* Contenido para cambiar la imagen y el título del Hero */}
       <div className={`section ${visibleSection === "image" ? "visible" : ""}`}>
-        <h2>Edita la Imagen del Hero</h2>
-        <div className="admin-hero-section">
-          <div className="image-section">
-            <label>Imagen actual del Hero:</label>
-            <div
-              className="image-preview"
-              style={{
-                backgroundImage: `url(${API_BASE_URL}/${homeData.imageHome})`,
-              }}
-              onClick={handleImageClick}
-            ></div>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden-file-input"
-            />
-          </div>
-
-          <div className="text-section">
-            <label htmlFor="titleHome">Título del Hero:</label>
-            <input
-              id="titleHome"
-              type="text"
-              value={homeData.titleHome}
-              onChange={handleTitleChange}
-            />
-            <button
-              onClick={() =>
-                validateAndUpdateField("titleHome", homeData.titleHome)
-              }
-            >
-              Guardar cambios
-            </button>
-            <button onClick={handleCancelTitle}>Cancelar</button>
-          </div>
+        <h2 className="titleEditHome">Imagen principal</h2>
+        <img
+          src={
+            file
+              ? URL.createObjectURL(file)
+              : `${API_BASE_URL}/images/${homeData?.imageHome}`
+          }
+          alt="Hero"
+          className="hero-image"
+        />
+        <div className="image-buttons">
+          <button onClick={handleImageClick}>Cambiar imagen</button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleFileChange}
+          />
+        </div>
+        <div className="title-input">
+          <h2 className="titleEditHome">Estás editando el texto del CTA</h2>
+          <input
+            className="editTitle-input"
+            type="text"
+            value={homeData.titleHome || ""}
+            onChange={handleTitleChange}
+            placeholder="Escribe el título del Home"
+          />
+          <button
+            className="editAdminHome-btn"
+            onClick={() =>
+              validateAndUpdateField("titleHome", homeData.titleHome)
+            }
+          >
+            Guardar
+          </button>
+          <button className="cancelAdminHome-btn" onClick={handleCancelTitle}>
+            X Cancelar
+          </button>
         </div>
       </div>
 
@@ -302,19 +312,23 @@ const AdminHome = () => {
           id="sectionText"
           value={homeData.sectionText}
           onChange={handleTextChange}
+          placeholder="Escribe el texto para la sección Nosotras"
           maxLength={MAX_CHARACTERS}
         />
-        <p className="characters-remaining">
-          {charactersRemaining} caracteres restantes
+        <p>
+          {charactersRemaining} caracteres restantes (Máximo 1800 caracteres)
         </p>
         <button
+          className="editAdminHome-btn"
           onClick={() =>
             validateAndUpdateField("sectionText", homeData.sectionText)
           }
         >
-          Guardar cambios
+          Guardar
         </button>
-        <button onClick={handleCancelText}>Cancelar</button>
+        <button className="cancelAdminHome-btn" onClick={handleCancelText}>
+          X Cancelar
+        </button>
       </div>
 
       {/* Contenido para agregar experiencias reales */}
@@ -331,17 +345,29 @@ const AdminHome = () => {
           name="text"
           value={newExperience.text}
           onChange={handleExperienceTextChange}
+          maxLength={MAX_CHARACTERS}
         />
+        <p className="charactersRemaining">
+          {charactersRemaining} caracteres restantes (Máximo 1800 caracteres)
+        </p>
 
-        <label htmlFor="experienceImage">Imagen de la experiencia:</label>
-        <input
-          ref={fileInputRef}
-          id="experienceImage"
-          type="file"
-          accept="image/*"
-          onChange={handleExperienceFileChange}
-          className="hidden-file-input"
-        />
+        <div>
+          <label htmlFor="experienceImage">Imagen de la experiencia:</label>
+          <button
+            className="experience-buttons"
+            onClick={handleExperienceImageClick}
+          >
+            Cambiar imagen
+          </button>
+          <input
+            ref={experienceFileInputRef}
+            id="experienceImage"
+            type="file"
+            accept="image/*"
+            onChange={handleExperienceFileChange}
+            style={{ display: "none" }}
+          />
+        </div>
 
         <button className="admin-btn-exp" onClick={handleAddExperience}>
           Agregar experiencia
@@ -353,7 +379,7 @@ const AdminHome = () => {
             homeData.experiences.map((experience, index) => (
               <li key={index}>
                 <img
-                  src={`${API_BASE_URL}/src/assets/images/${experience.image}`}
+                  src={`${API_BASE_URL}/images/${experience.image}`}
                   alt={experience.image}
                 />
                 <p>{experience.text}</p>

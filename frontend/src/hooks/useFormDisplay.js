@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+const useFormDisplay = (jsonNumber) => {
+    const [formToShow, setFormToShow] = useState({})
 
-const useFormDisplay = (publishedForm, setPublishedForm, jsonNumber) => {
     //Para obtener el formulario publicado:
     useEffect(() => {
         const getPublishedForm = async () => {
@@ -9,14 +10,11 @@ const useFormDisplay = (publishedForm, setPublishedForm, jsonNumber) => {
                     import.meta.env.VITE_API_URL +
                         `/get-published-form/${jsonNumber}`
                 )
-
                 if (response.ok) {
                     const data = await response.json()
-                    setPublishedForm((prevData) => {
-                        const newData = [...prevData]
-                        newData.splice(Number(jsonNumber) - 1, 1, data.form)
-                        return newData
-                    })
+                    setFormToShow(data.form)
+                } else {
+                    console.error('Error al enviar los datos')
                 }
             } catch (error) {
                 console.log('No hay datos que mostrar:', error)
@@ -24,16 +22,13 @@ const useFormDisplay = (publishedForm, setPublishedForm, jsonNumber) => {
         }
         getPublishedForm()
     }, [])
-
+    
     // Ref para el formulario
     const formRef = useRef(null)
-
     //Para enviar los resultados del formulario:
     const sendDataHandler = async (event) => {
         event.preventDefault()
-
         if (!formRef.current) return
-
         const formElements = formRef.current.elements
         const formValues = Array.from(formElements).reduce((acc, element) => {
             if (element.name) {
@@ -46,7 +41,7 @@ const useFormDisplay = (publishedForm, setPublishedForm, jsonNumber) => {
             const response = await fetch(
                 import.meta.env.VITE_API_URL +
                     '/submit-form/' +
-                    publishedForm.formName,
+                    formToShow.formName,
                 {
                     method: 'POST',
                     headers: {
@@ -54,7 +49,7 @@ const useFormDisplay = (publishedForm, setPublishedForm, jsonNumber) => {
                     },
                     body: JSON.stringify({
                         ...formValues,
-                        formName: publishedForm.formName,
+                        formName: formToShow.formName,
                     }),
                 }
             )
@@ -71,6 +66,7 @@ const useFormDisplay = (publishedForm, setPublishedForm, jsonNumber) => {
             console.error('Ha ocurrido un error:', error)
         }
     }
-    return { sendDataHandler, formRef }
+    return { sendDataHandler, formRef, formToShow }
 }
+
 export default useFormDisplay
