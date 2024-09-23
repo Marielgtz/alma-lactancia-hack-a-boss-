@@ -23,8 +23,8 @@ const useInstagramForm = (setInstagramPost) => {
 
                 if (response.ok) {
                     const res = await response.json()
-                    console.log(res.message)
                     isPublish = res.isPublished
+                    console.log(res.message, isPublish)
                 } else {
                     const errorData = await response.json()
                     const errorMessage = errorData.error || response.statusText

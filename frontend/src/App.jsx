@@ -4,7 +4,7 @@ import {
     Routes,
     Route,
     Navigate,
-} from 'react-router-dom' // Asegúrate de importar Navigate
+} from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Activities from './pages/Activities'
@@ -28,12 +28,16 @@ import FormActivityPage from './pages/FormActivityPage'
 function App() {
     const instagramPostList = Array.from({ length: 6 }, () => {
         return {}
-    }) //Número de publica
+    }) //Número de publicaciones de Instagram
+
     const formList = Array.from({ length: 4 }, () => {
         return {}
-    }) //Número de formularios que se pueden crear.
+    }) //Número de formularios que se pueden publicar.
+
     const [instagramPost, setInstagramPost] = useState(instagramPostList)
     const [publishedForm, setPublishedForm] = useState(formList)
+    const [activities, setActivities] = useState([])
+
     useEffect(() => {
         const fetchInstagramPost = async () => {
             const url = `${
@@ -66,7 +70,15 @@ function App() {
                     <Route path='*' element={<NotFoundPage />} />
                     <Route path='/' element={<Home />} />
                     <Route path='/quienes-somos' element={<About />} />
-                    <Route path='/actividades' element={<Activities />} />
+                    <Route
+                        path='/actividades'
+                        element={
+                            <Activities
+                                setActivities={setActivities}
+                                activities={activities}
+                            />
+                        }
+                    />
                     <Route
                         path='/historico'
                         element={
@@ -84,23 +96,15 @@ function App() {
                         path='/prueba'
                         element={
                             <Prueba
-                                instagramPost={instagramPost}
-                                setInstagramPost={setInstagramPost}
                                 publishedForm={publishedForm}
                                 setPublishedForm={setPublishedForm}
                             />
                         }
                     />
 
-                    {/* Pasar el estado publishedForm a FormActivityPage */}
                     <Route
-                        path='/formulario-inscripcion'
-                        element={
-                            <FormActivityPage
-                                publishedForm={publishedForm}
-                                setPublishedForm={setPublishedForm}
-                            />
-                        }
+                        path='/formulario-inscripcion/:eventId/:activityNumber'
+                        element={<FormActivityPage />}
                     />
 
                     {/* Rutas del DASHBOARD */}

@@ -42,6 +42,7 @@ const EditForm = ({
                 <div>
                     {fields?.map(
                         (field, index) =>
+                            field.label !== 'partner' &&
                             field.label !== 'Partner' && (
                                 <div
                                     key={field.id}

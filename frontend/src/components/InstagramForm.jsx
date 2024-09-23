@@ -1,6 +1,7 @@
 import useInstagramForm from '../hooks/useInstagramForm'
 import "./InstagramForm.css"
 
+
 const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
     const {
         blockquote,
@@ -12,13 +13,16 @@ const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
     } = useInstagramForm(setInstagramPost)
 
     const handlePostChange = (e) => {
+
         handlePostNumberChange(e);
         setSelectedPostNumber(e.target.value); 
     };
 
+
     return (
         <form className='instagram-form-container' onSubmit={handleSubmit}>
             <div className='instagram-form-input-select'>
+
             <select
                 className='instagram-form-select'
                 name='postNumber'
@@ -47,6 +51,7 @@ const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
             <button className='instagram-form-button-submit' type='submit'>Compartir publicación</button>
                 <button className='instagram-form-button-delete' onClick={handleDeletePost}>X Borrar publicación</button>
                 </div>
+
         </form>
     )
 }

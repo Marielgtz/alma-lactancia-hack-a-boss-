@@ -1,4 +1,5 @@
 .instagram-form-container {
+
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -10,10 +11,12 @@
   display: flex;
   justify-content: flex-start;
   gap: 10px;
+
 }
 
 .instagram-form-input,
 .instagram-form-select {
+
   padding: 10px;
   font-size: 1rem;
   text-align: center;
@@ -23,10 +26,12 @@
   border: none;
   border-radius: 5px;
   margin: 0;
+
 }
 
 .instagram-form-input:focus,
 .instagram-form-select:focus {
+
   outline: none;
   border-color: #b380b5;
   box-shadow: 0 0 5px #752677;
@@ -44,10 +49,12 @@
   display: flex;
   justify-content: flex-start;
   gap: 10px;
+
 }
 
 .instagram-form-button-submit,
 .instagram-form-button-delete {
+
   padding: 5px;
   font-size: 0.9rem;
   font-family: outfit;
@@ -73,4 +80,5 @@
 .instagram-form-button-delete:hover {
   background-color: #ff0400;
   color: #fff;
+
 }
