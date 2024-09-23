@@ -337,11 +337,13 @@ const activitiesFilters = {
   // access: ""              
 };
 
-export async function getCalendarEvents(filters) {
+export async function getCalendarEvents(activitiesLimit) {
+  console.log(activitiesLimit);
+  
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
   const fullUrl = `${apiUrl}/list-calendar-events`;
   const requestBody = {
-    maxResults: 10,
+    maxResults: activitiesLimit || 10,
     orderBy: "startTime",
     singleEvents: true,
     timeMin: new Date().toISOString() //Traer los eventos actuales
