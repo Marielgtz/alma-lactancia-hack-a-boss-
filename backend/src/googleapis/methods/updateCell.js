@@ -44,7 +44,7 @@ const updateCell = async (
         console.log('Las celdas han sido actualizadas')
         return result
     } catch (error) {
-        generateError('Ha habido un error al actualizar la celda')
+        generateError(`Ha habido un error al actualizar la celda: ${error}`)
     }
 }
 export default updateCell

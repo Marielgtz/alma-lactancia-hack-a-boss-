@@ -50,7 +50,7 @@ const googleSignIn = async (req, res, next) => {
         }
 
         //Redirecciono al front-end con la información del usuario:
-        res.redirect(process.env.FRONT_END)
+        res.redirect(`${process.env.FRONT_END}/dashboard`)
     } catch (error) {
         next(error)
     }

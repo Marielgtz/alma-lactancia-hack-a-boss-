@@ -66,6 +66,7 @@ const createFormController = async (req, res, next) => {
                     'Formulario generado y guardado correctamente. Creada hoja de respuestas',
                 form: dataToSend,
             })
+            return
         }
 
         //Si la hoja de respuesta ya existe, actualizo los campos:

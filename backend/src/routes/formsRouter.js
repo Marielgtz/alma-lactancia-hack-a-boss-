@@ -20,7 +20,10 @@ router.get('/get-all-forms', getAllForms)
 router.get('/get-form/:formId/:publish?/:jsonNumber?', getFormById)
 router.get('/get-published-form/:jsonNumber', getPublishedForm)
 router.get('/unpublish-form/:jsonNumber', unpublishForm)
-router.get('/check-is-published/:formId/:jsonNumber', checkIsPublished)
+router.get(
+    '/check-is-published/:formId/:jsonNumber/:checkIsFile?',
+    checkIsPublished
+)
 router.post('/submit-form/:sheetName', saveFormResponses)
 
 export default router

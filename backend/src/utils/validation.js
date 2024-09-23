@@ -14,6 +14,7 @@ const validationSchemaNewPartner = Joi.object({
 //Actividades:
 const eventSchema = Joi.object({
     summary: Joi.string().max(30).required(),
+    status: Joi.string().valid('confirmed', 'cancelled'),
     description: Joi.string().max(255).optional(),
     start: Joi.object({
         dateTime: Joi.date().iso().required(),
@@ -73,8 +74,8 @@ const validationSchemaNewMessage = Joi.object({
 const validationSchemaNewCollaborator = Joi.object({
     name: Joi.string().max(15).required(),
     surname: Joi.string().max(30).required(),
-    description: Joi.string().min(6).max(255).required(),
-    role: Joi.string().max(15),
+    description: Joi.string().min(6).required(),
+    role: Joi.string(),
     team: Joi.alternatives().try(Joi.boolean(), Joi.string()).required(),
 })
 

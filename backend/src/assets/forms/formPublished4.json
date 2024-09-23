@@ -1,1 +1,23 @@
-{}
+{
+  "formName": "Charla nocturna luna nueva",
+  "formId": "75161e69-9a6a-4d9a-8032-d9ebeba52537",
+  "publishNumber": "4",
+  "fields": [
+    {
+      "label": "Nombre",
+      "type": "text"
+    },
+    {
+      "label": "Correo electrónico",
+      "type": "email"
+    },
+    {
+      "label": "Número de socio",
+      "type": "number"
+    },
+    {
+      "label": "Partner",
+      "type": "select"
+    }
+  ]
+}
