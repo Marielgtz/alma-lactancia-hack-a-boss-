@@ -134,6 +134,10 @@ label[for="experienceText"] {
   border-radius: 0.5rem;
 }
 
+.charactersRemaining {
+  margin-left: 1rem;
+}
+
 label[for="experienceImage"] {
   margin-left: 1rem;
 }
@@ -143,11 +147,20 @@ label[for="experienceImage"] {
   border-radius: 0.5rem;
 }
 
-.admin-btn-exp {
+.experience-buttons {
+  margin-left: 1rem;
   margin-top: 1rem;
+}
+
+.admin-btn-exp {
+  margin-top: 1.5rem;
   margin-left: 1rem;
   padding: 0.3rem;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
 }
 
 h3 {
@@ -160,6 +173,7 @@ h3 {
   margin-left: -1.4rem;
   display: flex;
 }
+
 
 
 

@@ -150,9 +150,8 @@ const Home = () => {
                   <div key={experience.id} className="experience-card">
                     <img
                       src={`http://localhost:3001/images/${experience.image}`}
-                      alt={experience.name}
+                      alt={experience.image}
                     />
-                    <h3>{experience.name}</h3>
                     <p>{experience.text}</p>
                   </div>
                 ))}
