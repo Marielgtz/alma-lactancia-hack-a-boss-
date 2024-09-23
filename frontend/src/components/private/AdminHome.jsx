@@ -44,7 +44,7 @@ const AdminHome = () => {
     fetch(`${API_BASE_URL}/get-all-experiences`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Experiencias:", data); 
+        console.log("Experiencias:", data);
         setHomeData((prevData) => ({
           ...prevData,
           experiences: data.experiences,
@@ -336,24 +336,27 @@ const AdminHome = () => {
         <label htmlFor="experienceImage">Imagen de la experiencia:</label>
         <input
           ref={fileInputRef}
+          id="experienceImage"
           type="file"
           accept="image/*"
           onChange={handleExperienceFileChange}
           className="hidden-file-input"
         />
 
-        <button onClick={handleAddExperience}>Agregar experiencia</button>
+        <button className="admin-btn-exp" onClick={handleAddExperience}>
+          Agregar experiencia
+        </button>
 
         <h3>Experiencias Actuales:</h3>
-        <ul>
+        <ul className="list-exp">
           {homeData.experiences && homeData.experiences.length > 0 ? (
             homeData.experiences.map((experience, index) => (
               <li key={index}>
-                <p>{experience.text}</p>
                 <img
                   src={`${API_BASE_URL}/${experience.image}`}
-                  alt={experience.text}
+                  alt={experience.image}
                 />
+                <p>{experience.text}</p>
               </li>
             ))
           ) : (

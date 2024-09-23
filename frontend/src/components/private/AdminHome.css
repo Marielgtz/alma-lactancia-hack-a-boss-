@@ -126,3 +126,49 @@ p {
   color: #6c757d;
 }
 
+/* Sección experiencias */
+
+h2 {
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}
+
+label[for="experienceText"] {
+  margin-left: 1rem;
+}
+
+#experienceText {
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+}
+
+label[for="experienceImage"] {
+  margin-left: 1rem;
+}
+
+#experienceImage {
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+}
+
+.admin-btn-exp {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+}
+
+h3 {
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+
+.list-exp {
+  list-style: none;
+  margin-left: -1.4rem;
+  display: flex;
+}
+
+
+
+
