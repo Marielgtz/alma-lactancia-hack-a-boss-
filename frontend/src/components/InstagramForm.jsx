@@ -1,7 +1,7 @@
 import useInstagramForm from '../hooks/useInstagramForm'
-import InstagramPost from './InstagramPost'
+import './InstagramForm.css'
 
-const InstagramForm = ({ setInstagramPost, instagramPost }) => {
+const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
     const {
         blockquote,
         setBlockquote,
@@ -10,19 +10,19 @@ const InstagramForm = ({ setInstagramPost, instagramPost }) => {
         handleSubmit,
         handleDeletePost,
     } = useInstagramForm(setInstagramPost)
+
+    const handlePostChange = (e) => {
+        handlePostNumberChange(e)
+        setSelectedPostNumber(e.target.value)
+    }
+
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    required
-                    value={blockquote}
-                    onChange={(e) => setBlockquote(e.target.value)}
-                    placeholder='Introduce el código de inserción de Instagram'
-                />
+        <form className='instagram-form-container' onSubmit={handleSubmit}>
+            <div className='instagram-form-input-select'>
                 <select
+                    className='instagram-form-select'
                     name='postNumber'
-                    onChange={handlePostNumberChange}
+                    onChange={handlePostChange}
                     value={postNumber}
                     required
                 >
@@ -34,14 +34,27 @@ const InstagramForm = ({ setInstagramPost, instagramPost }) => {
                     <option value='5'>Publicación 5</option>
                     <option value='6'>Publicación 6</option>
                 </select>
-                <button type='submit'>Compartir publicación</button>
-                <button onClick={handleDeletePost}>Borrar publicación</button>
-            </form>
-            <InstagramPost
-                instagramPost={instagramPost}
-                postNumber={postNumber}
-            />
-        </>
+                <input
+                    className='instagram-form-input'
+                    type='text'
+                    required
+                    value={blockquote}
+                    onChange={(e) => setBlockquote(e.target.value)}
+                    placeholder='Introduce el código de inserción de Instagram'
+                />
+            </div>
+            <div className='instagram-form-buttons'>
+                <button className='instagram-form-button-submit' type='submit'>
+                    Compartir publicación
+                </button>
+                <button
+                    className='instagram-form-button-delete'
+                    onClick={handleDeletePost}
+                >
+                    X Borrar publicación
+                </button>
+            </div>
+        </form>
     )
 }
 

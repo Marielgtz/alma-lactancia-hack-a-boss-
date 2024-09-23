@@ -1,0 +1,76 @@
+.instagram-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: solid 1px black;
+    padding-top: 1rem;
+}
+
+.instagram-form-input-select {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.instagram-form-input,
+.instagram-form-select {
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+    color: #b380b5;
+    font-family: outfit;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.instagram-form-input:focus,
+.instagram-form-select:focus {
+    outline: none;
+    border-color: #b380b5;
+    box-shadow: 0 0 5px #752677;
+}
+
+.instagram-form-select {
+    width: 30%;
+}
+
+.instagram-form-input {
+    width: 40%;
+}
+
+.instagram-form-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.instagram-form-button-submit,
+.instagram-form-button-delete {
+    padding: 5px;
+    font-size: 0.9rem;
+    font-family: outfit;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.instagram-form-button-submit {
+    background-color: #000000;
+    color: #fff;
+}
+
+.instagram-form-button-submit:hover {
+    background-color: #b380b5;
+    color: #ffffff;
+}
+
+.instagram-form-button-delete {
+    background-color: #ff5733;
+}
+
+.instagram-form-button-delete:hover {
+    background-color: #ff0400;
+    color: #fff;
+}
