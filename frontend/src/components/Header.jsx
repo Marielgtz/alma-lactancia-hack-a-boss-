@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import useContactInfo from "../hooks/useContactInfo.js";
-
 import logoAlma from "../images/logo-alma.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
-
 
 const Header = () => {
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -24,20 +21,16 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
-
   const instagramLink = generalSettings?.linkInstagram || "";
   const facebookLink = generalSettings?.linkFacebok || "";
-  const logoSrc = generalSettings?.logo ? `${API_BASE_URL}/images/${generalSettings.logo}` : logoAlma;
-  
+  const logoSrc = generalSettings?.logo
+    ? `${API_BASE_URL}/images/${generalSettings.logo}`
+    : logoAlma;
 
   return (
     <header>
       <nav className="navbar">
-        <img
-          src={logoSrc}
-          alt="Logo Alma"
-          className="logo"
-        />
+        <img src={logoSrc} alt="Logo Alma" className="logo" />
         <div className="menu-toggle" onClick={toggleMenu}>
           {menuOpen ? "✕" : "☰"}
         </div>

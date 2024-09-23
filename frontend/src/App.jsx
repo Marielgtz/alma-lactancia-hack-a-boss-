@@ -41,7 +41,15 @@ function App() {
           <Route path="/colabora" element={<Collaborate />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
-          <Route path="/prueba" element={<Prueba />} />
+          <Route
+            path="/prueba"
+            element={
+              <Prueba
+                publishedForm={publishedForm}
+                setPublishedForm={setPublishedForm}
+              />
+            }
+          />
 
           {/* Pasar el estado publishedForm a FormActivityPage */}
           <Route

@@ -6,7 +6,8 @@ import EditForm from './EditForm'
 import FormDisplay from './FormDisplay'
 import FormDropdown from './FormDropdown'
 
-const Prueba = () => {
+const Prueba = ({ publishedForm, setPublishedForm }) => {
+
     const formList = Array.from({ length: 4 }, () => {
         return {}
     }) //Número de formularios que se pueden crear.
@@ -15,7 +16,7 @@ const Prueba = () => {
     }) //Número de publicaciones de Instagram que se podrán publicar.
 
     const [instagramPost, setInstagramPost] = useState(instagramPostList)
-    const [publishedForm, setPublishedForm] = useState(formList)
+    //const [publishedForm, setPublishedForm] = useState(formList)
     const [forms, setForms] = useState({})
     const [editingForm, setEditingForm] = useState(false)
     const [selectedForm, setSelectedForm] = useState(null)
