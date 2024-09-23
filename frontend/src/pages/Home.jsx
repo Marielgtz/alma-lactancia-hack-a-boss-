@@ -84,12 +84,6 @@ const Home = () => {
     }
   };
 
-  const experiencesToShow = experiences.slice(0, 4); // Solo muestra un máximo de 4 experiencias
-  const visibleExperiences = experiencesToShow.slice(
-    currentIndex,
-    currentIndex + cardsToShow
-  );
-
   const handleActivitiesClick = () => {
     navigate("/actividades");
   };
@@ -144,9 +138,7 @@ const Home = () => {
               &#10094; {/* Left Arrow */}
             </button>
             <div className="experience-cards">
-              {experiences
-                .slice(currentIndex, currentIndex + cardsToShow)
-                .map((experience) => (
+              {experiences.map((experience) => (
                   <div key={experience.id} className="experience-card">
                     <img
                       src={`http://localhost:3001/images/${experience.image}`}
