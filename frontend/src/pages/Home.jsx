@@ -138,7 +138,9 @@ const Home = () => {
               &#10094; {/* Left Arrow */}
             </button>
             <div className="experience-cards">
-              {experiences.map((experience) => (
+              {experiences
+              .slice(currentIndex, currentIndex + cardsToShow)
+              .map((experience) => (
                   <div key={experience.id} className="experience-card">
                     <img
                       src={`http://localhost:3001/images/${experience.image}`}
