@@ -157,6 +157,26 @@ export const updateCalendarEventService = async (eventId, eventData) => {
     }
 }
 
+export const cancelCalendarEventService = async (eventId) => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/cancel-calendar-event/${eventId}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+
+        const responseFinal = await response.json()
+        return responseFinal
+    } catch (error) {
+        console.error('Error updating calendar event:', error)
+        throw error
+    }
+}
+
 // Colaboradores
 export const getAllCollaboratorsService = async (isTeamMember) => {
     const isTeamMemberParam = isTeamMember ? isTeamMember : 'false' // Por defecto siempre trae a los miembros
@@ -224,15 +244,14 @@ export const deleteCollaboratorService = async (id, team) => {
 };
 
 export const updateCollaboratorService = async (id, team, formData) => {  
+    console.log(formData); // TODO - Error en el formData image
+    
   try {
     const response = await fetch(
       `${API_BASE_URL}/update-collaborator/${id}/${team}`,
       {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formData,
       }
     );
 
