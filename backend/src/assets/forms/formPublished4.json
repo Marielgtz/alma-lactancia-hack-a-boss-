@@ -1,23 +1,11 @@
 {
-  "formName": "Charla nocturna luna nueva",
-  "formId": "75161e69-9a6a-4d9a-8032-d9ebeba52537",
+  "formName": "Taller de maternidad",
+  "formId": "910dd948-2836-4474-a5fe-f90d33e2e0f3",
   "publishNumber": "4",
   "fields": [
     {
       "label": "Nombre",
       "type": "text"
-    },
-    {
-      "label": "Correo electrónico",
-      "type": "email"
-    },
-    {
-      "label": "Número de socio",
-      "type": "number"
-    },
-    {
-      "label": "Partner",
-      "type": "select"
     }
   ]
 }

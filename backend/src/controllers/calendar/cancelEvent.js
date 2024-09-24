@@ -1,40 +1,62 @@
 import {
     updateEvent,
     getRowsData,
-    updateCell,
-    getCoordinates,
     getEvent,
-    allSheetData,
+    updateRow,
 } from '../../googleapis/methods/index.js'
+import formatDate from '../../utils/formatDate.js'
 
 const cancelEvent = async (req, res, next) => {
     try {
         const eventId = req.params.eventId
         const sheetId = process.env.SPREADSHEET_ID
+        const existingEvent = await getEvent(eventId)
 
-        // Actualizo el estado en el calendario:
-        const eventFronCalendar = await getEvent(eventId)
-        await updateEvent(eventId, {
-            ...eventFronCalendar,
-            status: 'cancelled',
-        })
+        //Actualizo el evento en Google calendar:
+        const mergedEvent = {
+            ...existingEvent,
+            summary: `EVENTO CANCELADO: ${existingEvent.summary}`,
+            start: {
+                ...existingEvent.start,
+            },
+            end: {
+                ...existingEvent.end,
+            },
+        }
 
-        //Actualizo el estado en la hoja:
-        const data = await allSheetData(sheetId, 'Actividades')
-        const { rows, headers } = data
+        const response = await updateEvent(eventId, mergedEvent)
 
-        const coordinates = getCoordinates(rows, headers, 'status', 'confirmed')
-        const { fieldColumnIndex, valueRowIndex } = coordinates
-        await updateCell(
+        //Actualizo el evento en Google Sheets:
+        const fields = {
+            field: 'id',
+            value: eventId,
+            newValue: '',
+            sheetName: 'Actividades',
+        }
+        let rowValuesToUpdate = [
+            eventId,
+            mergedEvent.summary,
+            mergedEvent.description,
+            formatDate(mergedEvent.start.dateTime),
+            formatDate(mergedEvent.end.dateTime),
+            mergedEvent.location,
+            mergedEvent.acces,
+        ]
+        const dataToUpdate = await getRowsData(
             sheetId,
             'Actividades',
-            fieldColumnIndex,
-            valueRowIndex,
-            'cancelled'
+            fields,
+            rowValuesToUpdate
         )
-        return res.status(200).json({ message: 'Evento cancelado' })
+
+        const { rowToUpdate } = dataToUpdate
+        await updateRow(rowToUpdate)
+
+        res.send({
+            message: 'Evento cancelado',
+            data: response,
+        })
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

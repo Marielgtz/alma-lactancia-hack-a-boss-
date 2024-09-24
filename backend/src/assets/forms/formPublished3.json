@@ -1,1 +1,19 @@
-{}
+{
+  "formName": "Formulario tres",
+  "formId": "45f9679e-75e6-46dc-b018-4ab506334aa2",
+  "publishNumber": "3",
+  "fields": [
+    {
+      "label": "Nombre",
+      "type": "text"
+    },
+    {
+      "label": "Correo electrónico",
+      "type": "email"
+    },
+    {
+      "label": "Partner",
+      "type": "select"
+    }
+  ]
+}

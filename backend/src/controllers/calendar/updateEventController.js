@@ -14,31 +14,6 @@ const updateEventController = async (req, res, next) => {
         const updatedData = req.body
         const sheetId = process.env.SPREADSHEET_ID
 
-        //Cancelar evento:
-        if (req.body.status === 'cancelled') {
-            //Actualizo el estado en el calendario:
-            await updateEvent(eventId, { status: 'cancelled' })
-
-            //Actualizo el estado en la hoja:
-            const data = getRowsData(sheetId, 'Actividades', {
-                field: 'id',
-                value: eventId,
-                newValue: '',
-                sheetName: 'Actividades',
-            })
-            const { rows, headers } = data
-            const coordinates = getCoordinates(rows, headers, status, 'active')
-            const { fieldColumnIndex, valueRowIndex } = coordinates
-            await updateCell(
-                sheetId,
-                'Actividades',
-                fieldColumnIndex,
-                valueRowIndex,
-                'cancelled'
-            )
-            return res.status(200).json({ message: 'Evento cancelado' })
-        }
-
         //Traigo el evento del calendario:
         const existingEvent = await getEvent(eventId)
         const allowedProperties = [
@@ -52,7 +27,6 @@ const updateEventController = async (req, res, next) => {
             'reminders',
             'visibility',
             'access',
-            'status',
         ]
 
         //Creo un objeto solo con las propiedades que admite el método update de calendar:
@@ -95,7 +69,6 @@ const updateEventController = async (req, res, next) => {
             formatDate(mergedEvent.end.dateTime),
             mergedEvent.location,
             mergedEvent.acces,
-            mergedEvent.status,
         ]
         const dataToUpdate = await getRowsData(
             sheetId,
