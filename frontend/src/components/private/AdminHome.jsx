@@ -4,7 +4,7 @@ import './AdminHome.css'
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 const MAX_CHARACTERS = 1800
 
-const AdminHome = ({ setCheckedExperiences }) => {
+const AdminHome = () => {
     const [visibleSection, setVisibleSection] = useState(null)
     const [homeData, setHomeData] = useState({
         sectionText: '',

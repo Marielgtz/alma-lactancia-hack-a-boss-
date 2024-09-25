@@ -37,7 +37,6 @@ function App() {
     const [instagramPost, setInstagramPost] = useState(instagramPostList)
     const [publishedForm, setPublishedForm] = useState(formList)
     const [activities, setActivities] = useState([])
-    const [checkedExperiences, setCheckedExperiences] = useState([])
 
     useEffect(() => {
         const fetchInstagramPost = async () => {
@@ -69,12 +68,7 @@ function App() {
             <div className='App'>
                 <Routes>
                     <Route path='*' element={<NotFoundPage />} />
-                    <Route
-                        path='/'
-                        element={
-                            <Home checkedExperiences={checkedExperiences} />
-                        }
-                    />
+                    <Route path='/' element={<Home />} />
                     <Route path='/quienes-somos' element={<About />} />
                     <Route
                         path='/actividades'
@@ -117,16 +111,7 @@ function App() {
                     <Route path='/dashboard' element={<Layout />}>
                         {/* Redireccionar a 'general' cuando se accede a /dashboard */}
                         <Route path='general' element={<AdminGeneral />} />
-                        <Route
-                            path='inicio'
-                            element={
-                                <AdminHome
-                                    setCheckedExperiences={
-                                        setCheckedExperiences
-                                    }
-                                />
-                            }
-                        />
+                        <Route path='inicio' element={<AdminHome />} />
                         <Route path='quienes-somos' element={<AdminAbout />} />
                         <Route
                             path='actividades'
