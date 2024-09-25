@@ -21,6 +21,7 @@ const AdminHome = () => {
   const [originalText, setOriginalText] = useState(""); // Estado para almacenar el valor original de sectionText
   const fileInputRef = useRef(null); // Referencia para el input de archivo
   const experienceFileInputRef = useRef(null); // Referencia para el input de imagen de experiencia
+  const [selectedExperiences, setSelectedExperiences] = useState([]); // Estado para almacenar las experiencias seleccionadas
   const [newExperience, setNewExperience] = useState({
     text: "",
     image: null,
@@ -40,23 +41,6 @@ const AdminHome = () => {
       .catch((error) => console.error("Error al obtener los datos:", error));
   }, []);
 
-  // Cargar experiencias desde el backend
-  useEffect(() => {
-    fetch(`${API_BASE_URL}/get-all-experiences`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Experiencias:", data);
-        setHomeData((prevData) => ({
-          ...prevData,
-          experiences: data.experiences,
-        }));
-        setCharactersRemaining(MAX_CHARACTERS - newExperience.text.length);
-      })
-      .catch((error) =>
-        console.error("Error al obtener las experiencias", error)
-      );
-  }, []);
-
   // Manejar el cambio de imagen
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -66,29 +50,10 @@ const AdminHome = () => {
     }
   };
 
-  // Manejar el cambio de imagen de la experiencia
-  const handleExperienceFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    console.log("Archivo de experiencia seleccionado:", selectedFile);
-    if (selectedFile) {
-      setNewExperience((prevExperience) => ({
-        ...prevExperience,
-        image: selectedFile,
-      }));
-    }
-  };
-
   // Simular clic en el input de archivo
   const handleImageClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
-    }
-  };
-
-  // Simular click en el input de imagen de experiencia
-  const handleExperienceImageClick = () => {
-    if (experienceFileInputRef.current) {
-      experienceFileInputRef.current.click();
     }
   };
 
@@ -102,16 +67,6 @@ const AdminHome = () => {
       }));
       setCharactersRemaining(MAX_CHARACTERS - newText.length);
     }
-  };
-
-  // Manejar el cambio de texto para la descripción de la experiencia
-  const handleExperienceTextChange = (e) => {
-    const { value } = e.target;
-    setNewExperience((prevExperience) => ({
-      ...prevExperience,
-      text: value,
-    }));
-    setCharactersRemaining(MAX_CHARACTERS - value.length);
   };
 
   // Manejar el cambio del título del Hero
@@ -196,14 +151,56 @@ const AdminHome = () => {
     setVisibleSection(section);
   };
 
+  // Cargar experiencias desde el backend
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/get-all-experiences`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Experiencias:", data);
+        setHomeData((prevData) => ({
+          ...prevData,
+          experiences: data.experiences,
+        }));
+        setCharactersRemaining(MAX_CHARACTERS - newExperience.text.length);
+      })
+      .catch((error) =>
+        console.error("Error al obtener las experiencias", error)
+      );
+  }, []);
+
+  // Manejar el cambio de imagen de la experiencia
+  const handleExperienceFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    console.log("Archivo de experiencia seleccionado:", selectedFile);
+    if (selectedFile) {
+      setNewExperience((prevExperience) => ({
+        ...prevExperience,
+        image: selectedFile,
+      }));
+    }
+  };
+
+  // Simular click en el input de imagen de experiencia
+  const handleExperienceImageClick = () => {
+    console.log(experienceFileInputRef.current);
+    if (experienceFileInputRef.current) {
+      experienceFileInputRef.current.click();
+    }
+  };
+
+  // Manejar el cambio de texto para la descripción de la experiencia
+  const handleExperienceTextChange = (e) => {
+    const { value } = e.target;
+    setNewExperience((prevExperience) => ({
+      ...prevExperience,
+      text: value,
+    }));
+    setCharactersRemaining(MAX_CHARACTERS - value.length);
+  };
+
   // Guardar la nueva experiencia
   const handleAddExperience = async () => {
     console.log("Datos de nueva experiencia:", newExperience);
-    if (homeData.experiences.length >= 4) {
-      setMessage("No puedes agregar más de 4 experiencias.");
-      setMessageType("error");
-      return;
-    }
 
     try {
       const formData = new FormData();
@@ -230,6 +227,56 @@ const AdminHome = () => {
       setMessage(`Error: ${error.message}`);
       setMessageType("error");
     }
+  };
+
+  // Manejar la selección de experiencias
+  const handleExperienceSelection = (experienceId) => {
+    setSelectedExperiences((prevSelected) => {
+      if (prevSelected.includes(experienceId)) {
+        return prevSelected.filter((id) => id !== experienceId);
+      }
+      if (prevSelected.length < 4) {
+        return [...prevSelected, experienceId];
+      }
+      return prevSelected;
+    });
+  };
+
+  // Guardar selección de experiencias
+  const handleSaveSelection = async () => {
+    if (selectedExperiences.length === 0) {
+      setMessage("No has seleccionado ninguna experiencia.");
+      setMessageType("error");
+      return;
+    }
+
+    try {
+      //Enviar experiencias seleccionadas al backend
+      const response = await fetch(`${API_BASE_URL}/update-experience/${experienceId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          selectedExperiences,
+        }),
+      });
+
+      if (response.ok) {
+        setMessage("Selección guardada correctamente.");
+        setMessageType("success");
+      } else {
+        throw new Error("Error al guardar la selección.");
+      }
+    } catch (error) {
+      setMessage(`Error: ${error.message}`);
+      setMessageType("error");
+    }
+
+    //Ocultar mensaje después de 3 segundos
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
   };
 
   return (
@@ -370,25 +417,37 @@ const AdminHome = () => {
         </div>
 
         <button className="admin-btn-exp" onClick={handleAddExperience}>
-          Agregar experiencia
+          Añadir experiencia
         </button>
 
-        <h3>Experiencias Actuales:</h3>
+        <h3>Experiencias:</h3>
         <ul className="list-exp">
           {homeData.experiences && homeData.experiences.length > 0 ? (
-            homeData.experiences.map((experience, index) => (
-              <li key={index}>
+            homeData.experiences.map((experience) => (
+              <li key={experience.id}>
                 <img
                   src={`${API_BASE_URL}/images/${experience.image}`}
                   alt={experience.image}
                 />
                 <p>{experience.text}</p>
+                <input
+                  type="checkbox"
+                  checked={selectedExperiences.includes(experience.id)}
+                  onChange={() => handleExperienceSelection(experience.id)}
+                  disabled={
+                    !selectedExperiences.includes(experience.id) &&
+                    selectedExperiences.length >= 4
+                  }
+                />
               </li>
             ))
           ) : (
             <li>No hay experiencias disponibles</li>
           )}
         </ul>
+        <button className="save-selection-btn" onClick={handleSaveSelection}>
+          Guardar selección
+        </button>
       </div>
     </main>
   );
