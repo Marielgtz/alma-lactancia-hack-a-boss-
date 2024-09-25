@@ -68,7 +68,7 @@ const updateEventController = async (req, res, next) => {
             formatDate(mergedEvent.start.dateTime),
             formatDate(mergedEvent.end.dateTime),
             mergedEvent.location,
-            mergedEvent.acces,
+            mergedEvent.access,
         ]
         const dataToUpdate = await getRowsData(
             sheetId,
