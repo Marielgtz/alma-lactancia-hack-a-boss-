@@ -88,15 +88,84 @@ const Home = ({ checkedExperiences }) => {
         navigate('/actividades')
     }
 
-    if (loading)
-        return (
-            <div className='loading-container'>
-                <FontAwesomeIcon
-                    icon={faSpinner}
-                    className='spinner'
-                    spin
-                    size='2x'
-                />
+
+  if (loading)
+    return (
+      <div className="loading-container">
+        <FontAwesomeIcon icon={faSpinner} className="spinner" spin size="2x" />
+      </div>
+    );
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    <div className="home-page">
+      <div class="alert-div">
+        <p id="alerttext" class="alert-text">
+          <strong class="black">
+            XX CONGRESO DE LACTANCIA MATERNA FEDALMA
+          </strong>{" "}
+          |<span class="normal">3 y 4 de Octubre de 2025</span> |
+          <a
+            href="https://www.fedalma.org/congreso-2025/"
+            class="alert-text-link"
+            target="_blank"
+          >
+            + INFO
+          </a>
+        </p>
+      </div>
+      <Header />
+      <main className="main-home">
+        <ButtonUp />
+        <div className="img-section">
+          <div className="background-image">
+            <img
+              className="imageHome-img"
+              src={imageHomeSrc}
+              alt="imagen bebe"
+            />
+          </div>
+          <div className="support-button">
+            <p>{titleCTA}</p>
+            <button
+              className="activities-button"
+              onClick={handleActivitiesClick}
+            >
+              Nuestras actividades
+            </button>
+          </div>
+        </div>
+        <div className="content">
+          <h2 className="section-title">Nosotras</h2>
+          <div className="centered-container">
+            {textsNosotras.map((parrafo, index) => (
+              <p key={index} className="sectionText-nosotras">
+                {parrafo}
+              </p>
+            ))}
+          </div>
+          <img src={silueta} className="img-silueta" />
+          <Calendar />
+        </div>
+        <div className="experience-section">
+          <h2 className="experience-title">Experiencias reales</h2>
+          <div className="experience-carousel">
+            <button className="carousel-control prev" onClick={prevSlide}>
+              &#10094; {/* Left Arrow */}
+            </button>
+            <div className="experience-cards">
+              {experiences
+                .slice(currentIndex, currentIndex + cardsToShow)
+                .map((experience) => (
+                  <div key={experience.id} className="experience-card">
+                    <img
+                      src={`http://localhost:3001/images/${experience.image}`}
+                      alt={experience.image}
+                    />
+                    <p>{experience.text}</p>
+                  </div>
+                ))}
+
             </div>
         )
     if (error) return <p>Error: {error}</p>
