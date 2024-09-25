@@ -98,6 +98,21 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      <div class="alert-div">
+        <p id="alerttext" class="alert-text">
+          <strong class="black">
+            XX CONGRESO DE LACTANCIA MATERNA FEDALMA
+          </strong>{" "}
+          |<span class="normal">3 y 4 de Octubre de 2025</span> |
+          <a
+            href="https://www.fedalma.org/congreso-2025/"
+            class="alert-text-link"
+            target="_blank"
+          >
+            + INFO
+          </a>
+        </p>
+      </div>
       <Header />
       <main className="main-home">
         <ButtonUp />
@@ -139,8 +154,8 @@ const Home = () => {
             </button>
             <div className="experience-cards">
               {experiences
-              .slice(currentIndex, currentIndex + cardsToShow)
-              .map((experience) => (
+                .slice(currentIndex, currentIndex + cardsToShow)
+                .map((experience) => (
                   <div key={experience.id} className="experience-card">
                     <img
                       src={`http://localhost:3001/images/${experience.image}`}
