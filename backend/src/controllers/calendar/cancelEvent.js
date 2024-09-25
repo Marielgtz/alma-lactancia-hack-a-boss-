@@ -54,7 +54,7 @@ const cancelEvent = async (req, res, next) => {
 
         res.send({
             message: 'Evento cancelado',
-            data: response,
+            data: { ...response, status: 'cancelled' },
         })
     } catch (error) {
         next(error)

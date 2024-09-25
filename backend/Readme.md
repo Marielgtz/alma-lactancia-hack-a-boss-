@@ -204,6 +204,9 @@ Required fields:
 Method: get,
 Path: `/get-all-experiences`
 
+Method: get,
+Path: `/get-experience/:id`
+
 **captcha**
 Path to save generate captcha:
 Method: get,
