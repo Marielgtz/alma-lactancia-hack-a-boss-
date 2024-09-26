@@ -23,9 +23,10 @@ export default function EventForm({ toEdit, onSuccess }) {
   },[formError])
 
   useEffect(() => {
-    if (toEdit?.id) {
+    if (toEdit?.id) {      
       const adaptedData = {
         ...toEdit,
+        access: toEdit.extendedProperties?.private?.access || '',
         parsedStart: formatDate(toEdit.start.dateTime, 'local'),
         parsedEnd: formatDate(toEdit.end.dateTime, 'local'),
       };
@@ -34,7 +35,7 @@ export default function EventForm({ toEdit, onSuccess }) {
       setActivity(defaultActivity);
     }
 
-    // console.log(toEdit);
+    console.log(toEdit);
     
   }, [toEdit]);
 
@@ -91,7 +92,7 @@ export default function EventForm({ toEdit, onSuccess }) {
   }
 
   const validateForm = () => {
-    console.log('VALIDATION:',activity.access);
+    // console.log('VALIDATION:',activity.access);
     if (activity.access !== 'partners' && activity.access !== 'free') {
       setFormError('Por favor, seleccione un nivel de acceso válido.');
       return false;
@@ -135,7 +136,12 @@ export default function EventForm({ toEdit, onSuccess }) {
         ],
       },
       visibility: 'private',
-      access: '' || activity.access,
+      access: activity.access,
+      extendedProperties: {
+        private: {
+          access: activity.access,
+        },
+      }
     };
 
     if (toEdit?.id) {
@@ -212,9 +218,6 @@ export default function EventForm({ toEdit, onSuccess }) {
         onChange={handleChange}
         required
       >
-        <option value="default" disabled>
-          Seleccionar
-        </option>
         <option value="default">Seleccionar</option>
         <option value="partners">Solo socios</option>
         <option value="free">Público</option>

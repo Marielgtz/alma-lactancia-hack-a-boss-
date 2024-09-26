@@ -122,8 +122,6 @@ export const deleteCalendarEventService = async (eventId) => {
         method: "DELETE",
       }
     );
-
-    console.log('Fetch realizado');
     
     const data = await response.json()
 
@@ -136,7 +134,7 @@ export const deleteCalendarEventService = async (eventId) => {
 };
 
 
-export const updateCalendarEventService = async (eventId, eventData) => {
+export const updateCalendarEventService = async (eventId, eventData) => {    
     try {
         const response = await fetch(
             `${API_BASE_URL}/update-calendar-event/${eventId}`,
@@ -392,7 +390,6 @@ export async function getCalendarEvents(numberOfEvents = 20) {
         calendarEvents.forEach((calendarEvent) => {
             calendarEvent.dateISO = formatDate(calendarEvent.start.dateTime)
         })
-
         return calendarEvents
     } catch (error) {
         console.error('Error fetching past events:', error)
