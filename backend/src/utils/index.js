@@ -6,7 +6,7 @@ import formatDate from './formatDate.js'
 import parseCustomDateToISO from './parseCustomDateToISO .js'
 import groupDataById from './groupDataById.js'
 import normalizeFieldName from './normalizeFieldName.js'
-import unnormalizeFieldName from './UnnormalizeFieldName.js'
+import unnormalizeFieldName from './unnormalizeFieldName.js'
 import {
     validationSchemaNewPartner,
     validationSchemaLogin,
