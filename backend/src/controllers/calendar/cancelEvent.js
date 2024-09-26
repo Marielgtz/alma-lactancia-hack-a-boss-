@@ -16,6 +16,7 @@ const cancelEvent = async (req, res, next) => {
         const mergedEvent = {
             ...existingEvent,
             summary: `EVENTO CANCELADO: ${existingEvent.summary}`,
+            color: '9',
             start: {
                 ...existingEvent.start,
             },
