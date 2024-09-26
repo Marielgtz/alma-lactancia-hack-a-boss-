@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createEvent } from '../../services/calendar';
-import { deleteCalendarEventService, updateCalendarEventService } from '../../services/api';
+import { cancelCalendarEventService, deleteCalendarEventService, updateCalendarEventService } from '../../services/api';
 import formatDate from '../../utils/formatDate';
 
 export default function EventForm({ toEdit, onSuccess }) {
@@ -10,18 +10,23 @@ export default function EventForm({ toEdit, onSuccess }) {
     startDateTime: '',
     endDateTime: '',
     location: '',
-    access: 'free', // Valor por defecto
+    access: '',
     parsedStart: '', 
     parsedEnd: '', 
   };
 
   const [activity, setActivity] = useState(toEdit || defaultActivity);
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
-    if (toEdit?.id) {
-      // Si editamos un evento existende, autorrellenar las fechas
+    console.log(formError);
+  },[formError])
+
+  useEffect(() => {
+    if (toEdit?.id) {      
       const adaptedData = {
         ...toEdit,
+        access: toEdit.extendedProperties?.private?.access || '',
         parsedStart: formatDate(toEdit.start.dateTime, 'local'),
         parsedEnd: formatDate(toEdit.end.dateTime, 'local'),
       };
@@ -29,6 +34,9 @@ export default function EventForm({ toEdit, onSuccess }) {
     } else {
       setActivity(defaultActivity);
     }
+
+    console.log(toEdit);
+    
   }, [toEdit]);
 
   const handleChange = (e) => {
@@ -38,14 +46,14 @@ export default function EventForm({ toEdit, onSuccess }) {
       if (name === 'parsedStart') {
         return {
           ...prevData,
-          parsedStart: value, // Actualizar campo visual
-          startDateTime: new Date(value).toISOString(), 
+          parsedStart: value,
+          startDateTime: new Date(value).toISOString(),
         };
       }
       if (name === 'parsedEnd') {
         return {
           ...prevData,
-          parsedEnd: value, // Actualizar campo visual
+          parsedEnd: value,
           endDateTime: new Date(value).toISOString(),
         };
       }
@@ -59,8 +67,6 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log('Deleting...', activity.id);
-
     const responseMsg = await deleteCalendarEventService(activity.id);
     if (responseMsg.error) {
       console.error('NO SE HA ELIMINADO:', responseMsg.error);
@@ -70,9 +76,45 @@ export default function EventForm({ toEdit, onSuccess }) {
     }
   };
 
+  const handleCancel = async (e) => {
+    e.preventDefault();
+    console.log(activity.id);
+    
+    const responseMsg = await cancelCalendarEventService(activity.id) //! Same as update for now
+    console.log(responseMsg);
+
+    if (responseMsg.message === 'Evento cancelado'){
+      console.log('ÉXITO');
+      onSuccess();
+      
+    }
+    
+  }
+
+  const validateForm = () => {
+    // console.log('VALIDATION:',activity.access);
+    if (activity.access !== 'partners' && activity.access !== 'free') {
+      setFormError('Por favor, seleccione un nivel de acceso válido.');
+      return false;
+    }
+
+    if (!activity.summary || !activity.parsedStart || !activity.parsedEnd) {
+      setFormError('Por favor, complete todos los campos obligatorios.');
+      return false;
+    }
+
+    setFormError('');
+    return true;
+  };
+
   const submitNewEvent = async (e) => {
     e.preventDefault();
-    // console.log(activity.access); //? Da siempre undefined?
+
+    const isValid = validateForm();
+    console.log(isValid);
+    
+    
+    if (!validateForm()) return;
 
     const requestBody = {
       summary: activity.summary,
@@ -95,9 +137,12 @@ export default function EventForm({ toEdit, onSuccess }) {
       },
       visibility: 'private',
       access: activity.access,
+      extendedProperties: {
+        private: {
+          access: activity.access,
+        },
+      }
     };
-
-    // console.log('Event data submitted:', requestBody);
 
     if (toEdit?.id) {
       const response = await updateCalendarEventService(toEdit.id, requestBody);
@@ -107,13 +152,13 @@ export default function EventForm({ toEdit, onSuccess }) {
         console.log('ÉXITO');
         onSuccess();
       }
-    } else if (!toEdit?.id) {
+    } else {
       const response = await createEvent(requestBody);
       if (response.message === 'Actividad creada y subida al calendario correctamente') {
         console.log('ÉXITO');
         onSuccess();
       } else {
-        console.log('Se ha producido un error en la petición de creación...');
+        console.log('NO SE HA CREADO:', response.error);
       }
     }
   };
@@ -134,6 +179,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         name="description"
         value={activity?.description || ''}
         onChange={handleChange}
+        required
       />
 
       <div className="dateTime-settings">
@@ -141,7 +187,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         <input
           type="datetime-local"
           name="parsedStart"
-          value={activity?.parsedStart}
+          value={activity?.parsedStart || ''}
           onChange={handleChange}
           required
         />
@@ -150,7 +196,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         <input
           type="datetime-local"
           name="parsedEnd"
-          value={activity?.parsedEnd}
+          value={activity?.parsedEnd || ''}
           onChange={handleChange}
           required
         />
@@ -162,20 +208,29 @@ export default function EventForm({ toEdit, onSuccess }) {
         name="location"
         value={activity?.location || ''}
         onChange={handleChange}
+        required
       />
 
       <label>Acceso:</label>
-      <select name="access" value={activity?.access || ''} onChange={handleChange}>
+      <select
+        name="access"
+        value={activity?.access || ''}
+        onChange={handleChange}
+        required
+      >
         <option value="default">Seleccionar</option>
         <option value="partners">Solo socios</option>
         <option value="free">Público</option>
       </select>
 
+      {formError && <p style={{ color: 'red' }}>{formError}</p>}
+
       <br />
       <br />
 
-      <button type="submit" className='confirm-btn'>Guardar Cambios</button>
-      <button onClick={handleDelete} className='cancel-btn'>Eliminar actividad</button>
+      <button type="submit" className="confirm-btn">Guardar Cambios</button>
+      <button onClick={handleCancel} className="cancel-btn" style={{color:'red'}}>Cancelar actividad</button>
+      <button onClick={handleDelete} className="cancel-btn">Eliminar actividad</button>
     </form>
   );
 }

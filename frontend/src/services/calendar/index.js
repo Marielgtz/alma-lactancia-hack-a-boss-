@@ -21,10 +21,8 @@ export async function createEvent(requestBody) {
   })
   
   if (!response.ok) {
-    console.warn("Error en el fetch:", response);
     const error = await response.json()
-    console.warn(error)
-    return;
+    return error;
   }
 
   const data = await response.json()
