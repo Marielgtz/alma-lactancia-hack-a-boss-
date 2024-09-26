@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import EditableExperience from "./Modals/EditableExperience";
 import "./AdminHome.css";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -21,11 +22,12 @@ const AdminHome = () => {
   const [originalText, setOriginalText] = useState(""); // Estado para almacenar el valor original de sectionText
   const fileInputRef = useRef(null); // Referencia para el input de archivo
   const experienceFileInputRef = useRef(null); // Referencia para el input de imagen de experiencia
-  const [selectedExperiences, setSelectedExperiences] = useState([]); // Estado para almacenar las experiencias seleccionadas
+  const [selectedExperience, setSelectedExperience] = useState([]); // Estado para almacenar las experiencias seleccionadas
   const [newExperience, setNewExperience] = useState({
     text: "",
     image: null,
   });
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Cargar datos desde el backend
   useEffect(() => {
@@ -198,6 +200,66 @@ const AdminHome = () => {
     setCharactersRemaining(MAX_CHARACTERS - value.length);
   };
 
+  // Manejar la edición de la experiencia
+  const handleExperienceUpdate = async (updatedExperience) => {
+    try {
+      const formData = new FormData();
+      formData.append("text", updatedExperience.text);
+      if (updatedExperience.image) {
+        formData.append("image", updatedExperience.image);
+      }
+
+      const response = await fetch(
+        `${API_BASE_URL}/update-experience/${updatedExperience.id}`,
+        {
+          method: "PATCH",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const updatedData = await response.json();
+        console.log("Datos actualizados:", updatedData);
+        setHomeData((prevData) => ({
+          ...prevData,
+          experiences: prevData.experiences.map((exp) =>
+            exp.id === updatedData.experience.id ? updatedData.experience : exp
+          ),
+        }));
+        setMessage("Experiencia actualizada correctamente.");
+        setMessageType("success");
+      }
+    } catch (error) {
+      setMessage(`Error: ${error.message}`);
+      setMessageType("error");
+    }
+
+    setSelectedExperience(null);
+  };
+
+  // Manejar la eliminación de la experiencia
+  const handleExperienceDelete = async (id) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete-experience/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setHomeData((prevData) => ({
+          ...prevData,
+          experiences: prevData.experiences.filter((exp) => exp.id !== id),
+        }));
+        setMessage("Experiencia eliminada correctamente.");
+        setMessageType("success");
+      }
+    } catch (error) {
+      setMessage(`Error: ${error.message}`);
+      setMessageType("error");
+    }
+
+    setSelectedExperience(null);
+  };
+
   // Guardar la nueva experiencia
   const handleAddExperience = async () => {
     console.log("Datos de nueva experiencia:", newExperience);
@@ -230,43 +292,43 @@ const AdminHome = () => {
   };
 
   // Manejar la selección de experiencias
-  const handleExperienceSelection = (experienceId) => {
-    setSelectedExperiences((prevSelected) => {
-      if (prevSelected.includes(experienceId)) {
-        return prevSelected.filter((id) => id !== experienceId);
-      }
-      if (prevSelected.length < 4) {
-        return [...prevSelected, experienceId];
-      }
-      return prevSelected;
-    });
+  const handleExperienceSelection = (experience) => {
+    setSelectedExperience(experience);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedExperience(null);
   };
 
   // Guardar selección de experiencias
-  const handleSaveSelection = async () => {
-    if (selectedExperiences.length === 0) {
-      setMessage("No has seleccionado ninguna experiencia.");
-      setMessageType("error");
-      return;
+  const handleSaveSelection = async (id) => {
+    const formData = new FormData();
+    formData.append("text", newExperience.text);
+    if (newExperience.image) {
+      formData.append("image", newExperience.image);
     }
 
     try {
-      //Enviar experiencias seleccionadas al backend
-      const response = await fetch(`${API_BASE_URL}/update-experience/${experienceId}`, {
+      const response = await fetch(`${API_BASE_URL}/update-experience/${id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          selectedExperiences,
-        }),
+        body: formData,
       });
 
       if (response.ok) {
-        setMessage("Selección guardada correctamente.");
+        const updatedExperience = await response.json();
+        // Actualizar la lista de experiencias en el estado
+        setHomeData((prevData) => ({
+          ...prevData,
+          experiences: prevData.experiences.map((exp) =>
+            exp.id === id ? updatedExperience.experience : exp
+          ),
+        }));
+        setMessage("Experiencia actualizada correctamente.");
         setMessageType("success");
       } else {
-        throw new Error("Error al guardar la selección.");
+        throw new Error("Error al actualizar la experiencia.");
       }
     } catch (error) {
       setMessage(`Error: ${error.message}`);
@@ -424,30 +486,28 @@ const AdminHome = () => {
         <ul className="list-exp">
           {homeData.experiences && homeData.experiences.length > 0 ? (
             homeData.experiences.map((experience) => (
-              <li key={experience.id}>
+              <div key={experience.id}>
                 <img
                   src={`${API_BASE_URL}/images/${experience.image}`}
                   alt={experience.image}
+                  onClick={() => handleExperienceSelection(experience)}
+                  style={{ cursor: "pointer" }}
                 />
                 <p>{experience.text}</p>
-                <input
-                  type="checkbox"
-                  checked={selectedExperiences.includes(experience.id)}
-                  onChange={() => handleExperienceSelection(experience.id)}
-                  disabled={
-                    !selectedExperiences.includes(experience.id) &&
-                    selectedExperiences.length >= 4
-                  }
-                />
-              </li>
+              </div>
             ))
           ) : (
-            <li>No hay experiencias disponibles</li>
+            <p>No hay experiencias disponibles.</p>
           )}
         </ul>
-        <button className="save-selection-btn" onClick={handleSaveSelection}>
-          Guardar selección
-        </button>
+        {modalOpen && selectedExperience && (
+          <EditableExperience
+            experienceData={selectedExperience}
+            onUpdate={handleExperienceUpdate}
+            onDelete={handleExperienceDelete}
+            onClose={closeModal}
+          />
+        )}
       </div>
     </main>
   );
