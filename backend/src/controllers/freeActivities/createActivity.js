@@ -9,10 +9,18 @@ import { formatDate } from '../../utils/index.js'
 const createActivity = async (req, res, next) => {
     try {
         const sheetId = process.env.SPREADSHEET_ID
-        const { summary, description, start, end, location, access } = req.body
+        const {
+            summary,
+            description,
+            start,
+            end,
+            location,
+            access,
+            extendedProperties,
+        } = req.body
 
         let accessDataSheet
-        if (access === 'free') {
+        if (extendedProperties.private.access === 'free') {
             accessDataSheet = 'libre'
         } else accessDataSheet = 'solo_socios'
 

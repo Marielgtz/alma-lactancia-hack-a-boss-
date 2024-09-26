@@ -44,12 +44,12 @@ const eventSchema = Joi.object({
             .optional(),
     }).optional(),
     visibility: Joi.string().valid('default', 'public', 'private').optional(),
-    access: Joi.string().valid('partners', 'free').required(),
+    access: Joi.string().valid('partners', 'free').optional(),
     extendedProperties: Joi.object({
         private: Joi.object({
-          access: Joi.string().valid('free', 'partners').required()
-        }).required()
-      }).required()
+            access: Joi.string().valid('free', 'partners').required(),
+        }).required(),
+    }).required(),
 }).custom((value, helpers) => {
     const startDateTime = new Date(value.start.dateTime)
     const endDateTime = new Date(value.end.dateTime)
