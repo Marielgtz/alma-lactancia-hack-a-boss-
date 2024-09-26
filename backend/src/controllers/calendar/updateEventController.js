@@ -27,6 +27,7 @@ const updateEventController = async (req, res, next) => {
             'reminders',
             'visibility',
             'access',
+            'extendedProperties',
         ]
 
         //Creo un objeto solo con las propiedades que admite el método update de calendar:
