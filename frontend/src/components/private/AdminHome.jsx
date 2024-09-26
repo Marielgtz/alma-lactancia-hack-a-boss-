@@ -243,30 +243,32 @@ const AdminHome = () => {
   };
 
   // Guardar selección de experiencias
-  const handleSaveSelection = async () => {
-    if (selectedExperiences.length === 0) {
-      setMessage("No has seleccionado ninguna experiencia.");
-      setMessageType("error");
-      return;
+  const handleSaveSelection = async (id) => {
+    const formData = new FormData();
+    formData.append("text", newExperience.text); // El nuevo texto
+    if (newExperience.image) {
+      formData.append("image", newExperience.image); // La nueva imagen si se proporciona
     }
 
     try {
-      //Enviar experiencias seleccionadas al backend
-      const response = await fetch(`${API_BASE_URL}/update-experience/${experienceId}`, {
+      const response = await fetch(`${API_BASE_URL}/update-experience/${id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          selectedExperiences,
-        }),
+        body: formData,
       });
 
       if (response.ok) {
-        setMessage("Selección guardada correctamente.");
+        const updatedExperience = await response.json();
+        // Actualizar la lista de experiencias en el estado
+        setHomeData((prevData) => ({
+          ...prevData,
+          experiences: prevData.experiences.map((exp) =>
+            exp.id === id ? updatedExperience.experience : exp
+          ),
+        }));
+        setMessage("Experiencia actualizada correctamente.");
         setMessageType("success");
       } else {
-        throw new Error("Error al guardar la selección.");
+        throw new Error("Error al actualizar la experiencia.");
       }
     } catch (error) {
       setMessage(`Error: ${error.message}`);
@@ -439,15 +441,18 @@ const AdminHome = () => {
                     selectedExperiences.length >= 4
                   }
                 />
+                <button
+                  className="save-selection-btn"
+                  onClick={() => handleSaveSelection(experience.id)}
+                >
+                  Guardar selección
+                </button>
               </li>
             ))
           ) : (
             <li>No hay experiencias disponibles</li>
           )}
         </ul>
-        <button className="save-selection-btn" onClick={handleSaveSelection}>
-          Guardar selección
-        </button>
       </div>
     </main>
   );
