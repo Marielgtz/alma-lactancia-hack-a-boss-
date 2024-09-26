@@ -51,8 +51,8 @@
 
 .hero-image {
   width: 300px;
-  height: 200px; 
-  object-fit: cover; 
+  height: 200px;
+  object-fit: cover;
   margin-bottom: 10px;
   border-radius: 5px;
 }
@@ -108,13 +108,13 @@
 }
 
 .editNosotras-textarea {
-  width: 70%; 
-  height: 200px; 
+  width: 70%;
+  height: 200px;
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
   margin: 0 0 20px 0;
-  resize: none; 
+  resize: none;
 }
 
 p {
@@ -192,8 +192,3 @@ h3 {
   margin: 0.5rem;
   overflow-x: hidden;
 }
-
-
-
-
-

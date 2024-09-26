@@ -1,36 +1,44 @@
 .admin-panel {
   display: flex;
   min-height: 100vh;
-  background-color: white;
+  background-color: #fdeee7;
 }
 
 .admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  text-align: left;
-  background-color: white;
-  top: 1rem;
-  left: 1.5rem;
+  text-align: center;
+  top: 0;
+  left: 0;
   z-index: 100;
+  padding: 1rem;
+  background-color: #b380b5;
+  min-width: 250px; /* Ancho mínimo */
+  width: 20vw; /* Ancho relativo en vista normal */
+  max-width: 300px; /* Ancho máximo */
 }
 
 .admin-header h1 {
   margin: 0;
-  font-size: 1rem;
-  color: #b380b5;
+  font-size: 0.6rem;
+  color: white;
   font-family: outfit;
   font-weight: bold;
 }
 
 .sidebar {
-  background-color: #fdeee7;
+  background-color: #d8e2dc;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-top: 3rem;
-  border-radius: 1.5rem;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  justify-content: space-evenly;
+
+  /* Ancho mínimo y responsive */
+  min-width: 250px; /* Ancho mínimo */
+  width: 20vw; /* Ancho relativo en vista normal */
+  max-width: 300px; /* Ancho máximo */
 }
 
 .sidebar ul {
@@ -58,24 +66,41 @@
   color: white;
 }
 
-.footer {
+.sidebar-btn.active {
+  background-color: #b380b5; /* Color de fondo morado cuando está activo */
+  color: white; /* Texto blanco cuando está activo */
+}
+
+.footer-dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.logout-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #b380b5;
-}
-
 .back-to-site-link {
-  color: #b380b5;
   text-decoration: none;
+  font-family: Outfit;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  margin: 0px 0px;
+  background-color: #e0bb8e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
 }
 
 .back-to-site-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  background-color: white;
+  color: #b380b5;
+  font-size: 0.8rem;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 40vw; /* Más ancho en pantallas pequeñas */
+  }
 }
