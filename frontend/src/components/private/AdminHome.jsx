@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./AdminHome.css";
+import React, { useState, useEffect, useRef } from 'react'
+import './AdminHome.css'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-const MAX_CHARACTERS = 1800;
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+const MAX_CHARACTERS = 1800
 
 const AdminHome = () => {
   const [visibleSection, setVisibleSection] = useState(null);
@@ -55,7 +55,6 @@ const AdminHome = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
-  };
 
   // Manejar el cambio de texto en textarea
   const handleTextChange = (e) => {
@@ -105,40 +104,12 @@ const AdminHome = () => {
       return;
     }
 
-    try {
-      if (fieldName === "imageHome" && file) {
-        const formData = new FormData();
-        formData.append("imageHome", value);
-
-        await fetch(`${API_BASE_URL}/update-home-data`, {
-          method: "PATCH",
-          body: formData,
-        });
-      } else if (fieldName === "sectionText" || fieldName === "titleHome") {
-        // Actualizar el texto de la sección "Nosotras" o el título del Hero
-        const updateData = {
-          home: {
-            [fieldName]: value,
-          },
-        };
-
-        await fetch(`${API_BASE_URL}/update-home-data`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updateData),
-        });
-      }
-
-      // Mostrar mensaje de éxito
-      setMessageType("success");
-      setMessage(`${fieldName} actualizado correctamente`);
-    } catch (error) {
-      // Mostrar mensaje de error
-      console.error("Error al actualizar:", error);
-      setMessageType("error");
-      setMessage(`Error al actualizar ${fieldName}: ${error.message}`);
+    // Manejar el cambio del título del Hero
+    const handleTitleChange = (e) => {
+        setHomeData((prevData) => ({
+            ...prevData,
+            titleHome: e.target.value,
+        }))
     }
 
     // Ocultar mensaje después de 3 segundos
@@ -202,30 +173,72 @@ const AdminHome = () => {
   const handleAddExperience = async () => {
     console.log("Datos de nueva experiencia:", newExperience);
 
-    try {
-      const formData = new FormData();
-      formData.append("text", newExperience.text);
-      formData.append("image", newExperience.image);
-
-      const response = await fetch(`${API_BASE_URL}/save-experience`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const newExperienceData = await response.json();
+    // Cancelar cambios en el título
+    const handleCancelTitle = () => {
         setHomeData((prevData) => ({
-          ...prevData,
-          experiences: [...prevData.experiences, newExperienceData.experience],
-        }));
-        setMessage("Experiencia agregada correctamente");
-        setMessageType("success");
-      } else {
-        throw new Error("Error al agregar la experiencia");
-      }
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
-      setMessageType("error");
+            ...prevData,
+            titleHome: originalTitle,
+        }))
+    }
+
+    // Validar y actualizar imagen o texto en el backend
+    const validateAndUpdateField = async (fieldName, value) => {
+        if (fieldName !== 'imageHome' && !value) {
+            setMessageType('error')
+            setMessage(`El campo ${fieldName} no puede estar vacío`)
+            setTimeout(() => {
+                setMessage('')
+            }, 3000)
+            return
+        }
+
+        try {
+            if (fieldName === 'imageHome' && file) {
+                const formData = new FormData()
+                formData.append('imageHome', value)
+
+                await fetch(`${API_BASE_URL}/update-home-data`, {
+                    method: 'PATCH',
+                    body: formData,
+                })
+            } else if (
+                fieldName === 'sectionText' ||
+                fieldName === 'titleHome'
+            ) {
+                // Actualizar el texto de la sección "Nosotras" o el título del Hero
+                const updateData = {
+                    home: {
+                        [fieldName]: value,
+                    },
+                }
+
+                await fetch(`${API_BASE_URL}/update-home-data`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updateData),
+                })
+            }
+
+            // Mostrar mensaje de éxito
+            setMessageType('success')
+            setMessage(`${fieldName} actualizado correctamente`)
+        } catch (error) {
+            // Mostrar mensaje de error
+            console.error('Error al actualizar:', error)
+            setMessageType('error')
+            setMessage(`Error al actualizar ${fieldName}: ${error.message}`)
+        }
+
+        // Ocultar mensaje después de 3 segundos
+        setTimeout(() => {
+            setMessage('')
+        }, 3000)
+    }
+
+    const handleSectionChange = (section) => {
+        setVisibleSection(section)
     }
   };
 
@@ -426,8 +439,107 @@ const AdminHome = () => {
             homeData.experiences.map((experience) => (
               <li key={experience.id}>
                 <img
-                  src={`${API_BASE_URL}/images/${experience.image}`}
-                  alt={experience.image}
+                    src={
+                        file
+                            ? URL.createObjectURL(file)
+                            : `${API_BASE_URL}/images/${homeData?.imageHome}`
+                    }
+                    alt='Hero'
+                    className='hero-image'
+                />
+                <div className='image-buttons'>
+                    <button onClick={handleImageClick}>Cambiar imagen</button>
+                    <input
+                        type='file'
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                    />
+                </div>
+                <div className='title-input'>
+                    <h2 className='titleEditHome'>
+                        Estás editando el texto del CTA
+                    </h2>
+                    <input
+                        className='editTitle-input'
+                        type='text'
+                        value={homeData.titleHome || ''}
+                        onChange={handleTitleChange}
+                        placeholder='Escribe el título del Home'
+                    />
+                    <button
+                        className='editAdminHome-btn'
+                        onClick={() =>
+                            validateAndUpdateField(
+                                'titleHome',
+                                homeData.titleHome
+                            )
+                        }
+                    >
+                        Guardar
+                    </button>
+                    <button
+                        className='cancelAdminHome-btn'
+                        onClick={handleCancelTitle}
+                    >
+                        X Cancelar
+                    </button>
+                </div>
+            </div>
+
+            {/* Contenido para editar la sección "Nosotras" */}
+            <div
+                className={`section ${
+                    visibleSection === 'text' ? 'visible' : ''
+                }`}
+            >
+                <h2>Edita la Sección "Nosotras"</h2>
+                <label htmlFor='sectionText'>Texto:</label>
+                <textarea
+                    id='sectionText'
+                    value={homeData.sectionText}
+                    onChange={handleTextChange}
+                    placeholder='Escribe el texto para la sección Nosotras'
+                    maxLength={MAX_CHARACTERS}
+                />
+                <p>
+                    {charactersRemaining} caracteres restantes (Máximo 1800
+                    caracteres)
+                </p>
+                <button
+                    className='editAdminHome-btn'
+                    onClick={() =>
+                        validateAndUpdateField(
+                            'sectionText',
+                            homeData.sectionText
+                        )
+                    }
+                >
+                    Guardar
+                </button>
+                <button
+                    className='cancelAdminHome-btn'
+                    onClick={handleCancelText}
+                >
+                    X Cancelar
+                </button>
+            </div>
+
+            {/* Contenido para agregar experiencias reales */}
+            <div
+                className={`section ${
+                    visibleSection === 'experiences' ? 'visible' : ''
+                }`}
+            >
+                <h2>Editar experiencias reales</h2>
+
+                <label htmlFor='experienceText'>Descripción:</label>
+                <textarea
+                    id='experienceText'
+                    name='text'
+                    value={newExperience.text}
+                    onChange={handleExperienceTextChange}
+                    maxLength={MAX_CHARACTERS}
                 />
                 <p>{experience.text}</p>
                 <input
@@ -454,3 +566,4 @@ const AdminHome = () => {
 };
 
 export default AdminHome;
+

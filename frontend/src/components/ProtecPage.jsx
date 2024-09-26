@@ -1,49 +1,42 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function ProtectPage({ children }) {
-    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
-    const checkSession = import.meta.env.VITE_API_URL + '/check-session'
+    const checkSessionURL = import.meta.env.VITE_API_URL + '/check-session'
+    const googleURL = import.meta.env.VITE_GOOGLE_URL
+    const backURL = import.meta.env.VITE_API_URL
+    const clientId = import.meta.env.VITE_CLIENT_ID
 
     useEffect(() => {
         const checkSession = async () => {
             try {
-                const response = await fetch(checkSession, {
+                const response = await fetch(checkSessionURL, {
                     credentials: 'include',
                 })
 
                 if (response.ok) {
                     const data = await response.json()
-                    setUser(data.user) // Si la respuesta es ok se guardan los datos del usuario en el estado, si esto fuera necesario.
+                    console.log(data.message)
+                    setLoading(false)
                 } else {
-                    // Si no está autorizado, se redirige a otra parte.
-                    navigate('/')
+                    window.location.href = `${googleURL}?client_id=${clientId}&redirect_uri=${backURL}/auth/callback&response_type=code&scope=email%20profile`
                 }
             } catch (error) {
                 console.error('Error checking session:', error)
-                navigate('/') // En caso de error, también se redirige al usuario a otra parte.
             }
         }
 
         checkSession()
-    }, [navigate, checkSession])
+    }, [navigate, checkSessionURL])
 
-    if (!user) {
-        return <div>Loading...</div>
+    if (loading) {
+        return <FontAwesomeIcon />
     }
 
     return children
 }
 
 export default ProtectPage
-
-//Para proteger una página, envolver el componente en el componente protector:
-/* <Route
-path='/pruebas'
-element={
-    <ProtectPage>
-        <Prueba />
-    </ProtectPage>
-}
-/> */

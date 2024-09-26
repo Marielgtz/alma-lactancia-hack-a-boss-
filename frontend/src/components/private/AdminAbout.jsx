@@ -60,7 +60,7 @@ const AdminAbout = () => {
         <h1>Gestión de miembros</h1>
 
         <div id='team'>
-          <p>Elige qué persona quieres editar</p>
+          <p>Elige qué miembro quieres editar</p>
           <ol>
             {teamMembers.map((member) => (
               <li key={member.id}>
@@ -76,13 +76,13 @@ const AdminAbout = () => {
               <button
                 className='confirm-btn'
                 onClick={() => toggleEditMode({}, false)}
-              >Nueva colaboradora </button>
+              >Añadir miembro del equipo</button>
             </li>
           </ol>
         </div>
         
         <div id='external'>
-          <p>Elige qué colaboradora quieres editar</p>
+          <p>Elige qué colaborador quieres editar</p>
           <ol>
             {collaborators.map((collaborator) => (
               <li key={collaborator.id}>
@@ -98,7 +98,7 @@ const AdminAbout = () => {
               <button
                 className='confirm-btn'
                 onClick={() => toggleEditMode({}, true)}
-              >Nueva colaboradora</button>
+              >Añadir colaboradores</button>
             </li>
           </ol>
         </div>

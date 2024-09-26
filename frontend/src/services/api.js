@@ -122,8 +122,6 @@ export const deleteCalendarEventService = async (eventId) => {
         method: "DELETE",
       }
     );
-
-    console.log('Fetch realizado');
     
     const data = await response.json()
 
@@ -136,13 +134,33 @@ export const deleteCalendarEventService = async (eventId) => {
 };
 
 
-export const updateCalendarEventService = async (eventId, eventData) => {
+export const updateCalendarEventService = async (eventId, eventData) => {    
     try {
         const response = await fetch(
             `${API_BASE_URL}/update-calendar-event/${eventId}`,
             {
                 method: 'PATCH',
                 body: JSON.stringify(eventData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+
+        const responseFinal = await response.json()
+        return responseFinal
+    } catch (error) {
+        console.error('Error updating calendar event:', error)
+        throw error
+    }
+}
+
+export const cancelCalendarEventService = async (eventId) => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/cancel-calendar-event/${eventId}`,
+            {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -224,15 +242,14 @@ export const deleteCollaboratorService = async (id, team) => {
 };
 
 export const updateCollaboratorService = async (id, team, formData) => {  
+    console.log(formData); // TODO - Error en el formData image
+    
   try {
     const response = await fetch(
       `${API_BASE_URL}/update-collaborator/${id}/${team}`,
       {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formData,
       }
     );
 
@@ -373,7 +390,6 @@ export async function getCalendarEvents(numberOfEvents = 20) {
         calendarEvents.forEach((calendarEvent) => {
             calendarEvent.dateISO = formatDate(calendarEvent.start.dateTime)
         })
-
         return calendarEvents
     } catch (error) {
         console.error('Error fetching past events:', error)
