@@ -1,5 +1,4 @@
-.App {
-  text-align: center;
+/*.App {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -7,7 +6,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #ffeee7;
   height: 20vh;
   display: flex;
   flex-direction: column;
@@ -18,9 +17,33 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #b380b5;
 }
 
 .App-main {
   flex: 1;
+}
+*/
+
+.alert-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  background-color: #b380b5;
+
+  width: 100vw;
+}
+.alert-text {
+  font-family: Outfit;
+  text-align: center;
+  color: white;
+  letter-spacing: 0.05rem;
+}
+.alert-text-link {
+  font-weight: 900;
+  text-decoration: none;
+}
+.alert-text-link:hover {
+  color: white;
 }

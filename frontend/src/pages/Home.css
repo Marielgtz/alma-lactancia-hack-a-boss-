@@ -23,26 +23,7 @@ body,
   min-height: 100vh;
   overflow-x: hidden;
 }
-.alert-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0;
-  background-color: #b380b5;
-}
-.alert-text {
-  font-family: Outfit;
-  text-align: center;
-  color: white;
-  letter-spacing: 0.05rem;
-}
-.alert-text-link {
-  font-weight: 900;
-  text-decoration: none;
-}
-.alert-text-link:hover {
-  color: white;
-}
+
 .header {
   position: absolute;
   top: 0;
