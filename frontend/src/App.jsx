@@ -31,6 +31,22 @@ import "./App.css";
 function Alert() {
   const location = useLocation();
 
+  // Lista de rutas donde NO se mostrará el Alert
+  const excludedPaths = [
+    "/dashboard",
+    "/dashboard/general",
+    "/dashboard/inicio",
+    "/dashboard/quienes-somos",
+    "/dashboard/actividades",
+    "/dashboard/historico",
+    "/dashboard/biblioteca",
+  ];
+
+  // Si la ruta actual está en la lista de rutas excluidas, no renderiza el Alert
+  if (excludedPaths.includes(location.pathname)) {
+    return null;
+  }
+
   // Cambia el color del alert según la página
   const alertStyle = {
     backgroundColor:
