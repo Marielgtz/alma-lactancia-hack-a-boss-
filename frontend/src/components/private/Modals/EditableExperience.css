@@ -1,0 +1,5 @@
+.experienceData-text {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+}

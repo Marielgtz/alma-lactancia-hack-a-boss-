@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { getCalendarEvents } from '../../services/api';
 import './AdminActivities.css'
 import EventForm from '../../pages/private/CreateEventForm';
-import EditableEvent from './editableEvent';
+import EditableEvent from './Modals/editableEvent';
 import formatDate from '../../utils/formatDate';
-import './editableList.css'
+import './Modals/editableList.css'
 
 const AdminActivities = () => {
   // Sacar los eventos
