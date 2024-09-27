@@ -22,12 +22,11 @@ const useFormDisplay = (jsonNumber) => {
         }
         getPublishedForm()
     }, [])
-    
+
     // Ref para el formulario
     const formRef = useRef(null)
     //Para enviar los resultados del formulario:
-    const sendDataHandler = async (event) => {
-        event.preventDefault()
+    const sendDataHandler = async () => {
         if (!formRef.current) return
         const formElements = formRef.current.elements
         const formValues = Array.from(formElements).reduce((acc, element) => {

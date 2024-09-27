@@ -1,4 +1,5 @@
 import useFormDisplay from '../hooks/useFormDisplay'
+import CaptchaComponent from './Captcha'
 
 const FormDisplay = ({ jsonNumber }) => {
     const { sendDataHandler, formRef, formToShow } = useFormDisplay(jsonNumber)
@@ -8,11 +9,10 @@ const FormDisplay = ({ jsonNumber }) => {
     return (
         <div>
             <h2>{formToShow.formName}</h2>
-            <form ref={formRef} onSubmit={sendDataHandler}>
+            <form ref={formRef}>
                 {formToShow.fields.map((field, index) => (
                     <div key={index} style={{ marginBottom: '20px' }}>
                         <label>
-
                             {field.type === 'select' ? (
                                 <select
                                     name={field.label
@@ -37,7 +37,10 @@ const FormDisplay = ({ jsonNumber }) => {
                         </label>
                     </div>
                 ))}
-                <button type='submit'>Enviar</button>
+                <CaptchaComponent
+                    handleSubmit={sendDataHandler}
+                    buttonClassName={'sin_clase'}
+                />
             </form>
         </div>
     )
