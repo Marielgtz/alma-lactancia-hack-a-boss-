@@ -29,6 +29,10 @@ const homeData = async (req, res, next) => {
                 ...req.body.generalSettings,
                 logo: logo,
             },
+            library: {
+                ...oldJsonData.library,
+                ...req.body.library,
+            },
         }
 
         //Actualizo los datos en el json:
