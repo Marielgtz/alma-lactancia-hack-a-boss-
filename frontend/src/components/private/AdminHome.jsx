@@ -29,6 +29,8 @@ const AdminHome = () => {
   });
   const [modalOpen, setModalOpen] = useState(false);
 
+  console.log("Probando homeData", homeData);
+
   // Cargar datos desde el backend
   useEffect(() => {
     fetch(`${API_BASE_URL}/get-home-data`)
@@ -223,7 +225,7 @@ const AdminHome = () => {
         setHomeData((prevData) => ({
           ...prevData,
           experiences: prevData.experiences.map((exp) =>
-            exp.id === updatedData.experience.id ? updatedData.experience : exp
+            exp.id === updatedData.data[0] ? {id: updatedData.data[0], text: updatedData.data[1], image: updatedData.data[2]} : exp
           ),
         }));
         setMessage("Experiencia actualizada correctamente.");
