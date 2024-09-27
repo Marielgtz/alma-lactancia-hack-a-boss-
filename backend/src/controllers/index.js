@@ -35,6 +35,8 @@ import getAllPosts from './instagramPosts/getAllPosts.js'
 import getAllCollaborators from './collaborators/getAllCollaborators.js'
 import cancelEvent from './calendar/cancelEvent.js'
 import checkIsPublishedInstagram from './instagramPosts/checkIsPublishedInstagram.js'
+import saveFilteredExperiences from './experiences/saveFilteredExperiences.js'
+import getFilteredExperiences from './experiences/getFilteredExperiences.js'
 
 export {
     createActivity,
@@ -74,4 +76,6 @@ export {
     getAllCollaborators,
     cancelEvent,
     checkIsPublishedInstagram,
+    saveFilteredExperiences,
+    getFilteredExperiences,
 }

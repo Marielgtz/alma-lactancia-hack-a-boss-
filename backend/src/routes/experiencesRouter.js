@@ -4,6 +4,8 @@ import {
     getExperienceById,
     getExperiences,
     updateExperience,
+    saveFilteredExperiences,
+    getFilteredExperiences,
 } from '../controllers/index.js'
 import { storage, limits, fileFilter } from '../utils/index.js'
 import multer from 'multer'
@@ -13,6 +15,8 @@ const upload = multer({ storage: storage, limits, fileFilter })
 
 //Ruta para actividades:
 router.post('/save-experience', upload.single('image'), saveExperience)
+router.post('/save-filtered-experiences', saveFilteredExperiences)
+router.get('/get-filtered-experiences', getFilteredExperiences)
 router.get('/get-experience/:id', getExperienceById)
 router.get('/get-all-experiences', getExperiences)
 router.patch('/update-experience/:id', upload.single('image'), updateExperience)
