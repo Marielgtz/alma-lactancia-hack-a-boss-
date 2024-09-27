@@ -22,14 +22,14 @@ const AdminHome = () => {
   const [originalText, setOriginalText] = useState(""); // Estado para almacenar el valor original de sectionText
   const fileInputRef = useRef(null); // Referencia para el input de archivo
   const experienceFileInputRef = useRef(null); // Referencia para el input de imagen de experiencia
-  const [selectedExperience, setSelectedExperience] = useState([]); // Estado para almacenar las experiencias seleccionadas
+  const [selectedExperience, setSelectedExperience] = useState(null); // Estado para almacenar las experiencias seleccionadas
   const [newExperience, setNewExperience] = useState({
     text: "",
     image: null,
   });
   const [modalOpen, setModalOpen] = useState(false);
 
-  console.log("Probando homeData", homeData);
+  //console.log("Probando homeData", homeData);
 
   // Cargar datos desde el backend
   useEffect(() => {
@@ -160,7 +160,7 @@ const AdminHome = () => {
     fetch(`${API_BASE_URL}/get-all-experiences`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Experiencias:", data);
+        //console.log("Experiencias:", data);
         setHomeData((prevData) => ({
           ...prevData,
           experiences: data.experiences,
@@ -175,7 +175,7 @@ const AdminHome = () => {
   // Manejar el cambio de imagen de la experiencia
   const handleExperienceFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    console.log("Archivo de experiencia seleccionado:", selectedFile);
+    //console.log("Archivo de experiencia seleccionado:", selectedFile);
     if (selectedFile) {
       setNewExperience((prevExperience) => ({
         ...prevExperience,
@@ -186,7 +186,7 @@ const AdminHome = () => {
 
   // Simular click en el input de imagen de experiencia
   const handleExperienceImageClick = () => {
-    console.log(experienceFileInputRef.current);
+    //console.log(experienceFileInputRef.current);
     if (experienceFileInputRef.current) {
       experienceFileInputRef.current.click();
     }
@@ -225,7 +225,13 @@ const AdminHome = () => {
         setHomeData((prevData) => ({
           ...prevData,
           experiences: prevData.experiences.map((exp) =>
-            exp.id === updatedData.data[0] ? {id: updatedData.data[0], text: updatedData.data[1], image: updatedData.data[2]} : exp
+            exp.id === updatedData.data[0]
+              ? {
+                  id: updatedData.data[0],
+                  text: updatedData.data[1],
+                  image: updatedData.data[2],
+                }
+              : exp
           ),
         }));
         setMessage("Experiencia actualizada correctamente.");
@@ -264,26 +270,49 @@ const AdminHome = () => {
 
   // Guardar la nueva experiencia
   const handleAddExperience = async () => {
-    console.log("Datos de nueva experiencia:", newExperience);
+    if (newExperience.text.length < 50) {
+      setMessage("El texto debe tener al menos 50 caracteres.");
+      setMessageType("error");
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+      return;
+    }
 
     try {
       const formData = new FormData();
       formData.append("text", newExperience.text);
-      formData.append("image", newExperience.image);
+      if (newExperience.image) {
+        formData.append("image", newExperience.image);
+      }
 
-      const response = await fetch(`${API_BASE_URL}/save-experience`, {
-        method: "POST",
-        body: formData,
-      });
+      // Aquí es donde envías la nueva experiencia al backend
+      const response = await fetch(
+        `${API_BASE_URL}/save-filtered-experiences`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
+        // Si la respuesta es exitosa, agrega la nueva experiencia al estado
         const newExperienceData = await response.json();
+        console.log(newExperienceData);
         setHomeData((prevData) => ({
           ...prevData,
-          experiences: [...prevData.experiences, newExperienceData.experience],
+          experiences: [
+            ...prevData.experiences,
+            {
+              text: newExperienceData.data.text,
+              image: newExperienceData.data.image,
+            },
+          ],
         }));
-        setMessage("Experiencia agregada correctamente");
+        setMessage("Experiencia agregada correctamente.");
         setMessageType("success");
+        // Limpiar el formulario de nueva experiencia
+        setNewExperience({ text: "", image: null });
       } else {
         throw new Error("Error al agregar la experiencia");
       }
@@ -291,12 +320,21 @@ const AdminHome = () => {
       setMessage(`Error: ${error.message}`);
       setMessageType("error");
     }
+
+    // Ocultar mensaje después de 3 segundos
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
   };
 
   // Manejar la selección de experiencias
   const handleExperienceSelection = (experience) => {
-    setSelectedExperience(experience);
-    setModalOpen(true);
+    if (experience) {
+      setSelectedExperience(experience);
+      setModalOpen(true);
+    } else {
+      console.error("Experiencia seleccionada es inválida:", experience);
+    }
   };
 
   const closeModal = () => {
@@ -487,28 +525,36 @@ const AdminHome = () => {
         <h3>Experiencias:</h3>
         <ul className="list-exp">
           {homeData.experiences && homeData.experiences.length > 0 ? (
-            homeData.experiences.map((experience) => (
-              <div key={experience.id}>
-                <img
-                  src={`${API_BASE_URL}/images/${experience.image}`}
-                  alt={experience.image}
-                  onClick={() => handleExperienceSelection(experience)}
-                  style={{ cursor: "pointer" }}
-                />
-                <p>{experience.text}</p>
-              </div>
-            ))
+            homeData.experiences.map((experience) =>
+              experience ? (
+                <li key={experience.id}>
+                  <img
+                    src={`${API_BASE_URL}/images/${experience.image}`}
+                    alt={experience.text || "Experience Image"}
+                    onClick={() => handleExperienceSelection(experience)}
+                    style={{ cursor: "pointer" }}
+                  />
+                  <p>{experience.text}</p>
+                </li>
+              ) : null
+            )
           ) : (
             <p>No hay experiencias disponibles.</p>
           )}
         </ul>
         {modalOpen && selectedExperience && (
-          <EditableExperience
-            experienceData={selectedExperience}
-            onUpdate={handleExperienceUpdate}
-            onDelete={handleExperienceDelete}
-            onClose={closeModal}
-          />
+          <div className="modal-overlay">
+            <div className="modal-content">
+              {selectedExperience && (
+                <EditableExperience
+                  experienceData={selectedExperience}
+                  onUpdate={handleExperienceUpdate}
+                  onDelete={handleExperienceDelete}
+                  onClose={closeModal}
+                />
+              )}
+            </div>
+          </div>
         )}
       </div>
     </main>
