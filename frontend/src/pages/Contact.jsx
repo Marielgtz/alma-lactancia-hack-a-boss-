@@ -17,7 +17,7 @@ const Contact = () => {
         comments: '',
     })
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -43,17 +43,25 @@ const Contact = () => {
             )
 
             if (!response.ok) {
-                throw new Error('Error al enviar el mensaje')
+                const data = await response.json()
+                throw new Error(data.error)
             }
 
             const data = await response.json()
-            console.log(data.comments)
+            console.log(data.message)
+            setFormData({
+                name: '',
+                surname: '',
+                email: '',
+                subject: '',
+                comments: '',
+            })
 
-            // Redirigir a la página de confirmación
-            navigate('/confirmacion')
+            // // Redirigir a la página de confirmación
+            // navigate('/confirmacion')
         } catch (error) {
-            console.error('Error al enviar el mensaje:', error)
-            alert('Hubo un problema al enviar el mensaje. Inténtalo de nuevo.')
+            console.error(error)
+            alert(error)
         }
     }
 
@@ -135,10 +143,10 @@ const Contact = () => {
                             onChange={handleChange}
                         ></textarea>
 
-                        <Captcha handleSubmit={handleSubmit} />
-                        {/* <button className="contact-button" type="submit">
-              Enviar
-            </button> */}
+                        <Captcha
+                            handleSubmit={handleSubmit}
+                            buttonClassName={'contact-button'}
+                        />
                     </form>
 
                     <div className='contact-info'>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const CaptchaComponent = ({ handleSubmit }) => {
+const CaptchaComponent = ({ handleSubmit, buttonClassName }) => {
     const [captchaSvg, setCaptchaSvg] = useState('')
     const [captchaInput, setCaptchaInput] = useState('')
 
@@ -57,6 +57,7 @@ const CaptchaComponent = ({ handleSubmit }) => {
             // Si la validación falla, genera un nuevo CAPTCHA
             if (data.success) {
                 handleSubmit()
+                setCaptchaInput('')
             } else {
                 alert('Captcha incorrecto. Inténtalo de nuevo.')
                 setCaptchaInput('') // Limpiar el input
@@ -87,7 +88,7 @@ const CaptchaComponent = ({ handleSubmit }) => {
           Validar
         </button> */}
                 <button
-                    className='contact-button'
+                    className={buttonClassName}
                     onClick={(e) => {
                         e.preventDefault()
                         handleCaptchaValidation()
