@@ -23,7 +23,7 @@ router.delete('/delete-collaborator/:id/:team', deleteCollaborator)
 router.get('/get-all-collaborators/:team', getAllCollaborators)
 router.patch(
     '/update-collaborator/:id/:team',
-    upload.single('collaborator-image'),
+    upload.single('collaboratorImage'),
     updateCollaborator
 )
 
