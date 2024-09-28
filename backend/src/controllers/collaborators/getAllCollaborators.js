@@ -16,9 +16,6 @@ const getAllCollaborators = async (req, res, next) => {
 
         const { rows } = data
 
-        console.log(rows);
-        
-
         //Formateo los datos:
         const dataToSend = rows.slice(1).map((collaborator) => {
             return {

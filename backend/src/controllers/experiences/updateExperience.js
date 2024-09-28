@@ -19,7 +19,7 @@ const updateExperience = async (req, res, next) => {
             error.message = error.details[0].message
             generateError(error.message)
         }
-        const image = req.file?.filename
+        const image = req.file?.filename || req.body.image
         const newExperience = [id, experienceFromFront.text, image]
 
         //Datos antiguos:
@@ -65,7 +65,7 @@ const updateExperience = async (req, res, next) => {
         }
 
         res.status(200).json({
-            message: 'Formulario y hoja de respuestas, actualizados',
+            message: 'Experiencia actualizada correctamente.',
             data: newExperience,
         })
     } catch (error) {

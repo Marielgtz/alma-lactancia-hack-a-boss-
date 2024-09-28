@@ -1,7 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { getRowsData } from '../../googleapis/methods/index.js'
-import { groupDataById } from '../../utils/index.js'
 
 const getFilteredExperiences = async (req, res, next) => {
     const spreadsheetId = process.env.SPREADSHEET_ID

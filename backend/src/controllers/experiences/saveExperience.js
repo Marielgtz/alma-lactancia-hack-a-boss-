@@ -35,7 +35,7 @@ const saveExperience = async (req, res, next) => {
         )
         res.send({
             message: 'Experiencia guardada correctamente en la hoja de cálculo',
-            data: experienceSaved,
+            data: { id: id, image: image, text: req.body.text },
         })
     } catch (error) {
         console.log(error)
