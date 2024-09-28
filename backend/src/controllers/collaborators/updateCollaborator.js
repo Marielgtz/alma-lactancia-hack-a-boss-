@@ -109,7 +109,7 @@ const updateCollaborator = async (req, res, next) => {
             description: newData.description,
             role: newData.role || '',
             team: team,
-        }
+        }        
         //Se validan:
         const { error } =
             validationSchemaNewCollaborator.validate(dataToValidate)
@@ -124,7 +124,7 @@ const updateCollaborator = async (req, res, next) => {
             const oldImagePath = path.join(
                 'src',
                 'uploads',
-                newData.imaxeColaborador
+                newData.collaboratorImage
             )
 
             try {
