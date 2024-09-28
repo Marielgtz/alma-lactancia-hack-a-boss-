@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { createEvent } from '../../services/calendar';
 import { cancelCalendarEventService, deleteCalendarEventService, updateCalendarEventService } from '../../services/api';
 import formatDate from '../../utils/formatDate';
+import { toast } from 'react-toastify';
+import ConfirmationModal from "../../components/ConfirmationModal.jsx";
 
 export default function EventForm({ toEdit, onSuccess }) {
   const defaultActivity = {
@@ -17,10 +19,7 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   const [activity, setActivity] = useState(toEdit || defaultActivity);
   const [formError, setFormError] = useState('');
-
-  useEffect(() => {
-    console.log(formError);
-  },[formError])
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // Estado para el modal de eliminación
 
   useEffect(() => {
     if (toEdit?.id) {      
@@ -34,14 +33,10 @@ export default function EventForm({ toEdit, onSuccess }) {
     } else {
       setActivity(defaultActivity);
     }
-
-    console.log(toEdit);
-    
   }, [toEdit]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
     setActivity((prevData) => {
       if (name === 'parsedStart') {
         return {
@@ -65,34 +60,52 @@ export default function EventForm({ toEdit, onSuccess }) {
     });
   };
 
-  const handleDelete = async (e) => {
+  // Función para manejar la eliminación
+  const handleDelete = (e) => {
     e.preventDefault();
-    const responseMsg = await deleteCalendarEventService(activity.id);
-    if (responseMsg.error) {
-      console.error('NO SE HA ELIMINADO:', responseMsg.error);
-    } else {
-      console.log('ÉXITO');
+    setShowDeleteModal(true); // Muestra el modal de confirmación
+  };
+
+  const confirmDelete = async () => {
+    setShowDeleteModal(false); // Cierra el modal
+    const processToast = toast.loading('Eliminando evento...');
+    try {
+      const responseMsg = await deleteCalendarEventService(activity.id);
+      if (responseMsg.error) {
+        throw new Error(responseMsg.error);
+      }
+      toast.dismiss(processToast);
+      toast.success('Evento eliminado con éxito');
       onSuccess();
+    } catch (error) {
+      toast.dismiss(processToast);
+      toast.error(`Error al eliminar evento: ${error.message}`);
     }
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false); // Cierra el modal si el usuario cancela
   };
 
   const handleCancel = async (e) => {
     e.preventDefault();
-    console.log(activity.id);
-    
-    const responseMsg = await cancelCalendarEventService(activity.id) //! Same as update for now
-    console.log(responseMsg);
-
-    if (responseMsg.message === 'Evento cancelado'){
-      console.log('ÉXITO');
-      onSuccess();
-      
+    const processToast = toast.loading('Cancelando evento...');
+    try {
+      const responseMsg = await cancelCalendarEventService(activity.id);
+      if (responseMsg.message === 'Evento cancelado') {
+        toast.dismiss(processToast);
+        toast.success('Evento cancelado con éxito');
+        onSuccess();
+      } else {
+        throw new Error(responseMsg.error || 'Error al cancelar el evento');
+      }
+    } catch (error) {
+      toast.dismiss(processToast);
+      toast.error(`Error al cancelar evento: ${error.message}`);
     }
-    
-  }
+  };
 
   const validateForm = () => {
-    // console.log('VALIDATION:',activity.access);
     if (activity.access !== 'partners' && activity.access !== 'free') {
       setFormError('Por favor, seleccione un nivel de acceso válido.');
       return false;
@@ -109,12 +122,9 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   const submitNewEvent = async (e) => {
     e.preventDefault();
-
-    const isValid = validateForm();
-    console.log(isValid);
-    
-    
     if (!validateForm()) return;
+
+    const processToast = toast.loading('Guardando cambios...');
 
     const requestBody = {
       summary: activity.summary,
@@ -141,25 +151,31 @@ export default function EventForm({ toEdit, onSuccess }) {
         private: {
           access: activity.access,
         },
-      }
+      },
     };
 
-    if (toEdit?.id) {
-      const response = await updateCalendarEventService(toEdit.id, requestBody);
-      if (response.error) {
-        console.error('NO SE HA ACTUALIZADO:', response.error);
-      } else {
-        console.log('ÉXITO');
-        onSuccess();
-      }
-    } else {
-      const response = await createEvent(requestBody);
-      if (response.message === 'Actividad creada y subida al calendario correctamente') {
-        console.log('ÉXITO');
+    try {
+      if (toEdit?.id) {
+        const response = await updateCalendarEventService(toEdit.id, requestBody);
+        if (response.error) {
+          throw new Error(response.error);
+        }
+        toast.dismiss(processToast);
+        toast.success('Evento actualizado con éxito');
         onSuccess();
       } else {
-        console.log('NO SE HA CREADO:', response.error);
+        const response = await createEvent(requestBody);
+        if (response.message === 'Actividad creada y subida al calendario correctamente') {
+          toast.dismiss(processToast);
+          toast.success('Nuevo evento creado con éxito');
+          onSuccess();
+        } else {
+          throw new Error(response.error);
+        }
       }
+    } catch (error) {
+      toast.dismiss(processToast);
+      toast.error(`Error al guardar evento: ${error.message}`);
     }
   };
 
@@ -224,13 +240,19 @@ export default function EventForm({ toEdit, onSuccess }) {
       </select>
 
       {formError && <p style={{ color: 'red' }}>{formError}</p>}
-
-      <br />
       <br />
 
       <button type="submit" className="confirm-btn">Guardar Cambios</button>
+      <button onClick={handleDelete} className="delete-btn">Eliminar actividad</button>
       <button onClick={handleCancel} className="cancel-btn" style={{color:'red'}}>Cancelar actividad</button>
-      <button onClick={handleDelete} className="cancel-btn">Eliminar actividad</button>
+
+      {/* Agrega el modal de confirmación */}
+      <ConfirmationModal
+        isOpen={showDeleteModal}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        message={`¿Estás seguro de que deseas eliminar la actividad "${activity.summary}"? Esta acción no se puede deshacer.`}
+      />
     </form>
   );
 }
