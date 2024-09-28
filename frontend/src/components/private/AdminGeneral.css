@@ -1,15 +1,12 @@
 .settings-content {
   width: 75vw;
   background-color: #fdeee7;
-  padding: 1rem;
   border-radius: 1.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
 
-h3 {
-  color: black;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+.settings-content h2 {
+  margin-bottom: 0;
 }
 
 .logo-section {
@@ -19,20 +16,64 @@ h3 {
   margin-bottom: 0.5rem;
 }
 
+.logo-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  margin-left: 0;
+}
+
 .logo-image {
   max-width: 15rem;
   margin-bottom: 1rem;
-  background-color: #ddd;
+  padding: 1rem;
+  border: 1px solid #946b9f;
+  background-color: #caa2cb6a;
 }
 
 .logo-buttons {
   display: flex;
   gap: 2rem;
 }
+.actualizar-logo-boton button {
+  margin-bottom: 1rem;
+  background-color: #b380b5;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 8.5rem;
+  margin-top: 1rem;
+  font-family: Outfit;
+  /* Efecto 3D */
+  box-shadow: 0px 4px #946b9f; /* Sombra inferior para dar efecto de relieve */
+  transition: all 0.2s ease-in-out;
+}
+.actualizar-logo-boton button:hover {
+  margin-bottom: 1rem;
+  background-color: #caa2cb;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 8.5rem;
+  margin-top: 1rem;
+  font-family: Outfit;
+  /* Efecto 3D */
+  box-shadow: 0px 4px #946b9f; /* Sombra inferior para dar efecto de relieve */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efecto de presionado */
+.actualizar-logo-boton button:active {
+  box-shadow: 0 1px #946b9f; /* Reduce la sombra para simular que se presiona */
+  transform: translateY(3px); /* Desplaza el botón hacia abajo */
+}
 
 .logo-buttons input {
   height: 1.3rem;
-  width: 17rem;
+  width: 80%;
   margin-left: 0;
   background-color: white;
   border-radius: 0.5rem;
@@ -71,8 +112,8 @@ h3 {
 .social-links-form label {
   display: flex;
   flex-direction: column;
-  font-size: 0.9rem;
-  color: black;
+  margin-bottom: 1rem;
+  font-size: 1rem;
   margin-left: 3rem;
 }
 
@@ -92,7 +133,7 @@ h3 {
   cursor: pointer;
   border-radius: 0.5rem;
   height: 2.3rem;
-  width: 8.5rem;
+  width: 12rem;
   margin-top: 1rem;
   font-family: Outfit;
   /* Efecto 3D */

@@ -1,17 +1,30 @@
 .settings-content {
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
-
+.contenedor-secciones-dinamicas-dashboard {
+  padding: 0 2rem;
+}
 .section {
   display: none;
 }
 
 .section.visible {
   display: block;
+  max-width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.adminHome-btn.active {
+  background-color: #b380b5;
+  color: white;
 }
 
 .settings-content h1 {
-  font-family: outfit;
+  font-family: "Outfit", sans-serif;
   color: #b380b5;
   font-size: 20px;
   margin-bottom: 2rem;
@@ -22,11 +35,11 @@
   gap: 15px;
 }
 
-.titleEditHome {
-  font-size: 1.5rem;
-  font-family: outfit;
-  border-top: solid 1px black;
-  padding-top: 1rem;
+.title-edit-home {
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  border-top: 1px solid #b380b5;
+  padding: 1rem 0;
 }
 
 .adminHome-btn {
@@ -40,7 +53,7 @@
   cursor: pointer;
   font-size: 16px;
   border-radius: 10px;
-  font-family: outfit;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
 }
 
@@ -61,17 +74,34 @@
   margin-bottom: 20px;
 }
 
-.image-buttons button {
-  padding: 10px;
-  background-color: #fff;
-  color: #000000;
+.image-buttons button,
+.boton-guardar-dashboard,
+.experience-buttons {
+  background-color: #b380b5;
   border: none;
-  border-radius: 5px;
+  color: white;
   cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 8.5rem;
+  margin-top: 1rem;
+  font-family: "Outfit", sans-serif;
+  box-shadow: 0px 4px #946b9f;
+  transition: all 0.2s ease-in-out;
 }
 
-.image-buttons button:hover {
-  background-color: #ced4da;
+.image-buttons button:active,
+.boton-guardar-dashboard:active,
+.experience-buttons:active {
+  box-shadow: 0 1px #946b9f;
+  transform: translateY(3px);
+}
+
+.image-buttons button:hover,
+.boton-guardar-dashboard:hover,
+.experience-buttons:hover {
+  background-color: #caa2cb;
+  color: white;
 }
 
 .title-input {
@@ -86,34 +116,56 @@
   margin: 0 0 20px 0;
 }
 
-.editAdminHome-btn {
-  padding: 5px;
-  background-color: #000000;
-  color: #fff;
+.boton-cancelar-dashboard {
+  background-color: #b14b4b;
   border: none;
-  border-radius: 5px;
+  color: white;
   cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 8.5rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-family: "Outfit", sans-serif;
+  box-shadow: 0px 4px #aa2828;
+  transition: all 0.2s ease-in-out;
 }
 
-.editAdminHome-btn:hover {
-  background-color: #b380b5;
+.boton-cancelar-dashboard:active {
+  box-shadow: 0 1px #b14b4b;
+  transform: translateY(3px);
+}
+
+.boton-cancelar-dashboard:hover {
+  background-color: #ca5252;
   color: white;
 }
 
-.cancelAdminHome-btn {
-  background-color: transparent;
-  border: none;
-  margin-left: 20px;
-  cursor: pointer;
+.section label {
+  font-size: 1rem;
+  border-top: 1px solid #b380b5;
+  padding-top: 1rem;
+  color: #b380b5;
+  margin-top: 1rem;
+  margin-left: 0;
+  display: block;
+}
+
+textarea {
+  min-height: 100px;
+  width: 85%;
+  padding: 10px;
+  font-family: "Outfit", sans-serif;
+  border-radius: 1rem;
+  margin-left: 0;
+  resize: vertical;
 }
 
 .editNosotras-textarea {
-  width: 70%;
-  height: 200px;
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
-  margin: 0 0 20px 0;
+  margin: 0;
   resize: none;
 }
 
@@ -122,73 +174,86 @@ p {
   color: #6c757d;
 }
 
-/* Sección experiencias */
-
 h2 {
   font-size: 1.2rem;
-  margin-left: 1rem;
+  font-family: "Outfit", sans-serif;
+  margin-left: 0;
 }
 
-label[for="experienceText"] {
-  margin-left: 1rem;
+label[for="experienceText"],
+label[for="experienceImage"] {
+  margin-left: 0;
 }
 
-#experienceText {
-  margin-left: 1rem;
+#experienceText,
+#experienceImage {
   border-radius: 0.5rem;
 }
 
 .charactersRemaining {
-  margin-left: 1rem;
-}
-
-label[for="experienceImage"] {
-  margin-left: 1rem;
-}
-
-#experienceImage {
-  margin-left: 1rem;
-  border-radius: 0.5rem;
+  margin-left: 0;
 }
 
 .experience-buttons {
-  margin-left: 1rem;
+  margin-left: 0;
   margin-top: 1rem;
 }
 
 .admin-btn-exp {
-  margin-top: 1.5rem;
-  margin-left: 1rem;
-  padding: 0.3rem;
-  border-radius: 0.3rem;
-  color: white;
-  background-color: black;
+  background-color: #e0bb8e;
   border: none;
+  color: white;
   cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 10rem;
+  margin-top: 1rem;
+  font-family: "Outfit", sans-serif;
+  box-shadow: 0px 4px #dbb17d;
+  transition: all 0.2s ease-in-out;
 }
 
-h3 {
-  margin-left: 1rem;
-  margin-top: 2rem;
+.admin-btn-exp:active {
+  box-shadow: 0 1px #e0bb8e;
+  transform: translateY(3px);
+}
+
+.admin-btn-exp:hover {
+  background-color: #e0bb8e;
+  color: white;
 }
 
 .list-exp {
-  list-style: none;
-  margin-left: -1.4rem;
-  display: flex;
-  flex-wrap: wrap;
+  margin-left: 0;
+  padding-left: 0;
+  width: 80%;
 }
 
 .list-exp img {
-  width: 10rem;
   height: 10rem;
-  display: flex;
   margin: 0.5rem;
-  flex-wrap: wrap;
 }
 
 .list-exp p {
-  width: 10rem;
   margin: 0.5rem;
   overflow-x: hidden;
+}
+
+.no-hay-experiencias-mensaje,
+.texto-experiencias-dashboard {
+  font-family: "Outfit", sans-serif;
+}
+
+.fondo-lista-experiencias {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid #946b9f;
+  margin-top: 3rem;
+  min-height: 200px;
+  padding: 1rem;
+}
+.fondo-lista-experiencias h3 {
+  margin-top: 0;
 }
