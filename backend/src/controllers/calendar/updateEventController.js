@@ -11,6 +11,10 @@ const updateEventController = async (req, res, next) => {
         const eventId = req.params.eventId
         const updatedData = req.body
         const sheetId = process.env.SPREADSHEET_ID
+        let accessDataSheet
+        if (req.body.extendedProperties.private.access === 'free') {
+            accessDataSheet = 'libre'
+        } else accessDataSheet = 'solo_socios'
 
         //Traigo el evento del calendario:
         const existingEvent = await getEvent(eventId)
@@ -51,11 +55,11 @@ const updateEventController = async (req, res, next) => {
             },
             extendedProperties: {
                 private: {
-                    ...filteredExistingEvent.access,
-                    ...filteredUpdatedData.access,
+                    access: accessDataSheet,
                 },
             },
         }
+        console.log('merged', mergedEvent)
         //Lo actualizo:
         const response = await updateEvent(eventId, mergedEvent)
 
@@ -89,6 +93,7 @@ const updateEventController = async (req, res, next) => {
             data: response,
         })
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }
