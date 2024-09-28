@@ -12,7 +12,7 @@ const AdminActivities = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [eventsList, setEventsList] = useState([]);
 
-  // Toggle between editing mode and list mode
+  // Cambiar entre modo lista o edición
   function toggleEditMode(activityData = {}) {
     setIsEditMode((prevValue) => !prevValue);
     setToEdit(activityData);
@@ -36,9 +36,11 @@ const AdminActivities = () => {
   }
 
   useEffect(() => {
-    getEvents();
+    getEvents(); // Fetch al cargar la página
   }, []);
 
+
+  // Actualizar lista al gestionar eventos
   function deleteEvent(eventId) {
     setEventsList((prevEvents) => prevEvents.filter((event) => event.id !== eventId));
   }
