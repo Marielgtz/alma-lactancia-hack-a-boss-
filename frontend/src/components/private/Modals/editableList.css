@@ -42,3 +42,23 @@ li {
       margin-left: 20px;
       cursor: pointer;
   }
+
+ .delete-btn {
+    background-color: #ff5733;
+  }
+  
+ .delete-btn:hover {
+    background-color: #ff0400;
+    color: #fff;
+  
+  }
+  
+ .delete-btn {
+    margin-left: 1rem;
+    padding: 5px;
+    font-size: 0.9rem;
+    font-family: outfit;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

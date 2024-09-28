@@ -194,27 +194,14 @@ export const getAllCollaboratorsService = async (isTeamMember) => {
 }
 
 export const newCollaboratorService = async (formData) => {
-    // console.log('api colaboradores:', formData);
-    const objForzado = {
-        name: 'lara',
-        surname: 'Perez',
-        description: 'Opcional',
-        team: true,
-    }
-
-    console.log('Obj forzado api:', objForzado)
-
     try {
         const response = await fetch(`${API_BASE_URL}/new-collaborator`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(objForzado),
+            body: formData,
         })
 
         // return handleResponse(response);
-        const data = response.json()
+        const data = await response.json()
         return data
     } catch (error) {
         console.error('Error creating new collaborator:', error)
