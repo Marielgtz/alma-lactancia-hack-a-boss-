@@ -9,12 +9,16 @@ import "./Modals/editableList.css";
 
 const AdminActivities = () => {
   const [toEdit, setToEdit] = useState({});
+  const [toEdit, setToEdit] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [eventsList, setEventsList] = useState([]);
 
   // Cambiar entre modo lista o edición
   function toggleEditMode(activityData = {}) {
+  // Cambiar entre modo lista o edición
+  function toggleEditMode(activityData = {}) {
     setIsEditMode((prevValue) => !prevValue);
+    setToEdit(activityData);
     setToEdit(activityData);
   }
 
@@ -40,12 +44,14 @@ const AdminActivities = () => {
   }, []);
 
   // Actualizar lista al gestionar eventos
+  // Actualizar lista al gestionar eventos
   function deleteEvent(eventId) {
     setEventsList((prevEvents) =>
       prevEvents.filter((event) => event.id !== eventId)
     );
   }
 
+  async function refreshEventsList() {
   async function refreshEventsList() {
     toggleEditMode({});
     await getEvents(); // Actualiza eventos tras una actualización
@@ -62,9 +68,17 @@ const AdminActivities = () => {
           {eventsList.map((activity) => (
             <EditableEvent
               key={activity.id}
+        <ol>
+          {eventsList.map((activity) => (
+            <EditableEvent
+              key={activity.id}
               onClick={() => toggleEditMode(activity)}
               setToEdit={setToEdit}
               eventData={activity}
+              onDelete={() => deleteEvent(activity.id)}
+            />
+          ))}
+        </ol>
               onDelete={() => deleteEvent(activity.id)}
             />
           ))}
@@ -94,5 +108,5 @@ const AdminActivities = () => {
     </main>
   );
 };
-
+  }}
 export default AdminActivities;

@@ -306,6 +306,7 @@ const AdminHome = () => {
             {
               text: newExperienceData.data.text,
               image: newExperienceData.data.image,
+              id: newExperienceData.data.id,
             },
           ],
         }));
@@ -332,8 +333,6 @@ const AdminHome = () => {
     if (experience) {
       setSelectedExperience(experience);
       setModalOpen(true);
-    } else {
-      console.error("Experiencia seleccionada es inválida:", experience);
     }
   };
 
