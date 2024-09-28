@@ -15,7 +15,6 @@ const createActivity = async (req, res, next) => {
             start,
             end,
             location,
-            access,
             extendedProperties,
         } = req.body
 

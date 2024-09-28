@@ -23,6 +23,11 @@ const cancelEvent = async (req, res, next) => {
             end: {
                 ...existingEvent.end,
             },
+            extendedProperties: {
+                private: {
+                    ...existingEvent.access,
+                },
+            },
         }
 
         const response = await updateEvent(eventId, mergedEvent)
@@ -42,6 +47,7 @@ const cancelEvent = async (req, res, next) => {
             formatDate(mergedEvent.end.dateTime),
             mergedEvent.location,
             mergedEvent.access,
+            'cancelled',
         ]
         const dataToUpdate = await getRowsData(
             sheetId,

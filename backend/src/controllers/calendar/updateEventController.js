@@ -3,8 +3,6 @@ import {
     getEvent,
     getRowsData,
     updateRow,
-    updateCell,
-    getCoordinates,
 } from '../../googleapis/methods/index.js'
 import { filterProperties, formatDate } from '../../utils/index.js'
 
@@ -50,6 +48,12 @@ const updateEventController = async (req, res, next) => {
             end: {
                 ...filteredExistingEvent.end,
                 ...filteredUpdatedData.end,
+            },
+            extendedProperties: {
+                private: {
+                    ...filteredExistingEvent.access,
+                    ...filteredUpdatedData.access,
+                },
             },
         }
         //Lo actualizo:
