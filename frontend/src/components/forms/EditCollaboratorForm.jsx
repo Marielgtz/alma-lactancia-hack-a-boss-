@@ -1,96 +1,164 @@
 import React, { useEffect, useState } from 'react';
 import { deleteCollaboratorService, newCollaboratorService, updateCollaboratorService } from '../../services/api';
+import { toast } from 'react-toastify';
+import { isSuccessToast } from '../../utils/toast';
+import ConfirmationModal from '../ConfirmationModal';
 
 const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
   const [collaborator, setCollaborator] = useState(collaboratorData);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');  // Vista previa de la imagen
+  const [imageName, setImageName] = useState('');  // Nombre de la imagen del backend
+  const [showModal, setShowModal] = useState(false);
 
-  // Los datos previos que se mostrarán en el form (en caso de editar)
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+  console.log(`${API_BASE_URL}/images/Rosa.jpg`);
+  
+
+
+  // Efecto para sincronizar los datos del colaborador y la imagen
   useEffect(() => {
     setCollaborator(collaboratorData);
-    // console.log(collaboratorData);
-    
+
+    // Si hay una imagen en el backend, cargar el nombre y la vista previa
+    if (collaboratorData.image && collaboratorData.image !== 'Sin imagen') {
+      const imageUrl = `${API_BASE_URL}/images/${collaboratorData.image}`;
+      
+      setImagePreview(imageUrl);        
+      setImageName(collaboratorData.image); 
+    } else {
+      console.log('no hay imagen', collaboratorData);
+      
+      setImagePreview('');  
+      setImageName(''); 
+    }
+
+    // Limpiar el campo de archivo cuando cambia el colaborador
+    setSelectedFile(null);
   }, [collaboratorData]);
 
-  // Gestiona cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCollaborator((prevState) => ({
       ...prevState,
-      [name]: value, 
+      [name]: value,
     }));
   };
 
   const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);  // Save the first selected file
+    const file = e.target.files[0];
+    setSelectedFile(file);
+
+    // Mostrar la vista previa de la nueva imagen seleccionada
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result); 
+      };
+      reader.readAsDataURL(file);
+      setImageName(file.name); 
+    } else {
+      // Si no hay archivo seleccionado, restablecer la vista previa
+      setImagePreview(''); 
+      setImageName('');
+    }
   };
 
-  // Gestionar eliminación de colaboradores
   const handleDelete = async (e) => {
     e.preventDefault();
+    setShowModal(true); // Muestra el modal de confirmación
+  };
 
+  const confirmDelete = async () => {
+    setShowModal(false); // Cierra el modal
     const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'false' : 'true';
-    const responseMsg = await deleteCollaboratorService(collaborator.id, isTeam);
-    // console.log(responseMsg);
+    try {
+      const processToast = toast.loading('Eliminando colaborador...');
+      const responseMsg = await deleteCollaboratorService(collaborator.id, isTeam);
 
-    if (responseMsg.error) {
-      console.error('NO SE HA ELIMINADO:', responseMsg.error);
-      // TODO - Lógica error
-    }
-    else { //TODO - Crear requisito de "éxito"
-      console.log('ÉXITO');
-      onSuccess();
-    }
-  }
+      if (responseMsg.error) {
+        throw new Error(responseMsg.error);
+      }
 
-  // Envío del formulario
+      isSuccessToast(true, 'Colaborador eliminado con éxito', processToast);
+      onSuccess(); 
+    } catch (error) {
+      toast.dismiss();
+      toast.error(`Error al eliminar colaborador: ${error.message}`);
+    }
+  };
+
+  const cancelDelete = () => {
+    setShowModal(false); // Cierra el modal si el usuario cancela
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const formData = new FormData();
+    const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'false' : 'true';
 
+
+    const formData = new FormData();
     formData.append('name', collaborator.name);
     formData.append('surname', collaborator.surname);
     formData.append('role', collaborator.role);
     formData.append('description', collaborator.description);
+    formData.append('team', isTeam);
 
     if (selectedFile) {
-      formData.append('image', selectedFile);
+      formData.append('collaboratorImage', selectedFile);  // Añadir nueva imagen si se ha seleccionado
     }
 
-    console.log('Updated collaborator:', collaborator, selectedFile);
+    const processToast = toast.loading('Guardando cambios...');
 
-    if (collaborator.id) {  // Servicio de editar colaborador (si existe un id previo)
-      console.log('Actualizando...');
-      const isTeam = collaborator.hierarchy === 'Miembro del equipo' ? 'false' : 'true';
-      const responseMsg = await updateCollaboratorService(collaborator.id, isTeam, formData);
+    try {
+      if (collaborator.id) {
+        // Actualizar colaborador existente
+        const responseMsg = await updateCollaboratorService(collaborator.id, isTeam, formData);
 
-      // Actualizar lista (con respuesta del back)
-      if (responseMsg.error) {
-        console.log(responseMsg);
-        
-          console.error('NO SE HA ACTUALIZADO:', responseMsg.error)
-        //TODO Lógica error
-      }
-      else { //TODO - Crear requisito de "éxito"
-        console.log('ÉXITO');
+        if (responseMsg.error) {
+          throw new Error(responseMsg.error);
+        }
+
+        isSuccessToast(true, 'Colaborador actualizado con éxito', processToast);
+        onSuccess();
+      } else {
+        // Crear un nuevo colaborador
+        const responseMsg = await newCollaboratorService(formData);
+
+        if (responseMsg.error) {
+          throw new Error(responseMsg.error);
+        }
+
+        isSuccessToast(true, 'Nuevo colaborador creado con éxito', processToast);
         onSuccess();
       }
-    } else {  // Servicio de crear colaborador (si no existe id previo)
-      console.log('Creando...');
-      const responseMsg = await newCollaboratorService(collaborator); 
-      console.log(responseMsg);
 
-      // Actualizar lista (con respuesta del back)
-      onSuccess(); //! Solo debería activarse si fue bien
+      // Limpiar el campo de archivo después de guardar
+      setSelectedFile(null);
+      setImagePreview('');  // Limpiar vista previa
+      setImageName('');  // Limpiar nombre de la imagen
+    } catch (error) {
+      toast.dismiss();
+      toast.error(`Error al guardar colaborador: ${error.message}`);
     }
-    
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="image">Imagen:</label>
+        <label>Previsualización imagen: </label>
+        {imageName ? (
+          <div>
+            <p>{imageName}</p>
+            <img src={imagePreview} alt="Vista previa de la imagen" width="200px" />
+          </div>
+        ) : (
+          <p>Sin foto guardada</p> 
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="image">Nueva imagen (si quieres cambiarla):</label>
         <input
           type="file"
           id="image"
@@ -143,8 +211,15 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
         />
       </div>
 
-      <button type="submit" className='confirm-btn'>Guardar Cambios</button>
-      <button onClick={handleDelete} className='cancel-btn'>Eliminar colaborador</button>
+      <button type="submit" className="confirm-btn">Guardar Cambios</button>
+      <button onClick={handleDelete} className="delete-btn">Eliminar colaborador</button>
+
+      <ConfirmationModal
+        isOpen={showModal}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        message={`¿Estás seguro de que deseas eliminar a ${collaborator.name}? Esta acción no se puede deshacer.`}
+      />    
     </form>
   );
 };

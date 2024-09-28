@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllCollaboratorsService } from '../../services/api';
 import EditCollaboratorForm from '../forms/EditCollaboratorForm';
+import {toast} from 'react-toastify'
 
 const AdminAbout = () => {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -11,22 +12,38 @@ const AdminAbout = () => {
 
   async function fetchCollaborators() {
     console.log("Cargando colaboradores...");
-    const fetchedCollaborators = await getAllCollaboratorsService(true);
-    const fetchedTeamMembers = await getAllCollaboratorsService(false);
+    
+    const [fetchedCollaborators, fetchedTeamMembers] = await Promise.all([
+      getAllCollaboratorsService(true),
+      getAllCollaboratorsService(false)
+    ]);
+  
     setCollaborators(fetchedCollaborators);    
     setTeamMembers(fetchedTeamMembers);
     console.log("Colaboradores cargados");
-    
   }
-
+  
   function refreshCollaboratorsList() {
     toggleEditMode({});
-    fetchCollaborators();
+    toast.promise(
+      fetchCollaborators(),  
+      {
+        pending: 'Cargando datos...',
+        error: 'Error de conexión'
+      }
+    );
   }
-
+  
   useEffect(() => {
-    fetchCollaborators();
-  }, []);
+    toast.promise(
+      fetchCollaborators(),  
+      {
+        pending: 'Cargando datos...',
+        error: 'Error de conexión'
+      }
+    );
+  }, []); // Al cargar la página, traer la lista de colaboradores
+  
 
   // useEffect(() => {
   //   console.log(collaborators, teamMembers);

@@ -1,6 +1,5 @@
 import React from 'react'
 import { deleteCalendarEventService } from '../../services/api'
-import formatDate from '../../utils/formatDate';
 
 function EditableEvent({eventData, onDelete, onClick}) {
     async function handleDelete(){

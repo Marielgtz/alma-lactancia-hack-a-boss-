@@ -1,77 +1,94 @@
 import React, { useEffect, useState } from 'react';
 import { getCalendarEvents } from '../../services/api';
-import './AdminActivities.css'
+import './AdminActivities.css';
 import EventForm from '../../pages/private/CreateEventForm';
 import EditableEvent from './editableEvent';
 import formatDate from '../../utils/formatDate';
-import './editableList.css'
+import { toast } from 'react-toastify';
+import './editableList.css';
 
 const AdminActivities = () => {
-  // Sacar los eventos
-  const [toEdit, setToEdit] = useState({})
+  const [toEdit, setToEdit] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [eventsList, setEventsList] = useState([]);
 
-  function toggleEditMode(activityData) {
+  // Toggle between editing mode and list mode
+  function toggleEditMode(activityData = {}) {
     setIsEditMode((prevValue) => !prevValue);
-    setToEdit(activityData);     
+    setToEdit(activityData);
   }
 
   async function getEvents() {
-    const calendarEvents = await getCalendarEvents();
-    // console.log(calendarEvents);
-    setEventsList(calendarEvents)
+    const loadingToast = toast.loading('Cargando eventos...');    
+    try {
+      const calendarEvents = await getCalendarEvents();
+      setEventsList(calendarEvents);
+      toast.dismiss();
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      toast.update(loadingToast, {
+        render: 'Error al cargar los eventos',
+        type: 'error',
+        isLoading: false,
+        autoClose: 3000,
+      });
+    }
   }
 
   useEffect(() => {
-    getEvents(); // Con carga de la página
-  },[])
+    getEvents();
+  }, []);
 
-  // Funciones para actualizar la lista al gestionar eventos
   function deleteEvent(eventId) {
-    setEventsList(prevEvents => prevEvents.filter(event => event.id !== eventId));
+    setEventsList((prevEvents) => prevEvents.filter((event) => event.id !== eventId));
   }
 
-  function refreshEventsList() {
+  async function refreshEventsList() {
     toggleEditMode({});
-    getEvents();
+    await getEvents();  // Actualiza eventos tras una actualización
   }
 
   return (
     <main className='settings-content'>
       <h1>Actividades</h1>
+
+      {/* Muestra las actividades */}
       <div id='activities-display' className={isEditMode ? 'hidden' : ''}>
         <p>Selecciona la actividad que deseas editar:</p>
-          <ol>
-          {eventsList.map((activity)=>{
-            return(
-              <EditableEvent 
-              key={activity.id} 
+        <ol>
+          {eventsList.map((activity) => (
+            <EditableEvent
+              key={activity.id}
               onClick={() => toggleEditMode(activity)}
-
               setToEdit={setToEdit}
               eventData={activity}
-              onDelete={() => deleteEvent(activity.id)}/>
-            )
-          })}
-          </ol>
+              onDelete={() => deleteEvent(activity.id)}
+            />
+          ))}
+        </ol>
 
-          <h1>Creador de actividades</h1>
-          <button
-            onClick={() => toggleEditMode()}
-            className='confirm-btn'
-          >Crear nueva actividad</button>
+        <h1>Creador de actividades</h1>
+        <button
+          onClick={() => toggleEditMode()}
+          className='confirm-btn'
+        >
+          Crear nueva actividad
+        </button>
       </div>
-      <div className={!isEditMode ? 'hidden' : ''}>
-          <button
-            onClick={() => toggleEditMode({})}
-            className='confirm-btn'
-          >Volver atrás</button>
-        <p>Editando: {toEdit?.summary || 'Nueva actividad'}</p>
-        <p>Fecha: { toEdit?.start ? formatDate(toEdit.start.dateTime) : 'Fecha no especificada'}</p>
 
-        <EventForm 
-          toEdit={toEdit} 
+      {/* Crea o edita una actividad */}
+      <div className={!isEditMode ? 'hidden' : ''}>
+        <button
+          onClick={() => toggleEditMode({})}
+          className='confirm-btn'
+        >
+          Volver atrás
+        </button>
+        <p>Editando: {toEdit?.summary || 'Nueva actividad'}</p>
+        <p>Fecha: {toEdit?.start ? formatDate(toEdit.start.dateTime) : 'Fecha no especificada'}</p>
+
+        <EventForm
+          toEdit={toEdit}
           onSuccess={refreshEventsList}
         />
       </div>
