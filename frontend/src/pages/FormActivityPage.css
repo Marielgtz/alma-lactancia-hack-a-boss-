@@ -16,12 +16,16 @@ body,
 
 .register-page .navbar {
   background-color: #b380b5;
-  height: 10rem;
+  height: 6.5rem;
   position: relative;
 }
 
 .register-main {
   background-color: #fdeee7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem 5rem;
 }
 
 .register-page .navbar {

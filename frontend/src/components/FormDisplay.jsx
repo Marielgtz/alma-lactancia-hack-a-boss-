@@ -1,49 +1,55 @@
-import useFormDisplay from '../hooks/useFormDisplay'
-import CaptchaComponent from './Captcha'
+import useFormDisplay from "../hooks/useFormDisplay";
+import CaptchaComponent from "./Captcha";
+import "./FormDisplay.css";
 
 const FormDisplay = ({ jsonNumber }) => {
-    const { sendDataHandler, formRef, formToShow } = useFormDisplay(jsonNumber)
-    if (!formToShow?.fields) {
-        return <div>No hay datos para mostrar.</div>
-    }
-    return (
-        <div>
-            <h2>{formToShow.formName}</h2>
-            <form ref={formRef}>
-                {formToShow.fields.map((field, index) => (
-                    <div key={index} style={{ marginBottom: '20px' }}>
-                        <label>
-                            {field.type === 'select' ? (
-                                <select
-                                    name={field.label
-                                        .toLowerCase()
-                                        .replace(/\s+/g, '_')}
-                                    required
-                                >
-                                    <option value=''>¿Eres socio/a?</option>
-                                    <option value='sí'>Sí</option>
-                                    <option value='no'>No</option>
-                                </select>
-                            ) : (
-                                <input
-                                    type={field.type}
-                                    name={field.label
-                                        .toLowerCase()
-                                        .replace(/\s+/g, '_')} // Para sustituir espacios en blanco por guiones bajos
-                                    placeholder={field.label}
-                                    required
-                                />
-                            )}
-                        </label>
-                    </div>
-                ))}
-                <CaptchaComponent
-                    handleSubmit={sendDataHandler}
-                    buttonClassName={'sin_clase'}
+  const { sendDataHandler, formRef, formToShow } = useFormDisplay(jsonNumber);
+  if (!formToShow?.fields) {
+    return <div>No hay datos para mostrar.</div>;
+  }
+  return (
+    <div className="contenedor-formulario-display">
+      <p className="texto-anterior-titulo-formulario">
+        Te estás inscribiendo a la siguiente actividad:
+      </p>
+      <h2 className="titulo-formulario-inscripcion">{formToShow.formName}</h2>
+      <p className="texto-despues-titulo-formulario">
+        Rellena el formulario para formalizar la inscripción:
+      </p>
+      <form ref={formRef}>
+        {formToShow.fields.map((field, index) => (
+          <div key={index} style={{ marginBottom: "20px" }}>
+            <label className="formulario-inscripcion-label">
+              {field.type === "select" ? (
+                <select
+                  name={field.label.toLowerCase().replace(/\s+/g, "_")}
+                  required
+                  className="formulario-inscripcion-select"
+                >
+                  <option value="">¿Eres socio/a?</option>
+                  <option value="sí">Sí</option>
+                  <option value="no">No</option>
+                </select>
+              ) : (
+                <input
+                  type={field.type}
+                  name={field.label.toLowerCase().replace(/\s+/g, "_")}
+                  placeholder={field.label}
+                  required
+                  className="formulario-inscripcion-input"
                 />
-            </form>
-        </div>
-    )
-}
+              )}
+            </label>
+          </div>
+        ))}
+        <CaptchaComponent
+          handleSubmit={sendDataHandler}
+          captchaInputClassName={"captcha-input-formulario"}
+          buttonClassName={"boton-enviar-formulario-inscripcion"}
+        />
+      </form>
+    </div>
+  );
+};
 
-export default FormDisplay
+export default FormDisplay;
