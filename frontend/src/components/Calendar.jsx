@@ -176,12 +176,6 @@ const MyCalendar = () => {
                   <p className="event-date">{formatEventDate(event.start)}</p>
                   <i className="fas fa-map-marker-alt"></i> {event.location}
                   <p className="event-type">* Só para socias</p>
-                  <button
-                    className="register-button"
-                    onClick={() => handleEnrollClick(event)}
-                  >
-                    Inscribirse
-                  </button>
                 </div>
               </div>
             </div>
@@ -190,7 +184,15 @@ const MyCalendar = () => {
           <div className="activity">No hay actividades programadas</div>
         )}
       </div>
-
+      {/* Botón "Ver actividades" debajo de las tarjetas */}
+      <div className="contenedor-ver-actividades-inicio">
+        <button
+          className="boton-ver-actividades"
+          onClick={() => navigate("/actividades")}
+        >
+          Ver actividades
+        </button>
+      </div>
       <h2 className="section-title-calendar">Calendario</h2>
       <div className="calendar-content">
         <div className="calendar-container">
