@@ -5,17 +5,19 @@ body,
   margin: 0;
   padding: 0;
 }
+/* Contenedor de carga y spinner */
 .loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa toda la altura de la ventana */
+  height: 100vh;
 }
 
 .spinner {
-  color: #b380b5; /* Cambia este color al que desees (lila) */
+  color: #b380b5;
 }
 
+/* Estructura general de la página */
 .home-page {
   display: flex;
   flex-direction: column;
@@ -39,11 +41,8 @@ body,
   flex-direction: column;
 }
 
-.img-section {
-  position: relative;
-  height: 90vh;
-}
-
+/* Sección de la imagen principal */
+.img-section,
 .background-image {
   position: relative;
   height: 90vh;
@@ -61,6 +60,7 @@ body,
   filter: brightness(70%);
 }
 
+/* Botón de soporte */
 .support-button {
   position: absolute;
   bottom: 3em;
@@ -71,7 +71,7 @@ body,
 }
 
 .support-button p {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
   color: #f5f5f5;
   font-family: outfit;
@@ -80,6 +80,7 @@ body,
   white-space: normal;
 }
 
+/* Botón de actividades */
 .activities-button {
   background-color: #d8e2dc;
   border: none;
@@ -100,14 +101,14 @@ body,
   color: white;
 }
 
+/* Contenedor de contenido */
 .content {
-  padding: 2em;
   background-color: #fdeee7;
   position: relative;
+  padding: 0 4rem;
 }
 
 .section-title {
-  margin-left: 1.4em;
   color: #b380b5;
   font-weight: bold;
   font-size: 2.5rem;
@@ -115,6 +116,7 @@ body,
   font-family: outfit;
 }
 
+/* Contenedor centrado */
 .centered-container {
   display: flex;
   justify-content: center;
@@ -122,13 +124,14 @@ body,
   flex-direction: column;
 }
 
+/* Texto de la sección "Nosotras" */
 .sectionText-nosotras {
   max-width: 60rem;
   line-height: 1.7;
   font-family: bellota;
-  margin-left: 3.5rem;
 }
 
+/* Imagen de silueta */
 .img-silueta {
   display: flex;
   position: relative;
@@ -138,6 +141,7 @@ body,
   height: 45vh;
 }
 
+/* Sección de experiencias */
 .experience-section {
   background-color: white;
   padding: 2rem;
@@ -193,6 +197,7 @@ body,
   text-align: left;
 }
 
+/* Controles del carrusel */
 .carousel-control {
   background-color: transparent;
   color: grey;
@@ -212,115 +217,25 @@ body,
 
 .carousel-control.prev {
   left: 2rem;
-  color: #b380b5;
-  width: 2px;
 }
 
 .carousel-control.next {
   right: 2rem;
-  color: #b380b5;
 }
 
 /* Estilos responsive */
-/* Tablet */
-@media (max-width: 1600px) {
-  .img-section,
-  .background-image {
-    height: 100vh;
-  }
-
-  .img-silueta {
-    display: none;
-  }
-
-  .support-button {
-    bottom: 2em;
-    left: 2em;
-  }
-
-  .support-button p {
-    font-size: 3.5rem;
-  }
-
-  .activities-button {
-    width: 26rem;
-    font-size: 1.5em;
-  }
-
-  .content {
-    padding: 1.5em;
-  }
-
-  .section-title {
-    margin-left: 1em;
-    font-size: 2.5rem;
-  }
-
-  .centered-container {
-    align-items: center;
-  }
-
-  .sectionText-nosotras {
-    max-width: 90%;
-    margin-left: 0;
-    font-size: 1.3rem;
-  }
-
-  .img-silueta {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-    width: 25vw;
-    height: auto;
-  }
-
-  .experience-section {
-    padding: 1.5rem;
-  }
-
-  .experience-title {
-    font-size: 1.8rem;
-    margin-left: 1em;
-    margin-bottom: 2rem;
-  }
-
-  .experience-card {
-    width: 18rem;
-  }
-
-  .experience-card img {
-    width: 12rem;
-    height: 7rem;
-  }
-
-  .experience-card h3 {
-    font-size: 1.3rem;
-  }
-
-  .experience-card p {
-    font-size: 0.9rem;
-  }
-
-  .carousel-control {
-    font-size: 2rem;
-  }
-
-  .carousel-control.prev {
-    left: 1rem;
-  }
-
-  .carousel-control.next {
-    right: 1rem;
-  }
-}
-
 /* Mobile */
 @media (max-width: 768px) {
   .img-section {
     position: relative;
     height: 50vh;
   }
-
+  .content {
+    padding: 2rem;
+  }
+  .activity {
+    max-width: 280px;
+  }
   .background-image {
     height: 50vh;
   }
@@ -356,20 +271,14 @@ body,
     margin-left: 0;
     color: #b380b5;
     margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: outfit;
   }
 
-  .centered-container {
-    margin-left: 2em;
-  }
-
   .sectionText-nosotras {
-    font-size: 1.5em;
+    font-size: 1rem;
     text-align: center;
     max-width: 100%;
-    margin-left: -1.5em;
     font-family: bellota;
   }
 
@@ -414,6 +323,129 @@ body,
   .carousel-control.next {
     right: -1rem;
   }
+
+  .section-title-calendar {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    font-family: outfit;
+    font-size: 2rem;
+  }
+
+  .calendar-section {
+    padding-bottom: 1rem;
+  }
+  .calendar-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .event-details {
+    margin-top: 1rem;
+    border-radius: 10px; /* Quita el border-radius en mobile */
+  }
+
+  .calendar-wrapper {
+    order: 1; /* Mantiene el calendario arriba */
+    border-radius: 10px;
+  }
+
+  .event-details {
+    order: 2; /* Asegura que los detalles se muestren debajo del calendario */
+  }
+
+  .calendar {
+    height: 18rem;
+  }
+
+  .custom-toolbar-label {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  .experience-title {
+    margin-left: 0;
+    text-align: center;
+    font-size: 2rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1600px) {
+  .img-section,
+  .background-image {
+    height: 100vh;
+  }
+
+  .support-button {
+    bottom: 2em;
+    left: 4em;
+  }
+
+  .activities-button {
+    width: 26rem;
+    font-size: 1.5em;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+  .calendar-content {
+    max-width: 100%;
+  }
+  .custom-toolbar-label {
+    text-align: center;
+    font-size: 1rem;
+  }
+  .event-description {
+    text-align: center;
+  }
+  .centered-container {
+    align-items: center;
+  }
+
+  .sectionText-nosotras {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .img-silueta {
+    display: none;
+  }
+
+  .experience-section {
+    padding: 1.5rem;
+  }
+
+  .experience-title {
+    font-size: 1.8rem;
+    margin-left: 1em;
+    margin-bottom: 2rem;
+  }
+
+  .experience-card {
+    width: 18rem;
+  }
+
+  .experience-card img {
+    width: 12rem;
+    height: 7rem;
+  }
+
+  .experience-card p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+  }
+
+  .carousel-control.prev {
+    left: 1rem;
+  }
+
+  .carousel-control.next {
+    right: 1rem;
+  }
 }
 
 /* Pantallas muy grandes (mínimo 1600px) */
@@ -450,12 +482,7 @@ body,
   .content {
     padding: 1.5em;
   }
-  .section-title-activity {
-    font-size: 4rem;
-    text-align: center;
-    margin-top: 3%;
-    padding: 0;
-  }
+
   .section-title {
     margin-left: 1em;
     font-size: 4rem;
