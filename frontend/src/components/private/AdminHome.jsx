@@ -25,7 +25,7 @@ const AdminHome = () => {
   } = useAdminHome();
 
   return (
-    <main className="settings-content">
+    <main className="settings-content-inicio">
       <div className="contenedor-secciones-dinamicas-dashboard">
         <h1 className="titulo-escojer-seccion">
           Escoge qué sección quieres editar:

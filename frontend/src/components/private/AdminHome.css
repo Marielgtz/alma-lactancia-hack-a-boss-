@@ -1,7 +1,8 @@
-.settings-content {
+.settings-content-inicio {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  width: 60vw;
 }
 .contenedor-secciones-dinamicas-dashboard {
   padding: 0 2rem;

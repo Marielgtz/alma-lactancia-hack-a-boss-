@@ -2,6 +2,9 @@
   height: 100vh;
   width: 90%;
 }
+.settings-content-equipo {
+  width: 60vw;
+}
 .texto-editando-nosotras {
   font-family: Outfit;
   padding-top: 1rem;
