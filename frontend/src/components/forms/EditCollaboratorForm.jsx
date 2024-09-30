@@ -184,7 +184,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
             Nueva imagen (si quieres cambiarla):
           </p>
           <label htmlFor="image" className="file-label">
-            Seleccionar archivo...
+            <i className="fas fa-upload"></i> Seleccionar archivo...
           </label>
           <input
             type="file"

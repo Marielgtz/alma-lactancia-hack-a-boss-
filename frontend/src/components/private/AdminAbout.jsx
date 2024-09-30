@@ -67,7 +67,7 @@ const AdminAbout = () => {
   return (
     <main className="settings-content collaborators-admin margin-left-box">
       <div className={isEditMode ? "hidden" : ""}>
-        <h1>Gestión de miembros</h1>
+        <h1 className="titulo-gestion-miembros">Gestión de miembros</h1>
 
         <div id="team">
           <p className="texto-descriptivo-accion">
@@ -125,9 +125,9 @@ const AdminAbout = () => {
       <div id="edit-collaborator-div" className={!isEditMode ? "hidden" : ""}>
         <button
           onClick={() => toggleEditMode({})}
-          className="boton-volver-atras-nosotras"
+          className="boton-volver-atras"
         >
-          Volver atrás
+          <i className="fas fa-arrow-left"></i> Volver atrás
         </button>
         <div className="contenedor-editando-rango">
           <p className="texto-editando-nosotras">
