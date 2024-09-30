@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 
-const useExperiences = (setHomeData, setCharactersRemaining) => {
-    const MAX_CHARACTERS = 1800
-
+const useExperiences = (
+    setHomeData,
+    setCharactersRemaining,
+    MAX_CHARACTERS
+) => {
     const experienceFileInputRef = useRef(null)
     const [selectedExperience, setSelectedExperience] = useState(null)
     const [modalOpen, setModalOpen] = useState(false)
@@ -165,7 +167,7 @@ const useExperiences = (setHomeData, setCharactersRemaining) => {
             if (newExperience.image) {
                 formData.append('image', newExperience.image)
             } else {
-                window.alert('Por favor, seleccione una imagen')
+                toast.warn('Por favor, seleccione una imagen')
                 return
             }
 
@@ -203,6 +205,19 @@ const useExperiences = (setHomeData, setCharactersRemaining) => {
         setModalOpen(false)
         setSelectedExperience(null)
     }
+    const handleCheckboxChange = (experienceId) => {
+        if (checkedExperiences.includes(experienceId)) {
+            setCheckedExperiences(
+                checkedExperiences.filter((id) => id !== experienceId)
+            )
+        } else {
+            if (checkedExperiences.length < 4) {
+                setCheckedExperiences([...checkedExperiences, experienceId])
+            } else {
+                toast.warn('Solo puedes seleccionar hasta 4 experiencias.')
+            }
+        }
+    }
     return {
         handleExperienceDelete,
         selectedExperience,
@@ -219,6 +234,7 @@ const useExperiences = (setHomeData, setCharactersRemaining) => {
         setModalOpen,
         handleExperienceChange,
         imageName,
+        handleCheckboxChange,
     }
 }
 export default useExperiences
