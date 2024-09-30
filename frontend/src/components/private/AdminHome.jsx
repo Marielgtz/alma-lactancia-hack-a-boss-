@@ -1,8 +1,8 @@
 import useAdminHome from '../../hooks/useAdminHome'
 import './AdminHome.css'
 import Experiences from './Experiences'
-import Hero from './Hero'
 import Nosotras from './Nosotras'
+import Hero from './Hero'
 
 const AdminHome = () => {
     const {
