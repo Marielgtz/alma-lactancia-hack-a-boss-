@@ -43,7 +43,9 @@ const AdminActivities = () => {
     <main className="settings-content margin-left-box">
       <h1>Actividades</h1>
       <div id="activities-display" className={isEditMode ? "hidden" : ""}>
-        <p>Selecciona la actividad que deseas editar:</p>
+        <p className="texto-descriptivo-accion">
+          Selecciona la actividad que deseas editar:
+        </p>
         <ol>
           {eventsList.map((activity) => {
             return (
