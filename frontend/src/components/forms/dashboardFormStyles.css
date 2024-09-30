@@ -1,0 +1,95 @@
+.dashboard-form  label, input, textarea {
+    margin: 1rem 0;
+
+    width: 70%;
+}
+
+
+/* Estilos específicos form actividades */
+
+.dashboard-form select {
+    display: block;
+    font-family: Outfit;
+    color: black;
+    border-radius: 20px;
+    background-color: #d8e2dc;
+    border: none;
+
+    padding: 1rem 2rem;
+}
+
+.datetime-input {
+    text-align: center;
+    width: auto;
+}
+
+.datetime-selector {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: auto auto; 
+    gap: 0 1rem;
+  }
+  
+  #label-start {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  #input-start {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  #label-end {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  #input-end {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  
+/* Estilos específicos form colaboradores */
+
+.collaborator-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Dos columnas */
+    grid-template-rows: repeat(4, 80px); /* Cuatro filas para los campos */
+    grid-gap: 0; /* Espacio entre los elementos */
+  }
+.collaborator-form * {
+    margin: 0;
+}
+  .image-preview {
+    grid-column: 2 / 3; /* La imagen ocupa las dos columnas */
+    grid-row: 1 / 5; /* La imagen ocupa 4 filas */
+  }
+  
+  .new-image, .name, .surname, .role {
+    grid-column: 1/2; /* Los campos ocupan la segunda columna */
+  }
+  
+  .new-image {
+    grid-row: 1;
+  }
+  
+  .name {
+    grid-row: 2;
+  }
+  
+  .surname {
+    grid-row: 3;
+  }
+  
+  .role {
+    grid-row: 4;
+  }
+  
+  /* Botones fuera del grid */
+  .buttons-container {
+    margin-top: 20px;
+  }
+  

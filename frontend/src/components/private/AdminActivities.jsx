@@ -40,7 +40,7 @@ const AdminActivities = () => {
   }
 
   return (
-    <main className="settings-content">
+    <main className="settings-content margin-left-box">
       <h1>Actividades</h1>
       <div id="activities-display" className={isEditMode ? "hidden" : ""}>
         <p>Selecciona la actividad que deseas editar:</p>

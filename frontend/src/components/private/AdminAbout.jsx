@@ -72,7 +72,7 @@ const AdminAbout = () => {
   }
 
   return (
-    <main className='settings-content collaborators-admin'>
+    <main className='settings-content collaborators-admin margin-left-box'>
       <div className={isEditMode ? 'hidden' : ''}>
         <h1>Gestión de miembros</h1>
 

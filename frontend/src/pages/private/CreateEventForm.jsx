@@ -5,6 +5,8 @@ import formatDate from '../../utils/formatDate';
 import { toast } from 'react-toastify';
 import ConfirmationModal from "../../components/ConfirmationModal.jsx";
 
+import '../../components/forms/dashboardFormStyles.css'
+
 export default function EventForm({ toEdit, onSuccess }) {
   const defaultActivity = {
     summary: '',
@@ -180,7 +182,7 @@ export default function EventForm({ toEdit, onSuccess }) {
   };
 
   return (
-    <form onSubmit={submitNewEvent}>
+    <form onSubmit={submitNewEvent} className='dashboard-form'>
       <label>Título del evento:</label>
       <input
         type="text"
@@ -197,27 +199,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         onChange={handleChange}
         required
       />
-
-      <div className="dateTime-settings">
-        <label>Inicio:</label>
-        <input
-          type="datetime-local"
-          name="parsedStart"
-          value={activity?.parsedStart || ''}
-          onChange={handleChange}
-          required
-        />
-
-        <label>Finalización:</label>
-        <input
-          type="datetime-local"
-          name="parsedEnd"
-          value={activity?.parsedEnd || ''}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
+        
       <label>Localización:</label>
       <input
         type="text"
@@ -226,6 +208,31 @@ export default function EventForm({ toEdit, onSuccess }) {
         onChange={handleChange}
         required
       />
+
+      <div className='datetime-selector'>
+        <label id='label-start'>Inicio:</label>
+        <input
+          id='input-start'
+          className='datetime-input'
+          type="datetime-local"
+          name="parsedStart"
+          value={activity?.parsedStart || ''}
+          onChange={handleChange}
+          required
+        />
+
+        <label id='label-end'>Finalización:</label>
+        <input
+          id='input-end'
+          className='datetime-input'
+          type="datetime-local"
+          name="parsedEnd"
+          value={activity?.parsedEnd || ''}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
 
       <label>Acceso:</label>
       <select

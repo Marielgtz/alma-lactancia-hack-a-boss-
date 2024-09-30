@@ -9,6 +9,10 @@
   margin-bottom: 0;
 }
 
+.margin-left-box {
+  margin-left: 3rem;
+}
+
 .logo-section {
   display: flex;
   flex-direction: column;
