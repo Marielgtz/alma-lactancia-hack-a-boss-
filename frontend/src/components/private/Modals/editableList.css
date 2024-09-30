@@ -2,6 +2,10 @@ li {
   list-style: none;
 }
 
+ol {
+  padding: 0;
+}
+
 .list-btn {
     background-color: white;
     border: none;
@@ -44,7 +48,21 @@ li {
   }
 
  .delete-btn {
-    background-color: #ff5733;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    height: 3.3rem;
+    width: 12.5rem;
+    margin-top: 1rem;
+    font-family: Outfit;
+
+    background-color: #f37b60;
+    box-shadow: 0px 4px #cc4527; /* Sombra inferior para dar efecto de relieve */
+    
+    transition: all 0.2s ease-in-out;
   }
   
  .delete-btn:hover {
@@ -52,13 +70,31 @@ li {
     color: #fff;
   
   }
-  
- .delete-btn {
-    margin-left: 1rem;
-    padding: 5px;
-    font-size: 0.9rem;
-    font-family: outfit;
+
+  .confirm-btn {
+    background-color: #b380b5;
+    color: white;
+    margin-bottom: 1rem;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 0.5rem;
+    height: 3.3rem;
+    width: 12.5rem;
+    margin-top: 1rem;
+    font-family: Outfit;
+    /* Efecto 3D */
+    box-shadow: 0px 4px #946b9f; /* Sombra inferior para dar efecto de relieve */
+    transition: all 0.2s ease-in-out;
+  }
+  .confirm-btn:hover {
+   background-color: #caa2cb;
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Efecto de presionado */
+  .confirm-btn:active {
+    box-shadow: 0 1px #946b9f; /* Reduce la sombra para simular que se presiona */
+    transform: translateY(3px); /* Desplaza el botón hacia abajo */
   }

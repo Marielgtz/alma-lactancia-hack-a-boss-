@@ -24,6 +24,10 @@
   .modal-actions {
     margin-top: 20px;
   }
+
+  .modal-overlay h1{
+    font-family: Outfit;
+  }
   
   .confirm-delete-btn, .cancel-delete-btn {
     padding: 10px 20px;
@@ -39,7 +43,7 @@
   }
   
   .cancel-delete-btn {
-    background-color: #5bc0de; /* Color para el botón de cancelar */
+    background-color: #797e80; /* Color para el botón de cancelar */
     color: white;
   }
   

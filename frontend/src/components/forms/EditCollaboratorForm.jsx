@@ -145,74 +145,74 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Previsualización imagen: </label>
-        {imageName ? (
-          <div>
-            <p>{imageName}</p>
-            <img src={imagePreview} alt="Vista previa de la imagen" width="200px" />
-          </div>
-        ) : (
-          <p>Sin foto guardada</p> 
-        )}
+      {/* Contenedor del grid */}
+      <div className="collaborator-form">
+        {/* Previsualización de la imagen */}
+        <div className="image-preview">
+          <label>Previsualización imagen: </label>
+          {imageName ? (
+            <div>
+              <img src={imagePreview} alt="Vista previa de la imagen" width="200px" />
+              <p>{imageName}</p>
+            </div>
+          ) : (
+            <p>Sin foto guardada</p> 
+          )}
+        </div>
+
+        {/* Nueva imagen */}
+        <div className="new-image">
+          <label htmlFor="image">Nueva imagen (si quieres cambiarla):</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            onChange={handleFileChange}
+          />
+        </div>
+
+        {/* Nombre */}
+        <div className="name">
+          <label htmlFor="name">Nombre:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={collaborator.name || ''}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Apellidos */}
+        <div className="surname">
+          <label htmlFor="surname">Apellidos:</label>
+          <input
+            type="text"
+            id="surname"
+            name="surname"
+            value={collaborator.surname || ''}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Rol */}
+        <div className="role">
+          <label htmlFor="role">Rol:</label>
+          <input
+            type="text"
+            id="role"
+            name="role"
+            value={collaborator.role || ''}
+            onChange={handleChange}
+          />
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="image">Nueva imagen (si quieres cambiarla):</label>
-        <input
-          type="file"
-          id="image"
-          name="image"
-          onChange={handleFileChange}
-        />
+      {/* Contenedor para los botones fuera del grid */}
+      <div className="buttons-container">
+        <button type="submit" className="confirm-btn">Guardar Cambios</button>
+        <button onClick={handleDelete} className="delete-btn">Eliminar colaborador</button>
       </div>
-
-      <div>
-        <label htmlFor="name">Nombre:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={collaborator.name || ''}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="surname">Apellidos:</label>
-        <input
-          type="text"
-          id="surname"
-          name="surname"
-          value={collaborator.surname || ''}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="role">Rol:</label>
-        <input
-          type="text"
-          id="role"
-          name="role"
-          value={collaborator.role || ''}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="description">Descripción:</label>
-        <input
-          type="text"
-          id="description"
-          name="description"
-          value={collaborator.description || ''}
-          onChange={handleChange}
-        />
-      </div>
-
-      <button type="submit" className="confirm-btn">Guardar Cambios</button>
-      <button onClick={handleDelete} className="delete-btn">Eliminar colaborador</button>
 
       <ConfirmationModal
         isOpen={showModal}
@@ -221,6 +221,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
         message={`¿Estás seguro de que deseas eliminar a ${collaborator.name}? Esta acción no se puede deshacer.`}
       />    
     </form>
+
   );
 };
 
