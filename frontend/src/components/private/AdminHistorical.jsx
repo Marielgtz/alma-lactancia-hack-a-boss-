@@ -1,12 +1,10 @@
-
 import React, { useState } from "react";
 import InstagramForm from "../InstagramForm";
 import InstagramPost from "../InstagramPost";
-import "./AdminHistorical.css"
+import "./AdminHistorical.css";
 
 const AdminHistorical = ({ instagramPost, setInstagramPost }) => {
   const [selectedPostNumber, setSelectedPostNumber] = useState(null);
-
 
   return (
     <main className="settings-content">

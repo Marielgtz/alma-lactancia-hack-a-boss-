@@ -1,23 +1,23 @@
 ol {
-    max-width: 80%;
+  max-width: 80%;
 }
 .admin-list {
-    list-style-type: none;
-    display: grid;
-    gap: 1rem;
+  list-style-type: none;
+  display: grid;
+  gap: 1rem;
 
-    grid-template-columns: 1fr 1fr 1fr 100px 100px;
+  grid-template-columns: 1fr 1fr 1fr 100px 100px;
 
-    /* align-items: center;
+  /* align-items: center;
     justify-content: space-between */
 }
 
 .dateTime-settings {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
