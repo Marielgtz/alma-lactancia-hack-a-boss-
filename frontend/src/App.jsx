@@ -154,7 +154,7 @@ function App() {
           />
 
           <Route
-            path="/formulario-inscripcion/:eventId/:activityNumber"
+            path="/formulario-inscripcion/:eventId/:activityNumber/:title"
             element={<FormActivityPage />}
           />
 
