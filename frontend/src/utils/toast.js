@@ -21,6 +21,8 @@ export const isSuccessToast = (success, message, toastId) => {
         render: message || defaultMsg,
         type: success ? 'success' : 'error',
         isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
     });
 }
 

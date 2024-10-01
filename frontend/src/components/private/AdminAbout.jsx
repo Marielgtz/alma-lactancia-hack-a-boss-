@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllCollaboratorsService } from "../../services/api";
 import EditCollaboratorForm from "../forms/EditCollaboratorForm";
 import { toast } from "react-toastify";
+import "./AdminAbout.css";
 
 const AdminAbout = () => {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -64,12 +65,14 @@ const AdminAbout = () => {
   }
 
   return (
-    <main className="settings-content collaborators-admin margin-left-box">
+    <main className="settings-content-equipo collaborators-admin margin-left-box">
       <div className={isEditMode ? "hidden" : ""}>
-        <h1>Gestión de miembros</h1>
+        <h1 className="titulo-gestion-miembros">Gestión de miembros</h1>
 
         <div id="team">
-          <p>Elige qué miembro quieres editar</p>
+          <p className="texto-descriptivo-accion">
+            Elige qué miembro quieres editar
+          </p>
           <ol>
             {teamMembers.map((member) => (
               <li key={member.id}>
@@ -93,7 +96,9 @@ const AdminAbout = () => {
         </div>
 
         <div id="external">
-          <p>Elige qué colaborador quieres editar</p>
+          <p className="texto-descriptivo-accion">
+            Elige qué colaborador quieres editar
+          </p>
           <ol>
             {collaborators.map((collaborator) => (
               <li key={collaborator.id}>
@@ -118,19 +123,24 @@ const AdminAbout = () => {
       </div>
 
       <div id="edit-collaborator-div" className={!isEditMode ? "hidden" : ""}>
-        <button onClick={() => toggleEditMode({})} className="confirm-btn">
-          Volver atrás
+        <button
+          onClick={() => toggleEditMode({})}
+          className="boton-volver-atras"
+        >
+          <i className="fas fa-arrow-left"></i> Volver atrás
         </button>
-        <p>
-          Editando:{" "}
-          {`${toEdit.name || "Nueva"} ${toEdit.surname || "colaboradora"}`}
-        </p>
-        <p>Rango: {toEdit.hierarchy}</p>
-        <p></p>
-        <EditCollaboratorForm
-          collaboratorData={toEdit}
-          onSuccess={refreshCollaboratorsList}
-        />
+        <div className="contenedor-editando-rango">
+          <p className="texto-editando-nosotras">
+            Editando:{" "}
+            {`${toEdit.name || "Nueva"} ${toEdit.surname || "colaboradora"}`}
+          </p>
+          <p className="texto-rango-nosotras">Rango: {toEdit.hierarchy}</p>
+          <p></p>
+          <EditCollaboratorForm
+            collaboratorData={toEdit}
+            onSuccess={refreshCollaboratorsList}
+          />
+        </div>
       </div>
     </main>
   );

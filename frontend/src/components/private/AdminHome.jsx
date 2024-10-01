@@ -25,9 +25,11 @@ const AdminHome = ({checkedExperiences, setCheckedExperiences}) => {
   } = useAdminHome();
 
   return (
-    <main className="settings-content">
+    <main className="settings-content-inicio">
       <div className="contenedor-secciones-dinamicas-dashboard">
-        <h1>Escoge qué sección quieres editar:</h1>
+        <h1 className="titulo-escojer-seccion">
+          Escoge qué sección quieres editar:
+        </h1>
         <div className="panel-nav-btn">
           <button
             className={`adminHome-btn ${

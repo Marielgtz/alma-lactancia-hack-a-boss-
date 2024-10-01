@@ -1,3 +1,16 @@
+.settings-content {
+  margin-top: 3rem;
+  border-radius: 0;
+  width: 50vw;
+}
+
+.titulo-actividades-principal,
+.titulo-creador-actividades {
+  font-family: "Outfit", sans-serif;
+  color: #b380b5;
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
 ol {
   max-width: 80%;
 }
@@ -5,11 +18,7 @@ ol {
   list-style-type: none;
   display: grid;
   gap: 1rem;
-
   grid-template-columns: 1fr 1fr 1fr 100px 100px;
-
-  /* align-items: center;
-    justify-content: space-between */
 }
 
 .dateTime-settings {

@@ -41,9 +41,11 @@ const AdminActivities = () => {
 
   return (
     <main className="settings-content margin-left-box">
-      <h1>Actividades</h1>
+      <h1 className="titulo-actividades-principal">Actividades</h1>
       <div id="activities-display" className={isEditMode ? "hidden" : ""}>
-        <p>Selecciona la actividad que deseas editar:</p>
+        <p className="texto-descriptivo-accion">
+          Selecciona la actividad que deseas editar:
+        </p>
         <ol>
           {eventsList.map((activity) => {
             return (
@@ -58,17 +60,19 @@ const AdminActivities = () => {
           })}
         </ol>
 
-        <h1>Creador de actividades</h1>
+        <h1 className="titulo-creador-actividades">Creador de actividades</h1>
         <button onClick={() => toggleEditMode()} className="confirm-btn">
           Crear nueva actividad
         </button>
       </div>
       <div className={!isEditMode ? "hidden" : ""}>
         <button onClick={() => toggleEditMode({})} className="confirm-btn">
-          Volver atrás
+          <i className="fas fa-arrow-left"></i> Volver atrás
         </button>
-        <p>Editando: {toEdit?.summary || "Nueva actividad"}</p>
-        <p>
+        <p className="texto-editando-nosotras">
+          Editando: {toEdit?.summary || "Nueva actividad"}
+        </p>
+        <p className="texto-editando-nosotras">
           Fecha:{" "}
           {toEdit?.start
             ? formatDate(toEdit.start.dateTime)
