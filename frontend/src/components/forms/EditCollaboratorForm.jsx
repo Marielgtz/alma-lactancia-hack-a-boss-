@@ -238,7 +238,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
           <i className="fas fa-save"></i> Guardar Cambios
         </button>
         <button onClick={handleDelete} className="boton-cancelar-dashboard">
-          <i className="fas fa-times"></i> Eliminar
+          <i className="fas fa-trash-alt"></i> Eliminar
         </button>
       </div>
 

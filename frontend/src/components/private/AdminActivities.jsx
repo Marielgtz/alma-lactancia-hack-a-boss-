@@ -69,8 +69,10 @@ const AdminActivities = () => {
         <button onClick={() => toggleEditMode({})} className="confirm-btn">
           <i className="fas fa-arrow-left"></i> Volver atrás
         </button>
-        <p>Editando: {toEdit?.summary || "Nueva actividad"}</p>
-        <p>
+        <p className="texto-editando-nosotras">
+          Editando: {toEdit?.summary || "Nueva actividad"}
+        </p>
+        <p className="texto-editando-nosotras">
           Fecha:{" "}
           {toEdit?.start
             ? formatDate(toEdit.start.dateTime)

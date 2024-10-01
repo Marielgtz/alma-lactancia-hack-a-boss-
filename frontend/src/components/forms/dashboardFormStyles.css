@@ -6,6 +6,19 @@ textarea {
 }
 
 /* Estilos específicos form actividades */
+.dashboard-form input,
+textarea {
+  display: block;
+  font-family: outfit;
+  color: black;
+  width: 80%; /* Mantener el ancho al 80% en todas las pantallas */
+  padding: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: #d8e2dc;
+}
 
 .dashboard-form select {
   display: block;
