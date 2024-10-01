@@ -49,13 +49,17 @@ const Home = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "http://localhost:3001/get-all-experiences"
+          "http://localhost:3001/get-filtered-experiences"
         );
         if (!response.ok) {
-          throw new Error("Error al obtener las experiencias");
+          const data = response.json();
+          console.log(data);
+          throw new Error(data, "Error al obtener las experiencias");
         }
         const data = await response.json();
-        setExperiences(data.experiences);
+        console.log(data);
+        
+        setExperiences(data.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -140,7 +144,6 @@ const Home = () => {
             </button>
             <div className="experience-cards">
               {experiences
-                .slice(currentIndex, currentIndex + cardsToShow)
                 .map((experience) => (
                   <div key={experience.id} className="experience-card">
                     <img

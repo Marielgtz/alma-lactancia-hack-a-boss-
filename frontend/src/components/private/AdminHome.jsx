@@ -4,7 +4,7 @@ import Nosotras from "./Nosotras";
 import Hero from "./Hero";
 import "./AdminHome.css";
 
-const AdminHome = () => {
+const AdminHome = ({checkedExperiences, setCheckedExperiences}) => {
   const {
     handleSectionChange,
     handleCancelTitle,
@@ -85,6 +85,8 @@ const AdminHome = () => {
           visibleSection={visibleSection}
           charactersRemaining={charactersRemaining}
           MAX_CHARACTERS={MAX_CHARACTERS}
+          checkedExperiences={checkedExperiences}
+          setCheckedExperiences={setCheckedExperiences}
         />
       </div>
     </main>
