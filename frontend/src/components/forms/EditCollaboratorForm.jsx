@@ -74,7 +74,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
   const confirmDelete = async () => {
     setShowModal(false); // Cierra el modal
     const isTeam =
-      collaborator.hierarchy === "Miembro del equipo" ? "false" : "true";
+      collaborator.hierarchy === "Miembro del equipo" ? "true" : "false";
     try {
       const processToast = toast.loading("Eliminando colaborador...");
       const responseMsg = await deleteCollaboratorService(
@@ -101,7 +101,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isTeam =
-      collaborator.hierarchy === "Miembro del equipo" ? "false" : "true";
+      collaborator.hierarchy === "Miembro del equipo" ? "true" : "false";
 
     const formData = new FormData();
     formData.append("name", collaborator.name);
@@ -232,6 +232,18 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
         </div>
       </div>
 
+      {/* Descripción */}
+      <div className="description">
+        <label htmlFor="description">Descripción:</label>
+        <input 
+          type="text"
+          id="description"
+          name="description"
+          value={collaborator?.description || ""}
+          onChange={handleChange}
+        />
+      </div>
+        
       {/* Contenedor para los botones fuera del grid */}
       <div className="buttons-container">
         <button type="submit" className="confirm-btn">
