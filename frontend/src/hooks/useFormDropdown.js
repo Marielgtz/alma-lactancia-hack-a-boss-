@@ -22,6 +22,7 @@ const useFormDropdown = (
             .catch((error) => {
                 console.error('Error al obtener los formularios:', error)
             })
+
         const getPublishedForm = async (jsonNumber) => {
             try {
                 const response = await fetch(
@@ -30,19 +31,31 @@ const useFormDropdown = (
                 )
                 if (response.ok) {
                     const data = await response.json()
-                    setPublishedForm((prevData) => {
-                        const newData = [...prevData]
-                        newData.splice(Number(jsonNumber) - 1, 1, data.form)
-                        return newData
-                    })
+
+                    if (Object.keys(data.form).length === 0) {
+                        setPublishedForm((prevData) => {
+                            const newData = [...prevData]
+                            newData.splice(Number(jsonNumber) - 1, 1, {})
+                            return newData
+                        })
+                    } else {
+                        setPublishedForm((prevData) => {
+                            const newData = [...prevData]
+                            newData.splice(Number(jsonNumber) - 1, 1, data.form)
+                            return newData
+                        })
+                    }
                 } else {
-                    console.error('Error al enviar los datos')
+                    const data = await response.json()
+                    throw new Error(data.error)
                 }
             } catch (error) {
-                console.log('No hay datos que mostrar:', error)
+                console.log('No hay datos que mostrar')
             }
         }
-        Array.from({ length: 4 }, (_, index) => {
+
+        //Máximo de formularios publicados al mismo tiempo. Cambiar length si se requieren más.
+        Array.from({ length: 10 }, (_, index) => {
             getPublishedForm(index + 1)
         })
     }, [])
