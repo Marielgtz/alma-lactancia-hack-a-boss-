@@ -53,13 +53,10 @@ const Home = () => {
         );
         if (!response.ok) {
           const data = response.json();
-          console.log(data);
           throw new Error(data, "Error al obtener las experiencias");
         }
-        const data = await response.json();
-        console.log(data);
-        
-        setExperiences(data.data);
+        const data = await response.json();        
+        setExperiences(data.experiences);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -144,6 +141,7 @@ const Home = () => {
             </button>
             <div className="experience-cards">
               {experiences
+                .slice(currentIndex, currentIndex + cardsToShow)
                 .map((experience) => (
                   <div key={experience.id} className="experience-card">
                     <img
