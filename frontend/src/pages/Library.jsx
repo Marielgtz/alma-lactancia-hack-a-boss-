@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import useLibraryData from "../hooks/useLibraryData";
 import "./Library.css";
 
 const Library = () => {
   const [openInfo, setOpenInfo] = useState(null);
-  const libraryData = useLibraryData();
-
-  const renderTextWithFormatting = (text) => {
-    return text.split("\n").map((item, index) => {
-      if (item.trim().endsWith(":")) {
-        return <h4 key={index}>{item.trim()}</h4>;
-      } else {
-        return <li key={index}>{item.trim()}</li>;
-      }
-    });
-  };
 
   const toggleInfo = (info) => {
     setOpenInfo(info === openInfo ? null : info);
@@ -42,7 +30,6 @@ const Library = () => {
         </div>
         <div className="collapsible-main">
           <div className="collapsible-container-library">
-            {/* Lactancia */}
             <div
               className={`collapsible-header-library ${
                 openInfo === "lactancia" ? "open" : ""
@@ -62,25 +49,50 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>RECURSOS ONLINE</h3>
                 <ul>
-                  {libraryData.lactaResources.map((resource, index) => (
-                    <li key={index}>
-                      <a
-                        href={resource.enlace}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {resource.titulo}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Alma lactancia
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      e-lactancia: información sobre medicamentos y
+                      procedimientos varios compatibles con la lactancia
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      FEDALMA: Federación Española de Asociaciones de Apoyo a la
+                      Lactancia Materna
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Tenemos tetas
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Lactapp: blog y aplicación
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Eva González: asesora lactancia
+                    </a>
+                  </li>
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.lactaBooks)}</ul>
+                <ul>
+                  <li>Somos la leche. Alba Padró</li>
+                  <li>Destete. El final de una etapa. Alba Padró</li>
+                  <li>Un regalo para toda la vida. Carlos González</li>
+                  <li>Lactivista. Ibone Olza</li>
+                  <li>El libro de la lactancia. José María Paricio</li>
+                </ul>
               </div>
             )}
           </div>
-
-          {/* Embarazo */}
           <div className="collapsible-container-library">
             <div
               className={`collapsible-header-library ${
@@ -101,25 +113,48 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>RECURSOS</h3>
                 <ul>
-                  {libraryData.embaResources.map((resource, index) => (
-                    <li key={index}>
-                      <a
-                        href={resource.enlace}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {resource.titulo}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      El parto es nuestro
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Plantilla de plan de parto del SERGAS
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Modelo de ejemplo de plan de parto de "El parto es
+                      nuestro"
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Mamíferas: vídeo documental sobr el parto
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.eva-gonzalez.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Eva González: asesora lactancia
+                    </a>
+                  </li>
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.embaBooks)}</ul>
+                <ul>
+                  <li>El bebé es un mamífero. Michel Odent</li>
+                  <li>
+                    La nueva revolución del nacimiento. Isabel Fernández del
+                    Castillo
+                  </li>
+                </ul>
               </div>
             )}
           </div>
-
-          {/* Crianza */}
           <div className="collapsible-container-library">
             <div
               className={`collapsible-header-library ${
@@ -139,26 +174,31 @@ const Library = () => {
             {openInfo === "crianza" && (
               <div className="collapsible-content-library">
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.crianzaBooks)}</ul>
+                <ul>
+                  <h4>Crianza:</h4>
+                  <li>El poder de las caricias. Adolfo Gómez Papí</li>
+                  <li>Bésame mucho. Carlos González</li>
+                  <li>
+                    CRIAR: Un viaje desde el embarazo hasta la adolescencia.
+                    Laura Perales Bermejo
+                  </li>
+                  <h4>Sueño del bebé:</h4>
+                  <li>Dormir sin lágrimas. Rosa Jové</li>
+                  <li>Dormir con cuentos. Rosa Jové</li>
+                  <h4>Desarrollo personal</h4>
+                  <li>El concepto del continuum. Jean Lledloff</li>
+                </ul>
                 <h3>OTROS RECURSOS</h3>
                 <ul>
-                {libraryData.crianzaResources.map((resource, index) => (
-                    <li key={index}>
-                      <a
-                        href={resource.enlace}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {resource.titulo}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    Evidentemente: educación sanitaria e información basada en
+                    la evidencia científica, de la mano de Irene Iglesias Rubio,
+                    odontopediatra. Instagram: @irene.iglesias.eboca
+                  </li>
                 </ul>
               </div>
             )}
           </div>
-
-          {/* Alimentación complementaria */}
           <div className="collapsible-container-library">
             <div
               className={`collapsible-header-library ${
@@ -181,25 +221,39 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>BLOGS</h3>
                 <ul>
-                {libraryData.alimentBlogs.map((resource, index) => (
-                    <li key={index}>
-                      <a
-                        href={resource.enlace}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {resource.titulo}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      El blog de Lidia Folgar
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      AESAN: Agencia Española de Seguridad Alimentaria y
+                      Nutrición
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Recetas de Juan Llorca
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" target="_blank" rel="noopener noreferrer">
+                      Nutriciona: servicio de dietética y nutrición
+                    </a>
+                  </li>
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.alimentBooks)}</ul>
+                <ul>
+                  <li>El niño ya come solo. Gill Rapley</li>
+                  <li>Se me hace bola. Julio Basulto</li>
+                  <li>Aprender a comer solo. Lidia Folgar</li>
+                  <li>Sin dientes y a bocados. Juan Llorca y Melisa Gómez</li>
+                  <li>Mi niño no me come. Carlos González</li>
+                </ul>
               </div>
             )}
           </div>
-
-          {/* Hemeroteca */}
           <div className="collapsible-container-library">
             <div
               className={`collapsible-header-library ${
@@ -218,17 +272,16 @@ const Library = () => {
             </div>
             {openInfo === "hemeroteca" && (
               <div className="collapsible-content-library">
-                {libraryData.hemerBlogs.map((resource, index) => (
-                    <p key={index}>
-                      <a
-                        href={resource.enlace}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {resource.titulo}
-                      </a>
-                    </p>
-                  ))}
+                <p>
+                  <a
+                    className="link-antiguo-blog-al"
+                    href="https://almalactancia.blogspot.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visita el antiguo blog de Alma Lactancia ➡️
+                  </a>
+                </p>
               </div>
             )}
           </div>

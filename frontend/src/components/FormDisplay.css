@@ -35,16 +35,6 @@
   width: 100%;
   padding: 10px;
   margin: 0;
-  display: block;
-  font-family: outfit;
-  color: black;
-  width: 80%; /* Mantener el ancho al 80% en todas las pantallas */
-  padding: 0.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: none;
-  border-radius: 2rem;
-  background-color: #d8e2dc;
 }
 
 .formulario-inscripcion-select {
@@ -76,12 +66,6 @@
   background-color: white;
 }
 .captcha-input-formulario {
-  width: 100%; /* Ajusta el ancho como sea necesario */
-  margin-bottom: 1rem; /* Espacio entre el input y el botón */
-  width: 20rem;
-  height: 3rem;
-  font-family: outfit;
-  border: none;
-  border-radius: 2rem;
-  background-color: #d8e2dc;
+  margin-left: 0;
+  max-width: 200px;
 }

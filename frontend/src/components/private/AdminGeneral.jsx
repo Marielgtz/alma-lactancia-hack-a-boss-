@@ -98,7 +98,7 @@ const AdminGeneral = () => {
   };
 
   return (
-    <main className="settings-content-general">
+    <main className="settings-content">
       {message && (
         <div className={`popup-message ${messageType}`}>{message}</div>
       )}

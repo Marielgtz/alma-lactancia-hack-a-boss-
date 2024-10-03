@@ -2,7 +2,7 @@ import useFormDisplay from "../hooks/useFormDisplay";
 import CaptchaComponent from "./Captcha";
 import "./FormDisplay.css";
 
-const FormDisplay = ({ jsonNumber, title }) => {
+const FormDisplay = ({ jsonNumber }) => {
   const { sendDataHandler, formRef, formToShow } = useFormDisplay(jsonNumber);
   if (!formToShow?.fields) {
     return <div>No hay datos para mostrar.</div>;
@@ -12,7 +12,7 @@ const FormDisplay = ({ jsonNumber, title }) => {
       <p className="texto-anterior-titulo-formulario">
         Te estás inscribiendo a la siguiente actividad:
       </p>
-      <h2 className="titulo-formulario-inscripcion">{title}</h2>
+      <h2 className="titulo-formulario-inscripcion">{formToShow.formName}</h2>
       <p className="texto-despues-titulo-formulario">
         Rellena el formulario para formalizar la inscripción:
       </p>

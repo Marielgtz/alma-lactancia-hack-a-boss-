@@ -8,18 +8,20 @@ const CaptchaComponent = ({
   const [captchaSvg, setCaptchaSvg] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
 
+  // URL para validar el CAPTCHA y generar uno nuevo
   const validateCaptcha = import.meta.env.VITE_API_URL + "/validate-captcha";
   const generateCaptcha = import.meta.env.VITE_API_URL + "/generate-captcha";
 
+  // Obtener el CAPTCHA cuando el componente se monta o cuando sea necesario
   const fetchCaptcha = async () => {
     try {
       const response = await fetch(generateCaptcha, {
-        credentials: "include",
+        credentials: "include", // Esto es para que se envíen y reciban cookies
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.text();
+      const data = await response.text(); // El captcha es un SVG en formato texto
       setCaptchaSvg(data);
     } catch (error) {
       console.error("Error fetching CAPTCHA:", error);
@@ -56,44 +58,49 @@ const CaptchaComponent = ({
 
       const data = await response.json();
 
+      // Si la validación falla, genera un nuevo CAPTCHA
       if (data.success) {
         handleSubmit();
         setCaptchaInput("");
       } else {
         alert("Captcha incorrecto. Inténtalo de nuevo.");
-        setCaptchaInput("");
-        fetchCaptcha();
+        setCaptchaInput(""); // Limpiar el input
+        fetchCaptcha(); // Generar un nuevo CAPTCHA solo si falla
       }
     } catch (error) {
       console.log("Ha ocurrido un error", error);
-      setCaptchaInput("");
-      fetchCaptcha();
+      setCaptchaInput(""); // Limpiar el input
+      fetchCaptcha(); // Generar un nuevo CAPTCHA
     }
   };
 
   return (
-    <div className="captcha-main">
+    <div>
       <div
         className="captcha-img"
         dangerouslySetInnerHTML={{ __html: captchaSvg }}
       />
-      <input
-        type="text"
-        value={captchaInput}
-        onChange={handleCaptchaInput}
-        placeholder="Introduce el CAPTCHA"
-        className={captchaInputClassName}
-      />
-      {/* Este botón ahora estará justo debajo del campo de entrada del captcha */}
-      <button
-        className={buttonClassName}
-        onClick={(e) => {
-          e.preventDefault();
-          handleCaptchaValidation();
-        }}
-      >
-        Enviar
-      </button>
+      <div className="captcha-main">
+        <input
+          type="text"
+          value={captchaInput}
+          onChange={handleCaptchaInput}
+          placeholder="Introduce el CAPTCHA"
+          className={captchaInputClassName}
+        />
+        {/* <button className="captcha-button" onClick={handleCaptchaValidation}>
+          Validar
+        </button> */}
+        <button
+          className={buttonClassName}
+          onClick={(e) => {
+            e.preventDefault();
+            handleCaptchaValidation();
+          }}
+        >
+          Enviar
+        </button>
+      </div>
     </div>
   );
 };
