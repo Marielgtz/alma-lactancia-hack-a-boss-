@@ -48,5 +48,10 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "proxy": "http://localhost:3001",
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.3.1",
+        "vite": "^5.4.8"
     }
 }
