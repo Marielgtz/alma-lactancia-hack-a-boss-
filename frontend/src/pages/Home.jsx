@@ -46,15 +46,17 @@ const Home = () => {
             try {
                 setLoading(true)
                 const response = await fetch(
-                    `${import.meta.env.VITE_API_URL}/get-all-experiences`
+                    'http://localhost:3001/get-filtered-experiences'
                 )
                 if (!response.ok) {
-                    const data = await response.json()
+                    const data = response.json()
                     console.log(data)
-                    throw new Error('Error al obtener las experiencias')
+                    throw new Error(data, 'Error al obtener las experiencias')
                 }
                 const data = await response.json()
-                setExperiences(data.experiences)
+                console.log(data)
+
+                setExperiences(data.data)
             } catch (error) {
                 setError(error.message)
             } finally {
