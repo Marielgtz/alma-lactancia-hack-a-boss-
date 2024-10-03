@@ -1,0 +1,33 @@
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.register-page {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.register-page .navbar {
+  background-color: #b380b5;
+  height: 6.5rem;
+  position: relative;
+}
+
+.register-main {
+  background-color: #fdeee7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem 5rem;
+}
+
+.register-page .navbar {
+  position: relative;
+}

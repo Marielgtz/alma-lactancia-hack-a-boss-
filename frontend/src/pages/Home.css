@@ -1,0 +1,546 @@
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+/* Contenedor de carga y spinner */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  color: #b380b5;
+}
+
+/* Estructura general de la página */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background: transparent;
+}
+
+.main-home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sección de la imagen principal */
+.img-section,
+.background-image {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(70%);
+}
+
+/* Botón de soporte */
+.support-button {
+  position: absolute;
+  bottom: 3em;
+  left: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.support-button p {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #f5f5f5;
+  font-family: outfit;
+  max-width: 40rem;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Botón de actividades */
+.activities-button {
+  background-color: #d8e2dc;
+  border: none;
+  color: #b380b5;
+  cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: 18rem;
+  height: 2.5rem;
+  font-family: outfit;
+  margin-top: -1em;
+  margin-bottom: 1em;
+}
+
+.activities-button:hover {
+  background-color: #b380b5;
+  color: white;
+}
+
+/* Contenedor de contenido */
+.content {
+  background-color: #fdeee7;
+  position: relative;
+  padding: 0 4rem;
+}
+
+.section-title {
+  color: #b380b5;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-bottom: 0.2em;
+  font-family: outfit;
+}
+
+/* Contenedor centrado */
+.centered-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+}
+
+/* Texto de la sección "Nosotras" */
+.sectionText-nosotras {
+  max-width: 60rem;
+  line-height: 1.7;
+  font-family: bellota;
+}
+
+/* Imagen de silueta */
+.img-silueta {
+  display: flex;
+  position: relative;
+  margin-left: 64rem;
+  margin-top: -18rem;
+  width: 17vw;
+  height: 45vh;
+}
+
+/* Sección de experiencias */
+.experience-section {
+  background-color: white;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.experience-title {
+  font-family: outfit;
+  color: #b380b5;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  margin-left: 2em;
+}
+
+.experience-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.experience-cards {
+  display: flex;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.experience-card {
+  background-color: #d8e2dc;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 30rem;
+  max-width: 100%;
+  text-align: center;
+}
+
+.experience-card img {
+  border-radius: 50%;
+  width: 15rem;
+  height: 8rem;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.experience-card p {
+  font-family: bellota;
+  color: #333;
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* Controles del carrusel */
+.carousel-control {
+  background-color: transparent;
+  color: grey;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 1rem;
+  z-index: 1;
+}
+
+.carousel-control:hover {
+  color: #b380b5;
+}
+
+.carousel-control.prev {
+  left: 2rem;
+}
+
+.carousel-control.next {
+  right: 2rem;
+}
+
+/* Estilos responsive */
+/* Mobile */
+@media (max-width: 768px) {
+  .img-section {
+    position: relative;
+    height: 50vh;
+  }
+  .content {
+    padding: 2rem;
+  }
+  .activity {
+    max-width: 280px;
+  }
+  .background-image {
+    height: 50vh;
+  }
+
+  .background-image img {
+    height: 50vh;
+  }
+
+  .support-button {
+    bottom: 1em;
+    left: 1em;
+    right: 1em;
+  }
+
+  .support-button p {
+    font-size: 2.5rem;
+    max-width: 30rem;
+  }
+
+  .activities-button {
+    width: 100%;
+    max-width: 14rem;
+    font-size: 1em;
+  }
+
+  .activities-button:hover {
+    background-color: #b380b5;
+    color: white;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-left: 0;
+    color: #b380b5;
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-family: outfit;
+  }
+
+  .sectionText-nosotras {
+    font-size: 1rem;
+    text-align: center;
+    max-width: 100%;
+    font-family: bellota;
+  }
+
+  .img-silueta {
+    display: none;
+  }
+
+  .experience-section {
+    padding: 1rem;
+  }
+
+  .experience-carousel {
+    flex-direction: row;
+  }
+
+  .experience-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .experience-card {
+    width: 80%;
+    max-width: none;
+  }
+
+  .experience-card img {
+    width: 10rem;
+    height: 5rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .carousel-control.prev {
+    left: -1rem;
+  }
+
+  .carousel-control.next {
+    right: -1rem;
+  }
+
+  .section-title-calendar {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    font-family: outfit;
+    font-size: 2rem;
+  }
+
+  .calendar-section {
+    padding-bottom: 1rem;
+  }
+  .calendar-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .event-details {
+    margin-top: 1rem;
+    border-radius: 10px; /* Quita el border-radius en mobile */
+  }
+
+  .calendar-wrapper {
+    order: 1; /* Mantiene el calendario arriba */
+    border-radius: 10px;
+  }
+
+  .event-details {
+    order: 2; /* Asegura que los detalles se muestren debajo del calendario */
+  }
+
+  .calendar {
+    height: 18rem;
+  }
+
+  .custom-toolbar-label {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  .experience-title {
+    margin-left: 0;
+    text-align: center;
+    font-size: 2rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1600px) {
+  .img-section,
+  .background-image {
+    height: 100vh;
+  }
+
+  .support-button {
+    bottom: 2em;
+    left: 4em;
+  }
+
+  .activities-button {
+    width: 26rem;
+    font-size: 1.5em;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+  .calendar-content {
+    max-width: 100%;
+  }
+  .custom-toolbar-label {
+    text-align: center;
+    font-size: 1rem;
+  }
+  .event-description {
+    text-align: center;
+  }
+  .centered-container {
+    align-items: center;
+  }
+
+  .sectionText-nosotras {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .img-silueta {
+    display: none;
+  }
+
+  .experience-section {
+    padding: 1.5rem;
+  }
+
+  .experience-title {
+    font-size: 2.5rem;
+    margin-left: 1em;
+    margin-bottom: 2rem;
+  }
+
+  .experience-card {
+    width: 18rem;
+  }
+
+  .experience-card img {
+    width: 12rem;
+    height: 7rem;
+  }
+
+  .experience-card p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+  }
+
+  .carousel-control.prev {
+    left: 1rem;
+  }
+
+  .carousel-control.next {
+    right: 1rem;
+  }
+}
+
+/* Pantallas muy grandes (mínimo 1600px) */
+@media (min-width: 1601px) {
+  .support-button {
+    position: absolute;
+    bottom: 3em;
+    left: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-button p {
+    font-size: 4.3rem;
+    font-weight: bold;
+    color: #f5f5f5;
+    max-width: 60rem;
+    font-family: outfit;
+  }
+
+  .activities-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36rem;
+    height: 5rem;
+    font-size: 2em;
+    padding: 0;
+    margin-top: -1em;
+    margin-bottom: 1em;
+  }
+
+  .content {
+    padding: 1.5em;
+  }
+
+  .section-title {
+    margin-left: 1em;
+    font-size: 4rem;
+  }
+  .section-title-calendar {
+    font-size: 4rem;
+  }
+  .centered-container {
+    align-items: left;
+  }
+
+  .sectionText-nosotras {
+    max-width: 90%;
+    margin-left: 2em;
+    font-size: 1.6rem;
+    text-align: left;
+  }
+
+  .img-silueta {
+    display: none;
+  }
+
+  .experience-section {
+    padding: 1.5rem;
+  }
+
+  .experience-title {
+    font-size: 4rem;
+    margin-left: 1em;
+    margin-bottom: 2rem;
+  }
+
+  .experience-card {
+    width: 18rem;
+  }
+
+  .experience-card img {
+    width: 12rem;
+    height: 7rem;
+  }
+
+  .experience-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .experience-card p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control {
+    font-size: 2rem;
+  }
+
+  .carousel-control.prev {
+    left: 1rem;
+  }
+
+  .carousel-control.next {
+    right: 1rem;
+  }
+}
