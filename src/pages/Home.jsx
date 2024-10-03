@@ -164,7 +164,9 @@ const Home = () => {
                             </button>
                         </div>
                         <div className='experience-cards'>
-                            {experiences.map((experience) => (
+                            {experiences
+                            .slice(currentIndex, currentIndex + cardsToShow)
+                            .map((experience) => (
                                 <div
                                     key={experience.id}
                                     className='experience-card'
