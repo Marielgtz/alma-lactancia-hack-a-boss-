@@ -24,7 +24,6 @@ const Home = () => {
     const imageHomeSrc = home?.imageHome
         ? `${API_BASE_URL}/images/${home.imageHome}`
         : imageHome
-
     const textsNosotras = home?.sectionText ? home.sectionText.split('\n') : []
     const titleCTA = home?.titleHome || ''
 
@@ -32,11 +31,15 @@ const Home = () => {
 
     useEffect(() => {
         const updateCardsToShow = () => {
-            setCardsToShow(window.innerWidth < 768 ? 1 : 2)
+            if (window.innerWidth < 768) {
+                setCardsToShow(1)
+            } else {
+                setCardsToShow(2)
+            }
         }
 
         window.addEventListener('resize', updateCardsToShow)
-        updateCardsToShow() // Llamar a la función inmediatamente para establecer el valor inicial
+        updateCardsToShow()
 
         return () => window.removeEventListener('resize', updateCardsToShow)
     }, [])
@@ -50,11 +53,8 @@ const Home = () => {
                 )
                 if (!response.ok) {
                     const data = response.json()
-                    throw new Error(
-                        `Error ${response.status}: ${
-                            data.message || 'al obtener las experiencias'
-                        }`
-                    )
+                    console.log(data)
+                    throw new Error(data, 'Error al obtener las experiencias')
                 }
                 const data = await response.json()
                 console.log(data)
@@ -92,7 +92,7 @@ const Home = () => {
         navigate('/actividades')
     }
 
-    if (loading) {
+    if (loading)
         return (
             <div className='loading-container'>
                 <FontAwesomeIcon
@@ -103,7 +103,6 @@ const Home = () => {
                 />
             </div>
         )
-    }
 
     if (error) return <p>Error: {error}</p>
 
@@ -164,9 +163,7 @@ const Home = () => {
                             </button>
                         </div>
                         <div className='experience-cards'>
-                            {experiences
-                            .slice(currentIndex, currentIndex + cardsToShow)
-                            .map((experience) => (
+                            {experiences.map((experience) => (
                                 <div
                                     key={experience.id}
                                     className='experience-card'

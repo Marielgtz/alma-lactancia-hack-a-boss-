@@ -1,10 +1,23 @@
+:root {
+  --primary-color: #b380b5;
+  --secondary-color: #d8e2dc;
+  --background-color: #fdeee7;
+  --white: #f5f5f5;
+  --dark-text: #333;
+  --font-main: "Outfit", sans-serif;
+  --font-secondary: "Bellota", sans-serif;
+  --btn-radius: 3em;
+  --card-radius: 1.5rem;
+}
+
 html,
 body,
 #root {
-  height: 100vh;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
+
 /* Contenedor de carga y spinner */
 .loading-container {
   display: flex;
@@ -14,23 +27,23 @@ body,
 }
 
 .spinner {
-  color: #b380b5;
+  color: var(--primary-color);
 }
 
 /* Estructura general de la página */
 .home-page {
   display: flex;
   flex-direction: column;
-  position: relative;
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
 }
 
 .header {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  position: absolute;
   z-index: 1;
   background: transparent;
 }
@@ -42,22 +55,26 @@ body,
 }
 
 /* Sección de la imagen principal */
-.img-section,
-.background-image {
+.img-section {
   position: relative;
   height: 90vh;
   width: 100%;
   overflow: hidden;
 }
 
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: brightness(70%);
+}
+
 .background-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  filter: brightness(70%);
 }
 
 /* Botón de soporte */
@@ -73,47 +90,44 @@ body,
 .support-button p {
   font-size: 3rem;
   font-weight: bold;
-  color: #f5f5f5;
-  font-family: outfit;
+  color: var(--white);
+  font-family: var(--font-main);
   max-width: 40rem;
   word-wrap: break-word;
-  white-space: normal;
 }
 
 /* Botón de actividades */
 .activities-button {
-  background-color: #d8e2dc;
+  background-color: var(--secondary-color);
   border: none;
-  color: #b380b5;
+  color: var(--primary-color);
   cursor: pointer;
-  border-radius: 3em;
-  font-size: 1.4em;
+  border-radius: var(--btn-radius);
+  font-size: 1.4rem;
   font-weight: bold;
   width: 18rem;
   height: 2.5rem;
-  font-family: outfit;
-  margin-top: -1em;
-  margin-bottom: 1em;
+  font-family: var(--font-main);
 }
 
 .activities-button:hover {
-  background-color: #b380b5;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 
 /* Contenedor de contenido */
 .content {
-  background-color: #fdeee7;
+  background-color: var(--background-color);
   position: relative;
   padding: 0 4rem;
 }
 
 .section-title {
-  color: #b380b5;
+  color: var(--primary-color);
   font-weight: bold;
   font-size: 2.5rem;
   margin-bottom: 0.2em;
-  font-family: outfit;
+  font-family: var(--font-main);
 }
 
 /* Contenedor centrado */
@@ -128,7 +142,7 @@ body,
 .sectionText-nosotras {
   max-width: 60rem;
   line-height: 1.7;
-  font-family: bellota;
+  font-family: var(--font-secondary);
 }
 
 /* Imagen de silueta */
@@ -143,14 +157,14 @@ body,
 
 /* Sección de experiencias */
 .experience-section {
-  background-color: white;
+  background-color: #fff;
   padding: 2rem;
   margin-bottom: 3rem;
 }
 
 .experience-title {
-  font-family: outfit;
-  color: #b380b5;
+  font-family: var(--font-main);
+  color: var(--primary-color);
   font-size: 2.5rem;
   margin-bottom: 3rem;
   margin-left: 2em;
@@ -165,79 +179,69 @@ body,
 
 .experience-cards {
   display: flex;
-  gap: 2rem;
   overflow: hidden;
 }
-
 .experience-card {
-  background-color: #d8e2dc;
-  border-radius: 1.5rem;
-  padding: 1rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 30rem;
-  max-width: 100%;
-  text-align: center;
+  background-color: var(--secondary-color); /* Fondo con color personalizado */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 1.4rem;
+  margin: 1rem; /* Márgenes */
+  box-shadow: 4px 4px 10px rgba(179, 128, 181, 0.5); /* Sombra para darle un efecto de elevación */
+  max-width: 450px; /* Ancho máximo de 400px */
+  width: 100%;
 }
 
 .experience-card img {
-  border-radius: 50%;
-  width: 15rem;
-  height: 8rem;
+  width: 100px; /* Tamaño de la imagen */
+  height: 100px;
+  border-radius: 50%; /* Imagen completamente redonda */
   object-fit: cover;
-  margin-bottom: 1rem;
+  margin-right: 1.5rem; /* Separación entre la imagen y el texto */
 }
 
 .experience-card p {
-  font-family: bellota;
-  color: #333;
-  font-size: 1rem;
-  text-align: left;
+  font-family: var(--font-secondary); /* Fuente secundaria */
+  color: var(--dark-text); /* Color del texto */
+  font-size: 0.9rem;
+  margin: 0; /* Eliminar márgenes adicionales en el texto */
+  flex: 1; /* Asegura que el texto ocupe el espacio restante */
 }
 
 /* Controles del carrusel */
 .carousel-control {
-  background-color: transparent;
-  color: grey;
+  background: transparent;
   border: none;
-  font-size: 2.5rem;
   cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0 1rem;
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  font-size: 1.5rem; /* Tamaño del icono */
+  color: var(--primary-color); /* Cambia el color según tus variables */
 }
 
 .carousel-control:hover {
-  color: #b380b5;
+  color: var(--hover-color); /* Cambia el color al pasar el ratón */
 }
 
 .carousel-control.prev {
-  left: 2rem;
+  left: 0rem;
 }
 
 .carousel-control.next {
-  right: 2rem;
+  right: 0rem;
 }
 
 /* Estilos responsive */
-/* Mobile */
 @media (max-width: 768px) {
   .img-section {
-    position: relative;
     height: 50vh;
   }
+
   .content {
     padding: 2rem;
-  }
-  .activity {
-    max-width: 280px;
-  }
-  .background-image {
-    height: 50vh;
   }
 
   .background-image img {
@@ -258,106 +262,52 @@ body,
   .activities-button {
     width: 100%;
     max-width: 14rem;
-    font-size: 1em;
-  }
-
-  .activities-button:hover {
-    background-color: #b380b5;
-    color: white;
+    font-size: 1rem;
   }
 
   .section-title {
     text-align: center;
-    margin-left: 0;
-    color: #b380b5;
-    margin-top: 1rem;
     font-size: 2rem;
-    font-family: outfit;
   }
 
   .sectionText-nosotras {
     font-size: 1rem;
     text-align: center;
     max-width: 100%;
-    font-family: bellota;
   }
 
   .img-silueta {
     display: none;
   }
-
-  .experience-section {
-    padding: 1rem;
+  .calendar {
+    height: 18rem;
   }
-
-  .experience-carousel {
-    flex-direction: row;
-  }
-
-  .experience-cards {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .experience-card {
-    width: 80%;
-    max-width: none;
-  }
-
-  .experience-card img {
-    width: 10rem;
-    height: 5rem;
-  }
-
-  .carousel-control {
-    font-size: 2rem;
-    padding: 0 0.5rem;
-  }
-
-  .carousel-control.prev {
-    left: -1rem;
-  }
-
-  .carousel-control.next {
-    right: -1rem;
-  }
-
   .section-title-calendar {
-    font-size: 1.3rem;
-    margin-top: 2rem;
-    font-family: outfit;
     font-size: 2rem;
+    margin-top: 2rem;
+    font-family: Outfit, sans-serif;
   }
-
   .calendar-section {
     padding-bottom: 1rem;
   }
   .calendar-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
-
   .event-details {
     margin-top: 1rem;
-    border-radius: 10px; /* Quita el border-radius en mobile */
-  }
-
-  .calendar-wrapper {
-    order: 1; /* Mantiene el calendario arriba */
     border-radius: 10px;
   }
-
+  .calendar-wrapper {
+    order: 1;
+    border-radius: 10px;
+  }
   .event-details {
-    order: 2; /* Asegura que los detalles se muestren debajo del calendario */
+    order: 2;
+    padding: 2rem;
   }
-
-  .calendar {
-    height: 18rem;
-  }
-
   .custom-toolbar-label {
     text-align: center;
     font-size: 0.8rem;
@@ -367,12 +317,59 @@ body,
     text-align: center;
     font-size: 2rem;
   }
+  .experience-cards {
+    display: flex;
+    flex-direction: column; /* Cambia a columna para una mejor disposición en móviles */
+    overflow: hidden;
+  }
+
+  .experience-card {
+    display: flex;
+    align-items: center;
+    background-color: var(
+      --secondary-color
+    ); /* Fondo con color personalizado */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 1.4rem;
+    margin: 1rem; /* Márgenes */
+    box-shadow: 0 1px 2px rgba(179, 128, 181, 0.5); /* Sombra más suave */
+    max-width: 300px; /* Ancho máximo de 400px */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  }
+
+  .experience-card img {
+    width: 80px; /* Tamaño de la imagen ajustado para móviles */
+    height: 80px; /* Asegura que la imagen sea cuadrada */
+    border-radius: 50%; /* Imagen completamente redonda */
+    object-fit: cover; /* Mantiene la relación de aspecto */
+    margin-right: 1rem; /* Separación entre la imagen y el texto */
+  }
+
+  .experience-card p {
+    font-family: var(--font-secondary); /* Fuente secundaria */
+    color: var(--dark-text); /* Color del texto */
+    font-size: 0.8rem; /* Tamaño de fuente reducido para móviles */
+    margin: 0; /* Eliminar márgenes adicionales en el texto */
+    flex: 1; /* Asegura que el texto ocupe el espacio restante */
+  }
+
+  /* Controles del carrusel */
+  .carousel-control {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: none;
+    font-size: 2rem; /* Tamaño de fuente ajustado para móviles */
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
 }
 
 /* Tablet */
 @media (min-width: 769px) and (max-width: 1600px) {
-  .img-section,
-  .background-image {
+  .img-section {
     height: 100vh;
   }
 
@@ -407,140 +404,81 @@ body,
     max-width: 100%;
     font-size: 1rem;
   }
-
   .img-silueta {
     display: none;
   }
-
-  .experience-section {
-    padding: 1.5rem;
+  .experience-cards {
+    display: flex;
+    overflow: hidden;
   }
-
-  .experience-title {
-    font-size: 2.5rem;
-    margin-left: 1em;
-    margin-bottom: 2rem;
-  }
-
   .experience-card {
-    width: 18rem;
+    display: flex;
+    align-items: center;
+    background-color: var(
+      --secondary-color
+    ); /* Fondo con color personalizado */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 1.4rem;
+    margin: 1rem; /* Márgenes */
+    box-shadow: 4px 4px 10px rgba(179, 128, 181, 0.5); /* Sombra para darle un efecto de elevación */
+    max-width: 450px; /* Ancho máximo de 400px */
+    width: 100%;
   }
 
   .experience-card img {
-    width: 12rem;
-    height: 7rem;
+    width: 100px; /* Tamaño de la imagen */
+    height: 100px;
+    border-radius: 50%; /* Imagen completamente redonda */
+    object-fit: cover;
+    margin-right: 1.5rem; /* Separación entre la imagen y el texto */
   }
 
   .experience-card p {
+    font-family: var(--font-secondary); /* Fuente secundaria */
+    color: var(--dark-text); /* Color del texto */
     font-size: 0.9rem;
+    margin: 0; /* Eliminar márgenes adicionales en el texto */
+    flex: 1; /* Asegura que el texto ocupe el espacio restante */
   }
 
+  /* Controles del carrusel */
   .carousel-control {
-    font-size: 2rem;
-  }
-
-  .carousel-control.prev {
-    left: 1rem;
-  }
-
-  .carousel-control.next {
-    right: 1rem;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
   }
 }
 
-/* Pantallas muy grandes (mínimo 1600px) */
+/* Pantallas grandes */
 @media (min-width: 1601px) {
-  .support-button {
-    position: absolute;
-    bottom: 3em;
-    left: 3em;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .support-button p {
     font-size: 4.3rem;
-    font-weight: bold;
-    color: #f5f5f5;
     max-width: 60rem;
-    font-family: outfit;
   }
 
   .activities-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 36rem;
     height: 5rem;
     font-size: 2em;
-    padding: 0;
-    margin-top: -1em;
-    margin-bottom: 1em;
-  }
-
-  .content {
-    padding: 1.5em;
   }
 
   .section-title {
-    margin-left: 1em;
     font-size: 4rem;
-  }
-  .section-title-calendar {
-    font-size: 4rem;
-  }
-  .centered-container {
-    align-items: left;
   }
 
   .sectionText-nosotras {
     max-width: 90%;
-    margin-left: 2em;
     font-size: 1.6rem;
     text-align: left;
   }
 
-  .img-silueta {
-    display: none;
-  }
-
-  .experience-section {
-    padding: 1.5rem;
-  }
-
   .experience-title {
     font-size: 4rem;
-    margin-left: 1em;
-    margin-bottom: 2rem;
-  }
-
-  .experience-card {
-    width: 18rem;
-  }
-
-  .experience-card img {
-    width: 12rem;
-    height: 7rem;
-  }
-
-  .experience-card h3 {
-    font-size: 1.3rem;
-  }
-
-  .experience-card p {
-    font-size: 0.9rem;
-  }
-
-  .carousel-control {
-    font-size: 2rem;
-  }
-
-  .carousel-control.prev {
-    left: 1rem;
-  }
-
-  .carousel-control.next {
-    right: 1rem;
   }
 }

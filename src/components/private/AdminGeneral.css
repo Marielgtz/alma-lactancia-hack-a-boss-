@@ -1,8 +1,7 @@
-.settings-content {
+.settings-content-general {
   width: 75vw;
   background-color: #fdeee7;
   border-radius: 1.5rem;
-
   margin-bottom: 1.5rem;
 }
 .settings-content h2 {
@@ -74,13 +73,18 @@
   box-shadow: 0 1px #946b9f; /* Reduce la sombra para simular que se presiona */
   transform: translateY(3px); /* Desplaza el botón hacia abajo */
 }
-
+.editTitle-input,
 .logo-buttons input {
-  height: 1.3rem;
-  width: 80%;
-  margin-left: 0;
-  background-color: white;
-  border-radius: 0.5rem;
+  display: block;
+  font-family: outfit;
+  color: black;
+  width: 80%; /* Mantener el ancho al 80% en todas las pantallas */
+  padding: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: #d8e2dc;
 }
 
 .logo-buttons button {
@@ -119,15 +123,22 @@
   margin-bottom: 1rem;
   font-size: 1rem;
   margin-left: 3rem;
+  font-family: Outfit;
+  color: #b380b5;
+  font-weight: 700;
 }
 
 .social-links-form input {
-  border-radius: 0.5rem;
+  display: block;
+  font-family: outfit;
+  color: black;
+  width: 80%; /* Mantener el ancho al 80% en todas las pantallas */
+  padding: 0.5rem;
   margin-top: 1rem;
-  font-size: 0.8rem;
-  background-color: white;
+  margin-bottom: 1rem;
   border: none;
-  margin-left: 0;
+  border-radius: 2rem;
+  background-color: #d8e2dc;
 }
 
 .social-links-form button {
