@@ -3,6 +3,10 @@
   min-height: 100vh;
   background-color: #fdeee7;
 }
+.admin-content {
+  width: 80%;
+  max-width: 100%;
+}
 
 .admin-header {
   display: flex;

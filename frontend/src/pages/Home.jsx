@@ -136,12 +136,16 @@ const Home = () => {
         <div className="experience-section">
           <h2 className="experience-title">Experiencias reales</h2>
           <div className="experience-carousel">
-            <button className="carousel-control prev" onClick={prevSlide}>
-              &#10094; {/* Left Arrow */}
-            </button>
+            <div className="carousel-controls">
+              <button className="carousel-control prev" onClick={prevSlide}>
+                <i className="fas fa-chevron-left"></i>
+              </button>
+              <button className="carousel-control next" onClick={nextSlide}>
+                <i className="fas fa-chevron-right"></i>
+              </button>
+            </div>
             <div className="experience-cards">
               {experiences
-                .slice(currentIndex, currentIndex + cardsToShow)
                 .map((experience) => (
                   <div key={experience.id} className="experience-card">
                     <img
@@ -152,9 +156,6 @@ const Home = () => {
                   </div>
                 ))}
             </div>
-            <button className="carousel-control next" onClick={nextSlide}>
-              &#10095; {/* Right Arrow */}
-            </button>
           </div>
         </div>
       </main>
