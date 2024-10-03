@@ -8,7 +8,7 @@ const AdminGeneral = () => {
   const [settings, setSettings] = useState({
     logo: "",
     linkInstagram: "",
-    linkFacebok: "",
+    linkFacebook: "",
     email: "",
   });
   const [file, setFile] = useState(null);
@@ -147,15 +147,15 @@ const AdminGeneral = () => {
           Link de Facebook
           <input
             type="text"
-            name="linkFacebok"
+            name="linkFacebook"
             placeholder="Nueva dirección de Facebook"
-            value={settings.linkFacebok || ""}
+            value={settings.linkFacebook || ""}
             onChange={handleChange}
           />
           <button
             type="button"
             onClick={() =>
-              validateAndUpdateField("linkFacebok", settings.linkFacebok)
+              validateAndUpdateField("linkFacebook", settings.linkFacebook)
             }
           >
             <i className="fab fa-facebook"></i> Actualizar Facebook

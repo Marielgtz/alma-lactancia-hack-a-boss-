@@ -5,17 +5,17 @@ import { isSuccessToast } from "../utils/toast";
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const useAdminLibrary = () => {
-  const MAX_CHARACTERS = 1000; 
+  const MAX_CHARACTERS = 1000;
   const [libraryData, setLibraryData] = useState({
-    lactaResources: [],
+    lactationResources: [],
     lactaBooks: "",
-    embaResources: [],
+    pregnancyResources: [],
     embaBooks: "",
-    crianzaBooks: "",
-    crianzaResources: [],
-    alimentBlogs: [],
+    parentingBooks: "",
+    parentingResources: [],
+    nutritionBlogs: [],
     alimentBooks: "",
-    hemerBlogs: [],
+    archiveBlogs: [],
   });
 
   useEffect(() => {
@@ -24,24 +24,24 @@ const useAdminLibrary = () => {
     fetch(`${API_BASE_URL}/get-home-data`)
       .then((response) => response.json())
       .then((data) => {
-        const { library } = data.form; 
+        const { library } = data.form;
         setLibraryData(library);
         isSuccessToast(true, "Datos cargados correctamente", toastId);
-    })
-    .catch((error) => {
-      console.error("Error al obtener los datos:", error);
-      isSuccessToast(false, "Error al cargar los datos", toastId);
-    });
-}, []);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos:", error);
+        isSuccessToast(false, "Error al cargar los datos", toastId);
+      });
+  }, []);
 
   const handleChange = (field, value) => {
     if (value.length > MAX_CHARACTERS) {
-        toast.warn(`El campo no puede superar los ${MAX_CHARACTERS} caracteres.`);
-      return; 
+      toast.warn(`El campo no puede superar los ${MAX_CHARACTERS} caracteres.`);
+      return;
     }
     setLibraryData((prevState) => ({
       ...prevState,
-      [field]: value, 
+      [field]: value,
     }));
   };
 
@@ -50,10 +50,13 @@ const useAdminLibrary = () => {
       const value = libraryData[field];
 
       if (Array.isArray(value)) {
-        return value.every(resource => resource.titulo.trim() !== "" && resource.enlace.trim() !== "");
+        return value.every(
+          (resource) =>
+            resource.titulo.trim() !== "" && resource.enlace.trim() !== ""
+        );
       }
 
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         return value.trim() !== "";
       }
 
@@ -64,15 +67,15 @@ const useAdminLibrary = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!areFieldsValid()) {
-        toast.error("Por favor, completa todos los campos antes de enviar.");
-      return; 
+      toast.error("Por favor, completa todos los campos antes de enviar.");
+      return;
     }
 
     const toastId = toast.loading("Guardando cambios...");
 
     try {
-    // Se prepara la información para enviar al backend
-      const updateData = { library: libraryData }; 
+      // Se prepara la información para enviar al backend
+      const updateData = { library: libraryData };
 
       const response = await fetch(`${API_BASE_URL}/update-home-data`, {
         method: "PATCH",
@@ -88,7 +91,11 @@ const useAdminLibrary = () => {
 
       const data = await response.json();
       console.log("Datos de la biblioteca actualizados exitosamente:", data);
-      isSuccessToast(true, "Los cambios se han guardado exitosamente.", toastId);
+      isSuccessToast(
+        true,
+        "Los cambios se han guardado exitosamente.",
+        toastId
+      );
     } catch (error) {
       console.error("Error al actualizar datos:", error);
       isSuccessToast(false, "Hubo un error al guardar los cambios.", toastId);
