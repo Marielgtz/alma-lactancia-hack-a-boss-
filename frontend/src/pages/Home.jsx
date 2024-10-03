@@ -46,12 +46,15 @@ const Home = () => {
             try {
                 setLoading(true)
                 const response = await fetch(
-                    'http://localhost:3001/get-filtered-experiences'
+                    `${import.meta.env.VITE_API_URL}/get-filtered-experiences`
                 )
                 if (!response.ok) {
                     const data = response.json()
-                    console.log(data)
-                    throw new Error(data, 'Error al obtener las experiencias')
+                    throw new Error(
+                        `Error ${response.status}: ${
+                            data.message || 'al obtener las experiencias'
+                        }`
+                    )
                 }
                 const data = await response.json()
                 console.log(data)
@@ -146,34 +149,36 @@ const Home = () => {
                 <div className='experience-section'>
                     <h2 className='experience-title'>Experiencias reales</h2>
                     <div className='experience-carousel'>
-                        <button
-                            className='carousel-control prev'
-                            onClick={prevSlide}
-                        >
-                            &#10094; {/* Flecha izquierda */}
-                        </button>
-                        <div className='experience-cards'>
-                            {experiences
-                                .slice(currentIndex, currentIndex + cardsToShow)
-                                .map((experience) => (
-                                    <div
-                                        key={experience.id}
-                                        className='experience-card'
-                                    >
-                                        <img
-                                            src={`http://localhost:3001/images/${experience.image}`}
-                                            alt={experience.image}
-                                        />
-                                        <p>{experience.text}</p>
-                                    </div>
-                                ))}
+                        <div className='carousel-controls'>
+                            <button
+                                className='carousel-control prev'
+                                onClick={prevSlide}
+                            >
+                                <i className='fas fa-chevron-left'></i>
+                            </button>
+                            <button
+                                className='carousel-control next'
+                                onClick={nextSlide}
+                            >
+                                <i className='fas fa-chevron-right'></i>
+                            </button>
                         </div>
-                        <button
-                            className='carousel-control next'
-                            onClick={nextSlide}
-                        >
-                            &#10095; {/* Flecha derecha */}
-                        </button>
+                        <div className='experience-cards'>
+                            {experiences.map((experience) => (
+                                <div
+                                    key={experience.id}
+                                    className='experience-card'
+                                >
+                                    <img
+                                        src={`${
+                                            import.meta.env.VITE_API_URL
+                                        }/images/${experience.image}`}
+                                        alt={experience.image}
+                                    />
+                                    <p>{experience.text}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </main>
