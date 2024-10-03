@@ -26,9 +26,9 @@ body,
 }
 
 .background-image2 {
-  background-image: url("/src/images/Equipo Alma Lactancia.jpg");
+  background-image: url("/src/images/pexels-rethaferguson-3810795.jpg");
   background-size: cover;
-  background-position: top;
+  background-position: center;
   height: 90vh;
   width: 100vw;
   position: absolute;
@@ -105,8 +105,8 @@ body,
 }
 
 .person-card {
-  width: 300px;
-  height: 400px;
+  width: 18rem;
+  height: 18rem;
   margin: 2.5rem 2rem;
 }
 
@@ -155,7 +155,7 @@ body,
 
 .person-info {
   position: relative; /* Asegura que el contenido esté por encima del fondo semitransparente */
-  padding: 0 1.1rem;
+  padding: 0 2rem;
   z-index: 0;
 }
 
@@ -341,7 +341,7 @@ h3 {
   }
 
   .background-image2 {
-    background-image: url("/src/images/Equipo Alma Lactancia.jpg");
+    background-image: url("src/images/pexels-rethaferguson-3810795.jpg");
     background-size: cover;
     background-position: center;
     height: 50vh;
@@ -375,28 +375,21 @@ h3 {
     flex-wrap: wrap;
     gap: 0.5rem;
     justify-content: space-around;
-    padding-bottom: 2rem;
+    margin-bottom: 2rem;
   }
 
   .person-card {
     margin-bottom: 1rem;
     margin-top: 1rem;
-    width: 300px;
-    height: 400px;
+    width: 18rem;
+    height: 18rem;
   }
 
   .section-title1 {
     text-align: center;
-    padding: 0 1rem;
+    margin-left: 1rem;
   }
-  .collab-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-left: 0;
-  }
+
   .about-collab {
     display: flex;
     flex-direction: column;
@@ -409,20 +402,16 @@ h3 {
     gap: 1rem;
     margin-left: 2rem;
   }
-  .about-support {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
+
   .section-title2 {
     text-align: center;
     margin-left: 0.5rem;
   }
 
   .collapsible-container-about {
-    width: 17rem;
+    width: 14rem;
     text-align: center;
+    margin-left: 2.5rem;
   }
 
   .collapsible-title-about {

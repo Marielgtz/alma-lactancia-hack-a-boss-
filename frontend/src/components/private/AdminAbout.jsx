@@ -58,7 +58,7 @@ const AdminAbout = () => {
 
   function toggleEditMode(collaboratorData, isMember) {
     setIsEditMode((prevValue) => !prevValue);
-    collaboratorData.hierarchy = !isMember
+    collaboratorData.hierarchy = isMember
       ? "Miembro del equipo"
       : "Colaboración externa";
     setToEdit(collaboratorData);
