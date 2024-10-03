@@ -13,7 +13,8 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './Home.css'
 
 const Home = () => {
-    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+
+    const API_BASE_URL = import.meta.env.VITE_API_URL 
     const { home } = useContactInfo()
     const [cardsToShow, setCardsToShow] = useState(2)
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -76,6 +77,7 @@ const Home = () => {
         } else {
             setCurrentIndex(0)
         }
+
     }
 
     const prevSlide = () => {
@@ -90,94 +92,75 @@ const Home = () => {
         navigate('/actividades')
     }
 
-    if (loading)
-        return (
-            <div className='loading-container'>
-                <FontAwesomeIcon
-                    icon={faSpinner}
-                    className='spinner'
-                    spin
-                    size='2x'
-                />
-            </div>
-        )
 
-    if (error) return <p>Error: {error}</p>
-
+  if (loading)
     return (
-        <div className='home-page'>
-            <Header />
-            <main className='main-home'>
-                <ButtonUp />
-                <div className='img-section'>
-                    <div className='background-image'>
-                        <img
-                            className='imageHome-img'
-                            src={imageHomeSrc}
-                            alt='imagen bebe'
-                        />
-                    </div>
-                    <div className='support-button'>
-                        <p>{titleCTA}</p>
-                        <button
-                            className='activities-button'
-                            onClick={handleActivitiesClick}
-                        >
-                            Nuestras actividades
-                        </button>
-                    </div>
-                </div>
-                <div className='content'>
-                    <h2 className='section-title'>Nosotras</h2>
-                    <div className='centered-container'>
-                        {textsNosotras.map((parrafo, index) => (
-                            <p key={index} className='sectionText-nosotras'>
-                                {parrafo}
-                            </p>
-                        ))}
-                    </div>
+      <div className="loading-container">
+        <FontAwesomeIcon icon={faSpinner} className="spinner" spin size="2x" />
+      </div>
+    );
+
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    <div className="home-page">
+      <Header />
+      <main className="main-home">
+        <ButtonUp />
+        <div className="img-section">
+          <div className="background-image">
+            <img
+              className="imageHome-img"
+              src={imageHomeSrc}
+              alt="imagen bebe"
+            />
+          </div>
+          <div className="support-button">
+            <p>{titleCTA}</p>
+            <button
+              className="activities-button"
+              onClick={handleActivitiesClick}
+            >
+              Nuestras actividades
+            </button>
+          </div>
+        </div>
+        <div className="content">
+          <h2 className="section-title">Nosotras</h2>
+          <div className="centered-container">
+            {textsNosotras.map((parrafo, index) => (
+              <p key={index} className="sectionText-nosotras">
+                {parrafo}
+              </p>
+            ))}
+          </div>
+          <img src={silueta} className="img-silueta" alt="silueta lactancia" />
+          <Calendar />
+        </div>
+        <div className="experience-section">
+          <h2 className="experience-title">Experiencias reales</h2>
+          <div className="experience-carousel">
+            <button className="carousel-control prev" onClick={prevSlide}>
+              &#10094; {/* Left Arrow */}
+            </button>
+            <div className="experience-cards">
+              {experiences
+                .slice(currentIndex, currentIndex + cardsToShow)
+                .map((experience) => (
+                  <div key={experience.id} className="experience-card">
                     <img
-                        src={silueta}
-                        className='img-silueta'
-                        alt='silueta lactancia'
+                      src={`http://localhost:3001/images/${experience.image}`}
+                      alt={experience.image}
                     />
-                    <Calendar />
-                </div>
-                <div className='experience-section'>
-                    <h2 className='experience-title'>Experiencias reales</h2>
-                    <div className='experience-carousel'>
-                        <button
-                            className='carousel-control prev'
-                            onClick={prevSlide}
-                        >
-                            &#10094; {/* Left Arrow */}
-                        </button>
-                        <div className='experience-cards'>
-                            {experiences
-                                .slice(currentIndex, currentIndex + cardsToShow)
-                                .map((experience) => (
-                                    <div
-                                        key={experience.id}
-                                        className='experience-card'
-                                    >
-                                        <img
-                                            src={`http://localhost:3001/images/${experience.image}`}
-                                            alt={experience.image}
-                                        />
-                                        <p>{experience.text}</p>
-                                    </div>
-                                ))}
-                        </div>
-                        <button
-                            className='carousel-control next'
-                            onClick={nextSlide}
-                        >
-                            &#10095; {/* Right Arrow */}
-                        </button>
-                    </div>
-                </div>
-            </main>
-            <Footer />
+                    <p>{experience.text}</p>
+                  </div>
+                ))}
+            </div>
+            <button className="carousel-control next" onClick={nextSlide}>
+              &#10095; {/* Right Arrow */}
+            </button>
+          </div>
+
         </div>
     )
 }

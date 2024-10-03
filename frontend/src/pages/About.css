@@ -26,15 +26,17 @@ body,
 }
 
 .background-image2 {
-    background-image: url('/src/images/pexels-rethaferguson-3810795.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 90vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+
+  background-image: url("/src/images/pexels-rethaferguson-3810795.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
 }
 
 .background-image2::before {
@@ -105,12 +107,11 @@ body,
 }
 
 .person-card {
-    width: 18rem;
-    height: 22rem;
-    margin-left: 2rem;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-    margin-right: 2rem;
+
+  width: 18rem;
+  height: 18rem;
+  margin: 2.5rem 2rem;
+
 }
 
 .person-card-inner {
@@ -167,9 +168,11 @@ body,
 }
 
 .person-info {
-    position: relative; /* Asegura que el contenido esté por encima del fondo semitransparente */
-    padding: 2rem;
-    z-index: 0;
+
+  position: relative; /* Asegura que el contenido esté por encima del fondo semitransparente */
+  padding: 0 2rem;
+  z-index: 0;
+
 }
 
 .person-info h3 {
@@ -348,107 +351,109 @@ h3 {
 
 /* Estilos responsive */
 @media (max-width: 768px) {
-    .img-section {
-        position: relative;
-        height: 50vh;
-    }
 
-    .background-image2 {
-        background-image: url('src/images/pexels-rethaferguson-3810795.jpg');
-        background-size: cover;
-        background-position: center;
-        height: 50vh;
-        width: 100vw;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-    }
+  .img-section {
+    position: relative;
+    height: 50vh;
+  }
 
-    .about-alma {
-        position: absolute;
-        top: 20rem;
-        left: 1.5rem;
-        font-size: 1rem;
-        font-weight: lighter;
-        font-family: outfit;
-    }
+  .background-image2 {
+    background-image: url("src/images/pexels-rethaferguson-3810795.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 
-    .about-title {
-        position: absolute;
-        top: 21rem;
-        left: 1.5rem;
-        font-size: 1.5rem;
-        font-weight: bold;
-        font-family: outfit;
-    }
+  .about-alma {
+    position: absolute;
+    top: 15rem;
+    left: 1.5rem;
+    font-size: 1rem;
+    font-weight: lighter;
+    font-family: outfit;
+  }
 
-    .about-people {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        justify-content: space-around;
-        margin-bottom: 2rem;
-    }
+  .about-title {
+    position: absolute;
+    top: 13rem;
+    left: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: outfit;
+  }
 
-    .person-card {
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-        width: 17rem;
-        height: 22rem;
-    }
+  .about-people {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+  }
 
-    .section-title1 {
-        text-align: center;
-        margin-left: 1rem;
-    }
+  .person-card {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    width: 18rem;
+    height: 18rem;
+  }
 
-    .about-collab {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1.5rem;
-    }
+  .section-title1 {
+    text-align: center;
+    margin-left: 1rem;
+  }
 
-    .collab-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-left: 2rem;
-    }
+  .about-collab {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
 
-    .section-title2 {
-        text-align: center;
-        margin-left: 0.5rem;
-    }
+  .collab-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-left: 2rem;
+  }
 
-    .collapsible-container-about {
-        width: 14rem;
-        text-align: center;
-        margin-left: 2.5rem;
-    }
+  .section-title2 {
+    text-align: center;
+    margin-left: 0.5rem;
+  }
 
-    .collapsible-title-about {
-        text-align: left;
-    }
+  .collapsible-container-about {
+    width: 14rem;
+    text-align: center;
+    margin-left: 2.5rem;
+  }
 
-    .section-title3 {
-        text-align: center;
-        justify-content: center;
-    }
+  .collapsible-title-about {
+    text-align: left;
+  }
 
-    .about-img {
-        display: flex;
-        flex-direction: row;
-        gap: 0.5rem;
-        margin-left: 0.7rem;
-    }
+  .section-title3 {
+    text-align: center;
+    justify-content: center;
+  }
 
-    .fedalma-img {
-        width: 8rem;
-        height: 5rem;
-    }
+  .about-img {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-left: 0.7rem;
+  }
 
-    .fedegalma-img {
-        width: 13rem;
-    }
+  .fedalma-img {
+    width: 8rem;
+    height: 5rem;
+  }
+
+  .fedegalma-img {
+    width: 13rem;
+  }
+
 }
