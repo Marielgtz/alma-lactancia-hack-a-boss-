@@ -11,7 +11,7 @@ const AccordionSection = ({
 }) => (
   <div className="admin-library-accordion-section">
     <h2 className="admin-library-accordion-title" onClick={toggleOpen}>
-      {title} <i class="fas fa-arrow-down"></i>
+      {title} <i className="fas fa-arrow-down"></i>
     </h2>
     {isOpen && (
       <div className="admin-library-accordion-content">
@@ -60,7 +60,7 @@ const AdminLibrary = () => {
         toggleOpen={() => toggleSection("lactancia")}
         onSubmit={(e) => handleSubmit(e)}
       >
-        {libraryData.lactaResources.map((resource, index) => (
+        {libraryData.lactationResources.map((resource, index) => (
           <div key={index} className="admin-library-resource-inputs">
             <div className="contenedor-titulo-library">
               <p>Título:</p>
@@ -72,8 +72,8 @@ const AdminLibrary = () => {
                 value={resource.titulo}
                 onChange={(e) =>
                   handleChange(
-                    "lactaResources",
-                    libraryData.lactaResources.map((r, i) =>
+                    "lactationResources",
+                    libraryData.lactationResources.map((r, i) =>
                       i === index ? { ...r, titulo: e.target.value } : r
                     )
                   )
@@ -90,8 +90,8 @@ const AdminLibrary = () => {
                 value={resource.enlace}
                 onChange={(e) =>
                   handleChange(
-                    "lactaResources",
-                    libraryData.lactaResources.map((r, i) =>
+                    "lactationResources",
+                    libraryData.lactationResources.map((r, i) =>
                       i === index ? { ...r, enlace: e.target.value } : r
                     )
                   )
@@ -102,7 +102,9 @@ const AdminLibrary = () => {
               <button
                 className="admin-library-button admin-library-button-delete"
                 type="button"
-                onClick={() => handleDeleteResource("lactaResources", index)}
+                onClick={() =>
+                  handleDeleteResource("lactationResources", index)
+                }
               >
                 <i className="fas fa-trash-alt"></i> Eliminar
               </button>
@@ -115,8 +117,8 @@ const AdminLibrary = () => {
           onClick={() =>
             setLibraryData((prevState) => ({
               ...prevState,
-              lactaResources: [
-                ...prevState.lactaResources,
+              lactationResources: [
+                ...prevState.lactationResources,
                 { titulo: "", enlace: "" },
               ],
             }))
@@ -142,7 +144,7 @@ const AdminLibrary = () => {
         toggleOpen={() => toggleSection("embarazo")}
         onSubmit={(e) => handleSubmit(e)}
       >
-        {libraryData.embaResources.map((resource, index) => (
+        {libraryData.pregnancyResources.map((resource, index) => (
           <div key={index} className="admin-library-resource-inputs">
             <div className="contenedor-titulo-library">
               <p>Título:</p>
@@ -153,8 +155,8 @@ const AdminLibrary = () => {
                 value={resource.titulo}
                 onChange={(e) =>
                   handleChange(
-                    "embaResources",
-                    libraryData.embaResources.map((r, i) =>
+                    "pregnancyResources",
+                    libraryData.pregnancyResources.map((r, i) =>
                       i === index ? { ...r, titulo: e.target.value } : r
                     )
                   )
@@ -170,8 +172,8 @@ const AdminLibrary = () => {
                 value={resource.enlace}
                 onChange={(e) =>
                   handleChange(
-                    "embaResources",
-                    libraryData.embaResources.map((r, i) =>
+                    "pregnancyResources",
+                    libraryData.pregnancyResources.map((r, i) =>
                       i === index ? { ...r, enlace: e.target.value } : r
                     )
                   )
@@ -181,7 +183,7 @@ const AdminLibrary = () => {
             <button
               className="admin-library-button admin-library-button-delete"
               type="button"
-              onClick={() => handleDeleteResource("embaResources", index)}
+              onClick={() => handleDeleteResource("pregnancyResources", index)}
             >
               <i className="fas fa-trash-alt"></i> Eliminar
             </button>
@@ -193,8 +195,8 @@ const AdminLibrary = () => {
           onClick={() =>
             setLibraryData((prevState) => ({
               ...prevState,
-              embaResources: [
-                ...prevState.embaResources,
+              pregnancyResources: [
+                ...prevState.pregnancyResources,
                 { titulo: "", enlace: "" },
               ],
             }))
@@ -220,7 +222,7 @@ const AdminLibrary = () => {
         toggleOpen={() => toggleSection("crianza")}
         onSubmit={(e) => handleSubmit(e)}
       >
-        {libraryData.crianzaResources.map((resource, index) => (
+        {libraryData.parentingResources.map((resource, index) => (
           <div key={index} className="admin-library-resource-inputs">
             <div className="contenedor-titulo-library">
               <p>Título:</p>
@@ -231,8 +233,8 @@ const AdminLibrary = () => {
                 value={resource.titulo}
                 onChange={(e) =>
                   handleChange(
-                    "crianzaResources",
-                    libraryData.crianzaResources.map((r, i) =>
+                    "parentingResources",
+                    libraryData.parentingResources.map((r, i) =>
                       i === index ? { ...r, titulo: e.target.value } : r
                     )
                   )
@@ -248,8 +250,8 @@ const AdminLibrary = () => {
                 value={resource.enlace}
                 onChange={(e) =>
                   handleChange(
-                    "crianzaResources",
-                    libraryData.crianzaResources.map((r, i) =>
+                    "parentingResources",
+                    libraryData.parentingResources.map((r, i) =>
                       i === index ? { ...r, enlace: e.target.value } : r
                     )
                   )
@@ -259,7 +261,7 @@ const AdminLibrary = () => {
             <button
               className="admin-library-button admin-library-button-delete"
               type="button"
-              onClick={() => handleDeleteResource("crianzaResources", index)}
+              onClick={() => handleDeleteResource("parentingResources", index)}
             >
               <i className="fas fa-trash-alt"></i> Eliminar
             </button>
@@ -271,8 +273,8 @@ const AdminLibrary = () => {
           onClick={() =>
             setLibraryData((prevState) => ({
               ...prevState,
-              crianzaResources: [
-                ...prevState.crianzaResources,
+              parentingResources: [
+                ...prevState.parentingResources,
                 { titulo: "", enlace: "" },
               ],
             }))
@@ -284,8 +286,8 @@ const AdminLibrary = () => {
           <label>Libros:</label>
           <textarea
             className="admin-library-textarea"
-            value={libraryData.crianzaBooks}
-            onChange={(e) => handleChange("crianzaBooks", e.target.value)}
+            value={libraryData.parentingBooks}
+            onChange={(e) => handleChange("parentingBooks", e.target.value)}
             maxLength={MAX_CHARACTERS}
           />
         </div>
@@ -298,7 +300,7 @@ const AdminLibrary = () => {
         toggleOpen={() => toggleSection("alimentacion")}
         onSubmit={(e) => handleSubmit(e)}
       >
-        {libraryData.alimentBlogs.map((resource, index) => (
+        {libraryData.nutritionBlogs.map((resource, index) => (
           <div key={index} className="admin-library-resource-inputs">
             <div className="contenedor-titulo-library">
               <p>Título:</p>
@@ -309,8 +311,8 @@ const AdminLibrary = () => {
                 value={resource.titulo}
                 onChange={(e) =>
                   handleChange(
-                    "alimentBlogs",
-                    libraryData.alimentBlogs.map((r, i) =>
+                    "nutritionBlogs",
+                    libraryData.nutritionBlogs.map((r, i) =>
                       i === index ? { ...r, titulo: e.target.value } : r
                     )
                   )
@@ -326,8 +328,8 @@ const AdminLibrary = () => {
                 value={resource.enlace}
                 onChange={(e) =>
                   handleChange(
-                    "alimentBlogs",
-                    libraryData.alimentBlogs.map((r, i) =>
+                    "nutritionBlogs",
+                    libraryData.nutritionBlogs.map((r, i) =>
                       i === index ? { ...r, enlace: e.target.value } : r
                     )
                   )
@@ -337,7 +339,7 @@ const AdminLibrary = () => {
             <button
               className="admin-library-button admin-library-button-delete"
               type="button"
-              onClick={() => handleDeleteResource("alimentBlogs", index)}
+              onClick={() => handleDeleteResource("nutritionBlogs", index)}
             >
               <i className="fas fa-trash-alt"></i> Eliminar
             </button>
@@ -349,8 +351,8 @@ const AdminLibrary = () => {
           onClick={() =>
             setLibraryData((prevState) => ({
               ...prevState,
-              alimentBlogs: [
-                ...prevState.alimentBlogs,
+              nutritionBlogs: [
+                ...prevState.nutritionBlogs,
                 { titulo: "", enlace: "" },
               ],
             }))
@@ -376,7 +378,7 @@ const AdminLibrary = () => {
         toggleOpen={() => toggleSection("hemeroteca")}
         onSubmit={(e) => handleSubmit(e)}
       >
-        {libraryData.hemerBlogs.map((resource, index) => (
+        {libraryData.archiveBlogs.map((resource, index) => (
           <div key={index} className="admin-library-resource-inputs">
             <div className="contenedor-titulo-library">
               <p>Título:</p>
@@ -387,8 +389,8 @@ const AdminLibrary = () => {
                 value={resource.titulo}
                 onChange={(e) =>
                   handleChange(
-                    "hemerBlogs",
-                    libraryData.hemerBlogs.map((r, i) =>
+                    "archiveBlogs",
+                    libraryData.archiveBlogs.map((r, i) =>
                       i === index ? { ...r, titulo: e.target.value } : r
                     )
                   )
@@ -404,8 +406,8 @@ const AdminLibrary = () => {
                 value={resource.enlace}
                 onChange={(e) =>
                   handleChange(
-                    "hemerBlogs",
-                    libraryData.hemerBlogs.map((r, i) =>
+                    "archiveBlogs",
+                    libraryData.archiveBlogs.map((r, i) =>
                       i === index ? { ...r, enlace: e.target.value } : r
                     )
                   )
@@ -415,7 +417,7 @@ const AdminLibrary = () => {
             <button
               type="button"
               className="admin-library-button admin-library-button-delete"
-              onClick={() => handleDeleteResource("hemerBlogs", index)}
+              onClick={() => handleDeleteResource("archiveBlogs", index)}
             >
               <i className="fas fa-trash-alt"></i> Eliminar
             </button>
@@ -427,7 +429,10 @@ const AdminLibrary = () => {
           onClick={() =>
             setLibraryData((prevState) => ({
               ...prevState,
-              hemerBlogs: [...prevState.hemerBlogs, { titulo: "", enlace: "" }],
+              archiveBlogs: [
+                ...prevState.archiveBlogs,
+                { titulo: "", enlace: "" },
+              ],
             }))
           }
         >

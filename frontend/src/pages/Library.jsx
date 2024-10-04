@@ -62,7 +62,7 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>RECURSOS ONLINE</h3>
                 <ul>
-                  {libraryData.lactaResources.map((resource, index) => (
+                  {libraryData.lactationResources.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.enlace}
@@ -101,7 +101,7 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>RECURSOS</h3>
                 <ul>
-                  {libraryData.embaResources.map((resource, index) => (
+                  {libraryData.pregnancyResources.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.enlace}
@@ -139,10 +139,10 @@ const Library = () => {
             {openInfo === "crianza" && (
               <div className="collapsible-content-library">
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.crianzaBooks)}</ul>
+                <ul>{renderTextWithFormatting(libraryData.parentingBooks)}</ul>
                 <h3>OTROS RECURSOS</h3>
                 <ul>
-                {libraryData.crianzaResources.map((resource, index) => (
+                  {libraryData.parentingResources.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.enlace}
@@ -181,7 +181,7 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>BLOGS</h3>
                 <ul>
-                {libraryData.alimentBlogs.map((resource, index) => (
+                  {libraryData.nutritionBlogs.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.enlace}
@@ -218,17 +218,17 @@ const Library = () => {
             </div>
             {openInfo === "hemeroteca" && (
               <div className="collapsible-content-library">
-                {libraryData.hemerBlogs.map((resource, index) => (
-                    <p key={index}>
-                      <a
-                        href={resource.enlace}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {resource.titulo}
-                      </a>
-                    </p>
-                  ))}
+                {libraryData.archiveBlogs.map((resource, index) => (
+                  <p key={index}>
+                    <a
+                      href={resource.enlace}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {resource.titulo}
+                    </a>
+                  </p>
+                ))}
               </div>
             )}
           </div>
