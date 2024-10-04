@@ -1,8 +1,7 @@
-.settings-content-inicio {
+.settings-content {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  width: 70vw;
 }
 .contenedor-secciones-dinamicas-dashboard {
   padding: 0 2rem;
@@ -24,7 +23,7 @@
   color: white;
 }
 
-.titulo-escojer-seccion {
+.settings-content h1 {
   font-family: "Outfit", sans-serif;
   color: #b380b5;
   font-size: 20px;

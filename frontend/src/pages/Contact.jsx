@@ -1,68 +1,70 @@
-import React, { useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Captcha from "../components/Captcha";
-import silueta from "../images/IlustracionLactancia.png";
-import { useNavigate } from "react-router-dom";
-import useContactInfo from "../hooks/useContactInfo.js";
-import "./Contact.css";
+import React, { useState } from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Captcha from '../components/Captcha'
+import silueta from '../images/IlustracionLactancia.png'
+import { useNavigate } from 'react-router-dom'
+import useContactInfo from '../hooks/useContactInfo.js'
+import './Contact.css'
 
 const Contact = () => {
-  const { generalSettings } = useContactInfo();
-  const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    subject: "",
-    comments: "",
-  });
+    const { generalSettings } = useContactInfo()
+    const [formData, setFormData] = useState({
+        name: '',
+        surname: '',
+        email: '',
+        subject: '',
+        comments: '',
+    })
 
-  // const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async () => {
-    try {
-      // Realizar la solicitud POST al backend
-      const response = await fetch(
-        import.meta.env.VITE_API_URL + "/new-contact-message",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error);
-      }
-
-      const data = await response.json();
-      console.log(data.message);
-      setFormData({
-        name: "",
-        surname: "",
-        email: "",
-        subject: "",
-        comments: "",
-      });
-
-      // // Redirigir a la página de confirmación
-      // navigate('/confirmacion')
-    } catch (error) {
-      console.error(error);
-      alert(error);
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData({
+            ...formData,
+            [name]: value,
+        })
     }
+
+    const handleSubmit = async () => {
+        try {
+            // Realizar la solicitud POST al backend
+            const response = await fetch(
+                import.meta.env.VITE_API_URL + '/new-contact-message',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                    credentials: 'include',
+                }
+            )
+
+            if (!response.ok) {
+                const data = await response.json()
+                throw new Error(data.error)
+            }
+
+            const data = await response.json()
+            console.log(data.message)
+            setFormData({
+                name: '',
+                surname: '',
+                email: '',
+                subject: '',
+                comments: '',
+            })
+
+            // // Redirigir a la página de confirmación
+            // navigate('/confirmacion')
+        } catch (error) {
+            console.error(error)
+            alert(error)
+        }
+    }
+
   };
 
   const instagramLink = generalSettings?.linkInstagram || "";
@@ -188,10 +190,7 @@ const Contact = () => {
             <img src={silueta} />
           </div>
         </div>
-        <Footer />
-      </main>
-    </div>
-  );
-};
+    )
+}
 
-export default Contact;
+export default Contact

@@ -7,7 +7,6 @@ import "./Library.css";
 const Library = () => {
   const [openInfo, setOpenInfo] = useState(null);
   const libraryData = useLibraryData();
-
   const renderTextWithFormatting = (text) => {
     return text.split("\n").map((item, index) => {
       if (item.trim().endsWith(":")) {
@@ -65,21 +64,20 @@ const Library = () => {
                   {libraryData.lactationResources.map((resource, index) => (
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.lactaBooks)}</ul>
+                <ul>{renderTextWithFormatting(libraryData.lactationBooks)}</ul>
               </div>
             )}
           </div>
-
           {/* Embarazo */}
           <div className="collapsible-container-library">
             <div
@@ -104,21 +102,20 @@ const Library = () => {
                   {libraryData.pregnancyResources.map((resource, index) => (
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.embaBooks)}</ul>
+                <ul>{renderTextWithFormatting(libraryData.pregnancyBooks)}</ul>
               </div>
             )}
           </div>
-
           {/* Crianza */}
           <div className="collapsible-container-library">
             <div
@@ -142,14 +139,16 @@ const Library = () => {
                 <ul>{renderTextWithFormatting(libraryData.parentingBooks)}</ul>
                 <h3>OTROS RECURSOS</h3>
                 <ul>
-                  {libraryData.parentingResources.map((resource, index) => (
+                
+                {libraryData.parentingResources.map((resource, index) => (
+
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
@@ -157,7 +156,6 @@ const Library = () => {
               </div>
             )}
           </div>
-
           {/* Alimentación complementaria */}
           <div className="collapsible-container-library">
             <div
@@ -181,24 +179,25 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>BLOGS</h3>
                 <ul>
-                  {libraryData.nutritionBlogs.map((resource, index) => (
+
+                {libraryData.nutritionBlogs.map((resource, index) => (
+
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.alimentBooks)}</ul>
+                <ul>{renderTextWithFormatting(libraryData.nutritionBooks)}</ul>
               </div>
             )}
           </div>
-
           {/* Hemeroteca */}
           <div className="collapsible-container-library">
             <div
@@ -219,16 +218,17 @@ const Library = () => {
             {openInfo === "hemeroteca" && (
               <div className="collapsible-content-library">
                 {libraryData.archiveBlogs.map((resource, index) => (
-                  <p key={index}>
-                    <a
-                      href={resource.enlace}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {resource.titulo}
-                    </a>
-                  </p>
-                ))}
+                    <p key={index}>
+                      <a
+                        href={resource.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {resource.title}
+                      </a>
+                    </p>
+                  ))}
+
               </div>
             )}
           </div>

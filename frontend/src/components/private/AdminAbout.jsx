@@ -1,43 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { getAllCollaboratorsService } from "../../services/api";
-import EditCollaboratorForm from "../forms/EditCollaboratorForm";
-import { toast } from "react-toastify";
-import "./AdminAbout.css";
+import React, { useEffect, useState } from 'react';
+import { getAllCollaboratorsService } from '../../services/api';
+import EditCollaboratorForm from '../forms/EditCollaboratorForm';
+import {toast} from 'react-toastify'
 
 const AdminAbout = () => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [toEdit, setToEdit] = useState({}); // Initialize toEdit as an empty object
+  const [toEdit, setToEdit] = useState({});  // Initialize toEdit as an empty object
   // const [formAction, setFormAction] = useState("")
 
   async function fetchCollaborators() {
     console.log("Cargando colaboradores...");
-
+    
     const [fetchedCollaborators, fetchedTeamMembers] = await Promise.all([
       getAllCollaboratorsService(true),
-      getAllCollaboratorsService(false),
+      getAllCollaboratorsService(false)
     ]);
-
-    setCollaborators(fetchedCollaborators);
+  
+    setCollaborators(fetchedCollaborators);    
     setTeamMembers(fetchedTeamMembers);
     console.log("Colaboradores cargados");
   }
-
+  
   function refreshCollaboratorsList() {
     toggleEditMode({});
-    toast.promise(fetchCollaborators(), {
-      pending: "Cargando datos...",
-      error: "Error de conexión",
-    });
+    toast.promise(
+      fetchCollaborators(),  
+      {
+        pending: 'Cargando datos...',
+        error: 'Error de conexión'
+      }
+    );
   }
-
+  
   useEffect(() => {
-    toast.promise(fetchCollaborators(), {
-      pending: "Cargando datos...",
-      error: "Error de conexión",
-    });
+    toast.promise(
+      fetchCollaborators(),  
+      {
+        pending: 'Cargando datos...',
+        error: 'Error de conexión'
+      }
+    );
   }, []); // Al cargar la página, traer la lista de colaboradores
+  
 
   // useEffect(() => {
   //   console.log(collaborators, teamMembers);
@@ -58,27 +64,26 @@ const AdminAbout = () => {
 
   function toggleEditMode(collaboratorData, isMember) {
     setIsEditMode((prevValue) => !prevValue);
-    collaboratorData.hierarchy = !isMember
-      ? "Miembro del equipo"
-      : "Colaboración externa";
-    setToEdit(collaboratorData);
+    collaboratorData.hierarchy = isMember
+    ? 'Miembro del equipo'
+    : 'Colaboración externa';
+    setToEdit(collaboratorData); 
+    
   }
 
   return (
-    <main className="settings-content-equipo collaborators-admin margin-left-box">
-      <div className={isEditMode ? "hidden" : ""}>
-        <h1 className="titulo-gestion-miembros">Gestión de miembros</h1>
+    <main className='settings-content collaborators-admin margin-left-box'>
+      <div className={isEditMode ? 'hidden' : ''}>
+        <h1>Gestión de miembros</h1>
 
-        <div id="team">
-          <p className="texto-descriptivo-accion">
-            Elige qué miembro quieres editar
-          </p>
+        <div id='team'>
+          <p>Elige qué miembro quieres editar</p>
           <ol>
             {teamMembers.map((member) => (
               <li key={member.id}>
                 <button
-                  className="list-btn"
-                  onClick={() => toggleEditMode(member, false)}
+                  className='list-btn'
+                  onClick={() => toggleEditMode(member, false)}  
                 >
                   {`${member.name} ${member.surname}`}
                 </button>
@@ -86,25 +91,21 @@ const AdminAbout = () => {
             ))}
             <li>
               <button
-                className="confirm-btn"
+                className='confirm-btn'
                 onClick={() => toggleEditMode({}, false)}
-              >
-                Añadir miembro del equipo
-              </button>
+              >Añadir miembro del equipo</button>
             </li>
           </ol>
         </div>
-
-        <div id="external">
-          <p className="texto-descriptivo-accion">
-            Elige qué colaborador quieres editar
-          </p>
+        
+        <div id='external'>
+          <p>Elige qué colaborador quieres editar</p>
           <ol>
             {collaborators.map((collaborator) => (
               <li key={collaborator.id}>
                 <button
-                  className="list-btn"
-                  onClick={() => toggleEditMode(collaborator, true)}
+                  className='list-btn'
+                  onClick={() => toggleEditMode(collaborator, true)}  
                 >
                   {`${collaborator.name} ${collaborator.surname}`}
                 </button>
@@ -112,35 +113,26 @@ const AdminAbout = () => {
             ))}
             <li>
               <button
-                className="confirm-btn"
+                className='confirm-btn'
                 onClick={() => toggleEditMode({}, true)}
-              >
-                Añadir colaboradores
-              </button>
+              >Añadir colaboradores</button>
             </li>
           </ol>
         </div>
       </div>
 
-      <div id="edit-collaborator-div" className={!isEditMode ? "hidden" : ""}>
-        <button
+      <div id='edit-collaborator-div' className={!isEditMode ? 'hidden' : ''}>
+        <button 
           onClick={() => toggleEditMode({})}
-          className="boton-volver-atras"
-        >
-          <i className="fas fa-arrow-left"></i> Volver atrás
-        </button>
-        <div className="contenedor-editando-rango">
-          <p className="texto-editando-nosotras">
-            Editando:{" "}
-            {`${toEdit.name || "Nueva"} ${toEdit.surname || "colaboradora"}`}
-          </p>
-          <p className="texto-rango-nosotras">Rango: {toEdit.hierarchy}</p>
-          <p></p>
-          <EditCollaboratorForm
-            collaboratorData={toEdit}
-            onSuccess={refreshCollaboratorsList}
-          />
-        </div>
+          className='confirm-btn'
+        >Volver atrás</button>
+        <p>Editando: {`${toEdit.name || 'Nueva'} ${toEdit.surname || 'colaboradora'}`}</p>
+        <p>Rango: {toEdit.hierarchy}</p>
+        <p></p>
+        <EditCollaboratorForm 
+          collaboratorData={toEdit} 
+          onSuccess={refreshCollaboratorsList}
+        />
       </div>
     </main>
   );
