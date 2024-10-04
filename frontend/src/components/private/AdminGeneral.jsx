@@ -4,49 +4,34 @@ import './AdminGeneral.css'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL
 const AdminGeneral = () => {
+    const [settings, setSettings] = useState({
+        logo: '',
+        linkInstagram: '',
+        linkFacebook: '',
+        email: '',
+    })
+    const [file, setFile] = useState(null)
+    const [message, setMessage] = useState('')
+    const [messageType, setMessageType] = useState('success')
 
-  const [settings, setSettings] = useState({
-    logo: "",
-    linkInstagram: "",
-    linkFacebook: "",
-    email: "",
-  });
-  const [file, setFile] = useState(null);
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("success");
+    useEffect(() => {
+        axios
+            .get(`${API_BASE_URL}/get-home-data`)
+            .then((response) => {
+                const { generalSettings } = response.data.form
+                setSettings(generalSettings)
+            })
+            .catch((error) =>
+                console.error('Error al obtener los datos:', error)
+            )
+    }, [])
 
-  useEffect(() => {
-    axios
-      .get(`${API_BASE_URL}/get-home-data`)
-      .then((response) => {
-        const { generalSettings } = response.data.form;
-        setSettings(generalSettings);
-      })
-      .catch((error) => console.error("Error al obtener los datos:", error));
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSettings((prevSettings) => ({
-      ...prevSettings,
-      [name]: value,
-    }));
-  };
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const validateAndUpdateField = async (fieldName, value) => {
-    // Validar campos vacíos
-    if (fieldName !== "logo" && !value) {
-      setMessageType("error");
-      setMessage(`El campo de ${fieldName} no puede estar vacío`);
-      setTimeout(() => {
-        setMessage("");
-      }, 3000);
-      return;
-
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setSettings((prevSettings) => ({
+            ...prevSettings,
+            [name]: value,
+        }))
     }
 
     const handleFileChange = (e) => {
@@ -102,47 +87,17 @@ const AdminGeneral = () => {
                 )
             }
 
+            setMessageType('success')
+            setMessage(`${fieldName} actualizado correctamente`)
+        } catch (error) {
+            setMessageType('error')
+            setMessage(`Error al actualizar ${fieldName}: ${error.message}`)
+        }
 
-        <label>
-          Link de Facebook
-          <input
-            type="text"
-            name="linkFacebook"
-            placeholder="Nueva dirección de Facebook"
-            value={settings.linkFacebook || ""}
-            onChange={handleChange}
-          />
-          <button
-            type="button"
-            onClick={() =>
-              validateAndUpdateField("linkFacebook", settings.linkFacebook)
-            }
-          >
-            <i className="fab fa-facebook"></i> Actualizar Facebook
-          </button>
-        </label>
-
-        <label>
-          Correo Electrónico
-          <input
-            type="email"
-            name="email"
-            placeholder="Nueva dirección de correo electrónico"
-            value={settings.email || ""}
-            onChange={handleChange}
-          />
-          <button
-            type="button"
-            onClick={() => validateAndUpdateField("email", settings.email)}
-          >
-            <i className="fas fa-envelope"></i> Actualizar Correo
-          </button>
-        </label>
-      </form>
-    </main>
-  );
-};
-
+        setTimeout(() => {
+            setMessage('')
+        }, 3000)
+    }
 
     return (
         <main className='settings-content-general'>
@@ -155,7 +110,7 @@ const AdminGeneral = () => {
                     src={
                         file
                             ? URL.createObjectURL(file)
-                            : API_BASE_URL + '/images/' + settings?.logo
+                            : `${API_BASE_URL}/images/${settings?.logo}`
                     }
                     alt='Logo'
                     className='logo-image'
@@ -200,17 +155,17 @@ const AdminGeneral = () => {
                     Link de Facebook
                     <input
                         type='text'
-                        name='linkFacebok'
+                        name='linkFacebook'
                         placeholder='Nueva dirección de Facebook'
-                        value={settings.linkFacebok || ''}
+                        value={settings.linkFacebook || ''}
                         onChange={handleChange}
                     />
                     <button
                         type='button'
                         onClick={() =>
                             validateAndUpdateField(
-                                'linkFacebok',
-                                settings.linkFacebok
+                                'linkFacebook',
+                                settings.linkFacebook
                             )
                         }
                     >
