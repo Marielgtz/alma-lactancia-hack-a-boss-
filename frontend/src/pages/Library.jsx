@@ -139,7 +139,9 @@ const Library = () => {
                 <ul>{renderTextWithFormatting(libraryData.parentingBooks)}</ul>
                 <h3>OTROS RECURSOS</h3>
                 <ul>
+                
                 {libraryData.parentingResources.map((resource, index) => (
+
                     <li key={index}>
                       <a
                         href={resource.link}
@@ -177,7 +179,9 @@ const Library = () => {
               <div className="collapsible-content-library">
                 <h3>BLOGS</h3>
                 <ul>
+
                 {libraryData.nutritionBlogs.map((resource, index) => (
+
                     <li key={index}>
                       <a
                         href={resource.link}
@@ -224,6 +228,7 @@ const Library = () => {
                       </a>
                     </p>
                   ))}
+
               </div>
             )}
           </div>

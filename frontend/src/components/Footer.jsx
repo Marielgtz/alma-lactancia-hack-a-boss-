@@ -17,7 +17,7 @@ const Footer = () => {
   };
 
   const instagramLink = generalSettings?.linkInstagram || "";
-  const facebookLink = generalSettings?.linkFacebok || ""; 
+  const facebookLink = generalSettings?.linkFacebook || "";
   const email = generalSettings?.email || "";
 
   return (
