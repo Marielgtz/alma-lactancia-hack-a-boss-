@@ -1,0 +1,140 @@
+.dashboard-form label,
+input,
+textarea {
+  margin: 1rem 0;
+  width: 70%;
+}
+
+/* Estilos específicos form actividades */
+.dashboard-form input,
+textarea {
+  display: block;
+  font-family: outfit;
+  color: black;
+  width: 80%; /* Mantener el ancho al 80% en todas las pantallas */
+  padding: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: #d8e2dc;
+}
+
+.dashboard-form select {
+  display: block;
+  font-family: Outfit;
+  color: black;
+  border-radius: 20px;
+  background-color: #d8e2dc;
+  border: none;
+
+  padding: 1rem 2rem;
+}
+
+.datetime-input {
+  text-align: center;
+  width: auto;
+}
+
+.datetime-selector {
+  width: 70%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 1rem;
+}
+
+#label-start {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0.4rem;
+}
+
+#input-start {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0.4rem;
+}
+
+#label-end {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0.4rem;
+}
+
+#input-end {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0.4rem;
+}
+
+/* Estilos específicos form colaboradores */
+
+.collaborator-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Dos columnas */
+  grid-template-rows: repeat(4, 80px); /* Cuatro filas para los campos */
+  grid-gap: 0; /* Espacio entre los elementos */
+}
+.collaborator-form * {
+  margin: 0;
+}
+.image-preview {
+  grid-column: 2 / 3; /* La imagen ocupa las dos columnas */
+  grid-row: 1 / 5; /* La imagen ocupa 4 filas */
+}
+
+.new-image,
+.name,
+.surname,
+.role {
+  grid-column: 1/2; /* Los campos ocupan la segunda columna */
+}
+.new-image label,
+.name label,
+.surname label,
+.role label {
+  margin-bottom: 1rem;
+}
+.name {
+  grid-row: 2;
+}
+
+.surname {
+  grid-row: 3;
+}
+
+.role {
+  grid-row: 4;
+}
+
+/* Botones fuera del grid */
+.buttons-container {
+  margin-top: 20px;
+}
+
+/*Estilos para el selector de imágenes*/
+.new-image {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #b380b5;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  width: fit-content;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label:hover {
+  background-color: #b380b5;
+}
