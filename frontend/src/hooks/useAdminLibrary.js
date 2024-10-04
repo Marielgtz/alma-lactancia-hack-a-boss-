@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import { isSuccessToast } from "../utils/toast";
+import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import { isSuccessToast } from '../utils/toast'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_BASE_URL = import.meta.env.VITE_API_URL
 
 const useAdminLibrary = () => {
+
   const MAX_CHARACTERS = 1000;
   const [libraryData, setLibraryData] = useState({
     lactationResources: [],
@@ -99,15 +100,17 @@ const useAdminLibrary = () => {
     } catch (error) {
       console.error("Error al actualizar datos:", error);
       isSuccessToast(false, "Hubo un error al guardar los cambios.", toastId);
-    }
-  };
 
-  return {
-    libraryData,
-    handleChange,
-    handleSubmit,
-    setLibraryData,
-  };
-};
+    }
+
+    return {
+        libraryData,
+        handleChange,
+        handleSubmit,
+        setLibraryData,
+    }
+}
+
 
 export default useAdminLibrary;
+
