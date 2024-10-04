@@ -77,7 +77,6 @@ const useAdminLibrary = () => {
         const toastId = toast.loading('Guardando cambios...')
 
         try {
-            // Se prepara la información para enviar al backend
             const updateData = { library: libraryData }
 
             const response = await fetch(`${API_BASE_URL}/update-home-data`, {
@@ -110,13 +109,13 @@ const useAdminLibrary = () => {
                 toastId
             )
         }
+    }
 
-        return {
-            libraryData,
-            handleChange,
-            handleSubmit,
-            setLibraryData,
-        }
+    return {
+        libraryData,
+        handleChange,
+        handleSubmit,
+        setLibraryData,
     }
 }
 
