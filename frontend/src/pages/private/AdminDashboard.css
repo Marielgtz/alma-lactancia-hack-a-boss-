@@ -127,7 +127,13 @@
   }
 
   .admin-header {
-    display: none; /* Ocultar el header dentro del sidebar en mobile */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin: 0;
+    width: 100vw;
+    max-width: none;
   }
 
   .admin-content {
