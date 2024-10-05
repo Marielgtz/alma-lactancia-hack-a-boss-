@@ -103,8 +103,39 @@
   color: #b380b5;
   font-size: 0.8rem;
 }
+
+/*VERSION MOBILE*/
+
 @media (max-width: 768px) {
+  .admin-panel {
+    flex-direction: column; /* Disposición en columna para que el sidebar esté arriba */
+  }
+  .contenedor-lista-dashboard {
+    padding: 3rem;
+  }
   .sidebar {
-    width: 40vw; /* Más ancho en pantallas pequeñas */
+    width: 100vw;
+    padding: 0;
+    max-width: 100vw; /* Ancho máximo */
+    position: fixed; /* Fijamos el sidebar en la parte superior */
+    top: 0;
+    left: 0;
+    height: 100vh; /* El sidebar ocupa toda la altura */
+    z-index: 999;
+    background-color: #d8e2dc;
+    overflow-y: auto; /* Habilitamos el scroll si el contenido es muy largo */
+  }
+
+  .admin-header {
+    display: none; /* Ocultar el header dentro del sidebar en mobile */
+  }
+
+  .admin-content {
+    margin-top: 100vh; /* El contenido comienza debajo del sidebar */
+    width: 100%; /* Ajustar el ancho del contenido */
+  }
+
+  .sidebar-btn {
+    font-size: 1rem; /* Ajustar el tamaño del texto de los botones en mobile */
   }
 }
