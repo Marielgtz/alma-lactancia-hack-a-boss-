@@ -206,12 +206,12 @@ export const newCollaboratorService = async (formData) => {
     }
 }
 
-export const deleteCollaboratorService = async (id, team) => {
+export const deleteCollaboratorService = async (id, team, image) => {
     try {
         const response = await fetch(
-            `${API_BASE_URL}/delete-collaborator/${id}/${team}`,
+            `${API_BASE_URL}/delete-collaborator/${id}/${team}?image=${encodeURIComponent(image)}`,
             {
-                method: 'DELETE',
+                method: 'DELETE'
             }
         )
 
@@ -224,12 +224,12 @@ export const deleteCollaboratorService = async (id, team) => {
     }
 }
 
-export const updateCollaboratorService = async (id, team, formData) => {
+export const updateCollaboratorService = async (id, team, prevImage, formData) => {
     console.log(formData) // TODO - Error en el formData image
 
     try {
         const response = await fetch(
-            `${API_BASE_URL}/update-collaborator/${id}/${team}`,
+            `${API_BASE_URL}/update-collaborator/${id}/${team}?image=${encodeURIComponent(prevImage)}`,
             {
                 method: 'PATCH',
                 body: formData,
@@ -237,7 +237,7 @@ export const updateCollaboratorService = async (id, team, formData) => {
         )
 
         // return handleResponse(response);
-        const data = response.json()
+        const data = await response.json()
         return data
     } catch (error) {
         console.error('Error updating collaborator:', error)

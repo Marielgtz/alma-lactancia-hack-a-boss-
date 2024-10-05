@@ -21,7 +21,7 @@ const AdminAbout = () => {
 
     setCollaborators(fetchedCollaborators);
     setTeamMembers(fetchedTeamMembers);
-    console.log("Colaboradores cargados");
+    console.log("Colaboradores cargados", collaborators);
   }
 
   function refreshCollaboratorsList() {
