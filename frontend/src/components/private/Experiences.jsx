@@ -2,6 +2,10 @@ import useExperiences from "../../hooks/useExperiences";
 import EditableExperience from "./Modals/EditableExperience";
 import "./AdminHome.css";
 
+// URL de la imagen proporcionada (icono pecho)
+const DEFAULT_IMAGE_URL = 'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'    
+
+
 const Experiences = ({
   homeData,
   setHomeData,
@@ -79,11 +83,12 @@ const Experiences = ({
                 <li key={experience.id}>
                   <img
                     className="texto-experiencias-dashboard"
-                    src={`${import.meta.env.VITE_API_URL}/images/${
-                      experience.image
-                    }`}
+                    src={experience.image !== 'Sin imagen'
+                      ? experience.image
+                      : DEFAULT_IMAGE_URL
+                    }
                     alt={experience.text || "Experience Image"}
-                    onClick={() => {
+                    onClick={() => {                      
                       setSelectedExperience(experience);
                       setModalOpen(true);
                     }}
@@ -122,7 +127,7 @@ const Experiences = ({
               <EditableExperience
                 experienceData={selectedExperience}
                 onUpdate={handleExperienceUpdate}
-                onDelete={handleExperienceDelete}
+                onDelete={() => handleExperienceDelete(selectedExperience.id, selectedExperience?.image)}
                 onClose={closeModal}
               />
             )}

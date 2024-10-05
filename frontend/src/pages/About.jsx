@@ -40,8 +40,8 @@ const About = () => {
                 setTeamMembers(teamData.data)
                 setExternalCollaborators(externalData.data)
 
-                console.log(teamMembers) //TODO - Sin imagen
-                console.log(externalCollaborators) //TODO - Sin imagen
+                console.log(teamMembers) 
+                console.log(externalCollaborators)
             } catch (error) {
                 console.error('Error al obtener los colaboradores:', error)
             }

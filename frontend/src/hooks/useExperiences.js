@@ -20,7 +20,7 @@ const useExperiences = (
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/get-all-experiences`)
       .then((response) => response.json())
-      .then((data) => {
+      .then((data) => {        
         setHomeData((prevData) => ({
           ...prevData,
           experiences: data.experiences,
@@ -34,10 +34,10 @@ const useExperiences = (
   }, []);
 
   // Eliminar una experiencia.
-  const handleExperienceDelete = async (experienceId) => {
+  const handleExperienceDelete = async (experienceId, image) => {    
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/delete-experience/${experienceId}`,
+        `${import.meta.env.VITE_API_URL}/delete-experience/${experienceId}?image=${encodeURIComponent(image)}`,
         {
           method: "DELETE",
         }

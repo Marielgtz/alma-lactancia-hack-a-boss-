@@ -22,7 +22,7 @@ const AdminHome = ({checkedExperiences, setCheckedExperiences}) => {
     file,
     MAX_CHARACTERS,
     validateAndUpdateField,
-  } = useAdminHome();
+  } = useAdminHome();  
 
   return (
     <main className="settings-content-inicio">
