@@ -18,29 +18,26 @@ const EditableExperience = ({
     return null;
   }
 
-    const prevImage = experienceData.image
-    console.log(prevImage);
-    
+  const prevImage = experienceData.image;
+  console.log(prevImage);
 
-    const [text, setText] = useState(experienceData.text)
-    const [image, setImage] = useState(experienceData.image)
+  const [text, setText] = useState(experienceData.text);
+  const [image, setImage] = useState(experienceData.image);
 
-    const handleUpdate = () => {
-        const updatedExperience = {
-            ...experienceData,
-            text,
-            image: image
-        };
-        onUpdate(updatedExperience, prevImage);
+  const handleUpdate = () => {
+    const updatedExperience = {
+      ...experienceData,
+      text,
+      image: image,
     };
+    onUpdate(updatedExperience, prevImage);
+  };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0]
-        if (file) {
-            console.log('FILE:', file);
-            
-            setImage(file)
-        }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      console.log("FILE:", file);
+      setImage(file);
     }
   };
 
@@ -52,7 +49,6 @@ const EditableExperience = ({
       >
         <li style={{ listStyle: "none" }}>
           <div className="experienceData-text">
-            {" "}
             <p>Texto actual:</p>
             {experienceData.text}
           </div>
