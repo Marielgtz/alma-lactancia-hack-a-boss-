@@ -55,7 +55,8 @@
 }
 .name input,
 .surname input,
-.role input, .description input{
+.role input,
+.description input {
   display: block;
   font-family: outfit;
   color: black;
@@ -69,4 +70,5 @@
 }
 label {
   font-family: outfit;
+  margin-left: 0;
 }
