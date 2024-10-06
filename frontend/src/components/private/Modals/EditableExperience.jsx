@@ -18,24 +18,29 @@ const EditableExperience = ({
     return null;
   }
 
-  const [text, setText] = useState(experienceData.text);
-  const [image, setImage] = useState(experienceData.image);
+    const prevImage = experienceData.image
+    console.log(prevImage);
+    
 
-  const handleUpdate = () => {
-    const updatedExperience = {
-      ...experienceData,
-      text,
+    const [text, setText] = useState(experienceData.text)
+    const [image, setImage] = useState(experienceData.image)
+
+    const handleUpdate = () => {
+        const updatedExperience = {
+            ...experienceData,
+            text,
+            image: image
+        };
+        onUpdate(updatedExperience, prevImage);
     };
-    if (image) {
-      updatedExperience.image = image;
-    }
-    onUpdate(updatedExperience);
-  };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            console.log('FILE:', file);
+            
+            setImage(file)
+        }
     }
   };
 

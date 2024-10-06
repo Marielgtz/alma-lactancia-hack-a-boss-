@@ -15,29 +15,31 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
     const [imageName, setImageName] = useState('') // Nombre de la imagen del backend
     const [showModal, setShowModal] = useState(false)
 
-    const API_BASE_URL = import.meta.env.VITE_API_URL
-    console.log(`${API_BASE_URL}/images/Rosa.jpg`)
+    // URL de la imagen proporcionada (icono pecho)
+    const DEFAULT_IMAGE_URL = 'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'    
 
-    // Efecto para sincronizar los datos del colaborador y la imagen
     useEffect(() => {
         setCollaborator(collaboratorData)
+        console.log(collaboratorData);
 
         // Si hay una imagen en el backend, cargar el nombre y la vista previa
         if (collaboratorData.image && collaboratorData.image !== 'Sin imagen') {
-            const imageUrl = `${API_BASE_URL}/images/${collaboratorData.image}`
-
+            const imageUrl = collaboratorData.image
             setImagePreview(imageUrl)
             setImageName(collaboratorData.image)
         } else {
-            console.log('no hay imagen', collaboratorData)
-
-            setImagePreview('')
-            setImageName('')
+            // Si no hay imagen en el colaborador, usar la imagen por defecto
+            setImagePreview(DEFAULT_IMAGE_URL)
+            setImageName('Imagen por defecto')
         }
 
         // Limpiar el campo de archivo cuando cambia el colaborador
         setSelectedFile(null)
     }, [collaboratorData])
+
+    useEffect(() => {
+        // console.log(imagePreview);
+    })
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -51,8 +53,8 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
         const file = e.target.files[0]
         setSelectedFile(file)
 
-        // Mostrar la vista previa de la nueva imagen seleccionada
-        if (file) {
+          // Mostrar la vista previa de la nueva imagen seleccionada
+          if (file) {
             const reader = new FileReader()
             reader.onload = (e) => {
                 setImagePreview(e.target.result)
@@ -61,8 +63,8 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
             setImageName(file.name)
         } else {
             // Si no hay archivo seleccionado, restablecer la vista previa
-            setImagePreview('')
-            setImageName('')
+            setImagePreview(DEFAULT_IMAGE_URL)
+            setImageName('Imagen por defecto')
         }
     }
 
@@ -79,7 +81,8 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
             const processToast = toast.loading('Eliminando colaborador...')
             const responseMsg = await deleteCollaboratorService(
                 collaborator.id,
-                isTeam
+                isTeam,
+                collaboratorData.image,
             )
 
             if (responseMsg.error) {
@@ -120,12 +123,13 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
 
         const processToast = toast.loading('Guardando cambios...')
 
-        try {
+        try {   
             if (collaborator.id) {
                 // Actualizar colaborador existente
                 const responseMsg = await updateCollaboratorService(
                     collaborator.id,
                     isTeam,
+                    collaboratorData.image,
                     formData
                 )
 
@@ -152,6 +156,8 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
                     'Nuevo colaborador creado con éxito',
                     processToast
                 )
+                console.log(responseMsg);
+                
                 onSuccess()
             }
 
@@ -163,7 +169,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
             toast.dismiss()
             toast.error(`Error al guardar colaborador: ${error.message}`)
         }
-    }
+    }    
 
     return (
         <form onSubmit={handleSubmit}>
@@ -214,6 +220,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
                         name='name'
                         value={collaborator.name || ''}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -226,6 +233,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
                         name='surname'
                         value={collaborator.surname || ''}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -238,6 +246,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
                         name='role'
                         value={collaborator.role || ''}
                         onChange={handleChange}
+                        required
                     />
                 </div>
             </div>
@@ -251,6 +260,7 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
                     name='description'
                     value={collaborator?.description || ''}
                     onChange={handleChange}
+                    required
                 />
             </div>
 
