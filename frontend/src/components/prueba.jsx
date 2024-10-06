@@ -10,7 +10,7 @@ const Prueba = ({ publishedForm, setPublishedForm }) => {
   const [editingForm, setEditingForm] = useState(false);
   const [selectedForm, setSelectedForm] = useState(null);
   return (
-    <div>
+    <div className="contenedor-opciones-formularios">
       <h1>Formularios</h1>
       {editingForm ? (
         <EditForm
