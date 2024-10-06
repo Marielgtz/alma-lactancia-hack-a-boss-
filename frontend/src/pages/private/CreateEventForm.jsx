@@ -261,14 +261,13 @@ export default function EventForm({ toEdit, onSuccess }) {
       <button type="submit" className="confirm-btn">
         <i className="fas fa-save"></i> Guardar Cambios
       </button>
-      <button onClick={handleDelete} className="delete-btn">
+      <button
+        onClick={handleDelete}
+        className="boton-eliminar-actividad-dashboard"
+      >
         <i className="fas fa-trash-alt"></i> Eliminar actividad
       </button>
-      <button
-        onClick={handleCancel}
-        className="cancel-btn"
-        style={{ color: "red" }}
-      >
+      <button onClick={handleCancel} className="boton-cancelar-dashboard">
         <i className="fas fa-times"></i> Cancelar actividad
       </button>
 
