@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import LogoutButton from "../../components/LogoutButton";
 import "./AdminDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faHome } from "@fortawesome/free-solid-svg-icons";
 
 const useDynamicTitle = () => {
   const location = useLocation();
@@ -41,6 +41,12 @@ const AdminDashboard = () => {
     <div className="admin-panel">
       <aside className="sidebar">
         <div className="admin-header">
+          <button
+            className="home-button"
+            onClick={() => handleTabChange("general")}
+          >
+            <FontAwesomeIcon icon={faHome} />
+          </button>
           <h1>PANEL DE ADMINISTRACIÓN - {activeTab}</h1>
         </div>
         <div className="contenedor-lista-dashboard">
