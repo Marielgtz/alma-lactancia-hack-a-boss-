@@ -11,6 +11,10 @@ const EditableExperience = ({
         return null
     }
 
+    const prevImage = experienceData.image
+    console.log(prevImage);
+    
+
     const [text, setText] = useState(experienceData.text)
     const [image, setImage] = useState(experienceData.image)
 
@@ -18,16 +22,18 @@ const EditableExperience = ({
         const updatedExperience = {
             ...experienceData,
             text,
-        }
-        if (image) {
-            updatedExperience.image = image
-        }
-        onUpdate(updatedExperience)
-    }
+            image: image
+        };
+        console.log('UPDATED EXPERIENCE before sending to backend:', updatedExperience);        
+        onUpdate(updatedExperience, prevImage);
+    };
+    
 
     const handleImageChange = (e) => {
         const file = e.target.files[0]
         if (file) {
+            console.log('FILE:', file);
+            
             setImage(file)
         }
     }

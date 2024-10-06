@@ -61,47 +61,51 @@ const useExperiences = (
   };
 
   // Editar una experiencia:
-  const handleExperienceUpdate = async (updatedExperience) => {
+  const handleExperienceUpdate = async (updatedExperience, prevImage) => {
     try {
-      const formData = new FormData();
-      formData.append("text", updatedExperience.text);
-      if (updatedExperience.image) {
-        formData.append("image", updatedExperience.image);
-      }
-
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/update-experience/${
-          updatedExperience.id
-        }`,
-        {
-          method: "PATCH",
-          body: formData,
+        const formData = new FormData();
+        formData.append("text", updatedExperience.text);
+        
+        if (updatedExperience.image && updatedExperience.image instanceof File) {
+            formData.append("image", updatedExperience.image);
+        } else {
+            console.error('La imagen subida no es de tipo archivo')          
         }
-      );
 
-      if (response.ok) {
-        const updatedData = await response.json();
-        console.log("Datos actualizados:", updatedData);
-        setHomeData((prevData) => ({
-          ...prevData,
-          experiences: prevData.experiences.map((exp) =>
-            exp.id === updatedData.data[0]
-              ? {
-                  id: updatedData.data[0],
-                  text: updatedData.data[1],
-                  image: updatedData.data[2],
-                }
-              : exp
-          ),
-        }));
-        toast.success(updatedData.message);
-      } else {
-        const data = await response.json();
-        throw new Error(data.error);
-      }
+        console.log(prevImage);
+        
+
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/update-experience/${updatedExperience.id}?image=${encodeURIComponent(prevImage)}`,
+            {
+                method: "PATCH",
+                body: formData,
+            }
+        );
+
+        if (response.ok) {
+            const updatedData = await response.json();
+            console.log("Datos actualizados:", updatedData);
+            setHomeData((prevData) => ({
+                ...prevData,
+                experiences: prevData.experiences.map((exp) =>
+                    exp.id === updatedData.data[0]
+                        ? {
+                            id: updatedData.data[0],
+                            text: updatedData.data[1],
+                            image: updatedData.data[2],
+                        }
+                        : exp
+                ),
+            }));
+            toast.success(updatedData.message);
+        } else {
+            const data = await response.json();
+            throw new Error(data.error);
+        }
     } catch (error) {
-      console.log(error);
-      toast.error(error);
+        console.log(error);
+        toast.error(error.message || "Error al actualizar la experiencia.");
     }
 
     setSelectedExperience(null);

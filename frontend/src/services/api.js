@@ -225,8 +225,6 @@ export const deleteCollaboratorService = async (id, team, image) => {
 }
 
 export const updateCollaboratorService = async (id, team, prevImage, formData) => {
-    console.log(formData) // TODO - Error en el formData image
-
     try {
         const response = await fetch(
             `${API_BASE_URL}/update-collaborator/${id}/${team}?image=${encodeURIComponent(prevImage)}`,

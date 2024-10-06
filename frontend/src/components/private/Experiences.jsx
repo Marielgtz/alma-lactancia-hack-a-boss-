@@ -1,6 +1,7 @@
 import useExperiences from "../../hooks/useExperiences";
 import EditableExperience from "./Modals/EditableExperience";
 import "./AdminHome.css";
+import { useEffect } from "react";
 
 // URL de la imagen proporcionada (icono pecho)
 const DEFAULT_IMAGE_URL = 'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'    
@@ -31,6 +32,12 @@ const Experiences = ({
     imageName,
     handleCheckboxChange,
   } = useExperiences(setHomeData, setCharactersRemaining, MAX_CHARACTERS);
+
+  useEffect(() => {
+    console.log(selectedExperience);
+    
+  },[selectedExperience])
+
   return (
     <div
       className={`section ${visibleSection === "experiences" ? "visible" : ""}`}
@@ -127,7 +134,7 @@ const Experiences = ({
               <EditableExperience
                 experienceData={selectedExperience}
                 onUpdate={handleExperienceUpdate}
-                onDelete={() => handleExperienceDelete(selectedExperience.id, selectedExperience?.image)}
+                onDelete={handleExperienceDelete}
                 onClose={closeModal}
               />
             )}
