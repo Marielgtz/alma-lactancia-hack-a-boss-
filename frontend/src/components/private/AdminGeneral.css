@@ -183,3 +183,14 @@
 .popup-message.success {
   background-color: #4caf50;
 }
+
+/*VERSION MOBILE*/
+
+@media (max-width: 768px) {
+  .settings-content-general {
+    background-color: #fdeee7;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding-bottom: 3rem;
+  }
+}
