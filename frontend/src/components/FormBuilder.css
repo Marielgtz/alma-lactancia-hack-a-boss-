@@ -1,0 +1,112 @@
+.contenedor-creador-formularios {
+  border: 1px solid #b380b5;
+  padding: 2rem;
+  margin: 2rem;
+}
+.contenedor-creador-formularios h2 {
+  margin: 0;
+}
+.input-creador-formularios {
+  display: block;
+  font-family: outfit;
+  color: black;
+  width: 80%;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: #d8e2dc;
+}
+
+.select-creador-formularios {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d8e2dc;
+  border-radius: 50px;
+  border: none;
+  padding: 0.5rem 0;
+  font-family: Outfit, sans-serif;
+  width: 8.5rem;
+}
+.boton-eliminar-campo-formulario {
+  background-color: #b14b4b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 8.5rem;
+  margin-top: 1rem;
+  margin-left: auto;
+  font-family: "Outfit", sans-serif;
+  box-shadow: 0px 4px #aa2828;
+  transition: all 0.2s ease-in-out;
+}
+
+.boton-eliminar-campo-formulario:active {
+  box-shadow: 0 1px #b14b4b;
+  transform: translateY(3px);
+}
+
+.boton-eliminar-campo-formulario:hover {
+  background-color: #ca5252;
+  color: white;
+}
+
+.contenedor-botones-añadir-generar-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.boton-generar-formulario,
+.boton-añadir-campo-formulario {
+  background-color: #b380b5;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 10rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  font-family: "Outfit", sans-serif;
+  box-shadow: 0px 4px #946b9f;
+  transition: all 0.2s ease-in-out;
+}
+
+.boton-generar-formulario:active,
+.boton-añadir-campo-formulario:active {
+  box-shadow: 0 1px #946b9f;
+  transform: translateY(3px);
+}
+
+.boton-generar-formulario:hover,
+.boton-añadir-campo-formulario:hover {
+  background-color: #caa2cb;
+  color: white;
+}
+.contenedor-añadir-campo {
+  display: flex; /* Usar flexbox */
+  flex-direction: column;
+  justify-content: left; /* Espacia el contenido */
+  align-items: left; /* Centra verticalmente los elementos */
+  border: 1px solid #b380b5;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.contenedor-añadir-campo {
+  background-color: #ffeee7;
+  border-radius: 8px; /* Esquinas redondeadas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2),
+    /* Sombra general */ inset 0 1px 2px rgba(255, 255, 255, 0.7),
+    /* Sombra interior para el efecto hundido */ inset 0 -2px 5px rgba(0, 0, 0, 0.1); /* Efecto hundido */
+  padding: 20px; /* Espaciado interno */
+  margin-bottom: 20px; /* Espaciado entre contenedores */
+  transition: box-shadow 0.3s ease; /* Transición suave al cambiar el estado */
+}
+
+.contenedor-añadir-campo:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al pasar el mouse */
+}
