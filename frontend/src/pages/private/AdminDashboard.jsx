@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import LogoutButton from "../../components/LogoutButton";
 import "./AdminDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faHome } from "@fortawesome/free-solid-svg-icons";
 
 const useDynamicTitle = () => {
   const location = useLocation();
@@ -41,65 +41,74 @@ const AdminDashboard = () => {
     <div className="admin-panel">
       <aside className="sidebar">
         <div className="admin-header">
+          <button
+            className="home-button"
+            onClick={() => handleTabChange("general")}
+          >
+            <FontAwesomeIcon icon={faHome} />
+          </button>
           <h1>PANEL DE ADMINISTRACIÓN - {activeTab}</h1>
         </div>
-        <ul>
-          <li>
-            <button
-              className={`sidebar-btn ${isActive("general") ? "active" : ""}`} // Clase activa
-              onClick={() => handleTabChange("general")}
-            >
-              AJUSTES GENERALES
-            </button>
-          </li>
-          <li>
-            <button
-              className={`sidebar-btn ${isActive("inicio") ? "active" : ""}`} // Clase activa
-              onClick={() => handleTabChange("inicio")}
-            >
-              INICIO
-            </button>
-          </li>
-          <li>
-            <button
-              className={`sidebar-btn ${
-                isActive("quienes-somos") ? "active" : ""
-              }`} // Clase activa
-              onClick={() => handleTabChange("quienes-somos")}
-            >
-              QUIÉNES SOMOS
-            </button>
-          </li>
-          <li>
-            <button
-              className={`sidebar-btn ${
-                isActive("actividades") ? "active" : ""
-              }`} // Clase activa
-              onClick={() => handleTabChange("actividades")}
-            >
-              PRÓXIMAS ACTIVIDADES
-            </button>
-          </li>
-          <li>
-            <button
-              className={`sidebar-btn ${isActive("historico") ? "active" : ""}`} // Clase activa
-              onClick={() => handleTabChange("historico")}
-            >
-              HISTÓRICO
-            </button>
-          </li>
-          <li>
-            <button
-              className={`sidebar-btn ${
-                isActive("biblioteca") ? "active" : ""
-              }`} // Clase activa
-              onClick={() => handleTabChange("biblioteca")}
-            >
-              BIBLIOTECA
-            </button>
-          </li>
-        </ul>
-
+        <div className="contenedor-lista-dashboard">
+          <ul>
+            <li>
+              <button
+                className={`sidebar-btn ${isActive("general") ? "active" : ""}`} // Clase activa
+                onClick={() => handleTabChange("general")}
+              >
+                AJUSTES GENERALES
+              </button>
+            </li>
+            <li>
+              <button
+                className={`sidebar-btn ${isActive("inicio") ? "active" : ""}`} // Clase activa
+                onClick={() => handleTabChange("inicio")}
+              >
+                INICIO
+              </button>
+            </li>
+            <li>
+              <button
+                className={`sidebar-btn ${
+                  isActive("quienes-somos") ? "active" : ""
+                }`} // Clase activa
+                onClick={() => handleTabChange("quienes-somos")}
+              >
+                QUIÉNES SOMOS
+              </button>
+            </li>
+            <li>
+              <button
+                className={`sidebar-btn ${
+                  isActive("actividades") ? "active" : ""
+                }`} // Clase activa
+                onClick={() => handleTabChange("actividades")}
+              >
+                PRÓXIMAS ACTIVIDADES
+              </button>
+            </li>
+            <li>
+              <button
+                className={`sidebar-btn ${
+                  isActive("historico") ? "active" : ""
+                }`} // Clase activa
+                onClick={() => handleTabChange("historico")}
+              >
+                HISTÓRICO
+              </button>
+            </li>
+            <li>
+              <button
+                className={`sidebar-btn ${
+                  isActive("biblioteca") ? "active" : ""
+                }`} // Clase activa
+                onClick={() => handleTabChange("biblioteca")}
+              >
+                BIBLIOTECA
+              </button>
+            </li>
+          </ul>
+        </div>
         <div className="footer-dashboard">
           <LogoutButton>
             <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión
