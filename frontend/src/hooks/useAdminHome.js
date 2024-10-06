@@ -34,6 +34,7 @@ const useAdminHome = () => {
                 setOriginalTitle(home.titleHome)
                 setOriginalText(home.sectionText)
                 setCharactersRemaining(MAX_CHARACTERS - home.sectionText.length)
+                setFile(home.imageHome)
             } catch (error) {
                 console.error('Error al obtener los datos:', error)
                 toast.error('Error al cargar los datos.')
@@ -46,7 +47,7 @@ const useAdminHome = () => {
     // Manejar el cambio de imagen
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0]
-        if (selectedFile) {
+        if (selectedFile) {            
             setFile(selectedFile)
             validateAndUpdateField('imageHome', selectedFile)
         }
@@ -101,11 +102,11 @@ const useAdminHome = () => {
         if (fieldName !== 'imageHome' && !value) {
             toast.error(`El campo ${fieldName} no puede estar vacío`)
             return
-        }
+        }        
 
         try {
             if (fieldName === 'imageHome' && file) {
-                const formData = new FormData()
+                const formData = new FormData()                
                 formData.append('imageHome', value)
 
                 const response = await fetch(

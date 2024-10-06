@@ -24,7 +24,6 @@ const EditableExperience = ({
             text,
             image: image
         };
-        console.log('UPDATED EXPERIENCE before sending to backend:', updatedExperience);        
         onUpdate(updatedExperience, prevImage);
     };
     

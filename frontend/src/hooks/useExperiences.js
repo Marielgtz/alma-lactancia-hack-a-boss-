@@ -70,10 +70,7 @@ const useExperiences = (
             formData.append("image", updatedExperience.image);
         } else {
             console.error('La imagen subida no es de tipo archivo')          
-        }
-
-        console.log(prevImage);
-        
+        }        
 
         const response = await fetch(
             `${import.meta.env.VITE_API_URL}/update-experience/${updatedExperience.id}?image=${encodeURIComponent(prevImage)}`,

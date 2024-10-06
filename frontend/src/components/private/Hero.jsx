@@ -15,11 +15,7 @@ const Hero = ({
 
       <h2 className="title-edit-home">Imagen principal</h2>
       <img
-        src={
-          file
-            ? URL.createObjectURL(file)
-            : `${import.meta.env.VITE_API_URL}/images/${homeData?.imageHome}`
-        }
+        src={file}
         alt="Hero"
         className="hero-image"
       />

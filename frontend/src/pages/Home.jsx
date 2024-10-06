@@ -25,8 +25,6 @@ const Home = () => {
     const [error, setError] = useState(null)
 
     const imageHomeSrc = home?.imageHome
-        ? `${API_BASE_URL}/images/${home.imageHome}`
-        : imageHome
     const textsNosotras = home?.sectionText ? home.sectionText.split('\n') : []
     const titleCTA = home?.titleHome || ''
 
