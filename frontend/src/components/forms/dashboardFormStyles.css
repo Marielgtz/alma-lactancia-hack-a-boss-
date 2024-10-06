@@ -145,7 +145,6 @@ textarea {
 .file-label:hover {
   background-color: #b380b5;
 }
-.boton-cancelar-dashboard,
 .boton-eliminar-actividad-dashboard {
   background-color: #b14b4b;
   border: none;
@@ -161,37 +160,36 @@ textarea {
   transition: all 0.2s ease-in-out;
 }
 
-.boton-cancelar-dashboard:active,
 .boton-eliminar-actividad-dashboard:active {
   box-shadow: 0 1px #b14b4b;
   transform: translateY(3px);
 }
 
-.boton-cancelar-dashboard:hover,
 .boton-eliminar-actividad-dashboard:hover {
   background-color: #ca5252;
   color: white;
 }
 
-.boton-eliminar-modal-experiencias {
-  background-color: #b14b4b;
+.boton-cancelar-dashboard {
+  background-color: #797e80;
   border: none;
   color: white;
   cursor: pointer;
   border-radius: 0.5rem;
   height: 2.3rem;
-  width: 9rem;
-  margin-top: 2rem;
-  margin-left: 1rem;
+  width: 14rem;
+  margin-top: 1rem;
   font-family: "Outfit", sans-serif;
-  box-shadow: 0px 4px #aa2828;
+  box-shadow: 0px 4px #b2b6b8;
   transition: all 0.2s ease-in-out;
 }
-.boton-eliminar-modal-experiencias:hover {
-  box-shadow: 0 1px #b14b4b;
+
+.boton-cancelar-dashboard:active {
+  box-shadow: 0 1px #b2b6b8;
   transform: translateY(3px);
 }
-.boton-eliminar-modal-experiencias:active {
-  background-color: #ca5252;
+
+.boton-cancelar-dashboard:hover {
+  background-color: #b2b6b8;
   color: white;
 }
