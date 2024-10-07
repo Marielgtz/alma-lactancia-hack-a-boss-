@@ -21,12 +21,14 @@
   overflow-x: hidden;
   width: 100%;
   background-color: #d8e2dc;
+  border: 1px solid #b380b5;
+  border-radius: 5px  ;
 }
 
 .admin-library-accordion-title {
   cursor: pointer;
   padding: 10px;
-  border: 1px solid #b380b5;
+  border-bottom: 1px solid #b380b5;
   font-family: Outfit;
   color: #b380b5;
   margin: 0;
@@ -136,4 +138,8 @@
 .admin-library-button-delete:hover {
   background-color: #ca5252;
   color: white;
+}
+
+.archiveBlogsBtn{
+  margin-right: 10px;
 }
