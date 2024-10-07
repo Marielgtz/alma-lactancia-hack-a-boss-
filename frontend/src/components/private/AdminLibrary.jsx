@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import useAdminLibrary from "../../hooks/useAdminLibrary.js";
 import "./AdminLibrary.css";
+import Modal from "../../modal/ModalBooks.jsx";
+import ModalInstructions from "../../modal/ModalInstructions.jsx";
 
 const AccordionSection = ({
   title,
@@ -37,9 +39,14 @@ const AdminLibrary = () => {
     MAX_CHARACTERS,
   } = useAdminLibrary();
   const [openSection, setOpenSection] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   const handleDeleteResource = (type, index) => {
@@ -439,6 +446,15 @@ const AdminLibrary = () => {
           <i className="fas fa-plus"></i> Agregar Recurso
         </button>
       </AccordionSection>
+
+      <button type="button" className="info-button" onClick={toggleModal}>
+        ¿Cómo editar la sección de libros?
+      </button>
+
+      <Modal isOpen={isModalOpen} onClose={toggleModal}>
+        <ModalInstructions />
+      </Modal>
+
     </form>
   );
 };
