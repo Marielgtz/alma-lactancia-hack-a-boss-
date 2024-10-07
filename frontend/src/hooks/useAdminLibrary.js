@@ -8,13 +8,13 @@ const useAdminLibrary = () => {
     const MAX_CHARACTERS = 1000
     const [libraryData, setLibraryData] = useState({
         lactationResources: [],
-        lactaBooks: '',
+        lactationBooks: "",
         pregnancyResources: [],
-        embaBooks: '',
-        parentingBooks: '',
+        pregnancyBooks: "",
+        parentingBooks: "",
         parentingResources: [],
         nutritionBlogs: [],
-        alimentBooks: '',
+        nutritionBooks: "",
         archiveBlogs: [],
     })
 
@@ -54,8 +54,8 @@ const useAdminLibrary = () => {
             if (Array.isArray(value)) {
                 return value.every(
                     (resource) =>
-                        resource.titulo.trim() !== '' &&
-                        resource.enlace.trim() !== ''
+                        resource.title.trim() !== '' &&
+                        resource.link.trim() !== ''
                 )
             }
 

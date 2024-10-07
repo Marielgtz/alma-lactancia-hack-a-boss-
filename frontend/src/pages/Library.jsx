@@ -65,17 +65,17 @@ const Library = () => {
                   {libraryData.lactationResources.map((resource, index) => (
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.lactaBooks)}</ul>
+                <ul>{renderTextWithFormatting(libraryData.lactationBooks)}</ul>
               </div>
             )}
           </div>
@@ -104,17 +104,17 @@ const Library = () => {
                   {libraryData.pregnancyResources.map((resource, index) => (
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.embaBooks)}</ul>
+                <ul>{renderTextWithFormatting(libraryData.pregnancyBooks)}</ul>
               </div>
             )}
           </div>
@@ -138,22 +138,23 @@ const Library = () => {
             </div>
             {openInfo === "crianza" && (
               <div className="collapsible-content-library">
-                <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.parentingBooks)}</ul>
+                
                 <h3>OTROS RECURSOS</h3>
                 <ul>
                   {libraryData.parentingResources.map((resource, index) => (
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
                 </ul>
+                <h3>LIBROS</h3>
+                <ul>{renderTextWithFormatting(libraryData.parentingBooks)}</ul>
               </div>
             )}
           </div>
@@ -184,17 +185,17 @@ const Library = () => {
                   {libraryData.nutritionBlogs.map((resource, index) => (
                     <li key={index}>
                       <a
-                        href={resource.enlace}
+                        href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {resource.titulo}
+                        {resource.title}
                       </a>
                     </li>
                   ))}
                 </ul>
                 <h3>LIBROS</h3>
-                <ul>{renderTextWithFormatting(libraryData.alimentBooks)}</ul>
+                <ul>{renderTextWithFormatting(libraryData.nutritionBooks)}</ul>
               </div>
             )}
           </div>
@@ -221,11 +222,11 @@ const Library = () => {
                 {libraryData.archiveBlogs.map((resource, index) => (
                   <p key={index}>
                     <a
-                      href={resource.enlace}
+                      href={resource.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {resource.titulo}
+                      {resource.title}
                     </a>
                   </p>
                 ))}

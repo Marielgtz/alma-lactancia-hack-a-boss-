@@ -76,12 +76,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Título"
-                value={resource.titulo}
+                value={resource.title}
                 onChange={(e) =>
                   handleChange(
                     "lactationResources",
                     libraryData.lactationResources.map((r, i) =>
-                      i === index ? { ...r, titulo: e.target.value } : r
+                      i === index ? { ...r, title: e.target.value } : r
                     )
                   )
                 }
@@ -94,12 +94,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Enlace"
-                value={resource.enlace}
+                value={resource.link}
                 onChange={(e) =>
                   handleChange(
                     "lactationResources",
                     libraryData.lactationResources.map((r, i) =>
-                      i === index ? { ...r, enlace: e.target.value } : r
+                      i === index ? { ...r, link: e.target.value } : r
                     )
                   )
                 }
@@ -126,7 +126,7 @@ const AdminLibrary = () => {
               ...prevState,
               lactationResources: [
                 ...prevState.lactationResources,
-                { titulo: "", enlace: "" },
+                { title: "", link: "" },
               ],
             }))
           }
@@ -137,8 +137,8 @@ const AdminLibrary = () => {
           <label>Libros:</label>
           <textarea
             className="admin-library-textarea"
-            value={libraryData.lactaBooks}
-            onChange={(e) => handleChange("lactaBooks", e.target.value)}
+            value={libraryData.lactationBooks}
+            onChange={(e) => handleChange("lactationBooks", e.target.value)}
             maxLength={MAX_CHARACTERS}
           />
         </div>
@@ -159,12 +159,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Título"
-                value={resource.titulo}
+                value={resource.title}
                 onChange={(e) =>
                   handleChange(
                     "pregnancyResources",
                     libraryData.pregnancyResources.map((r, i) =>
-                      i === index ? { ...r, titulo: e.target.value } : r
+                      i === index ? { ...r, title: e.target.value } : r
                     )
                   )
                 }
@@ -176,12 +176,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Enlace"
-                value={resource.enlace}
+                value={resource.link}
                 onChange={(e) =>
                   handleChange(
                     "pregnancyResources",
                     libraryData.pregnancyResources.map((r, i) =>
-                      i === index ? { ...r, enlace: e.target.value } : r
+                      i === index ? { ...r, link: e.target.value } : r
                     )
                   )
                 }
@@ -204,7 +204,7 @@ const AdminLibrary = () => {
               ...prevState,
               pregnancyResources: [
                 ...prevState.pregnancyResources,
-                { titulo: "", enlace: "" },
+                { title: "", link: "" },
               ],
             }))
           }
@@ -215,8 +215,8 @@ const AdminLibrary = () => {
           <label>Libros:</label>
           <textarea
             className="admin-library-textarea"
-            value={libraryData.embaBooks}
-            onChange={(e) => handleChange("embaBooks", e.target.value)}
+            value={libraryData.pregnancyBooks}
+            onChange={(e) => handleChange("pregnancyBooks", e.target.value)}
             maxLength={MAX_CHARACTERS}
           />
         </div>
@@ -237,12 +237,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Título"
-                value={resource.titulo}
+                value={resource.title}
                 onChange={(e) =>
                   handleChange(
                     "parentingResources",
                     libraryData.parentingResources.map((r, i) =>
-                      i === index ? { ...r, titulo: e.target.value } : r
+                      i === index ? { ...r, title: e.target.value } : r
                     )
                   )
                 }
@@ -254,12 +254,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Enlace"
-                value={resource.enlace}
+                value={resource.link}
                 onChange={(e) =>
                   handleChange(
                     "parentingResources",
                     libraryData.parentingResources.map((r, i) =>
-                      i === index ? { ...r, enlace: e.target.value } : r
+                      i === index ? { ...r, link: e.target.value } : r
                     )
                   )
                 }
@@ -282,7 +282,7 @@ const AdminLibrary = () => {
               ...prevState,
               parentingResources: [
                 ...prevState.parentingResources,
-                { titulo: "", enlace: "" },
+                { title: "", link: "" },
               ],
             }))
           }
@@ -315,12 +315,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Título"
-                value={resource.titulo}
+                value={resource.title}
                 onChange={(e) =>
                   handleChange(
                     "nutritionBlogs",
                     libraryData.nutritionBlogs.map((r, i) =>
-                      i === index ? { ...r, titulo: e.target.value } : r
+                      i === index ? { ...r, title: e.target.value } : r
                     )
                   )
                 }
@@ -332,12 +332,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Enlace"
-                value={resource.enlace}
+                value={resource.link}
                 onChange={(e) =>
                   handleChange(
                     "nutritionBlogs",
                     libraryData.nutritionBlogs.map((r, i) =>
-                      i === index ? { ...r, enlace: e.target.value } : r
+                      i === index ? { ...r, link: e.target.value } : r
                     )
                   )
                 }
@@ -360,7 +360,7 @@ const AdminLibrary = () => {
               ...prevState,
               nutritionBlogs: [
                 ...prevState.nutritionBlogs,
-                { titulo: "", enlace: "" },
+                { title: "", link: "" },
               ],
             }))
           }
@@ -371,8 +371,8 @@ const AdminLibrary = () => {
           <label>Libros:</label>
           <textarea
             className="admin-library-textarea"
-            value={libraryData.alimentBooks}
-            onChange={(e) => handleChange("alimentBooks", e.target.value)}
+            value={libraryData.nutritionBooks}
+            onChange={(e) => handleChange("nutritionBooks", e.target.value)}
             maxLength={MAX_CHARACTERS}
           />
         </div>
@@ -393,12 +393,12 @@ const AdminLibrary = () => {
                 className="admin-library-input"
                 type="text"
                 placeholder="Título"
-                value={resource.titulo}
+                value={resource.title}
                 onChange={(e) =>
                   handleChange(
                     "archiveBlogs",
                     libraryData.archiveBlogs.map((r, i) =>
-                      i === index ? { ...r, titulo: e.target.value } : r
+                      i === index ? { ...r, title: e.target.value } : r
                     )
                   )
                 }
@@ -410,12 +410,12 @@ const AdminLibrary = () => {
                 type="text"
                 className="admin-library-input"
                 placeholder="Enlace"
-                value={resource.enlace}
+                value={resource.link}
                 onChange={(e) =>
                   handleChange(
                     "archiveBlogs",
                     libraryData.archiveBlogs.map((r, i) =>
-                      i === index ? { ...r, enlace: e.target.value } : r
+                      i === index ? { ...r, link: e.target.value } : r
                     )
                   )
                 }
@@ -432,13 +432,13 @@ const AdminLibrary = () => {
         ))}
         <button
           type="button"
-          className="admin-library-button"
+          className="admin-library-button archiveBlogsBtn"
           onClick={() =>
             setLibraryData((prevState) => ({
               ...prevState,
               archiveBlogs: [
                 ...prevState.archiveBlogs,
-                { titulo: "", enlace: "" },
+                { title: "", link: "" },
               ],
             }))
           }
