@@ -4,7 +4,9 @@ textarea {
   margin: 1rem 0;
   width: 70%;
 }
-
+.dashboard-form input::placeholder {
+  padding-left: 1rem;
+}
 /* Estilos específicos form actividades */
 .dashboard-form input,
 textarea {

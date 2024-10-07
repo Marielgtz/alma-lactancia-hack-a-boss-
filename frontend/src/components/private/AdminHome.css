@@ -351,3 +351,75 @@ label[for="experienceImage"] {
   background-color: #caa2cb;
   color: white;
 }
+
+/*VERSION MOBILE*/
+
+@media (max-width: 768px) {
+  .settings-content-inicio {
+    width: fit-content;
+    padding: 1rem;
+    overflow-x: hidden;
+  }
+  .contenedor-secciones-dinamicas-dashboard {
+    padding: 0.2rem;
+  }
+  /*BOTONES DE LAS SECCIONES*/
+  .panel-nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .panel-nav-btn button {
+    font-size: 0.8rem;
+    width: 15rem;
+    height: 1.9rem;
+  }
+  .boton-cancelar-dashboard {
+    margin: 0;
+  }
+  .title-input {
+    padding: 1.5rem 0;
+  }
+  .editTitle-input {
+    font-size: 0.8rem;
+    width: 95%;
+  }
+  /*LISTADO EXPERIENCIAS PUBLICADAS*/
+  .fondo-lista-experiencias {
+    padding: 1rem; /* Aumenta el padding para mejorar la apariencia */
+    overflow: hidden;
+  }
+
+  .list-exp {
+    padding: 0; /* Elimina padding en la lista */
+    list-style-type: none; /* Elimina los puntos de la lista */
+  }
+
+  .contenedor-experiencia {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: auto;
+  }
+
+  .imagen-experiencias-dashboard {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+
+  .texto-experiencias-dashboard {
+    font-size: 0.6rem;
+    line-height: 0.5rem;
+  }
+  .texto-descriptivo-experiencias {
+    line-height: 1.5rem;
+  }
+  .boton-publicar-experiencias {
+    width: 100%; /* Hace que el botón ocupe todo el ancho */
+    padding: 10px; /* Aumenta el padding del botón */
+    font-size: 0.7rem; /* Aumenta el tamaño de la fuente del botón */
+  }
+}

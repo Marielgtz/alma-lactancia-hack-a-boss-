@@ -30,3 +30,15 @@ ol {
 .hidden {
   display: none;
 }
+/*VERSION MOBILE*/
+
+@media (max-width: 768px) {
+  .settings-content {
+    margin: 3rem 0;
+  }
+
+  button.list-btn {
+    width: 100%;
+    font-size: 0.7rem;
+  }
+}

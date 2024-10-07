@@ -18,6 +18,9 @@
   border-radius: 2rem;
   background-color: #d8e2dc;
 }
+.input-creador-formularios::placeholder {
+  padding-left: 1rem;
+}
 
 .select-creador-formularios {
   display: flex;
