@@ -77,7 +77,8 @@
 
 .image-buttons button,
 .boton-guardar-dashboard,
-.experience-buttons {
+.experience-buttons,
+.boton-publicar-experiencias {
   background-color: #b380b5;
   border: none;
   color: white;
@@ -93,14 +94,16 @@
 
 .image-buttons button:active,
 .boton-guardar-dashboard:active,
-.experience-buttons:active {
+.experience-buttons:active,
+.boton-publicar-experiencias:active {
   box-shadow: 0 1px #946b9f;
   transform: translateY(3px);
 }
 
 .image-buttons button:hover,
 .boton-guardar-dashboard:hover,
-.experience-buttons:hover {
+.experience-buttons:hover,
+.boton-publicar-experiencias:hover {
   background-color: #caa2cb;
   color: white;
 }
@@ -153,7 +156,7 @@
 }
 
 textarea {
-  min-height: 100px;
+  min-height: 200px;
   width: 85%;
   padding: 10px;
   font-family: "Outfit", sans-serif;
@@ -244,6 +247,18 @@ label[for="experienceImage"] {
 .texto-experiencias-dashboard {
   font-family: "Outfit", sans-serif;
 }
+.contenedor-experiencia {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  min-width: 0;
+}
+.imagen-experiencias-dashboard {
+  width: 100px;
+  min-width: 100px;
+  object-fit: cover;
+}
 
 .fondo-lista-experiencias {
   display: flex;
@@ -251,10 +266,88 @@ label[for="experienceImage"] {
   flex-direction: column;
   justify-content: flex-start;
   border: 1px solid #946b9f;
-  margin-top: 3rem;
+  margin-top: 1rem;
   min-height: 200px;
   padding: 1rem;
+  font-family: Outfit, sans-serif;
 }
 .fondo-lista-experiencias h3 {
   margin-top: 0;
+  font-size: 1.6rem;
+}
+
+.fondo-lista-experiencias p,
+.texto-descriptivo-experiencias {
+  color: black;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5rem;
+}
+.texto-descriptivo-experiencias {
+  margin-top: 2rem;
+}
+/*CHECKBOX EXPERIENCIAS PUBLICADAS*/
+.contenedor-checkbox-experiencias {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #b380b5;
+  margin-left: 1rem;
+}
+.checkbox-experiencias-publicadas {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-experiencias-publicadas + label {
+  display: inline-block;
+  width: 20px;
+  height: 5px;
+  border: 2px solid #9c6fa0;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-experiencias-publicadas + label i {
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  font-size: 16px;
+  color: white;
+  opacity: 0;
+}
+
+.checkbox-experiencias-publicadas:checked + label {
+  background-color: #9c6fa0;
+  border-color: #9c6fa0;
+}
+
+.checkbox-experiencias-publicadas:checked + label i {
+  opacity: 1;
+}
+
+/*BOTON PUBLICAR EXPERIENCIAS*/
+.boton-publicar-experiencias {
+  background-color: #b380b5;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 20rem;
+  margin-top: 1rem;
+  font-family: "Outfit", sans-serif;
+  box-shadow: 0px 4px #946b9f;
+  transition: all 0.2s ease-in-out;
+}
+
+.boton-publicar-experiencias:active {
+  box-shadow: 0 1px #946b9f;
+  transform: translateY(3px);
+}
+
+.boton-publicar-experiencias:hover {
+  background-color: #caa2cb;
+  color: white;
 }
