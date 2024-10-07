@@ -21,13 +21,9 @@ const Header = () => {
         setMenuOpen(!menuOpen)
     }
 
-
-  const instagramLink = generalSettings?.linkInstagram || "";
-  const facebookLink = generalSettings?.linkFacebook || "";
-  const logoSrc = generalSettings?.logo
-    ? `${API_BASE_URL}/images/${generalSettings.logo}`
-    : logoAlma;
-
+    const instagramLink = generalSettings?.linkInstagram || ''
+    const facebookLink = generalSettings?.linkFacebook || ''
+    const logoSrc = generalSettings?.logo ? `${generalSettings.logo}` : logoAlma
 
     return (
         <header>
