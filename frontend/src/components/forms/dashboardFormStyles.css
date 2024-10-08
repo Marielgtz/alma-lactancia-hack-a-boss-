@@ -40,34 +40,32 @@ textarea {
 
 .datetime-selector {
   width: 70%;
-  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   gap: 0 1rem;
+  margin: 1.5rem 0;
 }
-
+.label-acceso-formulario {
+  margin-bottom: 1rem;
+}
 #label-start {
   grid-column: 1;
   grid-row: 1;
-  margin: 0.4rem;
 }
 
 #input-start {
   grid-column: 1;
   grid-row: 2;
-  margin: 0.4rem;
 }
 
 #label-end {
   grid-column: 2;
   grid-row: 1;
-  margin: 0.4rem;
 }
 
 #input-end {
   grid-column: 2;
   grid-row: 2;
-  margin: 0.4rem;
 }
 
 /* Estilos específicos form colaboradores */
@@ -194,4 +192,19 @@ textarea {
 .boton-cancelar-dashboard:hover {
   background-color: #b2b6b8;
   color: white;
+}
+/* Versión móvil */
+@media (max-width: 768px) {
+  .datetime-selector {
+    grid-template-columns: 1fr; /* Apila en una sola columna */
+    grid-template-rows: auto; /* Filas automáticas */
+    gap: 1rem; /* Añade espacio entre los elementos */
+    width: 100%; /* Puedes ajustar el ancho si es necesario */
+  }
+  .boton-eliminar-actividad-dashboard {
+    margin-left: 0;
+  }
+  .label-acceso-formulario {
+    margin-bottom: 1rem;
+  }
 }

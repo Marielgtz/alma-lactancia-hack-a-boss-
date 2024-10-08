@@ -212,6 +212,7 @@ export default function EventForm({ toEdit, onSuccess }) {
 
       <label>Localización:</label>
       <input
+        className="input-localizacion"
         type="text"
         name="location"
         value={activity?.location || ""}
@@ -243,7 +244,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         />
       </div>
 
-      <label>Acceso:</label>
+      <label className="label-acceso-formulario">Acceso:</label>
       <select
         name="access"
         value={activity?.access || ""}
