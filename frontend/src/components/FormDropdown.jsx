@@ -1,5 +1,7 @@
 import useFormDropdown from "../hooks/useFormDropdown";
 import CustomDialog from "../components/customDialog";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./FormDropdown.css";
 
 const FormDropdown = ({
@@ -40,22 +42,25 @@ const FormDropdown = ({
   );
   return (
     <div className="contenedor-seleccione-formulario">
-      <h2>Seleccione un formulario:</h2>
-      <ul>
-        {filteredFormEntries?.map(([formId, form], index) => (
-          <li key={index} onClick={() => handleSelectForm(formId)}>
-            {form.formName}
-          </li>
-        ))}
-      </ul>
-      <input
-        className="buscar-formulario-input"
-        type="text"
-        placeholder="🔍 Buscar formulario..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
-      />
+      <div className="contenedor-titulo-buscador">
+        <h2>Seleccione un formulario de la lista:</h2>
+        <input
+          className="buscar-formulario-input"
+          type="text"
+          placeholder="🔍 Buscar formulario..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="contenedor-listado-formularios">
+        <ul>
+          {filteredFormEntries?.map(([formId, form], index) => (
+            <li key={index} onClick={() => handleSelectForm(formId)}>
+              {form.formName}
+            </li>
+          ))}
+        </ul>
+      </div>
       {selectedForm && (
         <div>
           <h3>Formulario: {selectedForm?.formName}</h3>
@@ -88,7 +93,11 @@ const FormDropdown = ({
                   );
                 }}
               >
-                <select name="activity" id="activity">
+                <select
+                  className="selector-evento-formularios"
+                  name="activity"
+                  id="activity"
+                >
                   <option value="">Seleccione evento</option>
                   {publishedActivities.map((activity, index) => {
                     return (
@@ -98,12 +107,24 @@ const FormDropdown = ({
                     );
                   })}
                 </select>
-                <button>Publicar formulario</button>
+                <button className="boton-publicar-formulario-dropdown">
+                  Publicar formulario
+                </button>
               </form>
             </>
           )}
-          <button onClick={editFormHandler}>Editar</button>
-          <button onClick={openModal}>Borrar</button>
+          <button
+            className="boton-editar-formulario-dropdown"
+            onClick={editFormHandler}
+          >
+            <i className="fas fa-edit icon"></i> Editar
+          </button>
+          <button
+            className="boton-eliminar-campo-editar-formulario"
+            onClick={openModal}
+          >
+            <FontAwesomeIcon icon={faTrash} /> Eliminar
+          </button>
           {isModalOpen && (
             <CustomDialog
               onYes={() =>

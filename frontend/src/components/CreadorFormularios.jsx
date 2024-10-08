@@ -1,11 +1,11 @@
 import { useState } from "react";
 import FormBuilder from "./FormBuilder";
 import EditForm from "./EditForm";
-import "./prueba.css";
+import "./CreadorFormularios.css";
 
 import FormDropdown from "./FormDropdown";
 
-const Prueba = ({ publishedForm, setPublishedForm }) => {
+const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
   const [forms, setForms] = useState({});
   const [editingForm, setEditingForm] = useState(false);
   const [selectedForm, setSelectedForm] = useState(null);
@@ -36,4 +36,4 @@ const Prueba = ({ publishedForm, setPublishedForm }) => {
     </div>
   );
 };
-export default Prueba;
+export default CreadorFormularios;

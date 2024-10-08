@@ -1,4 +1,8 @@
 import useEditForm from "../hooks/useEditForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faTrash, faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+
 import "./EditForm.css";
 
 const EditForm = ({
@@ -42,22 +46,27 @@ const EditForm = ({
               field.label !== "Partner" && (
                 <div key={field.id} style={{ marginBottom: "20px" }}>
                   <input
+                    className="input-editor-formularios"
                     {...register(`fields[${index}].label`)}
                     placeholder="Etiqueta del Campo"
                     style={{ marginRight: "10px" }}
                   />
-                  <select {...register(`fields[${index}].type`)}>
+                  <select
+                    className="select-editor-formularios"
+                    {...register(`fields[${index}].type`)}
+                  >
                     <option value="text">Texto</option>
                     <option value="number">Número</option>
                     <option value="email">Email</option>
                     <option value="password">Contraseña</option>
                   </select>
                   <button
+                    className="boton-eliminar-campo-editar-formulario"
                     type="button"
                     onClick={() => remove(index)}
                     style={{ marginLeft: "10px" }}
                   >
-                    Eliminar
+                    <FontAwesomeIcon icon={faTrash} /> Eliminar
                   </button>
                 </div>
               )
@@ -65,15 +74,23 @@ const EditForm = ({
         </div>
 
         <button
+          className="boton-añadir-campo-editar-formulario"
           type="button"
           onClick={() => append({ label: "", type: "text" })}
           style={{ marginRight: "10px" }}
         >
-          Añadir Campo
+          <FontAwesomeIcon icon={faPlus} /> Añadir Campo
         </button>
 
-        <button onClick={() => setEditingForm(false)}>Cerrar editor</button>
-        <button type="submit">Actualizar formulario</button>
+        <button
+          className="boton-cerrar-editor"
+          onClick={() => setEditingForm(false)}
+        >
+          <FontAwesomeIcon icon={faTimes} /> Cerrar editor
+        </button>
+        <button className="boton-actualizar-formulario" type="submit">
+          Actualizar formulario
+        </button>
       </form>
     </div>
   );
