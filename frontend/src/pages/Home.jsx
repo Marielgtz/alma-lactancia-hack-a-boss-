@@ -156,15 +156,11 @@ const Home = () => {
                             >
                                 <i className='fas fa-chevron-left'></i>
                             </button>
-                            <button
-                                className='carousel-control next'
-                                onClick={nextSlide}
-                            >
-                                <i className='fas fa-chevron-right'></i>
-                            </button>
                         </div>
                         <div className='experience-cards'>
-                            {experiences.map((experience) => (
+                            {experiences
+                            .slice(currentIndex, currentIndex + cardsToShow)
+                            .map((experience) => (
                                 <div
                                     key={experience.id}
                                     className='experience-card'
@@ -180,6 +176,12 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
+                            <button
+                                className='carousel-control next'
+                                onClick={nextSlide}
+                            >
+                                <i className='fas fa-chevron-right'></i>
+                            </button>
                     </div>
                 </div>
             </main>
