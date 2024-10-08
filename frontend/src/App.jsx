@@ -14,7 +14,7 @@ import Library from "./pages/Library";
 import Collaborate from "./pages/Collaborate";
 import Contact from "./pages/Contact";
 import Confirmation from "./pages/MsgConfirmation";
-import Prueba from "./components/prueba";
+import CreadorFormularios from "./components/CreadorFormularios";
 import NotFoundPage from "./pages/NotFoundPage";
 import AdminHome from "./components/private/AdminHome";
 import AdminAbout from "./components/private/AdminAbout";
@@ -137,9 +137,9 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
           <Route
-            path="/prueba"
+            path="/CreadorFormularios"
             element={
-              <Prueba
+              <CreadorFormularios
                 publishedForm={publishedForm}
                 setPublishedForm={setPublishedForm}
               />
