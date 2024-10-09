@@ -10,7 +10,7 @@ const useFormDropdown = (
 ) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
-    const [publishedActivities, setPublishedActivities] = useState('')
+    const [publishedActivities, setPublishedActivities] = useState([])
 
     //Obtener los formularios creados:
     useEffect(() => {
