@@ -38,7 +38,7 @@ const FormBuilder = ({ setForms }) => {
               style={{ marginBottom: "20px" }}
             >
               <h3>
-                2.1. Escoje que tipo de campo quieres:
+                2.1. Escoge que tipo de campo quieres:
                 <FontAwesomeIcon
                   icon={faInfoCircle}
                   onClick={toggleModal}
