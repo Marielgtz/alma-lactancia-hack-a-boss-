@@ -22,26 +22,24 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
           publishedForm={publishedForm}
         />
       ) : (
-        <>
-          <p className="texto-descriptivo-accion">
-            En esta sección, se puede diseñar un formulario personalizado desde
-            cero.
-            <br></br>Una vez que hayas creado el formulario, se añadirá
-            automáticamente a la lista de formularios disponibles.
-            <br></br>Desde esta lista, se puede elegir entre publicarlo para que
-            los usuarios lo completen o modificarlo en caso de que necesites
-            hacer ajustes adicionales.
-            <br></br>Asegúrate de incluir todos los campos necesarios para
-            recopilar la información relevante de los usuarios.
-          </p>
-
+        <div>
+          <div className="contenedor-pasos">
+            <i className="fas fa-exclamation-triangle"></i>
+            <p className="texto-descriptivo-accion">
+              - En esta sección, se puede diseñar un formulario personalizado.
+              <br></br>- Una vez que hayas creado el formulario, se añadirá
+              automáticamente a la lista de formularios disponibles.
+              <br></br>- Desde la lista, se puede elegir entre publicarlo o
+              modificarlo en caso de necesitarlo.
+            </p>
+          </div>
+          <h3 className="titulo-descriptivo-accion">
+            PASO 1: Crea un formulario <i class="fas fa-arrow-down"></i>
+          </h3>
           <FormBuilder setForms={setForms} />
-        </>
+        </div>
       )}
-      <p className="dropdown-explanation">
-        Selecciona un formulario de la lista para editarlo, publicarlo o
-        eliminarlo. Usa el buscador si tienes varios formularios.
-      </p>
+
       <FormDropdown
         forms={forms}
         setForms={setForms}
