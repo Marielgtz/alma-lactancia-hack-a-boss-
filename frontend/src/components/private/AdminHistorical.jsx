@@ -9,13 +9,12 @@ const AdminHistorical = ({ instagramPost, setInstagramPost }) => {
   return (
     <main className="settings-content-historico">
       <h1 className="texto-seccion-historico">
-        Introduce el código de inserción de instagram para publicar en la
-        sección "Histórico"
+        Utiliza una de las 6 ranuras para fotos de Instagram:
       </h1>
       <InstagramForm
         setInstagramPost={setInstagramPost}
         setSelectedPostNumber={setSelectedPostNumber}
-      />
+        />
       <div className="instagram-post-container">
         {selectedPostNumber && (
           <InstagramPost
