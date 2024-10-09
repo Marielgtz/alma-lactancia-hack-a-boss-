@@ -20,7 +20,7 @@ const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
     <form className="instagram-form-container" onSubmit={handleSubmit}>
       <div>
         <p className="texto-descriptivo-accion">
-          1. Escoje una publicación vacía o bien cambia una existente:
+          1. Escoge una publicación vacía o bien cambia una existente:
         </p>
       </div>
       <div className="instagram-form-input-select">
