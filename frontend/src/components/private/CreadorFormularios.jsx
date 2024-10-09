@@ -9,22 +9,21 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
   const [forms, setForms] = useState({});
   const [editingForm, setEditingForm] = useState(false);
   const [selectedForm, setSelectedForm] = useState(null);
-  useEffect(()=>{
-    console.log("Editing form?:",editingForm);
-    
-  },[editingForm])
+  useEffect(() => {
+    console.log("Editing form?:", editingForm);
+  }, [editingForm]);
   return (
     <div className="contenedor-opciones-formularios">
       <h1>Formularios</h1>
-      { editingForm ? (
+      {editingForm ? (
         <EditForm
-            setEditingForm={setEditingForm}
-            selectedForm={selectedForm}
-            setForms={setForms}
-            setSelectedForm={setSelectedForm}
-            setPublishedForm={setPublishedForm}
-            publishedForm={publishedForm}
-          />
+          setEditingForm={setEditingForm}
+          selectedForm={selectedForm}
+          setForms={setForms}
+          setSelectedForm={setSelectedForm}
+          setPublishedForm={setPublishedForm}
+          publishedForm={publishedForm}
+        />
       ) : (
         <>
           <div>
@@ -39,7 +38,7 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
               </p>
             </div>
             <h3 className="titulo-descriptivo-accion">
-              PASO 1: Crea un formulario <i class="fas fa-arrow-down"></i>
+              PASO 1: Crea un formulario <i className="fas fa-arrow-down"></i>
             </h3>
             <FormBuilder setForms={setForms} />
           </div>
@@ -54,7 +53,6 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
           />
         </>
       )}
-
     </div>
   );
 };
