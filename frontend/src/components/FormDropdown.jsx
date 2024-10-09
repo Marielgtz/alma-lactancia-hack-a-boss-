@@ -54,14 +54,14 @@ useEffect(() => {
   return (
     <div className="contenedor-seleccione-formulario">
       <div className="contenedor-titulo-buscador">
-        <h2>PASO 2: Seleccione un formulario de la lista:</h2>
+        <h2>Busca y selecciona un formulario...</h2>
         <input
           className="buscar-formulario-input"
           type="text"
-          placeholder="🔍 Buscar formulario..."
+          placeholder="🔍 Busca un formulario..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-        />
+          />
       </div>
       <div className="contenedor-listado-formularios">
         <ul>
