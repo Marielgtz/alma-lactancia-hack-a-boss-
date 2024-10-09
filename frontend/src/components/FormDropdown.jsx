@@ -3,6 +3,7 @@ import CustomDialog from "../components/customDialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./FormDropdown.css";
+import { useEffect } from "react";
 
 const FormDropdown = ({
   forms,
@@ -36,6 +37,15 @@ const FormDropdown = ({
     publishedForm,
     selectedForm
   );
+
+  useEffect(() => {
+    console.log('Published activities updated:', publishedActivities);
+}, [publishedActivities]);
+
+useEffect(() => {
+    console.log('Selected form:', selectedForm);
+}, [selectedForm]);
+
 
   const publishFormIndex =
     Array.isArray(publishedForm) && selectedForm
