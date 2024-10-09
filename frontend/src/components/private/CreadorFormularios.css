@@ -9,3 +9,7 @@
   padding: 1rem 2rem;
   color: #b380b5;
 }
+.contenedor-opciones-formularios p {
+  margin: 0;
+  padding: 0 2rem;
+}

@@ -37,9 +37,10 @@ const FormDropdown = ({
     selectedForm
   );
 
-  const publishFormIndex = publishedForm.findIndex(
-    (form) => form.formId === selectedForm?.formId
-  );
+  const publishFormIndex =
+    Array.isArray(publishedForm) && selectedForm
+      ? publishedForm.findIndex((form) => form.formId === selectedForm.formId)
+      : -1;
   return (
     <div className="contenedor-seleccione-formulario">
       <div className="contenedor-titulo-buscador">

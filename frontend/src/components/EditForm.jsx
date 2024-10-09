@@ -21,9 +21,11 @@ const EditForm = ({
       setSelectedForm,
       setPublishedForm
     );
-  const publishFormIndex = publishedForm.findIndex(
-    (form) => form.formId === selectedForm?.formId
-  );
+
+  const publishFormIndex = Array.isArray(publishedForm)
+    ? publishedForm.findIndex((form) => form.formId === selectedForm?.formId)
+    : -1;
+
   const handleFormSubmit = (data) => {
     onSubmit(data, publishFormIndex);
   };

@@ -14,7 +14,6 @@ import Library from "./pages/Library";
 import Collaborate from "./pages/Collaborate";
 import Contact from "./pages/Contact";
 import Confirmation from "./pages/MsgConfirmation";
-import CreadorFormularios from "./components/CreadorFormularios";
 import NotFoundPage from "./pages/NotFoundPage";
 import AdminHome from "./components/private/AdminHome";
 import AdminAbout from "./components/private/AdminAbout";
@@ -24,6 +23,8 @@ import AdminLibrary from "./components/private/AdminLibrary";
 import Layout from "./pages/private/Layout";
 import AdminGeneral from "./components/private/AdminGeneral";
 //import AdminDashboard from "./pages/private/AdminDashboard";
+import CreadorFormularios from "./components/private/CreadorFormularios";
+
 import FormActivityPage from "./pages/FormActivityPage";
 import "./App.css";
 
@@ -136,6 +137,7 @@ function App() {
           <Route path="/colabora" element={<Collaborate />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
+          {/* 
           <Route
             path="/CreadorFormularios"
             element={
@@ -144,8 +146,7 @@ function App() {
                 setPublishedForm={setPublishedForm}
               />
             }
-          />
-
+          /> */}
           <Route
             path="/formulario-inscripcion/:eventId/:activityNumber/:title"
             element={<FormActivityPage />}
@@ -176,6 +177,7 @@ function App() {
               }
             />
             <Route path="biblioteca" element={<AdminLibrary />} />
+            <Route path="CreadorFormularios" element={<CreadorFormularios />} />
           </Route>
         </Routes>
       </div>
