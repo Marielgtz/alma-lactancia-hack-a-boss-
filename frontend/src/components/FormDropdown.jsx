@@ -44,7 +44,7 @@ const FormDropdown = ({
   return (
     <div className="contenedor-seleccione-formulario">
       <div className="contenedor-titulo-buscador">
-        <h2>Seleccione un formulario de la lista:</h2>
+        <h2>PASO 2: Seleccione un formulario de la lista:</h2>
         <input
           className="buscar-formulario-input"
           type="text"
