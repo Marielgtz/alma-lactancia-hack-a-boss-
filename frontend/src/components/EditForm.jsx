@@ -86,9 +86,12 @@ const EditForm = ({
 
         <button
           className="boton-cerrar-editor"
-          onClick={() => setEditingForm(false)}
+          onClick={() => {
+            setEditingForm(false); 
+            setEditingForm(null)}
+          }
         >
-          <FontAwesomeIcon icon={faTimes} /> Cerrar editor
+          <FontAwesomeIcon icon={faTimes} /> Cerrar edi;tor
         </button>
         <button className="boton-actualizar-formulario" type="submit">
           Actualizar formulario
