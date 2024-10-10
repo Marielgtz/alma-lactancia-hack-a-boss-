@@ -9,22 +9,21 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
   const [forms, setForms] = useState({});
   const [editingForm, setEditingForm] = useState(false);
   const [selectedForm, setSelectedForm] = useState(null);
-  useEffect(()=>{
-    console.log("Editing form?:",editingForm);
-    
-  },[editingForm])
+  useEffect(() => {
+    console.log("Editing form?:", editingForm);
+  }, [editingForm]);
   return (
     <div className="contenedor-opciones-formularios">
       <h1>Formularios</h1>
-      { editingForm ? (
+      {editingForm ? (
         <EditForm
-            setEditingForm={setEditingForm}
-            selectedForm={selectedForm}
-            setForms={setForms}
-            setSelectedForm={setSelectedForm}
-            setPublishedForm={setPublishedForm}
-            publishedForm={publishedForm}
-          />
+          setEditingForm={setEditingForm}
+          selectedForm={selectedForm}
+          setForms={setForms}
+          setSelectedForm={setSelectedForm}
+          setPublishedForm={setPublishedForm}
+          publishedForm={publishedForm}
+        />
       ) : (
         <>
             <div className="contenedor-pasos">
@@ -61,7 +60,6 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
           </div>
         </>
       )}
-
     </div>
   );
 };

@@ -5,8 +5,9 @@
   background-color: #fdeee7;
 }
 .admin-content {
-  width: fit-content;
+  width: calc(100% - 250px);
   max-width: 100%;
+  margin-left: 270px;
   flex-grow: 1; /* Permite que este contenedor crezca según el contenido */
   overflow-y: auto; /* Agrega scroll si el contenido es más largo que la ventana */
   padding: 1rem;
@@ -56,12 +57,13 @@
 /*Sidebar*/
 
 .sidebar {
+  position: fixed;
   background-color: #d8e2dc;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-
+  height: 100vh;
   /* Ancho mínimo y responsive */
   min-width: 250px; /* Ancho mínimo */
   width: 20vw; /* Ancho relativo en vista normal */
