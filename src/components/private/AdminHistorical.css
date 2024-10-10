@@ -84,3 +84,59 @@
   text-align: center;
   margin-top: 20px;
 }
+/* Ajustes generales para móviles */
+@media (max-width: 768px) {
+  .settings-content-historico {
+    margin: 0 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .texto-seccion-historico {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .no-publication-message {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+
+  .instagram-post-container {
+    margin-top: 1rem;
+    flex-direction: column;
+    max-height: 350px;
+  }
+  .instagram-form-select {
+    width: 100%;
+  }
+  .instagram-form-input {
+    width: 100%;
+  }
+  .instagram-form-input::placeholder {
+    font-weight: 400;
+    font-size: 0.8rem;
+  }
+  .instagram-form-buttons {
+    flex-direction: column;
+    font-weight: 400;
+  }
+  .instagram-form-button-submit,
+  .instagram-form-button-delete {
+    width: 100%; /* Hacer que los botones ocupen el ancho completo en pantallas pequeñas */
+    margin: 0.5rem 0; /* Añadir espacio entre los botones */
+  }
+
+  .instagram-form-button-submit {
+    margin-top: 1rem;
+  }
+
+  .instagram-post-container .instagram-post {
+    max-width: 100%; /* Ajustar la imagen para que sea completamente responsiva */
+    height: auto;
+  }
+
+  .no-post-message {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}

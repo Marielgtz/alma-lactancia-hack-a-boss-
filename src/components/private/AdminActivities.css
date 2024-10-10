@@ -1,7 +1,7 @@
 .settings-content {
   margin-top: 3rem;
   border-radius: 0;
-  width: 50vw;
+  width: 70vw;
 }
 
 .titulo-actividades-principal,
@@ -29,4 +29,16 @@ ol {
 
 .hidden {
   display: none;
+}
+/*VERSION MOBILE*/
+
+@media (max-width: 768px) {
+  .settings-content {
+    margin: 3rem 0;
+  }
+
+  button.list-btn {
+    width: 100%;
+    font-size: 0.7rem;
+  }
 }

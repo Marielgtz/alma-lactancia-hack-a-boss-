@@ -14,7 +14,6 @@ import Library from "./pages/Library";
 import Collaborate from "./pages/Collaborate";
 import Contact from "./pages/Contact";
 import Confirmation from "./pages/MsgConfirmation";
-import Prueba from "./components/prueba";
 import NotFoundPage from "./pages/NotFoundPage";
 import AdminHome from "./components/private/AdminHome";
 import AdminAbout from "./components/private/AdminAbout";
@@ -24,6 +23,8 @@ import AdminLibrary from "./components/private/AdminLibrary";
 import Layout from "./pages/private/Layout";
 import AdminGeneral from "./components/private/AdminGeneral";
 //import AdminDashboard from "./pages/private/AdminDashboard";
+import CreadorFormularios from "./components/private/CreadorFormularios";
+
 import FormActivityPage from "./pages/FormActivityPage";
 import "./App.css";
 
@@ -31,19 +32,8 @@ import "./App.css";
 function Alert() {
   const location = useLocation();
 
-  // Lista de rutas donde NO se mostrará el Alert
-  const excludedPaths = [
-    "/dashboard",
-    "/dashboard/general",
-    "/dashboard/inicio",
-    "/dashboard/quienes-somos",
-    "/dashboard/actividades",
-    "/dashboard/historico",
-    "/dashboard/biblioteca",
-  ];
-
-  // Si la ruta actual está en la lista de rutas excluidas, no renderiza el Alert
-  if (excludedPaths.includes(location.pathname)) {
+  // Si la ruta actual empieza con "/dashboard", no renderiza el Alert
+  if (location.pathname.startsWith("/dashboard")) {
     return null;
   }
 
@@ -147,16 +137,16 @@ function App() {
           <Route path="/colabora" element={<Collaborate />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/confirmacion" element={<Confirmation />} />
+          {/* 
           <Route
-            path="/prueba"
+            path="/CreadorFormularios"
             element={
-              <Prueba
+              <CreadorFormularios
                 publishedForm={publishedForm}
                 setPublishedForm={setPublishedForm}
               />
             }
-          />
-
+          /> */}
           <Route
             path="/formulario-inscripcion/:eventId/:activityNumber/:title"
             element={<FormActivityPage />}
@@ -187,6 +177,7 @@ function App() {
               }
             />
             <Route path="biblioteca" element={<AdminLibrary />} />
+            <Route path="CreadorFormularios" element={<CreadorFormularios />} />
           </Route>
         </Routes>
       </div>

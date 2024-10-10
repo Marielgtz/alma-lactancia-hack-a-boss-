@@ -53,9 +53,11 @@
   font-size: 20px;
   margin-bottom: 2rem;
 }
+
 .name input,
 .surname input,
-.role input, .description input{
+.role input,
+.description input {
   display: block;
   font-family: outfit;
   color: black;
@@ -69,4 +71,50 @@
 }
 label {
   font-family: outfit;
+  margin-left: 0;
+}
+
+/*VERSION MOBILE*/
+
+@media (max-width: 768px) {
+  .settings-content-equipo {
+    width: 95%;
+    padding: 0;
+    overflow-x: hidden;
+    margin-left: 1rem;
+  }
+  #edit-collaborator-div {
+    height: 100vh;
+    width: fit-content;
+  }
+
+  .margin-left-box {
+    margin-left: 1.5rem;
+  }
+  .description {
+    width: 60%;
+  }
+  .name input,
+  .surname input,
+  .role input,
+  .description input {
+    display: block;
+    font-family: outfit;
+    color: black;
+    width: 70%; /* Mantener el ancho al 80% en todas las pantallas */
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: #d8e2dc;
+  }
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .texto-editando-nosotras,
+  .texto-rango-nosotras {
+    width: 300px;
+  }
 }

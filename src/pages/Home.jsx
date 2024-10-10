@@ -9,8 +9,11 @@ import useContactInfo from '../hooks/useContactInfo.js'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-
 import './Home.css'
+
+// URL de la imagen proporcionada (icono pecho)
+const DEFAULT_IMAGE_URL = 'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'    
+
 
 const Home = () => {
     const API_BASE_URL = import.meta.env.VITE_API_URL
@@ -22,8 +25,6 @@ const Home = () => {
     const [error, setError] = useState(null)
 
     const imageHomeSrc = home?.imageHome
-        ? `${API_BASE_URL}/images/${home.imageHome}`
-        : imageHome
     const textsNosotras = home?.sectionText ? home.sectionText.split('\n') : []
     const titleCTA = home?.titleHome || ''
 
@@ -155,29 +156,32 @@ const Home = () => {
                             >
                                 <i className='fas fa-chevron-left'></i>
                             </button>
-                            <button
-                                className='carousel-control next'
-                                onClick={nextSlide}
-                            >
-                                <i className='fas fa-chevron-right'></i>
-                            </button>
                         </div>
                         <div className='experience-cards'>
-                            {experiences.map((experience) => (
+                            {experiences
+                            .slice(currentIndex, currentIndex + cardsToShow)
+                            .map((experience) => (
                                 <div
                                     key={experience.id}
                                     className='experience-card'
                                 >
                                     <img
-                                        src={`${
-                                            import.meta.env.VITE_API_URL
-                                        }/images/${experience.image}`}
+                                        src={experience.image !== 'Sin imagen'
+                                            ? experience.image
+                                            : DEFAULT_IMAGE_URL
+                                        }
                                         alt={experience.image}
                                     />
                                     <p>{experience.text}</p>
                                 </div>
                             ))}
                         </div>
+                            <button
+                                className='carousel-control next'
+                                onClick={nextSlide}
+                            >
+                                <i className='fas fa-chevron-right'></i>
+                            </button>
                     </div>
                 </div>
             </main>

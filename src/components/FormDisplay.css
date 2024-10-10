@@ -32,7 +32,6 @@
 }
 
 .formulario-inscripcion-input {
-  width: 100%;
   padding: 10px;
   margin: 0;
   display: block;
@@ -46,7 +45,9 @@
   border-radius: 2rem;
   background-color: #d8e2dc;
 }
-
+.formulario-inscripcion-input::placeholder {
+  padding-left: 1rem;
+}
 .formulario-inscripcion-select {
   display: flex;
   align-items: center;
@@ -84,4 +85,7 @@
   border: none;
   border-radius: 2rem;
   background-color: #d8e2dc;
+}
+.captcha-input-formulario::placeholder {
+  padding-left: 1rem;
 }

@@ -24,7 +24,9 @@
   border-radius: 5px;
   margin: 0;
 }
-
+.instagram-form-input::placeholder {
+  padding-left: 1rem;
+}
 .instagram-form-input:focus,
 .instagram-form-select:focus {
   outline: none;

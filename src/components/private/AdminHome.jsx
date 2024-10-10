@@ -4,7 +4,7 @@ import Nosotras from "./Nosotras";
 import Hero from "./Hero";
 import "./AdminHome.css";
 
-const AdminHome = ({checkedExperiences, setCheckedExperiences}) => {
+const AdminHome = ({ checkedExperiences, setCheckedExperiences }) => {
   const {
     handleSectionChange,
     handleCancelTitle,
@@ -27,7 +27,7 @@ const AdminHome = ({checkedExperiences, setCheckedExperiences}) => {
   return (
     <main className="settings-content-inicio">
       <div className="contenedor-secciones-dinamicas-dashboard">
-        <h1 className="titulo-escojer-seccion">
+        <h1 className="titulo-escoger-seccion">
           Escoge qué sección quieres editar:
         </h1>
         <div className="panel-nav-btn">

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import './AdminGeneral.css'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL
+
 const AdminGeneral = () => {
     const [settings, setSettings] = useState({
         logo: '',
@@ -11,19 +13,27 @@ const AdminGeneral = () => {
         email: '',
     })
     const [file, setFile] = useState(null)
-    const [message, setMessage] = useState('')
-    const [messageType, setMessageType] = useState('success')
 
+    const notify = (type, message) => {
+        toast[type](message, {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        })
+    }
+
+    // Fetch de los datos actuales
     useEffect(() => {
-        axios
-            .get(`${API_BASE_URL}/get-home-data`)
-            .then((response) => {
-                const { generalSettings } = response.data.form
+        fetch(`${API_BASE_URL}/get-home-data`)
+            .then((response) => response.json())
+            .then((data) => {
+                const { generalSettings } = data.form
                 setSettings(generalSettings)
             })
-            .catch((error) =>
-                console.error('Error al obtener los datos:', error)
-            )
+            .catch((error) => console.error('Error fetching data:', error))
     }, [])
 
     const handleChange = (e) => {
@@ -39,79 +49,70 @@ const AdminGeneral = () => {
     }
 
     const validateAndUpdateField = async (fieldName, value) => {
-        // Validar campos vacíos
         if (fieldName !== 'logo' && !value) {
-            setMessageType('error')
-            setMessage(`El campo de ${fieldName} no puede estar vacío`)
-            setTimeout(() => {
-                setMessage('')
-            }, 3000)
+            notify('error', `El campo de ${fieldName} no puede estar vacío`)
             return
         }
 
         try {
             if (fieldName === 'logo' && file) {
-                // Si es un archivo, usa FormData
                 const formData = new FormData()
                 formData.append('logo', file)
 
-                await axios
-                    .patch(`${API_BASE_URL}/update-home-data`, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    })
-                    .then((response) => {
-                        const { generalSettings } = response.data.data
-                        setSettings(generalSettings)
-                    })
-                    .catch((error) =>
-                        console.error('Error al obtener los datos:', error)
-                    )
+                const response = await fetch(
+                    `${API_BASE_URL}/update-home-data`,
+                    {
+                        method: 'PATCH',
+                        body: formData,
+                    }
+                )
+
+                if (!response.ok) {
+                    throw new Error('Error uploading file')
+                }
+
+                const result = await response.json()
+                const { generalSettings } = result.data
+                setSettings(generalSettings)
+                notify('success', 'Logotipo actualizado correctamente')
             } else {
-                // Si es texto (como Instagram, Facebook, Email), envía JSON
                 const updateData = {
                     generalSettings: {
                         [fieldName]: value,
                     },
                 }
 
-                await axios.patch(
+                const response = await fetch(
                     `${API_BASE_URL}/update-home-data`,
-                    updateData,
                     {
+                        method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
                         },
+                        body: JSON.stringify(updateData),
                     }
                 )
+
+                if (!response.ok) {
+                    throw new Error(`Error updating ${fieldName}`)
+                }
+
+                notify('success', `${fieldName} actualizado correctamente`)
             }
-
-            setMessageType('success')
-            setMessage(`${fieldName} actualizado correctamente`)
         } catch (error) {
-            setMessageType('error')
-            setMessage(`Error al actualizar ${fieldName}: ${error.message}`)
+            notify(
+                'error',
+                `Error al actualizar ${fieldName}: ${error.message}`
+            )
         }
-
-        setTimeout(() => {
-            setMessage('')
-        }, 3000)
     }
 
     return (
         <main className='settings-content-general'>
-            {message && (
-                <div className={`popup-message ${messageType}`}>{message}</div>
-            )}
             <div className='logo-section'>
                 <h3>Logotipo</h3>
                 <img
-                    src={
-                        file
-                            ? URL.createObjectURL(file)
-                            : `${API_BASE_URL}/images/${settings?.logo}`
-                    }
+                    src={file ? URL.createObjectURL(file) : `${settings?.logo}`}
                     alt='Logo'
                     className='logo-image'
                 />
