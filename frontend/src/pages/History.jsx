@@ -47,6 +47,34 @@ const History = ({ instagramPost, instagramPostList }) => {
             }
           })}
         </ol>
+
+        {/* Banner de redes sociales */}
+        <div className="banner-redes-historico">
+          <p className="texto-banner-historico">
+            ¡Únete a nuestra comunidad!
+            <br />
+            Sigue nuestras redes sociales para recibir actualizaciones y
+            contenido exclusivo.
+          </p>
+          <div className="social-media">
+            <a
+              href="https://www.instagram.com/alma_lactancia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-media-item"
+            >
+              <i className="fab fa-instagram"></i> {/* Icono de Instagram */}
+            </a>
+            <a
+              href="https://www.facebook.com/AlmaLactanciaMaterna"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-media-item"
+            >
+              <i className="fab fa-facebook-f"></i> {/* Icono de Facebook */}
+            </a>
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
