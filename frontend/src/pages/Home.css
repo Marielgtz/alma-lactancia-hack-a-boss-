@@ -226,6 +226,14 @@ body,
   color: var(--hover-color); /* Cambia el color al pasar el ratón */
 }
 
+.carousel-control.prev {
+  left: 0rem;
+}
+
+.carousel-control.next {
+  right: 0rem;
+}
+
 /* Estilos responsive */
 @media (max-width: 768px) {
   .img-section {

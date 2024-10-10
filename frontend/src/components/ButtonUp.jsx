@@ -41,7 +41,7 @@ const ButtonUp = () => {
   }, []);
 
   return (
-    <button id="up" className="btn-up active">
+    <button id="up" className="btn-up hide">
       Up
     </button>
   );

@@ -1,29 +1,32 @@
 /* Button styles */
 .btn-up {
   position: fixed;
-  bottom: 50px;
-  right: 20px;
+  bottom: 30px;
+  right: 30px;
   padding: 10px;
   background-color: #b380b5;
-  color: black;
+  color: white;
+  font-size: 16px;
   width: 50px;
   height: 50px;
   border: none;
   border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   opacity: 0;
   visibility: hidden;
+  z-index: 1000;
 }
 
-/* Hide class - makes the button invisible and non-interactive */
+/* Hide class */
 .btn-up.hide {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-/* Active class - makes the button visible and interactive */
+/* Active class */
 .btn-up.active {
   opacity: 1;
   visibility: visible;
