@@ -1,5 +1,10 @@
+import { useState } from "react";
 import useInstagramForm from "../hooks/useInstagramForm";
 import "./InstagramForm.css";
+import "./private/Modals/InstagramTutorial.css"
+import Modal from "../modal/ModalBooks";
+import ModalInstructions from "../modal/ModalInstructions";
+import InstagramTutorial from "./private/Modals/InstagramTutorial";
 
 const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
   const {
@@ -11,12 +16,23 @@ const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
     handleDeletePost,
   } = useInstagramForm(setInstagramPost);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   const handlePostChange = (e) => {
     handlePostNumberChange(e);
     setSelectedPostNumber(e.target.value);
   };
 
+  const displayInfo = (e) => {
+    e.preventDefault();
+    toggleModal();
+  };
+
   return (
+    <>
     <form className="instagram-form-container" onSubmit={handleSubmit}>
       <div>
         <p className="texto-descriptivo-accion">
@@ -55,12 +71,10 @@ const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
           placeholder="Introduce el código de inserción de Instagram"
           />
       </div>
-          <details>
-          <summary>¿Cómo obtener el código de inserción?</summary>
-          <p>1. En la web de Instagram (desde un ordenador), abrid la publicación que queréis subir.</p>
-          <p>2. Una vez abierta, en la esquina superior aparecen tres puntitos (...) que si hacéis click abren otro menú.</p>
-          <p>3. Ahí aparece una opción que se llama "CÓDIGO DE INSERCIÓN". Si hacéis click y lo copiáis, luego lo podréis pegar aquí! </p>
-          </details>
+      <button 
+        onClick={displayInfo}
+        className="help-btn-insta"
+      >¿Cómo obtener el código de inserción?</button>
 
       <div className="instagram-form-buttons">
         <button className="instagram-form-button-submit" type="submit">
@@ -74,6 +88,11 @@ const InstagramForm = ({ setInstagramPost, setSelectedPostNumber }) => {
         </button>
       </div>
     </form>
+    <Modal isOpen={isModalOpen} onClose={toggleModal}>
+      <InstagramTutorial />
+    </Modal>
+    </>
+
   );
 };
 
