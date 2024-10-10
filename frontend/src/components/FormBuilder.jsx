@@ -53,7 +53,7 @@ const FormBuilder = ({ setForms }) => {
                 <option value="text">Texto</option>
                 <option value="number">Número</option>
                 <option value="email">Email</option>
-                <option value="password">Contraseña</option>
+                {/* <option value="password">Contraseña</option> */}
               </select>
               <h3>2.2 Escribe el contenido del campo</h3>
 

@@ -58,7 +58,6 @@ const Home = () => {
                     throw new Error(data, 'Error al obtener las experiencias')
                 }
                 const data = await response.json()
-                console.log(data)
 
                 setExperiences(data.data)
             } catch (error) {

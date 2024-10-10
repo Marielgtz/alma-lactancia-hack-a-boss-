@@ -60,7 +60,7 @@ const EditForm = ({
                     <option value="text">Texto</option>
                     <option value="number">Número</option>
                     <option value="email">Email</option>
-                    <option value="password">Contraseña</option>
+                    {/* <option value="password">Contraseña</option> */}
                   </select>
                   <button
                     className="boton-eliminar-campo-editar-formulario"
