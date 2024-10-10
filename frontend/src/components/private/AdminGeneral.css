@@ -45,7 +45,7 @@
   cursor: pointer;
   border-radius: 0.5rem;
   height: 2.3rem;
-  width: 8.5rem;
+  width: 12rem;
   margin-top: 1rem;
   font-family: Outfit;
   /* Efecto 3D */
@@ -60,7 +60,6 @@
   cursor: pointer;
   border-radius: 0.5rem;
   height: 2.3rem;
-  width: 8.5rem;
   margin-top: 1rem;
   font-family: Outfit;
   /* Efecto 3D */
@@ -188,12 +187,33 @@
 
 @media (max-width: 768px) {
   .settings-content-general {
+    width: 90vw; /* Ocupar el 90% del ancho de la pantalla */
+    margin: 0 auto; /* Centrar el contenido */
     background-color: #fdeee7;
     border-radius: 0;
-    margin-bottom: 0;
-    padding-bottom: 3rem;
+    padding: 2rem 1rem; /* Agregar algo de padding interno */
   }
-  .margin-left-box {
-    margin-left: 1.5rem;
+
+  .margin-left-box,
+  .logo-section,
+  .social-links-form label {
+    margin-left: 0; /* Eliminar márgenes a la izquierda en móviles */
+    padding: 0 1rem; /* Agregar un padding interno para espacio */
+  }
+
+  .editTitle-input,
+  .logo-buttons input,
+  .social-links-form input {
+    width: 100%; /* Ocupar el 100% del ancho disponible */
+  }
+
+  .logo-buttons,
+  .social-links-form {
+    gap: 1rem; /* Ajustar el espacio entre botones en móviles */
+  }
+
+  .popup-message {
+    width: 90vw; /* Ajustar el ancho del popup en móviles */
+    left: 5vw; /* Centrar el popup */
   }
 }

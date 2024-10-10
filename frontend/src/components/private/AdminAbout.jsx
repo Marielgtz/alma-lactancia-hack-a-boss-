@@ -63,6 +63,20 @@ const AdminAbout = () => {
       : "Colaboración externa";
     setToEdit(collaboratorData);
   }
+  /*
+ function toggleEditMode(collaboratorData = {}, isMember = false) {
+  // Si isEditMode está en false, volvemos a la vista normal y limpiamos toEdit
+  if (isEditMode) {
+    setIsEditMode(false);
+    setToEdit({});
+  } else {
+    setIsEditMode(true);
+    collaboratorData.hierarchy = !isMember
+      ? "Miembro del equipo"
+      : "Colaboración externa";
+    setToEdit(collaboratorData);
+  }
+}*/
 
   return (
     <main className="settings-content-equipo collaborators-admin margin-left-box">
@@ -77,7 +91,7 @@ const AdminAbout = () => {
             {teamMembers.map((member) => (
               <li key={member.id}>
                 <button
-                  className="list-btn"
+                  className="list-btn-equipo"
                   onClick={() => toggleEditMode(member, false)}
                 >
                   {`${member.name} ${member.surname}`}
@@ -103,7 +117,7 @@ const AdminAbout = () => {
             {collaborators.map((collaborator) => (
               <li key={collaborator.id}>
                 <button
-                  className="list-btn"
+                  className="list-btn-equipo"
                   onClick={() => toggleEditMode(collaborator, true)}
                 >
                   {`${collaborator.name} ${collaborator.surname}`}
