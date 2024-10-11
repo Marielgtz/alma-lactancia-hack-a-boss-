@@ -182,31 +182,41 @@ body,
   overflow: hidden;
 }
 .experience-card {
+  width: 300px; /* Establece un tamaño fijo */
+  height: 150px; /* Puedes ajustar la altura según sea necesario */
   display: flex;
-  align-items: center;
-  background-color: var(--secondary-color); /* Fondo con color personalizado */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 1.4rem;
-  margin: 1rem; /* Márgenes */
-  box-shadow: 4px 4px 10px rgba(179, 128, 181, 0.5); /* Sombra para darle un efecto de elevación */
-  max-width: 450px; /* Ancho máximo de 400px */
-  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: left;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .experience-card img {
-  width: 100px; /* Tamaño de la imagen */
+  width: 100px;
   height: 100px;
-  border-radius: 50%; /* Imagen completamente redonda */
+  border-radius: 50%;
   object-fit: cover;
-  margin-right: 1.5rem; /* Separación entre la imagen y el texto */
+  margin-right: 1.5rem;
+}
+
+.experience-card h3,
+.experience-card p {
+  margin: 0;
+  text-align: left;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .experience-card p {
-  font-family: var(--font-secondary); /* Fuente secundaria */
-  color: var(--dark-text); /* Color del texto */
-  font-size: 0.9rem;
-  margin: 0; /* Eliminar márgenes adicionales en el texto */
-  flex: 1; /* Asegura que el texto ocupe el espacio restante */
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: 100px;
+  overflow: hidden;
 }
 
 /* Controles del carrusel */
