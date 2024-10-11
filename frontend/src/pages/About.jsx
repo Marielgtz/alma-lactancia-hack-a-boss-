@@ -5,7 +5,8 @@ import fedalma from '../images/cropped-logo_fedalma_200.png'
 import fedegalma from '../images/logo-fedegalma1-300x102.jpg'
 import './About.css'
 
-const defaultCollaboratorPicture = "https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png"
+const defaultCollaboratorPicture =
+    'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'
 
 const About = () => {
     const [openInfo, setOpenInfo] = useState(null)
@@ -40,7 +41,7 @@ const About = () => {
                 setTeamMembers(teamData.data)
                 setExternalCollaborators(externalData.data)
 
-                console.log(teamMembers) 
+                console.log(teamMembers)
                 console.log(externalCollaborators)
             } catch (error) {
                 console.error('Error al obtener los colaboradores:', error)
@@ -82,10 +83,7 @@ const About = () => {
                                             src={
                                                 member.image &&
                                                 member.image !== 'Sin imagen'
-                                                    ? `${
-                                                          import.meta.env
-                                                              .VITE_API_URL
-                                                      }/images/${member.image}`
+                                                    ? member.image
                                                     : defaultCollaboratorPicture
                                             }
                                             alt={member.name}
