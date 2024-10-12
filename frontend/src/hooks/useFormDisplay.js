@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { toast } from 'react-toastify'
 const useFormDisplay = (jsonNumber) => {
     const [formToShow, setFormToShow] = useState({})
 
@@ -37,6 +38,7 @@ const useFormDisplay = (jsonNumber) => {
         }, {})
 
         try {
+            toast.loading('Enviando datos...')
             const response = await fetch(
                 import.meta.env.VITE_API_URL +
                     '/submit-form/' +
@@ -54,6 +56,8 @@ const useFormDisplay = (jsonNumber) => {
             )
 
             if (response.ok) {
+                toast.dismiss()
+                toast.success('Datos enviados exitosamente')
                 console.log('Datos enviados exitosamente', formValues)
                 formRef.current.reset()
             } else {
@@ -62,6 +66,7 @@ const useFormDisplay = (jsonNumber) => {
                 throw new Error(errorMessage)
             }
         } catch (error) {
+            toast.success('Error al enviar los datos')
             console.error('Ha ocurrido un error:', error)
         }
     }

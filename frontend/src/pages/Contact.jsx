@@ -73,6 +73,7 @@ const Contact = () => {
       }
 
       const data = await response.json();
+      toast.dismiss();
       toast.success('Mensaje enviado correctamente');
       setFormData({
         name: "",
