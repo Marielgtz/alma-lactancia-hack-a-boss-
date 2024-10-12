@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const CaptchaComponent = ({
     handleSubmit,
     buttonClassName,
     captchaInputClassName,
+    validateForm
 }) => {
     const [captchaSvg, setCaptchaSvg] = useState('')
     const [captchaInput, setCaptchaInput] = useState('')
@@ -11,7 +13,12 @@ const CaptchaComponent = ({
     const validateCaptcha = import.meta.env.VITE_API_URL + '/validate-captcha'
     const generateCaptcha = import.meta.env.VITE_API_URL + '/generate-captcha'
 
+    
+
     const fetchCaptcha = async () => {
+        if (!validateForm()) {
+            return {message: "Missing required fields"};
+        }
         try {
             const response = await fetch(generateCaptcha, {
                 credentials: 'include',
@@ -23,6 +30,7 @@ const CaptchaComponent = ({
             setCaptchaSvg(data)
         } catch (error) {
             console.error('Error fetching CAPTCHA:', error)
+            toast.error("Error en la validación captcha")
         }
     }
 
@@ -36,6 +44,13 @@ const CaptchaComponent = ({
 
     const handleCaptchaValidation = async () => {
         try {
+            // Check for required fields before starting CAPTCHA validation
+            if (!validateForm()) {
+                toast.error("Por favor, completa todos los campos requeridos.");
+                return;  // Stop further execution if form validation fails
+            }
+    
+            toast.loading('Validando formulario...');
             const response = await fetch(validateCaptcha, {
                 method: 'POST',
                 headers: {
@@ -45,29 +60,43 @@ const CaptchaComponent = ({
                     captcha: captchaInput,
                 }),
                 credentials: 'include',
-            })
-
+            });
+    
             if (!response.ok) {
-                alert('Captcha incorrecto. Inténtalo de nuevo.')
-                throw new Error('Network response was not ok')
+                toast.dismiss();
+                toast.error('Captcha incorrecto. Inténtalo de nuevo.');
+                throw new Error('Network response was not ok');
             }
-
-            const data = await response.json()
-
+    
+            const data = await response.json();
+    
             if (data.success) {
-                handleSubmit()
-                setCaptchaInput('')
+                toast.dismiss();
+                toast.success('Mensaje enviado correctamente');
+                handleSubmit();
+                setCaptchaInput('');
             } else {
-                alert('Captcha incorrecto. Inténtalo de nuevo.')
-                setCaptchaInput('')
-                fetchCaptcha()
+                toast.dismiss();
+                toast.error('Captcha incorrecto. Inténtalo de nuevo.');
+                setCaptchaInput('');
+                fetchCaptcha();
             }
         } catch (error) {
-            console.log('Ha ocurrido un error', error)
-            setCaptchaInput('')
-            fetchCaptcha()
+            toast.dismiss();
+    
+            // Check if error is due to missing fields
+            if (error.message.includes('Missing required fields')) {
+                toast.error('Por favor, completa todos los campos requeridos.');
+            } else {
+                // Display a general error message for any other issue
+                toast.error('Error en el envío. Inténtalo de nuevo.');
+            }
+    
+            console.log('Ha ocurrido un error', error);
+            setCaptchaInput('');
+            fetchCaptcha();
         }
-    }
+    };
 
     return (
         <div className='captcha-main'>
