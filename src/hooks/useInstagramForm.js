@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { toast } from "react-toastify";
+import { isSuccessToast } from '../utils/toast.js';
 
 const useInstagramForm = (setInstagramPost) => {
     try {
@@ -16,6 +18,8 @@ const useInstagramForm = (setInstagramPost) => {
                 import.meta.env.VITE_API_URL
             }/check-instagram-post/${postNumber}`
 
+            const toastId = toast.loading('Comprobando si hay una publicación...')
+
             try {
                 const response = await fetch(postUrl, {
                     method: 'GET',
@@ -32,9 +36,15 @@ const useInstagramForm = (setInstagramPost) => {
                 }
             } catch (error) {
                 console.error('Ha ocurrido un error:', error)
+                toast.update(toastId, { 
+                    render: `Error al comprobar la publicación: ${error.message}`, 
+                    type: 'error', 
+                    isLoading: false, 
+                    autoClose: 3000 
+                });
             }
             if (!isPublish) {
-                window.alert('No hay publicaciones en esa ranura')
+                isSuccessToast(false, 'No hay publicaciones en esa ranura', toastId)
                 return
             }
 
@@ -42,7 +52,10 @@ const useInstagramForm = (setInstagramPost) => {
             const confirm = window.confirm(
                 `Estás a punto de borrar la publicación ${postNumber}, ¿quieres continuar?`
             )
-            if (!confirm) return
+            if (!confirm) {
+                toast.dismiss(toastId);
+                return;
+            }
             const url = `${
                 import.meta.env.VITE_API_URL
             }/unpublish-instagram-post/${postNumber}`
@@ -60,6 +73,7 @@ const useInstagramForm = (setInstagramPost) => {
                         newData[Number(postNumber) - 1] = {}
                         return newData
                     })
+                    isSuccessToast(true, 'Publicación borrada correctamente', toastId) 
                 } else {
                     const errorData = await response.json()
                     const errorMessage = errorData.error || response.statusText
@@ -67,6 +81,7 @@ const useInstagramForm = (setInstagramPost) => {
                 }
             } catch (error) {
                 console.error('Ha ocurrido un error:', error)
+                isSuccessToast(false, `Ha ocurrido un error: ${error.message}`, toastId)
             }
         }
         const handleSubmit = async (e) => {
@@ -75,6 +90,8 @@ const useInstagramForm = (setInstagramPost) => {
             const url = `${
                 import.meta.env.VITE_API_URL
             }/save-instagram-post/${postNumber}`
+
+            const toastId = toast.loading('Guardando publicación...')
 
             try {
                 const response = await fetch(url, {
@@ -88,13 +105,14 @@ const useInstagramForm = (setInstagramPost) => {
                 if (response.ok) {
                     const res = await response.json()
                     console.log(res.message)
+                    isSuccessToast(true, 'Publicación guardada correctamente', toastId)
                 } else {
                     const errorData = await response.json()
                     const errorMessage = errorData.error || response.statusText
                     throw new Error(errorMessage)
                 }
             } catch (error) {
-                console.error('Ha ocurrido un error:', error)
+                isSuccessToast(false, `Ha ocurrido un error: ${error.message}`, toastId)
             }
 
             setInstagramPost((prevData) => {

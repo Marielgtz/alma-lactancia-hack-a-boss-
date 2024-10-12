@@ -12,10 +12,10 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './Home.css'
 
 // URL de la imagen proporcionada (icono pecho)
-const DEFAULT_IMAGE_URL = 'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'    
+const DEFAULT_IMAGE_URL =
+    'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'
 
-
-const Home = () => {
+const Home = ({ homeData }) => {
     const API_BASE_URL = import.meta.env.VITE_API_URL
     const { home } = useContactInfo()
     const [cardsToShow, setCardsToShow] = useState(2)
@@ -58,7 +58,6 @@ const Home = () => {
                     throw new Error(data, 'Error al obtener las experiencias')
                 }
                 const data = await response.json()
-                console.log(data)
 
                 setExperiences(data.data)
             } catch (error) {
@@ -69,7 +68,7 @@ const Home = () => {
         }
 
         fetchExperiences()
-    }, [])
+    }, [homeData])
 
     const totalExperiences = experiences.length
 
@@ -159,29 +158,31 @@ const Home = () => {
                         </div>
                         <div className='experience-cards'>
                             {experiences
-                            .slice(currentIndex, currentIndex + cardsToShow)
-                            .map((experience) => (
-                                <div
-                                    key={experience.id}
-                                    className='experience-card'
-                                >
-                                    <img
-                                        src={experience.image !== 'Sin imagen'
-                                            ? experience.image
-                                            : DEFAULT_IMAGE_URL
-                                        }
-                                        alt={experience.image}
-                                    />
-                                    <p>{experience.text}</p>
-                                </div>
-                            ))}
+                                .slice(currentIndex, currentIndex + cardsToShow)
+                                .map((experience) => (
+                                    <div
+                                        key={experience.id}
+                                        className='experience-card'
+                                    >
+                                        <img
+                                            src={
+                                                experience.image !==
+                                                'Sin imagen'
+                                                    ? experience.image
+                                                    : DEFAULT_IMAGE_URL
+                                            }
+                                            alt={experience.image}
+                                        />
+                                        <p>{experience.text}</p>
+                                    </div>
+                                ))}
                         </div>
-                            <button
-                                className='carousel-control next'
-                                onClick={nextSlide}
-                            >
-                                <i className='fas fa-chevron-right'></i>
-                            </button>
+                        <button
+                            className='carousel-control next'
+                            onClick={nextSlide}
+                        >
+                            <i className='fas fa-chevron-right'></i>
+                        </button>
                     </div>
                 </div>
             </main>

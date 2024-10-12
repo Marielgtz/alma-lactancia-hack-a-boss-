@@ -12,7 +12,7 @@ import formatDate from "../utils/formatDate";
 const Activities = ({ activities, setActivities }) => {
   const navigate = useNavigate();
   // const [filteredActivities, setFilteredActivites] = useState([])
-
+  console.log('resultado', activities);
   // Función que obtiene la lista de actividades
   useEffect(() => {
     async function fetchCalendar(setActivities) {
@@ -111,8 +111,12 @@ const Activities = ({ activities, setActivities }) => {
                       {activity.summary || "Título"}
                     </h1>
                     <h2 className="activities-date">
-                      {activity.exactDate || "Fecha"}
+                      {formatDate(activity.start.dateTime) || "Fecha"}
                     </h2>
+                    <p className="activities-decription">
+                    {activity.description || "descripción"}
+                    </p>
+
                     <p className="activities-location">
                       {activity.location || "Lugar"}
                     </p>

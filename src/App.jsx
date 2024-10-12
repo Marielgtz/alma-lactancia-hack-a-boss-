@@ -1,188 +1,50 @@
-import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Activities from "./pages/Activities";
-import History from "./pages/History";
-import Library from "./pages/Library";
-import Collaborate from "./pages/Collaborate";
-import Contact from "./pages/Contact";
-import Confirmation from "./pages/MsgConfirmation";
-import NotFoundPage from "./pages/NotFoundPage";
-import AdminHome from "./components/private/AdminHome";
-import AdminAbout from "./components/private/AdminAbout";
-import AdminActivities from "./components/private/AdminActivities";
-import AdminHistorical from "./components/private/AdminHistorical";
-import AdminLibrary from "./components/private/AdminLibrary";
-import Layout from "./pages/private/Layout";
-import AdminGeneral from "./components/private/AdminGeneral";
-//import AdminDashboard from "./pages/private/AdminDashboard";
-import CreadorFormularios from "./components/private/CreadorFormularios";
-
-import FormActivityPage from "./pages/FormActivityPage";
-import "./App.css";
-
-// Componente para manejar el Alert y el estilo basado en la ruta
-function Alert() {
-  const location = useLocation();
-
-  // Si la ruta actual empieza con "/dashboard", no renderiza el Alert
-  if (location.pathname.startsWith("/dashboard")) {
-    return null;
-  }
-
-  // Cambia el color del alert según la página
-  const alertStyle = {
-    backgroundColor:
-      location.pathname === "/homepage" ||
-      location.pathname === "/" ||
-      location.pathname === "/quienes-somos"
-        ? "#b380b5" // Color morado para la página de inicio
-        : "#e0bb8e", // Color alternativo para otras páginas,
-  };
-
-  return (
-    <div className="alert-div" style={alertStyle}>
-      <p id="alerttext" className="alert-text">
-        <strong className="black">
-          XX CONGRESO DE LACTANCIA MATERNA FEDALMA
-        </strong>{" "}
-        |<span className="normal">3 y 4 de Octubre de 2025</span> |
-        <a
-          href="https://www.fedalma.org/congreso-2025/"
-          className="alert-text-link"
-          target="_blank"
-        >
-          + INFO
-        </a>
-      </p>
-    </div>
-  );
-}
+import AppRoutes from './components/AppRoutes'
+import Alert from './components/Alert'
+import { BrowserRouter as Router } from 'react-router-dom'
+import './App.css'
+import useApp from './hooks/useApp'
 
 function App() {
-  const instagramPostList = Array.from({ length: 6 }, () => {
-    return {};
-  }); //Número de publicaciones de Instagram
+    const {
+        instagramPostList,
+        formList,
+        instagramPost,
+        setInstagramPost,
+        publishedForm,
+        setPublishedForm,
+        activities,
+        setActivities,
+        checkedExperiences,
+        setCheckedExperiences,
+        homeData,
+        setHomeData,
+    } = useApp()
 
-  const formList = Array.from({ length: 4 }, () => {
-    return {};
-  }); //Número de formularios que se pueden publicar.
-
-  const [instagramPost, setInstagramPost] = useState(instagramPostList);
-  const [publishedForm, setPublishedForm] = useState(formList);
-  const [activities, setActivities] = useState([]);
-  const [checkedExperiences, setCheckedExperiences] = useState([]);
-
-  useEffect(() => {
-    const fetchInstagramPost = async () => {
-      const url = `${import.meta.env.VITE_API_URL}/get-all-instagram-posts`;
-
-      try {
-        const response = await fetch(url);
-
-        if (response.ok) {
-          const res = await response.json();
-          console.log(res.message);
-          setInstagramPost(res.posts);
-        } else {
-          const errorData = await response.json();
-          const errorMessage = errorData.error || response.statusText;
-          throw new Error(errorMessage);
-        }
-      } catch (error) {
-        console.error("Ha ocurrido un error:", error);
-      }
-    };
-    fetchInstagramPost();
-  }, []);
-
-  return (
-    <Router>
-      <div className="App">
-        <Alert />
-
-        <Routes>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route
-            path="/"
-            element={<Home checkedExperiences={checkedExperiences} />}
-          />
-          <Route path="/quienes-somos" element={<About />} />
-          <Route
-            path="/actividades"
-            element={
-              <Activities
-                setActivities={setActivities}
-                activities={activities}
-              />
-            }
-          />
-          <Route
-            path="/historico"
-            element={
-              <History
-                instagramPost={instagramPost}
-                instagramPostList={instagramPostList}
-              />
-            }
-          />
-          <Route path="/biblioteca" element={<Library />} />
-          <Route path="/colabora" element={<Collaborate />} />
-          <Route path="/contacto" element={<Contact />} />
-          <Route path="/confirmacion" element={<Confirmation />} />
-          {/* 
-          <Route
-            path="/CreadorFormularios"
-            element={
-              <CreadorFormularios
-                publishedForm={publishedForm}
-                setPublishedForm={setPublishedForm}
-              />
-            }
-          /> */}
-          <Route
-            path="/formulario-inscripcion/:eventId/:activityNumber/:title"
-            element={<FormActivityPage />}
-          />
-
-          {/* Rutas del DASHBOARD */}
-          <Route path="/dashboard" element={<Layout />}>
-            {/* Redireccionar a 'general' cuando se accede a /dashboard */}
-            <Route path="general" element={<AdminGeneral />} />
-            <Route
-              path="inicio"
-              element={
-                <AdminHome
-                  checkedExperiences={checkedExperiences}
-                  setCheckedExperiences={setCheckedExperiences}
+    return (
+        <Router>
+            <div className='App'>
+                <Alert
+                    title={'XX CONGRESO DE LACTANCIA MATERNA FEDALMA'}
+                    date={'3 y 4 de Octubre de 2025'}
+                    link={'https://www.fedalma.org/congreso-2025/'}
                 />
-              }
-            />
-            <Route path="quienes-somos" element={<AdminAbout />} />
-            <Route path="actividades" element={<AdminActivities />} />
-            <Route
-              path="historico"
-              element={
-                <AdminHistorical
-                  instagramPost={instagramPost}
-                  setInstagramPost={setInstagramPost}
+                <AppRoutes
+                    instagramPost={instagramPost}
+                    setInstagramPost={setInstagramPost}
+                    publishedForm={publishedForm}
+                    setPublishedForm={setPublishedForm}
+                    activities={activities}
+                    setActivities={setActivities}
+                    checkedExperiences={checkedExperiences}
+                    setCheckedExperiences={setCheckedExperiences}
+                    homeData={homeData}
+                    setHomeData={setHomeData}
+                    formList={formList}
+                    instagramPostList={instagramPostList}
                 />
-              }
-            />
-            <Route path="biblioteca" element={<AdminLibrary />} />
-            <Route path="CreadorFormularios" element={<CreadorFormularios />} />
-          </Route>
-        </Routes>
-      </div>
-    </Router>
-  );
+            </div>
+        </Router>
+    )
 }
 
-export default App;
+export default App

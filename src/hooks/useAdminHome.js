@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-const useAdminHome = () => {
+const useAdminHome = (setHomeData) => {
     const MAX_CHARACTERS = 1800
     const [visibleSection, setVisibleSection] = useState(null)
-    const [homeData, setHomeData] = useState({
-        sectionText: '',
-        imageHome: '',
-        titleHome: '',
-        experiences: [],
-        selectedExperiences: [],
-    })
+    // const [homeData, setHomeData] = useState({
+    //     sectionText: '',
+    //     imageHome: '',
+    //     titleHome: '',
+    //     experiences: [],
+    //     selectedExperiences: [],
+    // })
     const [file, setFile] = useState(null)
     const [charactersRemaining, setCharactersRemaining] =
         useState(MAX_CHARACTERS)
@@ -47,7 +47,7 @@ const useAdminHome = () => {
     // Manejar el cambio de imagen
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0]
-        if (selectedFile) {            
+        if (selectedFile) {
             setFile(selectedFile)
             validateAndUpdateField('imageHome', selectedFile)
         }
@@ -102,11 +102,11 @@ const useAdminHome = () => {
         if (fieldName !== 'imageHome' && !value) {
             toast.error(`El campo ${fieldName} no puede estar vacío`)
             return
-        }        
+        }
 
         try {
             if (fieldName === 'imageHome' && file) {
-                const formData = new FormData()                
+                const formData = new FormData()
                 formData.append('imageHome', value)
 
                 const response = await fetch(
@@ -179,8 +179,6 @@ const useAdminHome = () => {
         visibleSection,
         charactersRemaining,
         setCharactersRemaining,
-        homeData,
-        setHomeData,
         fileInputRef,
         file,
         MAX_CHARACTERS,

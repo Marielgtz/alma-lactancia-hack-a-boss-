@@ -129,7 +129,7 @@
   padding: 0 1rem;
   text-align: center;
   font-family: bellota;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: bold;
   margin: 1;
 }
@@ -215,13 +215,15 @@
   }
 
   .activity-cards {
-    flex: 1 1 100%;
+    flex: 0 1 100%;
     margin: 0.5rem;
   }
 
   .activity-container {
     justify-content: center;
+    align-items: center;
   }
+  
 }
 
 @media (min-width: 1600px) {

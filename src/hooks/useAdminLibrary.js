@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { isSuccessToast } from '../utils/toast'
+import { isSuccessToast } from '../utils/toast.js'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL
 

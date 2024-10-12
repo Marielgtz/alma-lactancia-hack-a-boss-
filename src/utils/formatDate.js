@@ -34,10 +34,10 @@ const formatDate = (date, mod) => {
         const dayOfWeek = days[d.getDay()]
 
         const hours = d.getHours().toString().padStart(2, '0')
-        const minutes = d.getMinutes().toString().padStart(2, '0')
+        const minutes = d.getMinutes().toString().padStart(2, '0',)
 
         const timeString =
-            hours !== '00' || minutes !== '00' ? `, ${hours}:${minutes}` : ''
+            hours !== '00' || minutes !== '00' ? `, ${hours}:${minutes} hs` : ''
 
         return `${dayOfWeek}, ${dayOfMonth} de ${month} de ${year}${timeString}`
     } 
@@ -49,7 +49,7 @@ const formatDate = (date, mod) => {
         const hours = String(d.getHours()).padStart(2, '0');
         const minutes = String(d.getMinutes()).padStart(2, '0');
     
-        return `${day}/${month} (${hours}:${minutes})`;
+        return `${day}/${month} (${hours}:${minutes} hs)`;
     }
     else if (mod === "local") {
         const year = d.getFullYear();

@@ -92,8 +92,6 @@ const FormBuilder = ({ setForms }) => {
                 <strong>Email: </strong>Valida que el valor sea un correo
                 electrónico. Ejemplo: "Campo: Email → Contenido: Correo
                 electrónico". <br />
-                <strong>Contraseña: </strong>Ejemplo: "Campo: Contraseña →
-                Contenido: ".
               </p>
               <button onClick={toggleModal}>Cerrar</button>
             </div>

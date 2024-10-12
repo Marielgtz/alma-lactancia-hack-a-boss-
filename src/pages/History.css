@@ -91,6 +91,43 @@
 .instagram-cards {
   width: 100%;
 }
+/*BANNER REDES SOCIALES*/
+
+.banner-redes-historico {
+  background-color: #b380b5; /* Color de fondo del banner */
+  padding: 20px;
+  color: white;
+  margin-top: 20px; /* Espacio entre el contenido de Instagram y el banner */
+}
+.texto-banner-historico {
+  color: white;
+  text-align: center;
+  font-family: Outfit, sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  line-height: 2rem;
+}
+/* Redes sociales */
+.social-media {
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+  font-size: 2rem;
+}
+
+/* Estilo de los iconos de redes sociales */
+.social-media a {
+  color: white;
+  margin: 0 0.5em;
+}
+.social-media a svg {
+  width: 1.5rem; /* Ajustar el ancho del icono */
+  height: 1.5rem; /* Ajustar la altura del icono */
+}
+
+.social-media a svg:hover {
+  color: #e0bb8e;
+}
 
 /* Versión tablet */
 @media (max-width: 1024px) {
