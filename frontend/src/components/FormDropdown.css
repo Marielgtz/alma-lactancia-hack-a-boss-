@@ -89,6 +89,26 @@
   transition: all 0.2s ease-in-out;
 }
 
+.boton-despublicar-formulario-dropdown{
+  background-color: #797e80;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+  width: 8.5rem;
+  margin-top: 2rem;
+  margin-right: 1rem;
+  font-family: "Outfit", sans-serif;
+  box-shadow: 0px 4px #b2b6b8;
+  transition: all 0.2s ease-in-out;
+}
+
+.boton-despublicar-formulario-dropdown:hover{
+  box-shadow: 0 1px #b2b6b8;
+  transform: translateY(3px);
+}
+
 /* Efecto de presionado */
 .boton-publicar-formulario-dropdown:active,
 .boton-editar-formulario-dropdown:active {
@@ -102,7 +122,7 @@
   cursor: pointer;
   border-radius: 0.5rem;
   height: 2.3rem;
-  width: 10rem;
+  width: 8.5rem;
   margin-right: 1rem;
   font-family: Outfit;
   /* Efecto 3D */
