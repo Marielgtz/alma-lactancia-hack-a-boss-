@@ -1,5 +1,5 @@
 import useFormDropdown from '../hooks/useFormDropdown'
-import CustomDialog from '../components/customDialog'
+import CustomDialog from './CustomDialog'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './FormDropdown.css'
@@ -99,7 +99,7 @@ const FormDropdown = ({
                                         ?.summary
                                 }`}
                             </p>
-                            <button
+                            <button className='boton-despublicar-formulario-dropdown'
                                 onClick={() =>
                                     unPublishHandler(
                                         publishFormIndex.toString()
