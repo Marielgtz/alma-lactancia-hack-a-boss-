@@ -3,8 +3,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
 import silueta from "../images/IlustracionLactancia.png";
-import { useNavigate } from "react-router-dom";
 import useContactInfo from "../hooks/useContactInfo.js";
+import { toast } from 'react-toastify'; // Import toast if missing
 import "./Contact.css";
 
 const Contact = () => {
@@ -17,8 +17,6 @@ const Contact = () => {
     comments: "",
   });
 
-  // const navigate = useNavigate()
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -27,9 +25,36 @@ const Contact = () => {
     });
   };
 
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      isValid = false;
+    }
+
+    if (!formData.surname.trim()) {
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      isValid = false;
+    }
+
+    if (!formData.subject.trim()) {
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
   const handleSubmit = async () => {
+    // Validate form before sending data
+    if (!validateForm()) {
+      return; // Prevent further actions if validation fails
+    }
+
     try {
-      // Realizar la solicitud POST al backend
+      // Proceed with form submission if validation passes
       const response = await fetch(
         import.meta.env.VITE_API_URL + "/new-contact-message",
         {
@@ -48,7 +73,7 @@ const Contact = () => {
       }
 
       const data = await response.json();
-      console.log(data.message);
+      toast.success('Mensaje enviado correctamente');
       setFormData({
         name: "",
         surname: "",
@@ -57,11 +82,9 @@ const Contact = () => {
         comments: "",
       });
 
-      // // Redirigir a la página de confirmación
-      // navigate('/confirmacion')
     } catch (error) {
       console.error(error);
-      alert(error);
+      toast.error('Error en el formulario');
     }
   };
 
@@ -152,6 +175,7 @@ const Contact = () => {
               handleSubmit={handleSubmit}
               captchaInputClassName={"captcha-input"}
               buttonClassName={"contact-button"}
+              validateForm={validateForm}
             />
           </form>
 
