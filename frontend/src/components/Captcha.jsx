@@ -16,9 +16,6 @@ const CaptchaComponent = ({
     
 
     const fetchCaptcha = async () => {
-        if (!validateForm()) {
-            return {message: "Missing required fields"};
-        }
         try {
             const response = await fetch(generateCaptcha, {
                 credentials: 'include',
@@ -45,9 +42,11 @@ const CaptchaComponent = ({
     const handleCaptchaValidation = async () => {
         try {
             // Check for required fields before starting CAPTCHA validation
-            if (!validateForm()) {
-                toast.error("Por favor, completa todos los campos requeridos.");
-                return;  // Stop further execution if form validation fails
+            if (validateForm){
+                if (!validateForm()) {
+                    toast.error("Por favor, completa todos los campos requeridos.");
+                    return;  // Stop further execution if form validation fails
+                };
             }
     
             toast.loading('Validando formulario...');
@@ -64,32 +63,33 @@ const CaptchaComponent = ({
     
             if (!response.ok) {
                 toast.dismiss();
-                toast.error('Captcha incorrecto. Inténtalo de nuevo.');
+                console.log('CAPTCHA INVÁLIDO');
                 throw new Error('Network response was not ok');
+                
             }
     
             const data = await response.json();
     
             if (data.success) {
                 toast.dismiss();
-                toast.success('Mensaje enviado correctamente');
+                toast.loading('Enviando, no cierre la página...')
                 handleSubmit();
                 setCaptchaInput('');
             } else {
                 toast.dismiss();
-                toast.error('Captcha incorrecto. Inténtalo de nuevo.');
+                toast.error('Captcha incorrecto. Inténtalo de nuevo');
                 setCaptchaInput('');
                 fetchCaptcha();
             }
         } catch (error) {
             toast.dismiss();
     
-            // Check if error is due to missing fields
+            // Revisa si el error se debe a la falta de campos
             if (error.message.includes('Missing required fields')) {
                 toast.error('Por favor, completa todos los campos requeridos.');
             } else {
-                // Display a general error message for any other issue
-                toast.error('Error en el envío. Inténtalo de nuevo.');
+                // Mensaje de error general
+                toast.error('Error en el código captcha. Inténtalo de nuevo.');
             }
     
             console.log('Ha ocurrido un error', error);
