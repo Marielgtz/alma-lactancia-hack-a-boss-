@@ -79,6 +79,37 @@ function App() {
   const [publishedForm, setPublishedForm] = useState(formList);
   const [activities, setActivities] = useState([]);
   const [checkedExperiences, setCheckedExperiences] = useState([]);
+  const [showButton, setShowButton] = useState(false); // Estado para controlar la visibilidad del botón
+
+  // Detectar cuando el usuario hace scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      console.log("Scroll Position:", scrollPosition); // Imprimir la posición del scroll
+      if (scrollPosition > 50) {
+        console.log("Button should be visible");
+        setShowButton(true);
+      } else {
+        console.log("Button should be hidden");
+        setShowButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Llamar inicialmente para establecer el estado
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Función para volver arriba
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Para un desplazamiento suave
+    });
+  };
 
   useEffect(() => {
     const fetchInstagramPost = async () => {
@@ -180,6 +211,29 @@ function App() {
             <Route path="CreadorFormularios" element={<CreadorFormularios />} />
           </Route>
         </Routes>
+
+        {/* Botón de Scroll to Top */}
+        {showButton && (
+          <button
+            onClick={scrollToTop}
+            style={{
+              position: "fixed",
+              bottom: "50px",
+              right: "50px",
+              padding: "10px 20px",
+              backgroundColor: "#b380b5",
+              color: "#000",
+              fontSize: "20px",
+              border: "none",
+              borderRadius: "50%",
+              cursor: "pointer",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              zIndex: 1000,
+            }}
+          >
+            ↑
+          </button>
+        )}
       </div>
     </Router>
   );
