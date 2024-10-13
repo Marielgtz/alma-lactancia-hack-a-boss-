@@ -136,7 +136,8 @@
 @media (max-width: 768px) {
   .admin-panel {
     display: block;
-    flex-direction: column; /* Disposición en columna para que el sidebar esté arriba */
+    flex-direction: column;
+    min-height: 60vh;
   }
   .contenedor-lista-dashboard {
     padding: 5rem 3rem 1rem 3rem;
@@ -167,10 +168,15 @@
     width: 100vw;
     max-width: none;
   }
-
   .admin-content {
-    width: fit-content;
+    width: 100%;
     padding: 0;
+    padding-bottom: 2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Asegura que el contenido se alinee en columna */
   }
 
   .sidebar-btn {

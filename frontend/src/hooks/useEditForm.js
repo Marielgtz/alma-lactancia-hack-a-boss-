@@ -29,7 +29,8 @@ const useEditForm = (
                 formName: data.formName,
                 fields: data.fields,
             }
-            const updateFormUrl = import.meta.env.VITE_API_URL + '/update-form'
+            const updateFormUrl =
+                import.meta.env.VITE_API_URL + '/update-form/updateMongo'
 
             const updateResponse = await fetch(updateFormUrl, {
                 method: 'PATCH',
@@ -71,9 +72,9 @@ const useEditForm = (
                     if (publishedData.isPublished) {
                         try {
                             const publishResponse = await fetch(
-                                `${import.meta.env.VITE_API_URL}/get-form/${
-                                    selectedForm.formId
-                                }/publish/${Number(jsonNumber) + 1}`
+                                `${
+                                    import.meta.env.VITE_API_URL
+                                }/get-published-form/${Number(jsonNumber) + 1}`
                             )
 
                             if (publishResponse.ok) {

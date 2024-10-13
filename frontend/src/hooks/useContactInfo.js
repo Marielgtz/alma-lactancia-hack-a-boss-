@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { toast } from "react-toastify"
 import axios from 'axios'
 
 const useContactInfo = () => {
@@ -15,7 +16,10 @@ const useContactInfo = () => {
                 const { generalSettings, home } = response.data.form
                 setContactInfo({ generalSettings, home })
             })
-            .catch((error) => console.error('Error al obtener datos:', error))
+            .catch((error) => 
+                {
+                    console.error('Error al obtener datos:', error);
+                })
     }, [API_BASE_URL])
 
     return contactInfo

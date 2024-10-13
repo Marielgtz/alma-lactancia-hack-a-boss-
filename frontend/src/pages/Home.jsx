@@ -14,7 +14,7 @@ import "./Home.css";
 const DEFAULT_IMAGE_URL =
   "https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png";
 
-const Home = () => {
+const Home = ({ homeData }) => {
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   const { home } = useContactInfo();
   const [cardsToShow, setCardsToShow] = useState(2);
@@ -67,7 +67,7 @@ const Home = () => {
     };
 
     fetchExperiences();
-  }, []);
+  }, [homeData]);
 
   const totalExperiences = experiences.length;
 

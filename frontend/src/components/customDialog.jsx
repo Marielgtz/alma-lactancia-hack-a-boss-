@@ -1,10 +1,11 @@
+import "./CustomDialog.css"
 const CustomDialog = ({ onYes, onNo, onCancel, message }) => {
     return (
         <div className='dialog'>
             <p>{message}</p>
-            <button onClick={onYes}>Sí</button>
-            <button onClick={onNo}>No</button>
-            <button onClick={onCancel}>Cancelar</button>
+            <button className="btnDialog yes" onClick={onYes}>Sí</button>
+            <button className="btnDialog no" onClick={onNo}>No</button>
+            <button className="btnDialog cancel" onClick={onCancel}>Cancelar</button>
         </div>
     )
 }
