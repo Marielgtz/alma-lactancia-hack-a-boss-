@@ -56,7 +56,7 @@ const History = ({ instagramPost, instagramPostList }) => {
             Sigue nuestras redes sociales para recibir actualizaciones y
             contenido exclusivo.
           </p>
-          <div className="social-media">
+          <div className="social-media-history">
             <a
               href="https://www.instagram.com/alma_lactancia"
               target="_blank"

@@ -113,7 +113,7 @@ const Home = ({ homeData }) => {
             />
           </div>
           <div className="support-button">
-            <p>{titleCTA}</p>
+            <p className="texto-cta">{titleCTA}</p>
             <button
               className="activities-button"
               onClick={handleActivitiesClick}
