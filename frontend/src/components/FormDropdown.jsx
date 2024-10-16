@@ -1,5 +1,5 @@
 import useFormDropdown from "../hooks/useFormDropdown";
-import CustomDialog from "./CustomDialog";
+import CustomDialog from "./customDialog.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./FormDropdown.css";

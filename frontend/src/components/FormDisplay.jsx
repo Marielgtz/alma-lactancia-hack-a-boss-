@@ -1,5 +1,5 @@
-import useFormDisplay from '../hooks/useFormDisplay'
-import CaptchaComponent from './Captcha'
+import useFormDisplay from '../hooks/useFormDisplay.js'
+import CaptchaComponent from './Captcha.jsx'
 import './FormDisplay.css'
 
 const FormDisplay = ({ jsonNumber, title }) => {
