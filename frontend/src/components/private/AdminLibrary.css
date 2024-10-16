@@ -143,3 +143,16 @@
 .archiveBlogsBtn {
   margin-right: 10px;
 }
+
+
+@media (max-width: 768px) {
+  .admin-library-button-delete{
+    width: 4rem;
+    margin-left: 0;
+  }
+
+  .admin-library-accordion-content{
+    padding: 10px 5px 10px 5px;
+  }
+
+}
