@@ -275,7 +275,7 @@
 
 .rbc-today {
   font-weight: bold;
-  background-color: #e9d9e9;
+  background-color: #d8e2dc;
   display: flex;
   margin: 0 auto;
 }
@@ -313,11 +313,6 @@
   border-top: none;
 }
 
-.selected-day {
-  background-color: #d8e2dc;
-  font-weight: bold;
-  margin: 0 auto;
-}
 .day-with-event {
   background-color: #9c6fa057;
   color: white;
@@ -343,10 +338,10 @@
   margin-right: 0.5rem;
 }
 .color-cuadrado-leyenda {
-  background-color: #9c6fa057;
+  background-color: #d8e2dc;
 }
 .leyenda-dia-con-evento {
-  background-color: #d8e2dc;
+  background-color: #9c6fa057;
 }
 @media (max-width: 768px) {
   .activities {
