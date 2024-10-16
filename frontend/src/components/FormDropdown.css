@@ -100,16 +100,17 @@
   margin-top: 2rem;
   margin-right: 1rem;
   font-family: "Outfit", sans-serif;
-  box-shadow: 0px 4px #b2b6b8;
+  box-shadow: 0px 4px #5d6061;
   transition: all 0.2s ease-in-out;
 }
 
 .boton-despublicar-formulario-dropdown:hover {
-  box-shadow: 0 1px #b2b6b8;
-  transform: translateY(3px);
+  background-color: #8e9294;
+  transition: all 0.2s ease-in-out;
 }
 
 /* Efecto de presionado */
+.boton-despublicar-formulario-dropdown:active,
 .boton-publicar-formulario-dropdown:active,
 .boton-editar-formulario-dropdown:active {
   box-shadow: 0 1px #946b9f; /* Reduce la sombra para simular que se presiona */
@@ -132,15 +133,6 @@
 
 .boton-editar-formulario-dropdown:hover {
   background-color: #caa2cb;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  height: 2.3rem;
-  width: 10rem;
-  font-family: Outfit;
-  /* Efecto 3D */
-  box-shadow: 0px 4px #946b9f; /* Sombra inferior para dar efecto de relieve */
   transition: all 0.2s ease-in-out;
 }
 
