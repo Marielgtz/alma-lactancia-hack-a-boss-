@@ -169,6 +169,10 @@
   }
   .instagram-container {
     grid-template-columns: 1fr; /* 1 columna en móvil */
+    padding: 0;
+  }
+  .instagram-cards{
+    margin-left: 0;
   }
 }
 

@@ -11,14 +11,16 @@
 }
 .contenedor-opciones-formularios p {
   margin: 0;
-  color: white;
 }
 .contenedor-pasos {
   background-color: #b380b5;
-  color: white;
   padding: 1rem;
   margin: 0 2rem 2rem 2rem;
 }
+.contenedor-pasos p{
+  color: white;
+}
+
 .fa-exclamation-triangle {
   font-size: 24px;
 }

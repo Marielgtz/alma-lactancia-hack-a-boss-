@@ -53,6 +53,7 @@
   box-sizing: border-box; /* Incluye el padding en el ancho total */
   overflow: hidden;
   margin-top: 1rem;
+  border-radius: 5px;
 }
 .help-btn-insta {
   font-family: Outfit, sans-serif;
