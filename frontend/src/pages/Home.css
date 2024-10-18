@@ -343,7 +343,6 @@ body,
     ); /* Fondo con color personalizado */
     border-radius: 10px; /* Bordes redondeados */
     padding: 1.4rem;
-    margin: 1rem; /* Márgenes */
     box-shadow: 0 1px 2px rgba(179, 128, 181, 0.5); /* Sombra más suave */
     max-width: 300px; /* Ancho máximo de 400px */
     width: 100%; /* Asegura que ocupe todo el ancho disponible */
@@ -376,6 +375,14 @@ body,
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
+  }
+
+  .carousel-control.prev {
+    left: -1rem;
+  }
+  
+  .carousel-control.next {
+    right: -1rem;
   }
 }
 

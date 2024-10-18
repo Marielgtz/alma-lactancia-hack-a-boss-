@@ -377,6 +377,14 @@
     font-size: 1.2em; /* Ajusta el tamaño de la fuente */
   }
   .calendar-wrapper {
-    width: 300px;
+    width: 350px;
+  }
+
+  .calendar-legend {
+    flex-direction: column;
+    margin: 1rem 0 0 0;
+  }
+  .legend-item {
+    margin-bottom: 2px;
   }
 }
