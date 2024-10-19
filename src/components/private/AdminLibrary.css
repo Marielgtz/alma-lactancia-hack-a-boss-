@@ -22,7 +22,7 @@
   width: 100%;
   background-color: #d8e2dc;
   border: 1px solid #b380b5;
-  border-radius: 5px  ;
+  border-radius: 5px;
 }
 
 .admin-library-accordion-title {
@@ -140,6 +140,19 @@
   color: white;
 }
 
-.archiveBlogsBtn{
+.archiveBlogsBtn {
   margin-right: 10px;
+}
+
+
+@media (max-width: 768px) {
+  .admin-library-button-delete{
+    width: 4rem;
+    margin-left: 0;
+  }
+
+  .admin-library-accordion-content{
+    padding: 10px 5px 10px 5px;
+  }
+
 }

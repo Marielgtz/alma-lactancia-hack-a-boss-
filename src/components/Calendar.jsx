@@ -113,7 +113,7 @@ const MyCalendar = () => {
     return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
   };
 
-  // Función para monstrar la descripción del evento en el calendario
+  // Función para mostrar la descripción del evento en el calendario
   const handleSelectEvent = (event) => {
     setSelectedEvent(event);
     setSelectedDate(event.start);
@@ -152,7 +152,7 @@ const MyCalendar = () => {
               <div className="activity" key={event.id}>
                 <div className="card-inner">
                   <div className="card-front">
-                    <div className="activity-image">
+                    <div className="activity-image-home">
                       {event.image && event.image.length > 0 ? (
                         <img
                           src={event.image}
@@ -266,15 +266,37 @@ const MyCalendar = () => {
                 views={{ month: true }}
                 popup={false}
                 dayPropGetter={(date) => {
+                  // Verifica si hay un evento en la fecha actual
+                  const hasEvent = events.some(
+                    (event) =>
+                      new Date(event.start).toDateString() ===
+                      date.toDateString()
+                  );
+
+                  // Verifica si el día está seleccionado
                   const isSelected =
                     selectedDate &&
                     date.toDateString() === selectedDate.toDateString();
+
+                  // Retorna la clase adecuada si el día tiene evento o si está seleccionado
                   return {
-                    className: isSelected ? "selected-day" : "",
+                    className: `${isSelected ? "selected-day" : ""} ${
+                      hasEvent ? "day-with-event" : ""
+                    }`,
                   };
                 }}
               />
             )}
+          </div>
+        </div>
+        <div className="calendar-legend">
+          <div className="legend-item">
+            <span className="legend-color color-cuadrado-leyenda"></span>
+            <span>Día actual</span>
+          </div>
+          <div className="legend-item">
+            <span className="legend-color leyenda-dia-con-evento"></span>
+            <span>Días con actividad</span>
           </div>
         </div>
       </div>

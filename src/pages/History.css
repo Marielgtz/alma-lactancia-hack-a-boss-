@@ -108,7 +108,7 @@
   line-height: 2rem;
 }
 /* Redes sociales */
-.social-media {
+.social-media-history {
   display: flex;
   justify-content: center;
   align-self: flex-end;
@@ -116,16 +116,16 @@
 }
 
 /* Estilo de los iconos de redes sociales */
-.social-media a {
+.social-media-item {
   color: white;
   margin: 0 0.5em;
 }
-.social-media a svg {
+.social-media-item i {
   width: 1.5rem; /* Ajustar el ancho del icono */
   height: 1.5rem; /* Ajustar la altura del icono */
 }
 
-.social-media a svg:hover {
+.social-media-item i:hover {
   color: #e0bb8e;
 }
 
@@ -169,6 +169,10 @@
   }
   .instagram-container {
     grid-template-columns: 1fr; /* 1 columna en móvil */
+    padding: 0;
+  }
+  .instagram-cards{
+    margin-left: 0;
   }
 }
 

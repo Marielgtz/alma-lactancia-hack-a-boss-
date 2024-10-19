@@ -38,6 +38,8 @@ const Activities = ({ activities, setActivities }) => {
   // }, [])
 
   const handleEnrollClick = async (activity, activityNumber) => {
+    if(activity.summary.includes("EVENTO CANCELADO")) return;
+    
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/check-is-published/${
@@ -124,7 +126,11 @@ const Activities = ({ activities, setActivities }) => {
                       className="activities-inscription"
                       onClick={() => handleEnrollClick(activity, index + 1)}
                     >
-                      Inscribirse
+                      {
+                      activity.summary.includes("EVENTO CANCELADO")
+                      ? "Inscripciones cerradas"
+                      : "Inscribirse"
+                      }
                     </button>
                   </div>
                 </li>

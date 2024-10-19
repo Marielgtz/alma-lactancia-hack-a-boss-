@@ -24,9 +24,20 @@
   perspective: 1000px;
   margin: 0.5rem;
 }
-
+.activity-image-home {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; /* Asegura que la imagen cubra todo el contenedor */
+  overflow: hidden;
+}
+.activity-image-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra completamente el contenedor */
+}
 .attachment-image {
-  border-radius: 2rem;
+  border-radius: 2rem 2rem 0 0;
 }
 
 .card-inner {
@@ -264,7 +275,7 @@
 
 .rbc-today {
   font-weight: bold;
-  background-color: #e9d9e9;
+  background-color: #d8e2dc;
   display: flex;
   margin: 0 auto;
 }
@@ -302,12 +313,36 @@
   border-top: none;
 }
 
-.selected-day {
-  background-color: #b380b5;
-  font-weight: bold;
-  margin: 0 auto;
+.day-with-event {
+  background-color: #9c6fa057;
+  color: white;
 }
 
+/*LEYENDA CALENDARIO*/
+.calendar-legend {
+  display: flex;
+  justify-content: flex-start;
+  margin: 1rem;
+  font-family: Outfit, sans-serif;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+.color-cuadrado-leyenda {
+  background-color: #d8e2dc;
+}
+.leyenda-dia-con-evento {
+  background-color: #9c6fa057;
+}
 @media (max-width: 768px) {
   .activities {
     flex-direction: column; /* Cambia a disposición vertical */
@@ -316,7 +351,7 @@
   }
 
   .activity {
-    width: 90vw; /* Asegura que las tarjetas ocupen la mayor parte de la pantalla */
+    width: 60vw; /* Asegura que las tarjetas ocupen la mayor parte de la pantalla */
     height: 18rem; /* Ajusta la altura para pantallas más pequeñas */
     margin: 1rem 0; /* Añade espacio entre las tarjetas */
   }
@@ -340,5 +375,16 @@
     width: 15rem; /* Reduce el ancho del botón */
     height: 2.5rem;
     font-size: 1.2em; /* Ajusta el tamaño de la fuente */
+  }
+  .calendar-wrapper {
+    width: 350px;
+  }
+
+  .calendar-legend {
+    flex-direction: column;
+    margin: 1rem 0 0 0;
+  }
+  .legend-item {
+    margin-bottom: 2px;
   }
 }

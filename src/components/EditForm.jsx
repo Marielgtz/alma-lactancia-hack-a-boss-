@@ -91,7 +91,7 @@ const EditForm = ({
             setEditingForm(null)}
           }
         >
-          <FontAwesomeIcon icon={faTimes} /> Cerrar edi;tor
+          <FontAwesomeIcon icon={faTimes} /> Cerrar editor
         </button>
         <button className="boton-actualizar-formulario" type="submit">
           Actualizar formulario

@@ -49,7 +49,7 @@
   }
   
   .info-button:hover {
-    background-color: #caa2cb;
+  background-color: #caa2cb;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   }

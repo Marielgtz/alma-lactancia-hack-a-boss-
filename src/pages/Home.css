@@ -87,13 +87,15 @@ body,
   align-items: flex-start;
 }
 
-.support-button p {
+.texto-cta {
   font-size: 3rem;
   font-weight: bold;
   color: var(--white);
   font-family: var(--font-main);
   max-width: 40rem;
   word-wrap: break-word;
+  margin-bottom: 0.8rem;
+  margin-top: 0;
 }
 
 /* Botón de actividades */
@@ -341,7 +343,6 @@ body,
     ); /* Fondo con color personalizado */
     border-radius: 10px; /* Bordes redondeados */
     padding: 1.4rem;
-    margin: 1rem; /* Márgenes */
     box-shadow: 0 1px 2px rgba(179, 128, 181, 0.5); /* Sombra más suave */
     max-width: 300px; /* Ancho máximo de 400px */
     width: 100%; /* Asegura que ocupe todo el ancho disponible */
@@ -375,6 +376,14 @@ body,
     transform: translateY(-50%);
     z-index: 1;
   }
+
+  .carousel-control.prev {
+    left: -1rem;
+  }
+  
+  .carousel-control.next {
+    right: -1rem;
+  }
 }
 
 /* Tablet */
@@ -384,7 +393,7 @@ body,
   }
 
   .support-button {
-    bottom: 2em;
+    bottom: 5em;
     left: 4em;
   }
 
@@ -477,7 +486,9 @@ body,
     height: 5rem;
     font-size: 2em;
   }
-
+  .img-silueta {
+    display: none;
+  }
   .section-title {
     font-size: 4rem;
   }
@@ -488,7 +499,26 @@ body,
     text-align: left;
   }
 
-  .experience-title {
-    font-size: 4rem;
+  /* Sección de experiencias */
+  .experience-card {
+    width: 600px;
+    height: 200px;
+    padding: 2rem;
+    margin: 1rem;
+    background-color: var(--secondary-color);
+    box-shadow: 4px 4px 10px rgba(179, 128, 181, 0.5);
+    font-family: Outfit, sans-serif;
+    display: flex;
+    align-items: center;
+    border-radius: 10px; /* Bordes redondeados */
+  }
+
+  .experience-card img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .experience-card p {
+    font-size: 1.3rem;
   }
 }

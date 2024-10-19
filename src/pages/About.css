@@ -20,7 +20,7 @@ body,
   flex-direction: column;
 }
 
-.img-section {
+.img-section-about {
   position: relative;
   height: 90vh;
 }
@@ -51,7 +51,7 @@ body,
   font-family: outfit;
   position: absolute;
   color: white;
-  top: 28rem;
+  top: 29rem;
   left: 5.2rem;
   font-size: 1rem;
   font-weight: lighter;
@@ -61,7 +61,7 @@ body,
   font-family: outfit;
   position: absolute;
   color: white;
-  top: 29rem;
+  top: 30rem;
   left: 5rem;
   font-size: 2.5rem;
   margin-bottom: 0;
@@ -335,7 +335,7 @@ h3 {
 
 /* Estilos responsive */
 @media (max-width: 768px) {
-  .img-section {
+  .img-section-about {
     position: relative;
     height: 50vh;
   }

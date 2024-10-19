@@ -4,10 +4,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./History.css";
 import InstagramPost from "../components/InstagramPost";
+import useContactInfo from '../hooks/useContactInfo.js'
+
 
 const History = ({ instagramPost, instagramPostList }) => {
   const navigate = useNavigate();
-
+  const { generalSettings } = useContactInfo()
+      
+  const instagramLink = generalSettings?.linkInstagram || ''
+  const facebookLink = generalSettings?.linkFacebook || ''
+  
   return (
     <div className="history-page">
       <Header />
@@ -56,9 +62,9 @@ const History = ({ instagramPost, instagramPostList }) => {
             Sigue nuestras redes sociales para recibir actualizaciones y
             contenido exclusivo.
           </p>
-          <div className="social-media">
+          <div className="social-media-history">
             <a
-              href="https://www.instagram.com/alma_lactancia"
+              href={instagramLink}
               target="_blank"
               rel="noopener noreferrer"
               className="social-media-item"
@@ -66,7 +72,7 @@ const History = ({ instagramPost, instagramPostList }) => {
               <i className="fab fa-instagram"></i> {/* Icono de Instagram */}
             </a>
             <a
-              href="https://www.facebook.com/AlmaLactanciaMaterna"
+              href={facebookLink}
               target="_blank"
               rel="noopener noreferrer"
               className="social-media-item"

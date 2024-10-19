@@ -143,7 +143,6 @@ body {
     width: 100vw;
     position: relative;
     background-color: #9c6fa0;
-
     padding: 0;
   }
 
@@ -157,7 +156,7 @@ body {
   }
 
   .social-media-item {
-    visibility: visible; /* Asegura que los iconos de redes sociales sean visibles en móviles */
+    visibility: visible;
     font-size: 0.9rem;
   }
 
@@ -167,8 +166,8 @@ body {
   }
 
   .social-media a svg {
-    width: 1.5rem; /* Ajustar el ancho del icono */
-    height: 1.5rem; /* Ajustar la altura del icono */
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .menu-toggle {
@@ -185,9 +184,9 @@ body {
   .menu {
     display: none;
     flex-direction: column;
-    width: 100%; /* Se ajusta al ancho completo del contenedor */
-    position: relative; /* Asegura que el menú esté en relación con el contenedor */
-    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    width: 100%;
+    position: relative;
+    transition: all 0.3s ease;
   }
 
   .menu.active {
@@ -196,8 +195,8 @@ body {
     z-index: 11;
     text-align: center;
     width: 100%;
-    height: auto; /* Ajusta la altura según el contenido */
-    margin-top: 0; /* Elimina el margen superior */
+    height: auto;
+    margin-top: 0;
   }
 
   .menu-item > a {
@@ -205,54 +204,68 @@ body {
     padding: 1.5rem 0;
     width: 100%;
     text-decoration: none;
-    display: block; /* Asegura que el enlace ocupa todo el espacio del item */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para fondo y color */
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
     box-sizing: border-box;
   }
 
   .menu-item > a:hover {
-    background-color: #b380b5; /* Fondo lila al hacer hover */
-    color: white; /* Color del texto blanco al hacer hover */
+    background-color: #b380b5;
+    color: white;
   }
 
+  /* Submenú */
   .submenu {
     display: none;
-    background-color: #9c6fa0; /* Fondo lila */
+    background-color: #9c6fa0;
     width: 100%;
-    color: white; /* Texto blanco */
-    position: relative;
-    margin-top: 0; /* Asegura que el submenú esté pegado al menú principal */
-    z-index: 999;
-    box-sizing: border-box;
+    color: white;
+    transition: all 0.3s ease; /* Transición suave para apertura */
   }
 
-  /* Cambia el color del texto en el submenú al pasar el mouse */
-  .submenu li a {
-    color: white; /* Texto blanco en submenú */
-    padding: 10px;
-    display: block;
-    box-sizing: border-box;
-    color: #9c6fa0; /* Texto blanco con fondo lila al pasar el mouse */
-    background-color: white;
-  }
-
-  .submenu li a:hover {
-    color: white; /* Texto blanco con fondo lila al pasar el mouse */
-    background-color: #e0bb8e;
-  }
-
+  /* Submenú activo */
   .submenu.active {
     display: block;
   }
 
+  .submenu li a {
+    color: #9c6fa0;
+    padding: 10px;
+    display: block;
+    background-color: white;
+    box-sizing: border-box;
+  }
+
+  .submenu li a:hover {
+    color: white;
+    background-color: #e0bb8e;
+  }
+
+  .menu-item {
+    position: relative;
+  }
+
+  /* Mostrar submenú al hacer hover */
+  .menu-item:hover .submenu {
+    display: block;
+  }
+
+  /* Eliminar el absolute y permitir que el submenú expanda el menú principal */
+  .menu-item .submenu {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  /* Icono de cierre del menú */
   .menu-toggle-close {
     position: absolute;
-    top: 1rem; /* Ajusta según sea necesario */
-    right: 1rem; /* Ajusta según sea necesario */
+    top: 1rem;
+    right: 1rem;
     color: white;
     cursor: pointer;
     font-size: 2rem;
-    z-index: 13; /* Asegura que el icono esté por encima del menú */
+    z-index: 13;
   }
 }
 
