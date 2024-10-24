@@ -46,15 +46,14 @@ export default function EventForm({ toEdit, onSuccess }) {
     } else {
       setActivity(defaultActivity);
     }
-  }, [toEdit]);
+  }, [toEdit]);  
 
   useEffect(() => {
-    setActivity(activity);
-    console.log(activity);
+    const currentActivity = activity || toEdit || {};
 
     // Si hay una imagen en el backend, cargar el nombre y la vista previa
-    if (activity.extendedProperties?.private?.image && activity.extendedProperties?.private?.image !== "Sin imagen") {
-      const imageUrl = activity.extendedProperties.private.image;
+    if (currentActivity.extendedProperties?.private?.image && currentActivity.extendedProperties?.private?.image !== "Sin imagen") {
+      const imageUrl = currentActivity.extendedProperties.private.image;
       setImagePreview(imageUrl);
       setImageName("Imagen subida");
     } else {
@@ -65,33 +64,30 @@ export default function EventForm({ toEdit, onSuccess }) {
 
     // Limpiar el campo de archivo cuando cambia el colaborador
     setSelectedFile(null);
-  }, [activity]);
+  }, [toEdit]);
 
+
+  useEffect(() => {
+    console.log("Cambio en selected file!!: ", selectedFile);
+    
+  },[selectedFile])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setActivity((prevData) => {
-      if (name === "parsedStart") {
-        return {
-          ...prevData,
-          parsedStart: value,
-          startDateTime: new Date(value).toISOString(),
-        };
-      }
-      if (name === "parsedEnd") {
-        return {
-          ...prevData,
-          parsedEnd: value,
-          endDateTime: new Date(value).toISOString(),
-        };
-      }
-
-      return {
-        ...prevData,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
+    setActivity((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+      ...(name === "parsedStart" && {
+        parsedStart: value,
+        startDateTime: new Date(value).toISOString(),
+      }),
+      ...(name === "parsedEnd" && {
+        parsedEnd: value,
+        endDateTime: new Date(value).toISOString(),
+      }),
+    }));
   };
+  
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -158,7 +154,7 @@ export default function EventForm({ toEdit, onSuccess }) {
   };
 
   const validateForm = () => {
-    if (activity.access !== "partners" && activity.access !== "free") {
+    if (activity.access !== "solo_socios" && activity.access !== "free") {
       setFormError("Por favor, seleccione un nivel de acceso válido.");
       return false;
     }
@@ -200,10 +196,12 @@ export default function EventForm({ toEdit, onSuccess }) {
     formData.append("summary", activity.summary);
     formData.append("description", activity.description);
     formData.append("location", activity.location);
-    formData.append("start", start);
-    formData.append("end", end);
-    formData.append("extendedProperties", extendedProperties);
-    formData.append("image", selectedFile);
+    formData.append("start", JSON.stringify(start));
+    formData.append("end", JSON.stringify(end));
+    formData.append("extendedProperties", JSON.stringify(extendedProperties));
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
 
 
     // const requestBody = {
@@ -239,7 +237,6 @@ export default function EventForm({ toEdit, onSuccess }) {
       if (toEdit?.id) {
         const response = await updateCalendarEventService(
           toEdit.id,
-          selectedFile,
           formData
         );
         if (response.error) {
@@ -249,7 +246,12 @@ export default function EventForm({ toEdit, onSuccess }) {
         toast.success("Evento actualizado con éxito");
         onSuccess();
       } else {
+        for (const [key, value] of formData.entries()) {
+          console.log(`${key}:`, value);
+      } 
+        console.log("CHECKPOINT 1: ANTES API");
         const response = await createEvent(formData);
+        console.log("CHECKPOINT 2: PASÓ API:", response);
         if (
           response.message ===
           "Actividad creada y subida al calendario correctamente"
@@ -296,6 +298,7 @@ export default function EventForm({ toEdit, onSuccess }) {
           <i className="fas fa-upload"></i> Seleccionar archivo...
         </label>
         <input
+          style={{"display": "none"}}
           type="file"
           id="image"
           name="image"
@@ -363,7 +366,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         required
       >
         <option value="default">Seleccionar</option>
-        <option value="partners">Solo socios</option>
+        <option value="solo_socios">Solo socios</option>
         <option value="free">Público</option>
       </select>
 

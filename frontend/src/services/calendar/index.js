@@ -4,20 +4,13 @@ export async function deleteEvent(requestBody) {
 }
 
 //* Fetch para crear eventos
-export async function createEvent(requestBody) {
-    // console.log(requestBody);
-    // console.log(requestBodyExample);
+export async function createEvent(formData) {
 
     const response = await fetch(
         `${import.meta.env.VITE_API_URL}/create-activity`,
         {
             method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody),
-            // body: JSON.stringify(requestBodyExample)
+            body: formData
         }
     )
 
