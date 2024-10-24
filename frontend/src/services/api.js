@@ -13,17 +13,20 @@ const handleResponse = async (response) => {
 }
 
 // Activities
-export const createActivityService = async (activityData) => {
+export const createActivityService = async (formData) => {
+    console.log("APIIIIIIIII");
+    
+    for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+    } 
     try {
         const response = await fetch(`${API_BASE_URL}/create-activity`, {
             method: 'POST',
-            body: JSON.stringify(activityData),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            body:formData
         })
-
-        return handleResponse(response)
+        
+        const data = await response.json()
+        return data
     } catch (error) {
         console.error('Error creating activity:', error)
         throw error
@@ -131,21 +134,22 @@ export const deleteCalendarEventService = async (eventId) => {
     }
 }
 
-export const updateCalendarEventService = async (eventId, eventData) => {
+export const updateCalendarEventService = async (eventId, formData) => {
+    console.log("Update on api: ", formData);
+    for (const [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
+    
     try {
         const response = await fetch(
-            `${API_BASE_URL}/update-calendar-event/${eventId}`,
+            `${API_BASE_URL}/update-calendar-event/${eventId}?image`,
             {
                 method: 'PATCH',
-                body: JSON.stringify(eventData),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                body: formData,
             }
         )
-
-        const responseFinal = await response.json()
-        return responseFinal
+        const data = await response.json()
+        return data
     } catch (error) {
         console.error('Error updating calendar event:', error)
         throw error
@@ -233,8 +237,6 @@ export const updateCollaboratorService = async (id, team, prevImage, formData) =
                 body: formData,
             }
         )
-
-        // return handleResponse(response);
         const data = await response.json()
         return data
     } catch (error) {
