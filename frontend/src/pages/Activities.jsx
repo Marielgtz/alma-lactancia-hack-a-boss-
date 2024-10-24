@@ -19,6 +19,8 @@ const Activities = ({ activities, setActivities }) => {
       const calendarEvents = await getCalendarEvents();
       if (calendarEvents) {
         setActivities(calendarEvents);
+        console.log(calendarEvents);
+        
       }
     }
 
@@ -102,8 +104,8 @@ const Activities = ({ activities, setActivities }) => {
                 <li key={index} className="activity-cards">
                   <div className="activity-content">
                     <div className="activity-image">
-                      {activity.image ? (
-                        <img src={activity.image} alt={activity.summary} />
+                      {activity.extendedProperties.private.image ? (
+                        <img src={activity.extendedProperties.private.image} alt={activity.summary} />
                       ) : (
                         <img src={silueta} alt="Imagen predeterminada" />
                       )}
