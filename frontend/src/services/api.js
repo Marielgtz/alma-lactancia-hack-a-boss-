@@ -17,10 +17,7 @@ export const createActivityService = async (activityData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/create-activity`, {
             method: 'POST',
-            body: JSON.stringify(activityData),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            body:activityData
         })
 
         return handleResponse(response)
@@ -132,15 +129,15 @@ export const deleteCalendarEventService = async (eventId) => {
 }
 
 export const updateCalendarEventService = async (eventId, eventData) => {
+    console.log(eventData);
+    
     try {
         const response = await fetch(
             `${API_BASE_URL}/update-calendar-event/${eventId}`,
             {
                 method: 'PATCH',
-                body: JSON.stringify(eventData),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                formData: eventData,
+            
             }
         )
 

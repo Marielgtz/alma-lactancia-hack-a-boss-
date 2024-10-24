@@ -104,7 +104,7 @@ const Activities = ({ activities, setActivities }) => {
                 <li key={index} className="activity-cards">
                   <div className="activity-content">
                     <div className="activity-image">
-                      {activity.extendedProperties.private.image ? (
+                      {activity.extendedProperties.private.image && activity.extendedProperties.private.image != "sin imagen"  ? (
                         <img src={activity.extendedProperties.private.image} alt={activity.summary} />
                       ) : (
                         <img src={silueta} alt="Imagen predeterminada" />

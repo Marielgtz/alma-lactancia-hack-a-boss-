@@ -180,41 +180,67 @@ export default function EventForm({ toEdit, onSuccess }) {
     
     console.log("Selected File", selectedFile);
     
+    const start = {
+      dateTime: activity.start?.dateTime || activity.startDateTime,
+      timeZone: "Europe/Madrid",
+    }
 
-    const requestBody = {
-      summary: activity.summary,
-      description: activity.description,
-      start: {
-        dateTime: activity.start?.dateTime || activity.startDateTime,
-        timeZone: "Europe/Madrid",
-      },
-      end: {
-        dateTime: activity.end?.dateTime || activity.endDateTime,
-        timeZone: "Europe/Madrid",
-      },
-      location: activity.location,
-      reminders: {
-        useDefault: false,
-        overrides: [
-          { method: "email", minutes: 1440 },
-          { method: "popup", minutes: 60 },
-        ],
-      },
-      visibility: "private",
-      access: activity.access,
-      extendedProperties: {
-        private: {
-          access: activity.access,
-          image: selectedFile
-        }
-      },
-    };
+    const end = {
+      dateTime: activity.end?.dateTime || activity.endDateTime,
+      timeZone: "Europe/Madrid",
+    }
+
+    const extendedProperties = {
+      private: {
+        access: activity.access
+      }
+    }
+
+    const formData = new FormData();
+    formData.append("summary", activity.summary);
+    formData.append("description", activity.description);
+    formData.append("location", activity.location);
+    formData.append("start", start);
+    formData.append("end", end);
+    formData.append("extendedProperties", extendedProperties);
+    formData.append("image", selectedFile);
+
+
+    // const requestBody = {
+    //   summary: activity.summary,
+    //   description: activity.description,
+    //   start: {
+    //     dateTime: activity.start?.dateTime || activity.startDateTime,
+    //     timeZone: "Europe/Madrid",
+    //   },
+    //   end: {
+    //     dateTime: activity.end?.dateTime || activity.endDateTime,
+    //     timeZone: "Europe/Madrid",
+    //   },
+    //   location: activity.location,
+    //   reminders: {
+    //     useDefault: false,
+    //     overrides: [
+    //       { method: "email", minutes: 1440 },
+    //       { method: "popup", minutes: 60 },
+    //     ],
+    //   },
+    //   visibility: "private",
+    //   access: activity.access,
+    //   extendedProperties: {
+    //     private: {
+    //       access: activity.access,
+    //       image: selectedFile
+    //     }
+    //   },
+    // };
 
     try {
       if (toEdit?.id) {
         const response = await updateCalendarEventService(
           toEdit.id,
-          requestBody
+          selectedFile,
+          formData
         );
         if (response.error) {
           throw new Error(response.error);
@@ -223,7 +249,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         toast.success("Evento actualizado con éxito");
         onSuccess();
       } else {
-        const response = await createEvent(requestBody);
+        const response = await createEvent(formData);
         if (
           response.message ===
           "Actividad creada y subida al calendario correctamente"
