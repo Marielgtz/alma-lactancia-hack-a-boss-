@@ -6,6 +6,7 @@ import {
   updateCalendarEventService,
 } from "../../services/api";
 import formatDate from "../../utils/formatDate";
+import silueta from "../../images/Alma_Lactancia_-_Foto_hero.jpg";
 import { toast } from "react-toastify";
 import ConfirmationModal from "../../components/ConfirmationModal.jsx";
 
@@ -25,7 +26,13 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   const [activity, setActivity] = useState(toEdit || defaultActivity);
   const [formError, setFormError] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(""); // Vista previa de la imagen
+  const [imageName, setImageName] = useState(""); // Nombre de la imagen del backend
   const [showDeleteModal, setShowDeleteModal] = useState(false); // Estado para el modal de eliminación
+
+  // URL de la imagen proporcionada (icono pecho)
+  const DEFAULT_IMAGE_URL = silueta;
 
   useEffect(() => {
     if (toEdit?.id) {
@@ -40,6 +47,26 @@ export default function EventForm({ toEdit, onSuccess }) {
       setActivity(defaultActivity);
     }
   }, [toEdit]);
+
+  useEffect(() => {
+    setActivity(activity);
+    console.log(activity);
+
+    // Si hay una imagen en el backend, cargar el nombre y la vista previa
+    if (activity.extendedProperties?.private?.image && activity.extendedProperties?.private?.image !== "Sin imagen") {
+      const imageUrl = activity.extendedProperties.private.image;
+      setImagePreview(imageUrl);
+      setImageName("Imagen subida");
+    } else {
+      // Si no hay imagen en el colaborador, usar la imagen por defecto
+      setImagePreview(DEFAULT_IMAGE_URL);
+      setImageName("Imagen por defecto");
+    }
+
+    // Limpiar el campo de archivo cuando cambia el colaborador
+    setSelectedFile(null);
+  }, [activity]);
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -64,6 +91,25 @@ export default function EventForm({ toEdit, onSuccess }) {
         [name]: type === "checkbox" ? checked : value,
       };
     });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+
+    // Mostrar la vista previa de la nueva imagen seleccionada
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+      setImageName(file.name);
+    } else {
+      // Si no hay archivo seleccionado, restablecer la vista previa
+      setImagePreview(DEFAULT_IMAGE_URL);
+      setImageName("Imagen por defecto");
+    }
   };
 
   // Función para manejar la eliminación
@@ -131,6 +177,9 @@ export default function EventForm({ toEdit, onSuccess }) {
     if (!validateForm()) return;
 
     const processToast = toast.loading("Guardando cambios...");
+    
+    console.log("Selected File", selectedFile);
+    
 
     const requestBody = {
       summary: activity.summary,
@@ -156,7 +205,8 @@ export default function EventForm({ toEdit, onSuccess }) {
       extendedProperties: {
         private: {
           access: activity.access,
-        },
+          image: selectedFile
+        }
       },
     };
 
@@ -193,6 +243,41 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   return (
     <form onSubmit={submitNewEvent} className="dashboard-form">
+      {/* Previsualización de la imagen */}
+      <div className="image-preview">
+  
+        <label>Previsualización imagen: </label>
+        {imageName ? (
+          <div>
+            <img
+              src={imagePreview}
+              alt="Vista previa de la imagen"
+              width="200px"
+            />
+            <p className="image-name-description">{imageName}</p>
+          </div>
+        ) : (
+          <p className="texto-descriptivo-accion">Sin foto guardada</p>
+        )}
+      </div>
+
+      {/* Nueva imagen */}
+      <div className="new-image">
+        <p className="texto-descriptivo-accion">
+          Nueva imagen (si quieres cambiarla):
+        </p>
+        <label htmlFor="image" className="file-label">
+          <i className="fas fa-upload"></i> Seleccionar archivo...
+        </label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          onChange={handleFileChange}
+          className="file-input"
+        />
+      </div>
+
       <label>Título del evento:</label>
       <input
         type="text"

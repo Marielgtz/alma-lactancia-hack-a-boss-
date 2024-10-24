@@ -64,6 +64,8 @@ const MyCalendar = () => {
           ? data.response
           : (data && data.events) || [];
 
+        
+          
         // Mapea los eventos al formato necesario para react-big-calendar
         const formattedEvents = eventsArray.map((event) => ({
           title: event.summary, // Usar summary como título
@@ -153,9 +155,9 @@ const MyCalendar = () => {
                 <div className="card-inner">
                   <div className="card-front">
                     <div className="activity-image-home">
-                      {event.image && event.image.length > 0 ? (
+                      {event.extendedProperties?.private?.image ? (
                         <img
-                          src={event.image}
+                          src={event.extendedProperties.private.image}
                           alt="imagen actividad"
                           className="attachment-image"
                         />
