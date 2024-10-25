@@ -63,9 +63,6 @@ const MyCalendar = () => {
         const eventsArray = Array.isArray(data.response)
           ? data.response
           : (data && data.events) || [];
-
-        
-          
         // Mapea los eventos al formato necesario para react-big-calendar
         const formattedEvents = eventsArray.map((event) => ({
           title: event.summary, // Usar summary como título
@@ -73,7 +70,9 @@ const MyCalendar = () => {
           end: new Date(event.end.dateTime || event.end.date), // Mostrar fecha de finalización
           id: event.id, // Incluir el id si se necesita para las claves
           description: event.description || "", // Incluir la descripción si está disponible
-          image: event.image || [], // Incluir los archivos adjuntos si están disponibles
+          image: event.extendedProperties?.private?.image || "", // Incluir los archivos adjuntos si están disponibles
+          access: event.extendedProperties?.private?.access || "",
+          location: event.location || "",
         }));
 
         // Filtrar los eventos para que solo muestren los futuros
@@ -155,9 +154,9 @@ const MyCalendar = () => {
                 <div className="card-inner">
                   <div className="card-front">
                     <div className="activity-image-home">
-                      {event.extendedProperties?.private?.image ? (
+                      {event.image ? (
                         <img
-                          src={event.extendedProperties.private.image}
+                          src={event.image}
                           alt="imagen actividad"
                           className="attachment-image"
                         />
@@ -174,10 +173,17 @@ const MyCalendar = () => {
                   </div>
                   <div className="card-back">
                     <p className="event-title">{event.title}</p>
-                    <p className="event-speaker">Por {event.speaker}</p>
+                    <p className="event-speaker">{event.description}</p>
                     <p className="event-date">{formatEventDate(event.start)}</p>
                     <i className="fas fa-map-marker-alt"></i> {event.location}
-                    <p className="event-type">* Só para socias</p>
+                    {event.access && (
+                      <p className="event-type">
+                        {" "}
+                        {event.access === "solo_socios"
+                          ? "Evento solo para socios/as"
+                          : "Evento abierto a la comunidad"}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -203,7 +209,7 @@ const MyCalendar = () => {
               <div className="event-all">
                 <div className="event-image-text">
                   <div className="event-image">
-                    {selectedEvent.image && selectedEvent.image.length > 0 ? (
+                    {selectedEvent.image ? (
                       <img
                         src={selectedEvent.image}
                         alt="Imagen del evento"
@@ -240,7 +246,22 @@ const MyCalendar = () => {
               </div>
             ) : (
               <p className="no-events">
-                No hay eventos programados para este día.
+                {selectedDate ? (
+                  <>
+                    No hay eventos programados para el día
+                    <br/>
+                    <strong>
+                      {new Date(selectedDate).toLocaleDateString("es-ES", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                      })}
+                    </strong>
+                    .
+                  </>
+                ) : (
+                  "No hay eventos programados para este día."
+                )}
               </p>
             )}
           </div>

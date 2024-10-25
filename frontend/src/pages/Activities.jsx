@@ -115,8 +115,16 @@ const Activities = ({ activities, setActivities }) => {
                       {activity.summary || "Título"}
                     </h1>
                     <h2 className="activities-date">
+                      Comienzo del evento
+                      <br/>
                       {formatDate(activity.start.dateTime) || "Fecha"}
                     </h2>
+                    <h2 className="activities-date">
+                      Finaliza
+                      <br/>
+                      {formatDate(activity.end.dateTime) || "Fecha"}
+                    </h2>
+
                     <p className="activities-decription">
                     {activity.description || "descripción"}
                     </p>
