@@ -45,31 +45,24 @@ export default function EventForm({ toEdit, onSuccess }) {
         parsedEnd: formatDate(toEdit.end.dateTime, "local"),
       };
       setActivity(adaptedData);
+
+      // Si hay una imagen en el backend, cargar el nombre y la vista previa
+      if (toEdit.extendedProperties?.private?.image && toEdit.extendedProperties?.private?.image !== "sin imagen") {
+        const imageUrl = toEdit.extendedProperties.private.image;        
+        setImagePreview(imageUrl);    
+        setImageName("(Imagen guardada en la nube)");
+      } else {
+        // Si no hay imagen en el colaborador, usar la imagen por defecto
+        setImagePreview(DEFAULT_IMAGE_URL); 
+        setImageName("(Imagen por defecto)");
+      }
+
+      // Limpiar el campo de archivo cuando cambia la actividad
+      setSelectedFile(null);
     } else {
       setActivity(defaultActivity);
     }
   }, [toEdit]);  
-
-  useEffect(() => {
-    const currentActivity = activity || toEdit || {};
-
-    //! console.log(currentActivity.extendedProperties.private.image);
-    
-
-    // Si hay una imagen en el backend, cargar el nombre y la vista previa
-    if (currentActivity.extendedProperties?.private?.image && currentActivity.extendedProperties?.private?.image !== "Sin imagen") {
-      const imageUrl = currentActivity.extendedProperties.private.image;
-      setImagePreview(imageUrl);    
-      setImageName("Imagen subida");
-    } else {
-      // Si no hay imagen en el colaborador, usar la imagen por defecto
-      setImagePreview(DEFAULT_IMAGE_URL); 
-      setImageName("Imagen por defecto");
-    }
-
-    // Limpiar el campo de archivo cuando cambia el colaborador
-    setSelectedFile(null);
-  }, [toEdit]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -205,9 +198,6 @@ export default function EventForm({ toEdit, onSuccess }) {
     if (selectedFile) {
       formData.append("image", selectedFile);
     }
-
-    //todo ......................................................... 
-
 
     // const requestBody = {
     //   summary: activity.summary,
