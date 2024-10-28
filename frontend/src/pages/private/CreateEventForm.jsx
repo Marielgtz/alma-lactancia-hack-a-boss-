@@ -36,6 +36,8 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   useEffect(() => {
     if (toEdit?.id) {
+      console.log(toEdit);
+      
       const adaptedData = {
         ...toEdit,
         access: toEdit.extendedProperties?.private?.access || "",
@@ -43,34 +45,24 @@ export default function EventForm({ toEdit, onSuccess }) {
         parsedEnd: formatDate(toEdit.end.dateTime, "local"),
       };
       setActivity(adaptedData);
+
+      // Si hay una imagen en el backend, cargar el nombre y la vista previa
+      if (toEdit.extendedProperties?.private?.image && toEdit.extendedProperties?.private?.image !== "sin imagen") {
+        const imageUrl = toEdit.extendedProperties.private.image;        
+        setImagePreview(imageUrl);    
+        setImageName("(Imagen guardada en la nube)");
+      } else {
+        // Si no hay imagen en el colaborador, usar la imagen por defecto
+        setImagePreview(DEFAULT_IMAGE_URL); 
+        setImageName("(Imagen por defecto)");
+      }
+
+      // Limpiar el campo de archivo cuando cambia la actividad
+      setSelectedFile(null);
     } else {
       setActivity(defaultActivity);
     }
   }, [toEdit]);  
-
-  useEffect(() => {
-    const currentActivity = activity || toEdit || {};
-
-    // Si hay una imagen en el backend, cargar el nombre y la vista previa
-    if (currentActivity.extendedProperties?.private?.image && currentActivity.extendedProperties?.private?.image !== "Sin imagen") {
-      const imageUrl = currentActivity.extendedProperties.private.image;
-      setImagePreview(imageUrl);
-      setImageName("Imagen subida");
-    } else {
-      // Si no hay imagen en el colaborador, usar la imagen por defecto
-      setImagePreview(DEFAULT_IMAGE_URL);
-      setImageName("Imagen por defecto");
-    }
-
-    // Limpiar el campo de archivo cuando cambia el colaborador
-    setSelectedFile(null);
-  }, [toEdit]);
-
-
-  useEffect(() => {
-    console.log("Cambio en selected file!!: ", selectedFile);
-    
-  },[selectedFile])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -154,7 +146,7 @@ export default function EventForm({ toEdit, onSuccess }) {
   };
 
   const validateForm = () => {
-    if (activity.access !== "solo_socios" && activity.access !== "free") {
+    if (activity.access !== "partners" && activity.access !== "free") {
       setFormError("Por favor, seleccione un nivel de acceso válido.");
       return false;
     }
@@ -171,7 +163,6 @@ export default function EventForm({ toEdit, onSuccess }) {
   const submitNewEvent = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
     const processToast = toast.loading("Guardando cambios...");
     
     console.log("Selected File", selectedFile);
@@ -188,7 +179,8 @@ export default function EventForm({ toEdit, onSuccess }) {
 
     const extendedProperties = {
       private: {
-        access: activity.access
+        access: activity.access,
+        image: activity.extendedProperties.private.image || "sin imagen"
       }
     }
 
@@ -196,13 +188,16 @@ export default function EventForm({ toEdit, onSuccess }) {
     formData.append("summary", activity.summary);
     formData.append("description", activity.description);
     formData.append("location", activity.location);
-    formData.append("start", JSON.stringify(start));
-    formData.append("end", JSON.stringify(end));
-    formData.append("extendedProperties", JSON.stringify(extendedProperties));
+    formData.append("start[dateTime]", start.dateTime);
+    formData.append("start[timeZone]", start.timeZone);
+    formData.append("end[dateTime]", end.dateTime);
+    formData.append("end[timeZone]", end.timeZone);
+    formData.append("extendedProperties[private][access]", extendedProperties.private.access);
+    formData.append("extendedProperties[private][image]", extendedProperties.private.image);
+
     if (selectedFile) {
       formData.append("image", selectedFile);
     }
-
 
     // const requestBody = {
     //   summary: activity.summary,
@@ -366,7 +361,7 @@ export default function EventForm({ toEdit, onSuccess }) {
         required
       >
         <option value="default">Seleccionar</option>
-        <option value="solo_socios">Solo socios</option>
+        <option value="partners">Solo socios</option>
         <option value="free">Público</option>
       </select>
 
