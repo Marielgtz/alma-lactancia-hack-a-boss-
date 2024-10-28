@@ -19,6 +19,8 @@ const Activities = ({ activities, setActivities }) => {
       const calendarEvents = await getCalendarEvents();
       if (calendarEvents) {
         setActivities(calendarEvents);
+        console.log(calendarEvents);
+        
       }
     }
 
@@ -93,6 +95,20 @@ const Activities = ({ activities, setActivities }) => {
         <ol className="activity-container">
           {activities.length > 0 ? (
             activities.map((activity, index) => {
+              
+              // Calcular la duración
+              const start = new Date(activity.start.dateTime);
+              const end = new Date(activity.end.dateTime);
+
+              const durationInMinutes = Math.floor((end - start) / (1000 * 60));
+              const hours = Math.floor(durationInMinutes / 60);
+              const minutes = durationInMinutes % 60;
+
+              const durationString = 
+                hours > 0 
+                  ? `${hours} h ${minutes} m`
+                  : `${minutes} minutos`;
+
               // setPublishedActivity((prevData) => {
               //     const newData = [...prevData]
               //     newData.splice(index + 1, 1, activity)
@@ -102,26 +118,27 @@ const Activities = ({ activities, setActivities }) => {
                 <li key={index} className="activity-cards">
                   <div className="activity-content">
                     <div className="activity-image">
-                      {activity.image ? (
-                        <img src={activity.image} alt={activity.summary} />
+                      {activity.extendedProperties.private.image && activity.extendedProperties.private.image != "sin imagen"  ? (
+                        <img src={activity.extendedProperties.private.image} alt={activity.summary} />
                       ) : (
                         <img src={silueta} alt="Imagen predeterminada" />
                       )}
                     </div>
-                    <p>{`Actividad número: ${index + 1}`}</p>
                     <h1 className="activities-title">
                       {activity.summary || "Título"}
                     </h1>
-                    <h2 className="activities-date">
-                      {formatDate(activity.start.dateTime) || "Fecha"}
-                    </h2>
                     <p className="activities-decription">
                     {activity.description || "descripción"}
                     </p>
-
                     <p className="activities-location">
                       {activity.location || "Lugar"}
                     </p>
+                    <h2 className="activities-date">
+                      {formatDate(activity.start.dateTime) || "Fecha"}
+                    </h2>
+                    <h2 className="activities-date">
+                      Duración estimada: { durationString || "Duración"}
+                    </h2>
                     <button
                       className="activities-inscription"
                       onClick={() => handleEnrollClick(activity, index + 1)}

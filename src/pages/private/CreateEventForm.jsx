@@ -6,6 +6,7 @@ import {
   updateCalendarEventService,
 } from "../../services/api";
 import formatDate from "../../utils/formatDate";
+import silueta from "../../images/Alma_Lactancia_-_Foto_hero.jpg";
 import { toast } from "react-toastify";
 import ConfirmationModal from "../../components/ConfirmationModal.jsx";
 
@@ -25,10 +26,18 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   const [activity, setActivity] = useState(toEdit || defaultActivity);
   const [formError, setFormError] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(""); // Vista previa de la imagen
+  const [imageName, setImageName] = useState(""); // Nombre de la imagen del backend
   const [showDeleteModal, setShowDeleteModal] = useState(false); // Estado para el modal de eliminación
+
+  // URL de la imagen proporcionada (icono pecho)
+  const DEFAULT_IMAGE_URL = silueta;
 
   useEffect(() => {
     if (toEdit?.id) {
+      console.log(toEdit);
+      
       const adaptedData = {
         ...toEdit,
         access: toEdit.extendedProperties?.private?.access || "",
@@ -36,34 +45,59 @@ export default function EventForm({ toEdit, onSuccess }) {
         parsedEnd: formatDate(toEdit.end.dateTime, "local"),
       };
       setActivity(adaptedData);
+
+      // Si hay una imagen en el backend, cargar el nombre y la vista previa
+      if (toEdit.extendedProperties?.private?.image && toEdit.extendedProperties?.private?.image !== "sin imagen") {
+        const imageUrl = toEdit.extendedProperties.private.image;        
+        setImagePreview(imageUrl);    
+        setImageName("(Imagen guardada en la nube)");
+      } else {
+        // Si no hay imagen en el colaborador, usar la imagen por defecto
+        setImagePreview(DEFAULT_IMAGE_URL); 
+        setImageName("(Imagen por defecto)");
+      }
+
+      // Limpiar el campo de archivo cuando cambia la actividad
+      setSelectedFile(null);
     } else {
       setActivity(defaultActivity);
     }
-  }, [toEdit]);
+  }, [toEdit]);  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setActivity((prevData) => {
-      if (name === "parsedStart") {
-        return {
-          ...prevData,
-          parsedStart: value,
-          startDateTime: new Date(value).toISOString(),
-        };
-      }
-      if (name === "parsedEnd") {
-        return {
-          ...prevData,
-          parsedEnd: value,
-          endDateTime: new Date(value).toISOString(),
-        };
-      }
+    setActivity((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+      ...(name === "parsedStart" && {
+        parsedStart: value,
+        startDateTime: new Date(value).toISOString(),
+      }),
+      ...(name === "parsedEnd" && {
+        parsedEnd: value,
+        endDateTime: new Date(value).toISOString(),
+      }),
+    }));
+  };
+  
 
-      return {
-        ...prevData,
-        [name]: type === "checkbox" ? checked : value,
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+
+    // Mostrar la vista previa de la nueva imagen seleccionada
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
       };
-    });
+      reader.readAsDataURL(file);
+      setImageName(file.name);
+    } else {
+      // Si no hay archivo seleccionado, restablecer la vista previa
+      setImagePreview(DEFAULT_IMAGE_URL);
+      setImageName("Imagen por defecto");
+    }
   };
 
   // Función para manejar la eliminación
@@ -129,42 +163,76 @@ export default function EventForm({ toEdit, onSuccess }) {
   const submitNewEvent = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
     const processToast = toast.loading("Guardando cambios...");
+    
+    console.log("Selected File", selectedFile);
+    
+    const start = {
+      dateTime: activity.start?.dateTime || activity.startDateTime,
+      timeZone: "Europe/Madrid",
+    }
 
-    const requestBody = {
-      summary: activity.summary,
-      description: activity.description,
-      start: {
-        dateTime: activity.start?.dateTime || activity.startDateTime,
-        timeZone: "Europe/Madrid",
-      },
-      end: {
-        dateTime: activity.end?.dateTime || activity.endDateTime,
-        timeZone: "Europe/Madrid",
-      },
-      location: activity.location,
-      reminders: {
-        useDefault: false,
-        overrides: [
-          { method: "email", minutes: 1440 },
-          { method: "popup", minutes: 60 },
-        ],
-      },
-      visibility: "private",
-      access: activity.access,
-      extendedProperties: {
-        private: {
-          access: activity.access,
-        },
-      },
-    };
+    const end = {
+      dateTime: activity.end?.dateTime || activity.endDateTime,
+      timeZone: "Europe/Madrid",
+    }
+
+    const extendedProperties = {
+      private: {
+        access: activity.access,
+        image: activity.extendedProperties.private.image || "sin imagen"
+      }
+    }
+
+    const formData = new FormData();
+    formData.append("summary", activity.summary);
+    formData.append("description", activity.description);
+    formData.append("location", activity.location);
+    formData.append("start[dateTime]", start.dateTime);
+    formData.append("start[timeZone]", start.timeZone);
+    formData.append("end[dateTime]", end.dateTime);
+    formData.append("end[timeZone]", end.timeZone);
+    formData.append("extendedProperties[private][access]", extendedProperties.private.access);
+    formData.append("extendedProperties[private][image]", extendedProperties.private.image);
+
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
+
+    // const requestBody = {
+    //   summary: activity.summary,
+    //   description: activity.description,
+    //   start: {
+    //     dateTime: activity.start?.dateTime || activity.startDateTime,
+    //     timeZone: "Europe/Madrid",
+    //   },
+    //   end: {
+    //     dateTime: activity.end?.dateTime || activity.endDateTime,
+    //     timeZone: "Europe/Madrid",
+    //   },
+    //   location: activity.location,
+    //   reminders: {
+    //     useDefault: false,
+    //     overrides: [
+    //       { method: "email", minutes: 1440 },
+    //       { method: "popup", minutes: 60 },
+    //     ],
+    //   },
+    //   visibility: "private",
+    //   access: activity.access,
+    //   extendedProperties: {
+    //     private: {
+    //       access: activity.access,
+    //       image: selectedFile
+    //     }
+    //   },
+    // };
 
     try {
       if (toEdit?.id) {
         const response = await updateCalendarEventService(
           toEdit.id,
-          requestBody
+          formData
         );
         if (response.error) {
           throw new Error(response.error);
@@ -173,7 +241,12 @@ export default function EventForm({ toEdit, onSuccess }) {
         toast.success("Evento actualizado con éxito");
         onSuccess();
       } else {
-        const response = await createEvent(requestBody);
+        for (const [key, value] of formData.entries()) {
+          console.log(`${key}:`, value);
+      } 
+        console.log("CHECKPOINT 1: ANTES API");
+        const response = await createEvent(formData);
+        console.log("CHECKPOINT 2: PASÓ API:", response);
         if (
           response.message ===
           "Actividad creada y subida al calendario correctamente"
@@ -193,6 +266,42 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   return (
     <form onSubmit={submitNewEvent} className="dashboard-form">
+      {/* Previsualización de la imagen */}
+      <div className="image-preview">
+  
+        <label>Previsualización imagen: </label>
+        {imageName ? (
+          <div>
+            <img
+              src={imagePreview}
+              alt="Vista previa de la imagen"
+              width="200px"
+            />
+            <p className="image-name-description">{imageName}</p>
+          </div>
+        ) : (
+          <p className="texto-descriptivo-accion">Sin foto guardada</p>
+        )}
+      </div>
+
+      {/* Nueva imagen */}
+      <div className="new-image">
+        <p className="texto-descriptivo-accion">
+          Nueva imagen (si quieres cambiarla):
+        </p>
+        <label htmlFor="image" className="file-label">
+          <i className="fas fa-upload"></i> Seleccionar archivo...
+        </label>
+        <input
+          style={{"display": "none"}}
+          type="file"
+          id="image"
+          name="image"
+          onChange={handleFileChange}
+          className="file-input"
+        />
+      </div>
+
       <label>Título del evento:</label>
       <input
         type="text"

@@ -343,6 +343,11 @@
 .leyenda-dia-con-evento {
   background-color: #9c6fa057;
 }
+
+.selected-day{
+  background-color: #e0e0e0;
+}
+
 @media (max-width: 768px) {
   .activities {
     flex-direction: column; /* Cambia a disposición vertical */
