@@ -27,7 +27,7 @@ function InstagramTutorial() {
     },
     {
       src: "https://res.cloudinary.com/dqhemn1nv/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1728548561/Screenshot_from_2024-10-10_10-08-46_iyzizg.png",
-      comment: "Copia el código que aparece",
+      comment: "Copia el código que aparece, quitando la opción 'incluir pie de foto'",
     },
     {
       src: "https://res.cloudinary.com/dqhemn1nv/image/upload/v1728548553/Screenshot_from_2024-10-10_10-10-18_ig3ikx.png",
