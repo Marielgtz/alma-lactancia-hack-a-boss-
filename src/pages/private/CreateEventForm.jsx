@@ -36,8 +36,6 @@ export default function EventForm({ toEdit, onSuccess }) {
 
   useEffect(() => {
     if (toEdit?.id) {
-      console.log(toEdit);
-      
       const adaptedData = {
         ...toEdit,
         access: toEdit.extendedProperties?.private?.access || "",
@@ -61,6 +59,8 @@ export default function EventForm({ toEdit, onSuccess }) {
       setSelectedFile(null);
     } else {
       setActivity(defaultActivity);
+      setImagePreview(DEFAULT_IMAGE_URL);
+      setImageName("(Imagen por defecto)");
     }
   }, [toEdit]);  
 
@@ -180,7 +180,7 @@ export default function EventForm({ toEdit, onSuccess }) {
     const extendedProperties = {
       private: {
         access: activity.access,
-        image: activity.extendedProperties.private.image || "sin imagen"
+        image: activity.extendedProperties?.private?.image || "sin imagen"
       }
     }
 
@@ -286,11 +286,8 @@ export default function EventForm({ toEdit, onSuccess }) {
 
       {/* Nueva imagen */}
       <div className="new-image">
-        <p className="texto-descriptivo-accion">
-          Nueva imagen (si quieres cambiarla):
-        </p>
         <label htmlFor="image" className="file-label">
-          <i className="fas fa-upload"></i> Seleccionar archivo...
+          <i className="fas fa-upload"></i> Seleccionar nueva imagen...
         </label>
         <input
           style={{"display": "none"}}

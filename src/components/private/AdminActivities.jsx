@@ -66,10 +66,10 @@ const AdminActivities = () => {
         </button>
       </div>
       <div className={!isEditMode ? "hidden" : ""}>
-        <button onClick={() => toggleEditMode({})} className="confirm-btn">
+        <button onClick={() => toggleEditMode({})} className="confirm-btn" style={{marginBottom: "1rem"}}>
           <i className="fas fa-arrow-left"></i> Volver atrás
         </button>
-        <p className="texto-editando-nosotras">
+        {/* <p className="texto-editando-nosotras">
           Editando: {toEdit?.summary || "Nueva actividad"}
         </p>
         <p className="texto-editando-nosotras">
@@ -77,7 +77,7 @@ const AdminActivities = () => {
           {toEdit?.start
             ? formatDate(toEdit.start.dateTime)
             : "Fecha no especificada"}
-        </p>
+        </p> */}
 
         <EventForm toEdit={toEdit} onSuccess={refreshEventsList} />
       </div>
