@@ -139,7 +139,6 @@ const MyCalendar = () => {
     setSelectedEvent(event || null);
   };
 
-
   return (
     <div className="calendar-section">
       <h2 className="section-title-activity">Próximas actividades</h2>
@@ -213,10 +212,11 @@ const MyCalendar = () => {
               <div className="event-all">
                 <div className="event-image-text">
                   <div className="event-image">
-                    {selectedEvent.image ? (
+                    {selectedEvent.image &&
+                    selectedEvent.image !== "sin imagen" ? (
                       <img
                         src={selectedEvent.image}
-                        alt="Imagen del evento"
+                        alt="imagen actividad"
                         className="attachment-image"
                       />
                     ) : (
