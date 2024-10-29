@@ -175,7 +175,10 @@ const MyCalendar = () => {
                     <p className="event-title">{event.title}</p>
                     <p className="event-speaker">{event.description}</p>
                     <p className="event-date">{formatEventDate(event.start)}</p>
-                    <i className="fas fa-map-marker-alt"></i> {event.location}
+                    <i className="fas fa-map-marker-alt icon-location"></i>
+                    <div className="location">
+                      <p>{event.location}</p>
+                    </div>
                     {event.access && (
                       <p className="event-type">
                         {" "}
@@ -249,7 +252,7 @@ const MyCalendar = () => {
                 {selectedDate ? (
                   <>
                     No hay eventos programados para el día
-                    <br/>
+                    <br />
                     <strong>
                       {new Date(selectedDate).toLocaleDateString("es-ES", {
                         weekday: "long",

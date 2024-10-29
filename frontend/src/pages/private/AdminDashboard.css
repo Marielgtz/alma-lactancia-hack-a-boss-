@@ -186,3 +186,14 @@
     padding: 1rem 2rem;
   }
 }
+
+@media (min-width: 1300px) {
+  .admin-content {
+    width: calc(100% - 350px);
+    max-width: 100%;
+    margin-left: 350px;
+    flex-grow: 1; /* Permite que este contenedor crezca según el contenido */
+    overflow-y: auto; /* Agrega scroll si el contenido es más largo que la ventana */
+    padding: 1rem;
+  }
+}

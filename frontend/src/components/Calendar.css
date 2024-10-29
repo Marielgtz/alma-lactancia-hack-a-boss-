@@ -28,16 +28,20 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%; /* Asegura que la imagen cubra todo el contenedor */
+  height: 200px; /* Define una altura fija para el contenedor */
   overflow: hidden;
+  border-radius: 2rem 2rem 0 0; /* Agrega el borde redondeado al contenedor */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* Color de fondo opcional en caso de que la imagen tarde en cargar */
 }
+
 .activity-image-home img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Asegura que la imagen cubra completamente el contenedor */
-}
-.attachment-image {
-  border-radius: 2rem 2rem 0 0;
+  display: block; /* Elimina el espacio inferior que a veces aparece en imágenes dentro de divs */
 }
 
 .card-inner {
@@ -59,7 +63,7 @@
 .card-back {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: auto;
   backface-visibility: hidden;
   border-radius: 2rem;
   display: flex;
@@ -68,11 +72,12 @@
   align-items: center;
   overflow: hidden;
   background-color: #d8e2dc;
-  color: #555;
+  color: #333;
 }
 
 .card-back {
   transform: rotateY(180deg);
+  padding: 1rem 0;
 }
 
 .contenedor-ver-actividades-inicio {
@@ -111,7 +116,7 @@
 }
 
 .event-title {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: bold;
   text-align: center;
   margin-bottom: 0.5rem;
@@ -122,20 +127,39 @@
 .event-speaker {
   font-size: 0.9rem;
   font-family: outfit;
+  padding: 0 1.6rem;
+  text-align: center;
+  line-height: 1.4rem;
 }
 
 .event-date {
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
-
-.event-type {
+.location {
+  display: flex;
+  align-items: center;
   font-size: 1rem;
-  color: #b380b5;
-  margin-top: 2.5rem;
-  font-family: outfit;
 }
 
+.location p {
+  font-weight: bold;
+  font-family: Outfit, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+}
+.event-type {
+  font-size: 1rem;
+  background-color: #b380b5;
+  color: white;
+  padding: 0.5rem 1.3rem;
+  border-radius: 30px;
+  font-family: outfit;
+  text-align: center;
+}
+.icon-location {
+  color: #b380b5;
+}
 .register-button {
   margin-top: 1rem;
   color: #b380b5;
@@ -344,7 +368,7 @@
   background-color: #9c6fa057;
 }
 
-.selected-day{
+.selected-day {
   background-color: #e0e0e0;
 }
 
