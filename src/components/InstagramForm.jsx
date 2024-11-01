@@ -3,7 +3,6 @@ import useInstagramForm from "../hooks/useInstagramForm";
 import "./InstagramForm.css";
 import "./private/Modals/InstagramTutorial.css";
 import Modal from "../modal/ModalBooks";
-import ModalInstructions from "../modal/ModalInstructions";
 import InstagramTutorial from "./private/Modals/InstagramTutorial";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
