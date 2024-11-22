@@ -1,7 +1,7 @@
 # Asociación sin ánimo de lucro ALMA LACTANCIA 
 
 <div>
-  <img src="./alma-lactancia-hack-a-boss-/src/images/logo-alma.png" width="500px"/>
+  <img src="./src/images/logo-alma.png" width="500px"/>
 </div>
 
 <br/>
