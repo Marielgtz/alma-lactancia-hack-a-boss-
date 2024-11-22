@@ -27,7 +27,7 @@ Página web donde consultar recursos, eventos y actividades sobre lactancia orga
   </li>
 </ol>
 
-## 👩‍💻 Developers
+## 👩‍💻 Desarrolladores
 <a href="https://github.com/GuillermoGCP"><img src="https://i.postimg.cc/cHSfDxZq/temp-Image8a-Fxfs.png" width="150" /></a>
 <a href="https://github.com/albafresnillo"><img src="https://i.postimg.cc/k58xFV0F/temp-Image-Wsg5-Gc.png" width="150" /></a>
 <a href="https://github.com/Roberto-Panella"><img src="https://i.postimg.cc/FHYbzCG6/temp-Image-YQY2gl.png" width="150" /></a>
@@ -144,33 +144,30 @@ Responsive, amigable y fácilmente accesible desde múltiples dispositivos. Cump
 ![MockupDesktop](./src/images/Mockup-desktop.png)
 
 ## 💻 Tech Stack
-<div align="center">
 
-  - HTML5
-  - CSS3
-  - React
-  - Vite
-  - Material UI
-  - React Router
-  - Axios
-  - React Hook Form
-  - React Big Calendar
-  - React Calendar
-  - React Toastify
-  - Font Awesome
-  - Date-fns
-  - Google APIs
-  - UUID
-  - Testing Libraries
-  - Dotenv
-  - CORS
-  - NPM
-  - GitHub
-  - GIT
-  - VSC
-  - Notion
-  - Figma
+<div align="center" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">HTML5</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">CSS3</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">React</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Vite</span>
+  
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Material UI</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">React Router</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Axios</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">React Hook Form</span>
+  
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">React Big Calendar</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">React Calendar</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">React Toastify</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Font Awesome</span>
+  
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Date-fns</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Google APIs</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">UUID</span>
+  <span style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Testing Libraries</span>
 
 </div>
+
 
 <a href="#menu">Volver arriba</a>
