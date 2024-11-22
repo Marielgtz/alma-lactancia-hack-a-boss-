@@ -29,11 +29,11 @@ Página web donde consultar recursos, eventos y actividades sobre lactancia orga
 
 ## 👩‍💻 Desarrolladores
 <div style="display: flex; gap: 35px;">
-  <a href="https://github.com/GuillermoGCP"><img src="https://i.postimg.cc/cHSfDxZq/temp-Image8a-Fxfs.png" width="150" /></a>
-  <a href="https://github.com/albafresnillo"><img src="https://i.postimg.cc/k58xFV0F/temp-Image-Wsg5-Gc.png" width="150" /></a>
-  <a href="https://github.com/Roberto-Panella"><img src="https://i.postimg.cc/FHYbzCG6/temp-Image-YQY2gl.png" width="150" /></a>
-  <a href="https://github.com/danvei0707"><img src="https://i.postimg.cc/DwRrXQMw/temp-Imagef-Sd7-Me.png" width="150" /></a>
-  <a href="https://github.com/helenartola"><img src="https://i.postimg.cc/sXHDMmTn/temp-Imagei-Emzld.png" width="150" /></a>
+  <a href="https://github.com/GuillermoGCP"><img src="https://i.postimg.cc/cHSfDxZq/temp-Image8a-Fxfs.png" width="150" height="155" /></a>
+  <a href="https://github.com/albafresnillo"><img src="https://i.postimg.cc/8cdkKNDk/temp-Image-JYTy-Yi.png" width="150" height="155" /></a>
+  <a href="https://github.com/helenartola"><img src="https://i.postimg.cc/sXHDMmTn/temp-Imagei-Emzld.png" width="150" height="155" /></a>
+  <a href="https://github.com/Roberto-Panella"><img src="https://i.postimg.cc/J0C45tfd/temp-Image-Usxln-J.png" width="150" height="155" /></a>
+  <a href="https://github.com/danvei0707"><img src="https://i.postimg.cc/DwRrXQMw/temp-Imagef-Sd7-Me.png" width="150" height="155" /></a>
 </div>
 
 ## 📅 Scrum Master
