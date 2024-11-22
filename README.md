@@ -141,8 +141,8 @@ Diseñada con [Figma](https://www.figma.com/proto/6UCLBJaESI8DXv5qJh77vJ/Alma-La
 Responsive, amigable y fácilmente accesible desde múltiples dispositivos. Cumpliendo criterios de accesibilidad para que pueda ser usada por cualquier persona.
 
 <div style="display: flex; justify-content: space-around;">
-  <img src="./src/images/Mockup-mobile.png" alt="Mockup Mobile" style="width: 25%;"/>
-  <img src="./src/images/Mockup-desktop.png" alt="Mockup Desktop" style="width: 75%;"/>
+  <img src="./src/images/Mockup-mobile.png" alt="Mockup Mobile" style="width: 22%;"/>
+  <img src="./src/images/Mockup-desktop.png" alt="Mockup Desktop" style="width: 65%;"/>
 </div>
 
 
