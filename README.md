@@ -1,7 +1,7 @@
 # Asociación sin ánimo de lucro ALMA LACTANCIA 
 
 <div>
-  <img src="./src/images/logo-alma.png" width="500px"/>
+  <img src="./src/images/Logo_alma_lactancia.jpeg" width="500px"/>
 </div>
 
 <br/>
@@ -29,16 +29,21 @@ Página web donde consultar recursos, eventos y actividades sobre lactancia orga
 
 ## 👩‍💻 Desarrolladores
 <div style="display: flex; gap: 35px;">
-  <a href="https://github.com/GuillermoGCP"><img src="https://i.postimg.cc/cHSfDxZq/temp-Image8a-Fxfs.png" width="150" height="155" /></a>
-  <a href="https://github.com/albafresnillo"><img src="https://i.postimg.cc/8cdkKNDk/temp-Image-JYTy-Yi.png" width="150" height="155" /></a>
-  <a href="https://github.com/helenartola"><img src="https://i.postimg.cc/sXHDMmTn/temp-Imagei-Emzld.png" width="150" height="155" /></a>
-  <a href="https://github.com/Roberto-Panella"><img src="https://i.postimg.cc/J0C45tfd/temp-Image-Usxln-J.png" width="150" height="155" /></a>
-  <a href="https://github.com/danvei0707"><img src="https://i.postimg.cc/DwRrXQMw/temp-Imagef-Sd7-Me.png" width="150" height="155" /></a>
+  <a href="https://github.com/GuillermoGCP"><img src="https://i.postimg.cc/c6dt3Zgn/temp-Imagey2jor-L.png" width="150" height="155" /></a>
+  <a href="https://github.com/albafresnillo"><img src="https://i.postimg.cc/ygyJGp5x/temp-Image-OZf-Um-Q.png" width="150" height="155" /></a>
+  <a href="https://github.com/helenartola"><img src="https://i.postimg.cc/PNKpzcYF/temp-Images2-BNXh.png" width="150" height="155" /></a>
+  <a href="https://github.com/Roberto-Panella"><img src="https://i.postimg.cc/cvtvWLjV/temp-Imaged-JQw4z.png" width="150" height="155" /></a>
+  <a href="https://github.com/danvei0707"><img src="https://i.postimg.cc/CnMZpHTN/temp-Image-Sx7-Wm-D.png" width="150" height="155" /></a>
 </div>
+
+## 📅 Tech Lead
+<a href="https://github.com/noeesp">
+  <img src="https://i.postimg.cc/7fW5j2B3/temp-Imagev-L0ec-U.png"  width="150"/>
+</a>
 
 ## 📅 Scrum Master
 <a href="https://github.com/Marielgtz">
-  <img src="https://i.postimg.cc/DZPLH9yS/temp-Imagefm-Vd-DF.png"  width="150"/>
+  <img src="https://i.postimg.cc/1ftgWHKR/temp-Imageh-CGDAP.png"  width="150"/>
 </a>
 
 <br/>
