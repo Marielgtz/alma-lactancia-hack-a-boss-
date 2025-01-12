@@ -1,0 +1,39 @@
+.boton-inscribirme {
+  display: flex;
+  justify-content: center;
+  width: 7rem; /* Ancho fijo */
+  padding: 0.3rem;
+  background-color: #b380b5;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-family: outfit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 1rem; /* Añadir espacio superior para que no quede pegado a otros elementos */
+}
+
+.boton-inscribirme:hover {
+  color: #b380b5;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+  .boton-inscribirme {
+    width: 5rem; /* Hacer el botón más pequeño en móviles */
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    margin-top: 1rem; /* Asegurarse de que hay suficiente espacio */
+  }
+}
+
+/* Media Query para pantallas de tablet */
+@media (max-width: 1024px) {
+  .boton-inscribirme {
+    width: 6rem; /* Aumentar el tamaño del botón en tablets */
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}
