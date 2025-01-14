@@ -62,8 +62,8 @@
 /* Media Query para dispositivos móviles */
 @media (max-width: 768px) {
   .boton-inscribirme {
-    width: 5rem; /* Hacer el botón más pequeño en móviles */
-    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    font-size: 1rem; /* Ajustar el tamaño de la fuente */
+    padding: 1rem; /* Ajustar el padding para que no quede tan pequeño */
     margin-top: 1rem; /* Asegurarse de que hay suficiente espacio */
   }
 }
@@ -71,8 +71,8 @@
 /* Media Query para pantallas de tablet */
 @media (max-width: 1024px) {
   .boton-inscribirme {
-    width: 6rem; /* Aumentar el tamaño del botón en tablets */
-    font-size: 1rem;
+    font-size: 1.1rem; /* Ajustar tamaño de la fuente */
+    padding: 1rem 2rem; /* Asegurarse de que el padding sea adecuado */
     margin-top: 1rem;
   }
 }
