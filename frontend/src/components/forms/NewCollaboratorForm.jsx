@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
+import useSubmitPartnerForm from "../../hooks/useSubmitPartnerForm";
 import "./NewCollaboratorForm.css";
 
 const NewPartnerForm = () => {
@@ -11,92 +11,126 @@ const NewPartnerForm = () => {
     phone: "",
   });
 
+  const { submitForm, isLoading, error } = useSubmitPartnerForm();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    // Si el campo es 'phone', solo permitimos números
+    const newValue = name === "phone" ? value.replace(/\D/g, "") : value;
+
+    // Si el campo es 'phone' y está vacío, asignamos null
+    if (name === "phone" && newValue === "") {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: null, // Si está vacío, guardamos null
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: newValue, // Si no está vacío, guardamos el valor numérico
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let phone = formData.phone.trim();
+    phone = phone === "" ? null : Number(phone); // Si está vacío, asignamos null; si no, convertimos a número
+
+    // Verificar si el teléfono es válido (si no es null, debe ser un número)
+    if (phone !== null && isNaN(phone)) {
+      toast.error("El teléfono debe ser un número válido.");
+      return;
+    }
+
     try {
-      const processToast = toast.loading("Enviando datos...");
-      const response = await axios.post("/new-partner", formData);
+      const data = await submitForm({
+        name: formData.name,
+        surname: formData.surname,
+        email: formData.email,
+        phone: phone, // Enviar null si no hay teléfono
+      });
 
-      if (response.status === 200) {
-        const { message, id } = response.data;
-        toast.dismiss(processToast);
-        toast.success(`${message} ID de Socio: ${id}`);
-
-        // Limpia el formulario
-        setFormData({
-          name: "",
-          surname: "",
-          email: "",
-          phone: "",
-        });
+      if (data.error && data.error.includes("Ya existe un email")) {
+        toast.error("El correo electrónico ya está registrado.");
       } else {
-        throw new Error("Error inesperado en la respuesta del servidor.");
+        toast.success("Socio añadido correctamente");
       }
     } catch (error) {
-      toast.dismiss();
-      toast.error(
-        `Error al añadir socio: ${
-          error.response?.data?.message || error.message
-        }`
-      );
+      toast.error(`Error al añadir socio: ${error.message || "Desconocido"}`);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="name-field">
-        <label htmlFor="name">Nombre:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+      <div className="contenedor-formulario">
+        <div className="contenedor-campos-form">
+          <label htmlFor="name" className="etiquetas-form-inscripcion">
+            Nombre:
+            <span className="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="inputs-form-inscripcion"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="contenedor-campos-form">
+          <label htmlFor="surname" className="etiquetas-form-inscripcion">
+            Apellidos:
+            <span className="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="surname"
+            name="surname"
+            className="inputs-form-inscripcion"
+            value={formData.surname}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="contenedor-campos-form">
+          <label htmlFor="email" className="etiquetas-form-inscripcion">
+            Correo electrónico:
+            <span className="required">*</span>
+          </label>
+
+          <input
+            type="email"
+            id="collaborator-email"
+            name="email"
+            className="inputs-form-inscripcion"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            autoComplete="email"
+          />
+        </div>
+        <div className="contenedor-campos-form">
+          <label htmlFor="phone" className="etiquetas-form-inscripcion">
+            Teléfono (opcional):
+          </label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            className="inputs-form-inscripcion"
+            value={formData.phone}
+            onChange={handleChange}
+            pattern="\d*"
+            placeholder="Introduce solo números"
+          />
+        </div>
       </div>
-      <div className="name-field">
-        <label htmlFor="surname">Apellidos:</label>
-        <input
-          type="text"
-          id="surname"
-          name="surname"
-          value={formData.surname}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="name-field">
-        <label htmlFor="email">Correo electrónico:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="name-field">
-        <label htmlFor="phone">Teléfono (opcional):</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-        />
-      </div>
-      <button class="boton-inscribirme" type="submit">
-        Inscribirme
+      <button className="boton-inscribirme" type="submit" disabled={isLoading}>
+        {isLoading ? "Enviando..." : "Inscribirme"}
       </button>
     </form>
   );

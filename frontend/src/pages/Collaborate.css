@@ -7,27 +7,28 @@
 
 /* Estilo para el Header en la página de colaboración */
 .collaborate-page .navbar {
-  background-color: #9c6fa0; /* Fondo del Header en esta página */
+  background-color: #9c6fa0; /* Fondo del Header */
   height: 6.5rem;
   position: relative;
 }
 
-/* Evita que el contenido se solape con el Header */
+/* Evitamos que el contenido se solape con el Header */
 .collaborate-content {
   display: flex;
   justify-content: space-between;
-  padding: 2rem 4rem;
+  padding: 2rem 2rem;
   background-color: #ffeee7;
   display: flex;
-  gap: 2rem; /* Espacio entre las columnas */
+  gap: 2rem;
 }
-.columna-1,
-.columna-2 {
-  flex: 1; /* Asegura que ambas columnas ocupen el mismo espacio */
-  padding: 1rem; /* Añade algo de espacio interior */
+.columna-1 {
+  flex: 2; /* Columna 1 será el doble de ancha que la columna 2 */
+  padding: 1rem;
 }
+
 .columna-2 {
-  padding: 2rem 4rem;
+  flex: 1; /* Columna 2 ocupa la mitad del espacio de la columna 1 */
+  padding: 1rem;
 }
 
 /* Título */
@@ -37,16 +38,23 @@
   font-size: 2.5rem;
   margin-bottom: 2rem;
 }
+/* Estilos del texto debajo del título */
 
-/* Estilos para la caja informativa */
+.texto-inscripcion-socios {
+  font-family: Bellota;
+  color: #333;
+  font-size: 1rem;
+}
+/* Estilos para la tarjeta informativa */
 .info-box {
   background-color: #d8e2dc;
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  height: 90%;
   max-width: 100%;
-  width: 100%;
+  width: 70%;
 }
 
 .info-box h2 {
@@ -55,6 +63,7 @@
   color: #b380b5;
   margin-bottom: 1rem;
 }
+
 .texto-socios {
   font-family: Outfit, sans-serif;
   color: black;
@@ -65,11 +74,18 @@
   color: black;
   font-size: 0.6rem;
 }
+.cta-colaboraciones {
+  font-family: outfit;
+  font-size: 1.2rem;
+  color: #b380b5;
+  margin-top: 3rem;
+}
+
 /* Media Query para pantallas móviles */
 @media (max-width: 768px) {
   .collaborate-content {
     flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
-    padding: 2rem 2rem; /* Reducir el padding para dispositivos móviles */
+    padding: 2rem 2rem;
   }
 
   .form-column,

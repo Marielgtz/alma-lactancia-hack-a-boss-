@@ -11,47 +11,38 @@ const Collaborate = () => {
       <div className="collaborate-content">
         <div className="columna-1">
           <h1 className="colabora-title">¿Quieres colaborar?</h1>
-          <p>Rellena el formulario para inscribirte como socio.</p>
+          <p class="texto-inscripcion-socios">
+            Rellena el formulario a la izquierda y nos pondremos en contacto
+            para formalizar la inscripción. La cuota anual es de 20€, y se paga
+            una vez nos pongamos en contacto contigo. La condición de socia es
+            personal e intransferible, y es válida de enero a diciembre del año
+            en que te unes.
+          </p>
 
           <NewCollaboratorForm />
         </div>
         <div className="columna-2">
           <div className="info-box">
-            <h2>Maneras de colaborar</h2>
-            <h3>Puedes hacerte socia… </h3>
+            <h2>También puedes...</h2>
+
+            <h3>Hacer un donativo</h3>
             <p class="texto-socios">
-              Simplemente con rellenar la ficha de inscripción y hacer un
-              ingreso en nuestra cuenta de la cuota anual (20€), indicando tu
-              nombre y apellidos y NUEVA SOCIA o RENOVACIÓN según sea tu caso.
-              <p class="texto-letra-pequeña">
-                LA CONDICIÓN DE SOCIA/O ES PERSONAL E INTRANSFERIBLE, Y ESTÁ EN
-                VIGOR DE ENERO A DICIEMBRE DEL AÑO EN QUE LA PERSONA SE ASOCIA A
-                ALMA.
-              </p>
-              <p class="texto-socios">
-                El IBAN es el siguiente: ES31 2095 5587 4091 1403 9324
-                (Kutxabank)
-              </p>
-              <h3>Puedes hacer un donativo…</h3>
-              <p class="texto-socios">
-                Tanto económico como material. Estamos abiertas a todo tipo de
-                donaciones relacionadas con el mundo de la lactancia y la
-                crianza.
-              </p>
-              <h3>Puedes hacerte asesora… </h3>
-              <p class="texto-socios">
-                Todas las que asesoramos actualmente en Alma somos madres que
-                hemos lactado durante varios años. Nuestra plantilla de asesoras
-                está viva y siempre nos alegramos cuando una madre se decide a
-                formar parte de una manera más activa de la asociación. Contacta
-                con nosotras si quieres saber cómo nos formamos y mantenemos
-                actualizadas. Colaboraciones puntuales… Alma realiza eventos
-                puntuales además de las reuniones periódicas de Culleredo y A
-                Coruña. Hay madres que nos ayudan en estos eventos puntuales y
-                son también muy necesarias.
-              </p>
+              Tanto económico como material. Aceptamos donaciones relacionadas
+              con la lactancia y la crianza.
             </p>
-            <h3>
+            <h3>Convertirte en asesora </h3>
+            <p class="texto-socios">
+              Todas nuestras asesoras somos madres que hemos lactado por varios
+              años. Si te interesa formar parte de nuestro equipo, contáctanos
+              para saber cómo nos formamos y mantenemos actualizadas.
+            </p>
+            <h3>Colaborar puntualmente </h3>
+            <p class="texto-socios">
+              Alma organiza eventos y reuniones periódicas en Culleredo y A
+              Coruña. Muchas madres colaboran en estos eventos puntuales, ¡y tu
+              ayuda es siempre bienvenida!
+            </p>
+            <h3 class="cta-colaboraciones">
               Únete a nuestra comunidad y ayuda a promover nuestras causas.
             </h3>
           </div>

@@ -19,7 +19,40 @@
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.contenedor-formulario {
+  display: flex;
+  flex-direction: column; /* Para alinear los campos en una columna */
+  width: 100%;
+  max-width: 600px;
+}
 
+.contenedor-campos-form {
+  width: 100%; /* Asegúrate de que los divs internos ocupen todo el ancho */
+  margin-bottom: 0.5rem; /* Espaciado entre los campos */
+}
+.etiquetas-form-inscripcion {
+  display: block;
+  font-family: outfit;
+  font-size: 0.9rem;
+  color: #b380b5;
+  font-weight: bold;
+  text-align: left;
+  width: 80%; /* Ajustamos el ancho */
+}
+
+.inputs-form-inscripcion {
+  display: block;
+  font-family: outfit;
+  color: black;
+  width: 100%; /* Mantener el ancho al 80% en todas las pantallas */
+  padding: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: #d8e2dc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 /* Media Query para dispositivos móviles */
 @media (max-width: 768px) {
   .boton-inscribirme {

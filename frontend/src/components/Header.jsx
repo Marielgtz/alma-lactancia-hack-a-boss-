@@ -99,7 +99,7 @@ const Header = () => {
               activeClassName="active"
               onClick={toggleMenu}
             >
-              ¿Quieres colaborar?
+              Colabora
             </NavLink>
           </li>
           <li className="menu-item">
