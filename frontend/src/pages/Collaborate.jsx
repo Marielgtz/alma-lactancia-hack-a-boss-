@@ -2,6 +2,8 @@ import React from "react";
 import "./Collaborate.css";
 import Header from "../components/Header";
 import NewCollaboratorForm from "../components/forms/NewCollaboratorForm";
+import { Link } from "react-router-dom";
+
 import Footer from "../components/Footer";
 
 const Collaborate = () => {
@@ -10,16 +12,20 @@ const Collaborate = () => {
       <Header className="header-collaborate" />
       <div className="collaborate-content">
         <div className="columna-1">
+          <p className="alma-text-colab">Alma Lactancia</p>
+
           <h1 className="colabora-title">¿Quieres colaborar?</h1>
-          <p class="texto-inscripcion-socios">
-            Rellena el formulario a la izquierda y nos pondremos en contacto
-            para formalizar la inscripción. La cuota anual es de 20€, y se paga
-            una vez nos pongamos en contacto contigo. La condición de socia es
-            personal e intransferible, y es válida de enero a diciembre del año
-            en que te unes.
+          <p className="texto-inscripcion-socios">
+            Rellena el formulario y nos pondremos en contacto para formalizar la
+            inscripción. La cuota anual es de 20€, y se paga una vez nos
+            pongamos en contacto contigo.*
           </p>
 
           <NewCollaboratorForm />
+          <p className="letra-pequena-inscripcion-socios">
+            *La condición de socia es personal e intransferible, y es válida de
+            enero a diciembre del año en que te unes.
+          </p>
         </div>
         <div className="columna-2">
           <div className="info-box">
@@ -42,9 +48,11 @@ const Collaborate = () => {
               Coruña. Muchas madres colaboran en estos eventos puntuales, ¡y tu
               ayuda es siempre bienvenida!
             </p>
-            <h3 class="cta-colaboraciones">
-              Únete a nuestra comunidad y ayuda a promover nuestras causas.
-            </h3>
+
+            {/* Botón de contacto */}
+            <Link to="/contacto" className="boton-escribenos">
+              Escríbenos ➜
+            </Link>
           </div>
         </div>
       </div>

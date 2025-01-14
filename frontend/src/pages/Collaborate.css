@@ -22,15 +22,24 @@
   gap: 2rem;
 }
 .columna-1 {
-  flex: 2; /* Columna 1 será el doble de ancha que la columna 2 */
+  flex: 1.5; /* Columna 1 será el doble de ancha que la columna 2 */
   padding: 1rem;
 }
 
 .columna-2 {
   flex: 1; /* Columna 2 ocupa la mitad del espacio de la columna 1 */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;
   padding: 1rem;
 }
-
+.alma-text-colab {
+  font-family: outfit;
+  color: #b380b5;
+  font-size: 1.1rem;
+  width: 100%;
+  margin-bottom: 0;
+}
 /* Título */
 .colabora-title {
   font-family: outfit;
@@ -44,6 +53,17 @@
   font-family: Bellota;
   color: #333;
   font-size: 1rem;
+  line-height: 1.7;
+  font-weight: bold;
+}
+/* Estilos de la letra pequeña inscripción */
+
+.letra-pequena-inscripcion-socios {
+  font-family: Bellota;
+  color: #333;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  font-weight: bold;
 }
 /* Estilos para la tarjeta informativa */
 .info-box {
@@ -52,9 +72,9 @@
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  height: 90%;
   max-width: 100%;
   width: 70%;
+  height: auto; /* La altura se adapta al contenido */
 }
 
 .info-box h2 {
@@ -80,7 +100,32 @@
   color: #b380b5;
   margin-top: 3rem;
 }
-
+.boton-escribenos {
+  background-color: #b380b5;
+  border: none;
+  color: #d8e2dc;
+  cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: auto; /* Cambiado para que se ajuste al contenido */
+  max-width: 100%; /* Asegura que no se desborde */
+  height: auto; /* Se ajusta al contenido */
+  font-family: outfit;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  display: inline-block; /* Asegura que no se superponga con el texto */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.boton-escribenos:hover {
+  color: #b380b5;
+  background-color: transparent;
+  border: 1px solid #b380b5;
+  transform: translateY(-5px);
+}
 /* Media Query para pantallas móviles */
 @media (max-width: 768px) {
   .collaborate-content {

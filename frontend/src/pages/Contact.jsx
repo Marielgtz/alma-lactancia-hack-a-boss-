@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Captcha from "../components/Captcha";
 import silueta from "../images/IlustracionLactancia.png";
 import useContactInfo from "../hooks/useContactInfo.js";
-import { toast } from 'react-toastify'; // Import toast if missing
+import { toast } from "react-toastify"; // Import toast if missing
 import "./Contact.css";
 
 const Contact = () => {
@@ -74,7 +74,7 @@ const Contact = () => {
 
       const data = await response.json();
       toast.dismiss();
-      toast.success('Mensaje enviado correctamente');
+      toast.success("Mensaje enviado correctamente");
       setFormData({
         name: "",
         surname: "",
@@ -82,10 +82,9 @@ const Contact = () => {
         subject: "",
         comments: "",
       });
-
     } catch (error) {
       console.error(error);
-      toast.error('Error en el formulario');
+      toast.error("Error en el formulario");
     }
   };
 
@@ -181,7 +180,7 @@ const Contact = () => {
           </form>
 
           <div className="contact-info">
-            <p>
+            <p className="texto-redes-contacto">
               También podéis contactar con la Asociación ALMA a través de
               cualquiera de los siguientes medios:
             </p>

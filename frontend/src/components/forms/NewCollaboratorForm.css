@@ -1,23 +1,29 @@
 .boton-inscribirme {
-  display: flex;
-  justify-content: center;
-  width: 7rem; /* Ancho fijo */
-  padding: 0.3rem;
   background-color: #b380b5;
-  color: white;
   border: none;
-  border-radius: 2rem;
+  color: #ffeee7;
   cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: auto; /* Cambiado para que se ajuste al contenido */
+  max-width: 100%; /* Asegura que no se desborde */
+  height: auto; /* Se ajusta al contenido */
   font-family: outfit;
-  font-size: 1rem;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  display: inline-block; /* Asegura que no se superponga con el texto */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  margin-top: 1rem; /* Añadir espacio superior para que no quede pegado a otros elementos */
 }
 
 .boton-inscribirme:hover {
   color: #b380b5;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border: 1px solid #b380b5;
+  transform: translateY(-5px);
 }
 .contenedor-formulario {
   display: flex;

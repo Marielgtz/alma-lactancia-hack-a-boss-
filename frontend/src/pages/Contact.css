@@ -31,7 +31,13 @@ body,
   flex-direction: column;
   background-color: #ffeee7;
 }
-
+.texto-redes-contacto {
+  font-family: Bellota;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: bold;
+}
 #contact {
   flex: 1;
   width: 100%; /* Ocupa el 100% del contenedor */
@@ -132,22 +138,31 @@ body,
 }
 
 .contact-button {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 7rem;
-  padding: 0.3rem;
   background-color: #b380b5;
-  color: white;
   border: none;
-  border-radius: 2rem;
+  color: #ffeee7;
   cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: auto; /* Cambiado para que se ajuste al contenido */
+  max-width: 100%; /* Asegura que no se desborde */
+  height: auto; /* Se ajusta al contenido */
   font-family: outfit;
+  text-decoration: none;
+  padding: 0.7rem 2rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  display: inline-block; /* Asegura que no se superponga con el texto */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
-
+.contact-button:hover {
+  color: #b380b5;
+  background-color: transparent;
+  border: 1px solid #b380b5;
+  transform: translateY(-5px);
+}
 .contact-info {
   flex: 0.4;
   margin-right: 3rem;

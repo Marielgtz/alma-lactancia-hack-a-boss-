@@ -145,6 +145,9 @@ body,
   max-width: 60rem;
   line-height: 1.7;
   font-family: var(--font-secondary);
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 /* Imagen de silueta */
@@ -380,7 +383,7 @@ body,
   .carousel-control.prev {
     left: -1rem;
   }
-  
+
   .carousel-control.next {
     right: -1rem;
   }
