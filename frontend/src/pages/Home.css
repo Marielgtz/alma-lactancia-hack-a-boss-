@@ -96,25 +96,53 @@ body,
   word-wrap: break-word;
   margin-bottom: 0.8rem;
   margin-top: 0;
+
+  /* Configuración inicial para la animación */
+  opacity: 0; /* Inicialmente invisible */
+  transform: translateY(-20px); /* Desplazamiento hacia arriba */
+
+  /* Aplicación de la animación */
+  animation: fadeIn 1s ease-out forwards; /* La animación se ejecutará una vez al cargar */
+}
+
+/* Definición de la animación */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Botón de actividades */
 .activities-button {
-  background-color: var(--secondary-color);
+  background-color: #b380b5;
   border: none;
-  color: var(--primary-color);
+  color: #d8e2dc;
   cursor: pointer;
-  border-radius: var(--btn-radius);
-  font-size: 1.4rem;
+  border-radius: 3em;
+  font-size: 1.4em;
   font-weight: bold;
-  width: 18rem;
-  height: 2.5rem;
-  font-family: var(--font-main);
+  width: auto; /* Cambiado para que se ajuste al contenido */
+  max-width: 100%; /* Asegura que no se desborde */
+  height: auto; /* Se ajusta al contenido */
+  font-family: outfit;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  display: inline-block; /* Asegura que no se superponga con el texto */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .activities-button:hover {
-  background-color: var(--primary-color);
-  color: var(--white);
+  color: #b380b5;
+  background-color: #d8e2dc;
+  transform: translateY(-5px);
 }
 
 /* Contenedor de contenido */
