@@ -88,21 +88,31 @@
 }
 
 .boton-ver-actividades {
-  background-color: #d8e2dc;
+  background-color: #b380b5;
   border: none;
-  color: #b380b5;
+  color: white;
   cursor: pointer;
   border-radius: 3em;
   font-size: 1.4em;
   font-weight: bold;
-  width: 18rem;
-  height: 2.5rem;
+  width: auto; /* Cambiado para que se ajuste al contenido */
+  max-width: 100%; /* Asegura que no se desborde */
+  height: auto; /* Se ajusta al contenido */
   font-family: outfit;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  display: inline-block; /* Asegura que no se superponga con el texto */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .boton-ver-actividades:hover {
-  background-color: #b380b5;
-  color: white;
+  color: #b380b5;
+  background-color: transparent;
+  border: 1px solid #b380b5;
+  transform: translateY(-5px);
 }
 
 .event-attachments {
