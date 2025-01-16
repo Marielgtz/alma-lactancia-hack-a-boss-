@@ -17,11 +17,11 @@ const Collaborate = () => {
           <h1 className="colabora-title">¿Quieres colaborar?</h1>
           <p className="texto-inscripcion-socios">
             Rellena el formulario y nos pondremos en contacto para formalizar la
-            inscripción. La cuota anual es de 20€, y se paga una vez nos
-            pongamos en contacto contigo.*
+            inscripción.
           </p>
 
           <NewCollaboratorForm />
+
           <p className="letra-pequena-inscripcion-socios">
             *La condición de socia es personal e intransferible, y es válida de
             enero a diciembre del año en que te unes.
@@ -53,6 +53,16 @@ const Collaborate = () => {
             <Link to="/contacto" className="boton-escribenos">
               Escríbenos ➜
             </Link>
+            {/* Nueva sección para el botón de suscripción */}
+            <div className="suscripcion-info">
+              <h3 class="texto-ya-socio">¿Ya eres socio?</h3>
+              <button
+                className="boton-suscripcion"
+                onClick={() => handleUserProfileClick()}
+              >
+                Ver mi suscripción
+              </button>
+            </div>
           </div>
         </div>
       </div>

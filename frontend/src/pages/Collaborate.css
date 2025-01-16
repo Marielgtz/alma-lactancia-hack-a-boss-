@@ -39,6 +39,7 @@
   font-size: 1.1rem;
   width: 100%;
   margin-bottom: 0;
+  margin-top: -20px;
 }
 /* Título */
 .colabora-title {
@@ -53,7 +54,14 @@
   font-family: Bellota;
   color: #333;
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1rem;
+}
+
+.texto-inscripcion-socios-destacada {
+  font-family: Bellota;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1rem;
   font-weight: bold;
 }
 /* Estilos de la letra pequeña inscripción */
@@ -125,6 +133,36 @@
   background-color: transparent;
   border: 1px solid #b380b5;
   transform: translateY(-5px);
+}
+
+/*Estilos botón para ver la suscripción*/
+
+.boton-suscripcion {
+  background-color: transparent;
+  border: 1px solid #b380b5;
+  color: #b380b5;
+  cursor: pointer;
+  border-radius: 2em;
+  font-size: 1em;
+  width: auto; /* Cambiado para que se ajuste al contenido */
+  max-width: 100%; /* Asegura que no se desborde */
+  height: auto; /* Se ajusta al contenido */
+  font-family: outfit;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: inline-block; /* Asegura que no se superponga con el texto */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.boton-suscripcion:hover {
+  color: #b380b5;
+  background-color: transparent;
+  border: 1px solid #b380b5;
+  transform: translateY(-5px);
+}
+.texto-ya-socio {
+  margin-top: 2rem;
 }
 /* Media Query para pantallas móviles */
 @media (max-width: 768px) {

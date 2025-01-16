@@ -1,0 +1,143 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #d8e2dc;
+  color: #b380b5;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  font-family: "Outfit", sans-serif;
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-options button {
+  background-color: #b380b5;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.modal-options button:hover {
+  background-color: #6b3e85;
+}
+
+.modal-options button:disabled {
+  background-color: #c3a0b6;
+  cursor: not-allowed;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #b380b5;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #7e5097;
+}
+
+.close-btn:focus {
+  outline: none;
+}
+
+.my-subscription-modal input[type="text"],
+.my-subscription-modal input[type="email"] {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+  font-family: "Outfit", sans-serif;
+}
+
+.my-subscription-modal input[type="text"]:focus,
+.my-subscription-modal input[type="email"]:focus {
+  border-color: #b380b5;
+  outline: none;
+}
+.my-subscription-modal input[type="text"]::placeholder,
+.my-subscription-modal input[type="email"]::placeholder {
+  font-family: "Outfit", sans-serif;
+  color: #aaa;
+}
+label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.modal-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.boton-acceder-suscripcion {
+  background-color: #b380b5;
+  border: none;
+  color: #d8e2dc;
+  cursor: pointer;
+  border-radius: 3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: auto; /* Cambiado para que se ajuste al contenido */
+  max-width: 100%; /* Asegura que no se desborde */
+  height: auto; /* Se ajusta al contenido */
+  font-family: outfit;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  display: inline-block; /* Asegura que no se superponga con el texto */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.boton-acceder-suscripcion:hover {
+  color: #b380b5;
+  background-color: transparent;
+  border: 1px solid #b380b5;
+  transform: translateY(-5px);
+}
+.boton-acceder-suscripcion:disabled {
+  background-color: #c3a0b6; /* Gris cuando está deshabilitado */
+  color: #f1f1f1; /* Color gris claro para el texto */
+  cursor: not-allowed; /* Cambiar el cursor para indicar que está deshabilitado */
+  border: 1px solid #c3a0b6; /* Gris para el borde */
+}
+
+.boton-acceder-suscripcion:disabled:hover {
+  /* Eliminar el efecto de hover cuando el botón está deshabilitado */
+  background-color: #c3a0b6;
+  color: #f1f1f1;
+  border: 1px solid #c3a0b6;
+  transform: none; /* Eliminar el cambio de posición al hacer hover */
+}

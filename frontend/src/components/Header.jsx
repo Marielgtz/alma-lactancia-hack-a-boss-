@@ -5,6 +5,8 @@ import useContactInfo from "../hooks/useContactInfo.js";
 import logoAlma from "../images/logo-alma.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import MySubscriptionModal from "../components/forms/MySubscriptionModal"; // Asegúrate de importar el modal
 
 const Header = () => {
   const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -12,6 +14,7 @@ const Header = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
 
   const toggleSubMenu = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -19,6 +22,16 @@ const Header = () => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  // Función para abrir el modal
+  const handleUserProfileClick = () => {
+    setIsModalOpen(true);
+  };
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const instagramLink = generalSettings?.linkInstagram || "";
@@ -42,6 +55,7 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="social-media-item"
+              aria-label="Ir a Instagram"
             >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
@@ -52,12 +66,22 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="social-media-item"
+              aria-label="Ir a Facebook"
             >
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
           )}
+          {/* Icono de usuario que abre el modal */}
+          <div
+            className="social-media-item user-icon"
+            onClick={handleUserProfileClick}
+            aria-label="Tu suscripción"
+            title="Tu suscripción"
+          >
+            <FontAwesomeIcon icon={faUser} />
+          </div>
         </div>
-        {/* Inicio de la lista de elementos del menú */}
+
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
             <NavLink to="/" activeClassName="active">
@@ -112,8 +136,10 @@ const Header = () => {
             </NavLink>
           </li>
         </ul>
-        {/* Fin de la lista de elementos del menú */}
       </nav>
+
+      {/* Modal: Mostrarlo solo cuando isModalOpen es true */}
+      {isModalOpen && <MySubscriptionModal onClose={closeModal} />}
     </header>
   );
 };

@@ -1,0 +1,181 @@
+import React, { useState } from "react";
+import "./MySubscriptionModal.css";
+import { toast } from "react-toastify";
+
+const MySubscriptionModal = ({ onClose }) => {
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
+  const [step, setStep] = useState(1); // Controla en qué paso está el modal
+  const [subscriptionStatus, setSubscriptionStatus] = useState(""); // Estado de la suscripción
+
+  const handleClose = () => {
+    onClose();
+  };
+
+  // Validación simple de email y id
+  const isValid = email.trim() !== "" && id.trim() !== "";
+
+  const handleCheckSubscription = async () => {
+    if (!isValid) {
+      toast.error("Por favor, ingresa un ID y un email válidos.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:3001/check-subscription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(
+          data.message || "Error al obtener el estado de la suscripción."
+        );
+        return;
+      }
+
+      // Verificar si el usuario tiene una suscripción activa
+      setSubscriptionStatus(data.status); // Asume que 'data.status' contiene la información de la suscripción
+
+      // Cambiar a la siguiente etapa (paso 2) solo si la suscripción fue exitosa
+      setStep(2);
+    } catch (error) {
+      toast.error(
+        `Error al obtener el estado de la suscripción: ${
+          error.message || "Desconocido"
+        }`
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRenewSubscription = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:3001/renew-partnership", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.message || "Error al renovar la suscripción.");
+      } else {
+        toast.success(
+          `Suscripción renovada con éxito. Fecha de renovación: ${data.currentDateOfRenovation}`
+        );
+      }
+    } catch (error) {
+      toast.error(
+        `Error al renovar la suscripción: ${error.message || "Desconocido"}`
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUnsubscribe = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        "http://localhost:3001/unsubscribe-partnership",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            id,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.message || "Error al darse de baja.");
+      } else {
+        toast.success(data.message); // Confirmación de baja exitosa
+      }
+    } catch (error) {
+      toast.error(`Error al darse de baja: ${error.message || "Desconocido"}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="modal-overlay my-subscription-modal" onClick={handleClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <h2>Mi Suscripción</h2>
+
+        {/* Paso 1: Formulario de ingreso de datos */}
+        {step === 1 && (
+          <div className="modal-form">
+            <input
+              type="email"
+              placeholder="Ingresa tu correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Ingresa tu ID"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+            />
+            <button
+              onClick={handleCheckSubscription}
+              disabled={loading || !isValid}
+              className="boton-acceder-suscripcion"
+            >
+              Acceder a mi suscripción
+            </button>
+          </div>
+        )}
+
+        {/* Paso 2: Mostrar estado de la suscripción y botones */}
+        {step === 2 && (
+          <div className="modal-options">
+            <p>
+              Estado de mi suscripción: {subscriptionStatus || "Cargando..."}
+            </p>
+
+            <button onClick={handleRenewSubscription} disabled={loading}>
+              Renovar mi suscripción
+            </button>
+            <button onClick={handleUnsubscribe} disabled={loading}>
+              Darme de baja
+            </button>
+          </div>
+        )}
+
+        {/* Cerrar modal */}
+        <button className="close-btn" onClick={handleClose}>
+          <i className="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default MySubscriptionModal;

@@ -39,6 +39,7 @@ body {
   display: flex;
   justify-content: center;
   align-self: flex-end;
+  margin-right: 1rem;
 }
 
 /* Estilo de los iconos de redes sociales */
@@ -48,11 +49,27 @@ body {
   margin-top: -1em;
 }
 .social-media a svg {
-  width: 1.5rem; /* Ajustar el ancho del icono */
-  height: 1.5rem; /* Ajustar la altura del icono */
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .social-media a svg:hover {
+  color: #e0bb8e;
+}
+/* Estilo para el ícono de usuario */
+
+.social-media .user-icon {
+  color: white;
+  margin: 0 0.5em;
+  cursor: pointer;
+}
+
+.social-media .user-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.social-media .user-icon:hover svg {
   color: #e0bb8e;
 }
 
