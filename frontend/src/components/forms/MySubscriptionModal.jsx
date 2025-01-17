@@ -9,6 +9,10 @@ const MySubscriptionModal = ({ onClose }) => {
   const [step, setStep] = useState(1); // Controla en qué paso está el modal
   const [subscriptionStatus, setSubscriptionStatus] = useState(""); // Estado de la suscripción
 
+  //Añadimos un estado para la confirmación de que el usuario se ha dado de baja
+  const [showUnsubscribeConfirmation, setShowUnsubscribeConfirmation] =
+    useState(false);
+
   const handleClose = () => {
     onClose();
   };
@@ -45,7 +49,7 @@ const MySubscriptionModal = ({ onClose }) => {
       }
 
       // Verificar si el usuario tiene una suscripción activa
-      setSubscriptionStatus(data.status); // Asume que 'data.status' contiene la información de la suscripción
+      setSubscriptionStatus(data.state);
 
       // Cambiar a la siguiente etapa (paso 2) solo si la suscripción fue exitosa
       setStep(2);
@@ -163,14 +167,34 @@ const MySubscriptionModal = ({ onClose }) => {
             <button onClick={handleRenewSubscription} disabled={loading}>
               Renovar mi suscripción
             </button>
-            <button onClick={handleUnsubscribe} disabled={loading}>
+            <button
+              onClick={() => setShowUnsubscribeConfirmation(true)}
+              disabled={loading}
+            >
               Darme de baja
             </button>
+            {/*Modal para confirmar que realmente quieres darte de baja*/}
+            {showUnsubscribeConfirmation && (
+              <div className="confirmacion-baja-overlay">
+                <div className="confirmacion-baja-modal">
+                  <p>
+                    ¿Estás seguro de que deseas darte de baja? Esta acción no se
+                    puede deshacer.
+                  </p>
+                  <button onClick={handleUnsubscribe} disabled={loading}>
+                    Sí, darme de baja
+                  </button>
+                  <button onClick={() => setShowUnsubscribeConfirmation(false)}>
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
         {/* Cerrar modal */}
-        <button className="close-btn" onClick={handleClose}>
+        <button className="close-btn-modal-usuario" onClick={handleClose}>
           <i className="fa-solid fa-circle-xmark"></i>
         </button>
       </div>
