@@ -49,7 +49,7 @@ const MySubscriptionModal = ({ onClose }) => {
       }
 
       // Verificar si el usuario tiene una suscripción activa
-      setSubscriptionStatus(data.state);
+      setSubscriptionStatus(data.data.state);
 
       // Cambiar a la siguiente etapa (paso 2) solo si la suscripción fue exitosa
       setStep(2);
@@ -130,7 +130,7 @@ const MySubscriptionModal = ({ onClose }) => {
   return (
     <div className="modal-overlay my-subscription-modal" onClick={handleClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2>Mi Suscripción</h2>
+        <h2>Mi suscripción</h2>
 
         {/* Paso 1: Formulario de ingreso de datos */}
         {step === 1 && (
@@ -164,12 +164,17 @@ const MySubscriptionModal = ({ onClose }) => {
               Estado de mi suscripción: {subscriptionStatus || "Cargando..."}
             </p>
 
-            <button onClick={handleRenewSubscription} disabled={loading}>
+            <button
+              onClick={handleRenewSubscription}
+              disabled={loading}
+              className="boton-renovar-suscripcion"
+            >
               Renovar mi suscripción
             </button>
             <button
               onClick={() => setShowUnsubscribeConfirmation(true)}
               disabled={loading}
+              className="boton-baja-suscripcion"
             >
               Darme de baja
             </button>
@@ -178,13 +183,22 @@ const MySubscriptionModal = ({ onClose }) => {
               <div className="confirmacion-baja-overlay">
                 <div className="confirmacion-baja-modal">
                   <p>
-                    ¿Estás seguro de que deseas darte de baja? Esta acción no se
-                    puede deshacer.
+                    ¿Estás seguro de que deseas darte de baja? <br />
+                    <span class="mensaje-accion-baja">
+                      Esta acción no se puede deshacer.
+                    </span>
                   </p>
-                  <button onClick={handleUnsubscribe} disabled={loading}>
+                  <button
+                    onClick={handleUnsubscribe}
+                    disabled={loading}
+                    className="confirmacion-baja-modal-boton"
+                  >
                     Sí, darme de baja
                   </button>
-                  <button onClick={() => setShowUnsubscribeConfirmation(false)}>
+                  <button
+                    onClick={() => setShowUnsubscribeConfirmation(false)}
+                    className="confirmacion-cancelar-modal"
+                  >
                     Cancelar
                   </button>
                 </div>
