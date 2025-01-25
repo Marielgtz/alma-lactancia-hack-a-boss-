@@ -7,8 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import MySubscriptionModal from "../components/forms/MySubscriptionModal"; // Asegúrate de importar el modal
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const { t } = useTranslation(); // t es la función que usamos para traducir
+
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   const { generalSettings } = useContactInfo();
 
@@ -80,30 +84,32 @@ const Header = () => {
           >
             <FontAwesomeIcon icon={faUser} />
           </div>
+          {/* LanguageSwitcher */}
+          <LanguageSwitcher />
         </div>
 
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
             <NavLink to="/" activeClassName="active">
-              Inicio
+              {t("homeTitle")} {/* Traducción para el título de la página */}
             </NavLink>
           </li>
           <li className="menu-item">
             <NavLink to="/quienes-somos" activeClassName="active">
-              ¿Quiénes somos?
+              {t("aboutUs")}
             </NavLink>
           </li>
           <li className="menu-item">
-            <a onClick={() => toggleSubMenu(1)}>Actividades</a>
+            <a onClick={() => toggleSubMenu(1)}>{t("activities")}</a>
             <ul className={`submenu ${activeIndex === 1 ? "active" : ""}`}>
               <li>
                 <NavLink to="/actividades" activeClassName="active">
-                  Próximas actividades
+                  {t("nextActivities")}
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/historico" activeClassName="active">
-                  Histórico
+                  {t("history")}
                 </NavLink>
               </li>
             </ul>
@@ -114,7 +120,7 @@ const Header = () => {
               activeClassName="active"
               onClick={toggleMenu}
             >
-              Biblioteca
+              {t("library")}
             </NavLink>
           </li>
           <li className="menu-item">
@@ -123,7 +129,7 @@ const Header = () => {
               activeClassName="active"
               onClick={toggleMenu}
             >
-              Colabora
+              {t("colab")}
             </NavLink>
           </li>
           <li className="menu-item">
@@ -132,7 +138,7 @@ const Header = () => {
               activeClassName="active"
               onClick={toggleMenu}
             >
-              Contacto
+              {t("contact")}
             </NavLink>
           </li>
         </ul>

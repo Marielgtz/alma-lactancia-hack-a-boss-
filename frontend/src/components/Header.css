@@ -37,6 +37,7 @@ body {
 /* Redes sociales */
 .social-media {
   display: flex;
+  align-items: center;
   justify-content: center;
   align-self: flex-end;
   margin-right: 1rem;
