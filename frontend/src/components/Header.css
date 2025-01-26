@@ -7,17 +7,27 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  z-index: 1;
+  z-index: 999;
   background: transparent;
-  position: absolute;
+  position: fixed; /* Fijo al hacer scroll */
+  top: 0; /* Pegado a la parte superior */
   left: 0;
   right: 0;
   flex-direction: column;
   font-family: outfit;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 50px;
+  padding-top: 70px;
   font-size: 1.1rem;
+}
+
+header {
+  transition: background-color 0.3s ease;
+}
+
+header.scrolled {
+  background-color: #b380b5;
+  height: 100px; /* Cambia a tu color deseado */
 }
 
 /* Estilo del logo */

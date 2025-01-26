@@ -6,18 +6,18 @@
 
 .language-switcher button {
   background-color: transparent;
-  border: 1px solid #9c6fa0;
+  border: 1px solid #e0bb8e;
   padding: 0.25rem 0.75rem; /* Reduce el padding */
   cursor: pointer;
   border-radius: 5px;
   font-family: "Outfit", sans-serif;
   font-size: 0.875rem; /* Reduce el tamaño de la fuente */
-  color: #9c6fa0;
+  color: #e0bb8e;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .language-switcher button.active {
-  background-color: #9c6fa0;
+  background-color: #e0bb8e;
   color: #fff;
 }
 

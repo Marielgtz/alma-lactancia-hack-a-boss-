@@ -1,43 +1,32 @@
-/*.App {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.App-header {
-  background-color: #ffeee7;
-  height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(1rem + 2vw);
-  color: white;
-}
-
-.App-link {
-  color: #b380b5;
-}
-
-.App-main {
-  flex: 1;
-}
-*/
-
-.App{
+.App {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100vh;
+}
+
+.scrolled-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #b380b5;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-family: Outfit, sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .alert-div {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed; /* Fijo al hacer scroll */
+  top: 0; /* Pegado a la parte superior */
+  left: 0;
+  right: 0;
+  z-index: 1000;
   margin-top: 0;
   background-color: #b380b5;
-
   width: 100vw;
 }
 .alert-text {

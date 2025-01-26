@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import useApp from "./hooks/useApp";
 import ScrollToTopButton from "./components/ScrollToTopButton";
-
+import { useEffect, useRef, useState } from "react";
+import Header from "./components/Header"; // Importar el Header
 
 function App() {
   const {
@@ -22,10 +23,34 @@ function App() {
     setHomeData,
   } = useApp();
 
+  const appRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (appRef.current) {
+        setScrolled(appRef.current.scrollTop > 50);
+      }
+    };
+
+    const appElement = appRef.current;
+    if (appElement) {
+      appElement.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (appElement) {
+        appElement.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   return (
     <Router>
-      <div className="App">
+      <div className="App" ref={appRef}>
+        {/* Pasamos el estado 'scrolled' a Header */}
+        <Header scrolled={scrolled} />
+
         <Alert
           title={"XX CONGRESO DE LACTANCIA MATERNA FEDALMA"}
           date={"3 y 4 de Octubre de 2025"}

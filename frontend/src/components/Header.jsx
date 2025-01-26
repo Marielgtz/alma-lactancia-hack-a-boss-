@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "./Header.css";
 import useContactInfo from "../hooks/useContactInfo.js";
@@ -10,7 +10,7 @@ import MySubscriptionModal from "../components/forms/MySubscriptionModal"; // As
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
-const Header = () => {
+const Header = ({ scrolled }) => {
   const { t } = useTranslation(); // t es la función que usamos para traducir
 
   const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -43,7 +43,7 @@ const Header = () => {
   const logoSrc = generalSettings?.logo ? `${generalSettings.logo}` : logoAlma;
 
   return (
-    <header>
+    <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <nav className="navbar">
         <Link to="/" className="logo">
           <img src={logoSrc} alt="Logo de Alma" className="logo" />

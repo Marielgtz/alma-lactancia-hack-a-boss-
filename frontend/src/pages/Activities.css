@@ -7,8 +7,9 @@
 
 .activity-page .navbar {
   background-color: #b380b5;
-  height: 6.5rem;
+  width: 100%; /* Asegura que el navbar ocupe todo el ancho */
   position: relative;
+  padding: 40px 100px 10px 20px;
 }
 
 .activity-main {

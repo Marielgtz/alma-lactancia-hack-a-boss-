@@ -7,9 +7,10 @@
 
 /* Estilo para el Header en la página de colaboración */
 .collaborate-page .navbar {
-  background-color: #9c6fa0; /* Fondo del Header */
-  height: 6.5rem;
+  background-color: #b380b5;
+  width: 100%; /* Asegura que el navbar ocupe todo el ancho */
   position: relative;
+  padding: 40px 100px 10px 20px;
 }
 
 /* Evitamos que el contenido se solape con el Header */

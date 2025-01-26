@@ -45,18 +45,18 @@ const Collaborate = () => {
             <h2>También puedes...</h2>
 
             <h3>Hacer un donativo</h3>
-            <p class="texto-socios">
+            <p className="texto-socios">
               Tanto económico como material. Aceptamos donaciones relacionadas
               con la lactancia y la crianza.
             </p>
             <h3>Convertirte en asesora </h3>
-            <p class="texto-socios">
+            <p className="texto-socios">
               Todas nuestras asesoras somos madres que hemos lactado por varios
               años. Si te interesa formar parte de nuestro equipo, contáctanos
               para saber cómo nos formamos y mantenemos actualizadas.
             </p>
             <h3>Colaborar puntualmente </h3>
-            <p class="texto-socios">
+            <p className="texto-socios">
               Alma organiza eventos y reuniones periódicas en Culleredo y A
               Coruña. Muchas madres colaboran en estos eventos puntuales, ¡y tu
               ayuda es siempre bienvenida!
@@ -68,7 +68,7 @@ const Collaborate = () => {
             </Link>
             {/* Nueva sección para el botón de suscripción */}
             <div className="suscripcion-info">
-              <h3 class="texto-ya-socio">¿Ya eres socio?</h3>
+              <h3 className="texto-ya-socio">¿Ya eres socio?</h3>
               <button
                 className="boton-suscripcion"
                 onClick={handleUserProfileClick} // Cuando se hace clic, abrir el modal
