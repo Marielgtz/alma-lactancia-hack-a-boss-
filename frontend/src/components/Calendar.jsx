@@ -7,6 +7,7 @@ import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
 import "moment/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css";
+import { useTranslation } from "react-i18next";
 
 moment.updateLocale("es", {
   week: {
@@ -35,6 +36,8 @@ const messages = {
 };
 
 const MyCalendar = () => {
+  const { t } = useTranslation();
+
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -141,7 +144,11 @@ const MyCalendar = () => {
 
   return (
     <div className="calendar-section">
-      <h2 className="section-title-activity">Próximas actividades</h2>
+      <h2 className="section-title-activity">
+        {" "}
+        {/*TEXTO NUESTRAS ACTIVIDADES TRADUCIDO*/}
+        {t("proximasActividadesHome")}
+      </h2>
       <div className="activities">
         {loading ? (
           <p>Cargando actividades...</p>
@@ -193,7 +200,10 @@ const MyCalendar = () => {
             );
           })
         ) : (
-          <div className="activity">No hay actividades programadas</div>
+          <div className="activity">
+            {/*TEXTO NO HAY ACTIVIDADES TRADUCIDO*/}
+            {t("noHayActividadesProgramadas")}
+          </div>
         )}
       </div>
       <div className="contenedor-ver-actividades-inicio">
@@ -201,10 +211,14 @@ const MyCalendar = () => {
           className="boton-ver-actividades"
           onClick={() => navigate("/actividades")}
         >
-          Ver actividades
+          {/*TEXTO VER ACTIVIDADES CALENDARIO TRADUCIDO*/}
+          {t("verActividadesCalendar")}
         </button>
       </div>
-      <h2 className="section-title-calendar">Calendario</h2>
+      <h2 className="section-title-calendar">
+        {/*TÍTULO CALENDARIO TRADUCIDO*/}
+        {t("tituloCalendario")}
+      </h2>
       <div className="calendar-content">
         <div className="calendar-container">
           <div className="event-details">
@@ -252,7 +266,8 @@ const MyCalendar = () => {
               <p className="no-events">
                 {selectedDate ? (
                   <>
-                    No hay eventos programados para el día
+                    {/*TEXTO NO HAY EVENTOS PROGRAMADOS TRADUCIDO*/}
+                    {t("noHayEventosProgramados")}
                     <br />
                     <strong>
                       {new Date(selectedDate).toLocaleDateString("es-ES", {
@@ -272,7 +287,11 @@ const MyCalendar = () => {
 
           <div className="calendar-wrapper">
             {loading ? (
-              <p>Cargando calendario...</p>
+              <p>
+                {" "}
+                {/*TEXTO CARGANDO EL CALENDARIO TRADUCIDO*/}
+                {t("cargandoCalendario")}
+              </p>
             ) : error ? (
               <p>{error}</p>
             ) : (
@@ -323,7 +342,11 @@ const MyCalendar = () => {
           </div>
           <div className="legend-item">
             <span className="legend-color leyenda-dia-con-evento"></span>
-            <span>Días con actividad</span>
+            <span>
+              {" "}
+              {/*TEXTO DIAS CON ACTIVIDAD TRADUCIDO*/}
+              {t("diasConActividad")}
+            </span>
           </div>
         </div>
       </div>

@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
+import { useTranslation } from "react-i18next";
 
 // URL de la imagen proporcionada (icono pecho)
 const DEFAULT_IMAGE_URL =
   "https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png";
 
 const Home = ({ homeData }) => {
+  const { t } = useTranslation();
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   const { home } = useContactInfo();
   const [cardsToShow, setCardsToShow] = useState(2);
@@ -118,12 +120,16 @@ const Home = ({ homeData }) => {
               className="activities-button"
               onClick={handleActivitiesClick}
             >
-              Nuestras actividades
+              {/*TEXTO NUESTRAS ACTIVIDADES TRADUCIDO*/}
+              {t("nuestrasActividades")}
             </button>
           </div>
         </div>
         <div className="content">
-          <h2 className="section-title">Nosotras</h2>
+          <h2 className="section-title">
+            {/*TEXTO NOSOTRAS TRADUCIDO*/}
+            {t("nosotras")}
+          </h2>
           <div className="centered-container">
             {textsNosotras.map((parrafo, index) => (
               <p key={index} className="sectionText-nosotras">
@@ -135,7 +141,11 @@ const Home = ({ homeData }) => {
           <Calendar />
         </div>
         <div className="experience-section">
-          <h2 className="experience-title">Experiencias reales</h2>
+          <h2 className="experience-title">
+            {" "}
+            {/*TEXTO EXPERIENCIAS REALES TRADUCIDO*/}
+            {t("experienciasReales")}
+          </h2>
           <div className="experience-carousel">
             <div className="carousel-controls">
               <button className="carousel-control prev" onClick={prevSlide}>

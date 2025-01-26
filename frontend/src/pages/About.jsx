@@ -4,11 +4,14 @@ import Footer from "../components/Footer";
 import fedalma from "../images/cropped-logo_fedalma_200.png";
 import fedegalma from "../images/logo-fedegalma1-300x102.jpg";
 import "./About.css";
+import { useTranslation } from "react-i18next";
 
 const defaultCollaboratorPicture =
   "https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png";
 
 const About = () => {
+  const { t } = useTranslation();
+
   const [openInfo, setOpenInfo] = useState(null);
   const [teamMembers, setTeamMembers] = useState([]);
   const [externalCollaborators, setExternalCollaborators] = useState([]);
@@ -54,7 +57,11 @@ const About = () => {
         <div className="img-section-about">
           <div className="background-image2"></div>
           <h2 className="about-alma">Alma Lactancia</h2>
-          <h1 className="about-title">Equipo</h1>
+          <h1 className="about-title">
+            {" "}
+            {/*TEXTO EQUIPO TRADUCIDO*/}
+            {t("equipo")}
+          </h1>
         </div>
 
         {/* Sección del equipo */}

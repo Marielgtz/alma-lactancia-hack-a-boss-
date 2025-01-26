@@ -1,5 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import traduccionesHome from "./traducciones/traduccionesHome";
+import traduccionesCalendar from "./traducciones/traduccionesCalendar";
+import traduccionesEquipo from "./traducciones/traduccionesEquipo";
+import traduccionesFooter from "./traducciones/traduccionesFooter";
 
 const resources = {
   es: {
@@ -13,6 +17,10 @@ const resources = {
       library: "Biblioteca",
       colab: "Colabora",
       contact: "Contacto",
+      ...traduccionesHome.es,
+      ...traduccionesCalendar.es,
+      ...traduccionesEquipo.es,
+      ...traduccionesFooter.es,
     },
   },
   gl: {
@@ -26,6 +34,10 @@ const resources = {
       library: "Biblioteca",
       colab: "Colaborar",
       contact: "Contacto",
+      ...traduccionesHome.gl,
+      ...traduccionesCalendar.gl,
+      ...traduccionesEquipo.gl,
+      ...traduccionesFooter.gl,
     },
   },
 };
