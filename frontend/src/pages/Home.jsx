@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
 import silueta from "../images/IlustracionLactancia.png";
-import imageHome from "../images/Alma_Lactancia_-_Foto_hero.jpg";
 import useContactInfo from "../hooks/useContactInfo.js";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,8 +14,9 @@ import { useTranslation } from "react-i18next";
 const DEFAULT_IMAGE_URL =
   "https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png";
 
-const Home = ({ homeData }) => {
+const Home = ({ homeData, scrolled }) => {
   const { t } = useTranslation();
+
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   const { home } = useContactInfo();
   const [cardsToShow, setCardsToShow] = useState(2);
@@ -104,7 +104,7 @@ const Home = ({ homeData }) => {
 
   return (
     <div className="home-page">
-      <Header />
+      <Header scrolled={scrolled} defaultBackground={false} />
       <main className="main-home">
         <div className="img-section">
           <div className="background-image">
@@ -148,7 +148,11 @@ const Home = ({ homeData }) => {
           </h2>
           <div className="experience-carousel">
             <div className="carousel-controls">
-              <button className="carousel-control prev" onClick={prevSlide}>
+              <button
+                className="carousel-control prev"
+                onClick={prevSlide}
+                aria-label="Anterior"
+              >
                 <i className="fas fa-chevron-left"></i>
               </button>
             </div>
@@ -169,7 +173,11 @@ const Home = ({ homeData }) => {
                   </div>
                 ))}
             </div>
-            <button className="carousel-control next" onClick={nextSlide}>
+            <button
+              className="carousel-control next"
+              onClick={nextSlide}
+              aria-label="Siguiente"
+            >
               <i className="fas fa-chevron-right"></i>
             </button>
           </div>

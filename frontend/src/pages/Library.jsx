@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 import useLibraryData from "../hooks/useLibraryData";
 import "./Library.css";
+import { useTranslation } from "react-i18next";
 
 const Library = () => {
+  const { t } = useTranslation();
+
   const [openInfo, setOpenInfo] = useState(null);
   const libraryData = useLibraryData();
 
@@ -24,21 +26,13 @@ const Library = () => {
 
   return (
     <div className="library-page">
-      <Header />
       <main className="library-main">
         <p className="alma-text">Alma Lactancia</p>
 
         <h1 className="library-title">Biblioteca</h1>
         <div className="contenedor-texto-biblioteca">
-          <p className="library-text">
-            Bienvenidos a nuestra biblioteca de recursos, un espacio dedicado a
-            ofrecer información confiable y actualizada sobre la lactancia
-            materna y temas relacionados.
-            <br />
-            Aquí encontrarás una cuidada selección de recursos diseñados para
-            acompañarte en cada etapa dedicado la maternidad, desde el embarazo
-            hasta la crianza y la alimentación complementaria.
-          </p>
+          <p className="library-text">{t("textoInicialBiblioteca")}</p>
+          <p className="library-text">{t("textoInicialDosBiblioteca")}</p>
         </div>
         <div className="collapsible-main">
           <div className="collapsible-container-library">
@@ -138,7 +132,6 @@ const Library = () => {
             </div>
             {openInfo === "crianza" && (
               <div className="collapsible-content-library">
-                
                 <h3>OTROS RECURSOS</h3>
                 <ul>
                   {libraryData.parentingResources.map((resource, index) => (

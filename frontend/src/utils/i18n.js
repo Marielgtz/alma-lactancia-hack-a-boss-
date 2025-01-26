@@ -4,6 +4,8 @@ import traduccionesHome from "./traducciones/traduccionesHome";
 import traduccionesCalendar from "./traducciones/traduccionesCalendar";
 import traduccionesEquipo from "./traducciones/traduccionesEquipo";
 import traduccionesFooter from "./traducciones/traduccionesFooter";
+import traduccionesColabora from "./traducciones/traduccionesColabora";
+import traduccionesBiblioteca from "./traducciones/traduccionesBiblioteca";
 
 const resources = {
   es: {
@@ -21,6 +23,8 @@ const resources = {
       ...traduccionesCalendar.es,
       ...traduccionesEquipo.es,
       ...traduccionesFooter.es,
+      ...traduccionesColabora.es,
+      ...traduccionesBiblioteca.es,
     },
   },
   gl: {
@@ -38,6 +42,8 @@ const resources = {
       ...traduccionesCalendar.gl,
       ...traduccionesEquipo.gl,
       ...traduccionesFooter.gl,
+      ...traduccionesColabora.gl,
+      ...traduccionesBiblioteca.gl,
     },
   },
 };

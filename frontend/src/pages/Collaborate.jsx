@@ -5,8 +5,11 @@ import NewCollaboratorForm from "../components/forms/NewCollaboratorForm";
 import { Link } from "react-router-dom";
 import MySubscriptionModal from "../components/forms/MySubscriptionModal"; // Asegúrate de importar el modal
 import Footer from "../components/Footer";
+import { useTranslation } from "react-i18next";
 
 const Collaborate = () => {
+  const { t } = useTranslation();
+
   // Paso 1: Definir el estado isModalOpen para controlar la visibilidad del modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -27,40 +30,32 @@ const Collaborate = () => {
         <div className="columna-1">
           <p className="alma-text-colab">Alma Lactancia</p>
 
-          <h1 className="colabora-title">¿Quieres colaborar?</h1>
+          <h1 className="colabora-title">
+            {" "}
+            {/*TEXTO QUIERES COLABORAR TRADUCIDO*/}
+            {t("quieresColab")}
+          </h1>
           <p className="texto-inscripcion-socios">
-            Rellena el formulario y nos pondremos en contacto para formalizar la
-            inscripción.
+            {/*TEXTO QUIERES COLABORAR TRADUCIDO*/}
+            {t("textoRellenaFormularioColab")}
           </p>
 
           <NewCollaboratorForm />
 
           <p className="letra-pequena-inscripcion-socios">
-            *La condición de socia es personal e intransferible, y es válida de
-            enero a diciembre del año en que te unes.
+            {t("letraPequenaColab")}
           </p>
         </div>
         <div className="columna-2">
           <div className="info-box">
-            <h2>También puedes...</h2>
+            <h2> {t("tambienPuedes")}</h2>
 
-            <h3>Hacer un donativo</h3>
-            <p className="texto-socios">
-              Tanto económico como material. Aceptamos donaciones relacionadas
-              con la lactancia y la crianza.
-            </p>
-            <h3>Convertirte en asesora </h3>
-            <p className="texto-socios">
-              Todas nuestras asesoras somos madres que hemos lactado por varios
-              años. Si te interesa formar parte de nuestro equipo, contáctanos
-              para saber cómo nos formamos y mantenemos actualizadas.
-            </p>
-            <h3>Colaborar puntualmente </h3>
-            <p className="texto-socios">
-              Alma organiza eventos y reuniones periódicas en Culleredo y A
-              Coruña. Muchas madres colaboran en estos eventos puntuales, ¡y tu
-              ayuda es siempre bienvenida!
-            </p>
+            <h3>{t("hacerDonativoTitulo")}</h3>
+            <p className="texto-socios">{t("hacerDonativoTexto")}</p>
+            <h3>{t("asesoraTitulo")}</h3>
+            <p className="texto-socios">{t("asesoraTexto")}</p>
+            <h3>{t("colaboraPuntualTitulo")}</h3>
+            <p className="texto-socios">{t("colaboraPuntualTexto")}</p>
 
             {/* Botón de contacto */}
             <Link to="/contacto" className="boton-escribenos">
@@ -68,12 +63,12 @@ const Collaborate = () => {
             </Link>
             {/* Nueva sección para el botón de suscripción */}
             <div className="suscripcion-info">
-              <h3 className="texto-ya-socio">¿Ya eres socio?</h3>
+              <h3 className="texto-ya-socio">{t("preguntaYaMiembro")}</h3>
               <button
                 className="boton-suscripcion"
                 onClick={handleUserProfileClick} // Cuando se hace clic, abrir el modal
               >
-                Ver mi suscripción
+                {t("verSuscripcion")}
               </button>
             </div>
           </div>
