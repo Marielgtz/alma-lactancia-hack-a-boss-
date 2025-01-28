@@ -18,17 +18,21 @@ body,
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding-top: 170px;
 }
 
 .img-section-about {
   position: relative;
   height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Asegura que el contenido se alinee al fondo */
 }
 
 .background-image2 {
   background-image: url("/src/images/Equipo Alma Lactancia.jpg");
   background-size: cover;
-  background-position: top;
+  background-position: center;
   height: 90vh;
   width: 100vw;
   position: absolute;
@@ -49,23 +53,22 @@ body,
 
 .about-alma {
   font-family: outfit;
-  position: absolute;
   color: white;
-  top: 29rem;
-  left: 5.2rem;
   font-size: 1rem;
+  margin-left: 5.2rem;
+  z-index: 998;
   font-weight: lighter;
 }
 
 .about-title {
   font-family: outfit;
-  position: absolute;
   color: white;
-  top: 30rem;
-  left: 5rem;
   font-size: 2.5rem;
-  margin-bottom: 0;
+  margin-bottom: 3rem;
   font-weight: bold;
+  margin-left: 5rem;
+  z-index: 998;
+  margin-top: 0;
 }
 
 .section-title1 {
@@ -197,11 +200,12 @@ body,
 
 .collapsible-container-about {
   border: 1px solid #b380b5;
+  background-color: #d8e2dc;
   border-radius: 0.5rem;
   margin-left: 5rem;
   margin-right: 6rem;
   margin-top: 1rem;
-  padding: 0.4rem;
+  padding: 2rem;
   overflow: hidden;
   position: relative;
 }
@@ -211,13 +215,13 @@ body,
   font-family: outfit;
   font-size: 1.2rem;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .collapsible-header-about {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
   cursor: pointer;
 }
 
@@ -257,11 +261,11 @@ body,
   background-color: #d8e2dc;
 }
 
-.collapsible-content-about ul {
+.collapsible-content-about p {
   background-color: #d8e2dc;
   margin: 0;
-  padding: 1rem;
-  margin-left: 1rem;
+  padding-bottom: 0.5rem;
+  line-height: 1.3rem; /* Similar a lo que hacía en li */
 }
 
 .about-collab {

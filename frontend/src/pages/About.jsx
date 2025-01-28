@@ -52,7 +52,6 @@ const About = () => {
 
   return (
     <div className="about-page">
-      <Header />
       <main className="about-main">
         <div className="img-section-about">
           <div className="background-image2"></div>
@@ -104,7 +103,7 @@ const About = () => {
         </div>
 
         {/* Sección de colaboraciones externas */}
-        <h1 className="section-title1">Colaboraciones externas</h1>
+        <h1 className="section-title1"> {t("colabsExternas")}</h1>
         <div className="about-collab">
           <div className="collab-container">
             {externalCollaborators.slice(0, 5).map((collaborator) => (
@@ -127,7 +126,9 @@ const About = () => {
 
         {/* Sección de apoyo */}
         <div className="about-support">
-          <h1 className="section-title2">Nuestro compromiso y apoyos</h1>
+          <h1 className="section-title2">{t("nuestroCompromiso")}</h1>
+
+          {/* Sección Qué Hacemos */}
           <div className="collapsible-container-about">
             <div
               className={`collapsible-header-about ${
@@ -135,7 +136,7 @@ const About = () => {
               }`}
               onClick={() => toggleInfo("quehacemos")}
             >
-              <span className="collapsible-title-about">¿Qué hacemos?</span>
+              <span className="collapsible-title-about">{t("queHacemos")}</span>
               <span
                 className={`collapsible-arrow-about ${
                   openInfo === "quehacemos" ? "open" : "closed"
@@ -146,30 +147,20 @@ const About = () => {
             </div>
             {openInfo === "quehacemos" && (
               <div className="collapsible-content-about">
-                <ul>
-                  <li>
-                    Asesoría en lactancia en las reuniones, además de por correo
-                    electrónico y Whatsapp.
-                  </li>
-                  <li>
-                    Información puntual sobre nuestras actividades a través de
-                    Facebook e Instagram.
-                  </li>
-                  <li>
-                    Organizamos charlas y actividades para la normalización y
-                    conocimiento de las recomendaciones oficiales sobre
-                    lactancia materna, crianza en los primeros años, autocuidado
-                    materno y temas afines.
-                  </li>
-                  <li>
-                    Nos formamos e informamos constantemente: estar actualizadas
-                    es uno de nuestros principales ejercicios de responsabilidad
-                    para con las usuarias de la asociación.
-                  </li>
-                </ul>
+                {typeof t("queHacemosTexto") === "string" ? (
+                  <p>
+                    {t("queHacemosTexto")
+                      .split("\n") // Divide el texto por saltos de línea
+                      .map((p, index) => (
+                        <p key={index}>{p}</p> // Crea un párrafo por cada línea
+                      ))}
+                  </p>
+                ) : null}
               </div>
             )}
           </div>
+
+          {/* Sección Qué No Hacemos */}
           <div className="collapsible-container-about">
             <div
               className={`collapsible-header-about ${
@@ -177,7 +168,9 @@ const About = () => {
               }`}
               onClick={() => toggleInfo("quenohacemos")}
             >
-              <span className="collapsible-title-about">¿Qué no hacemos?</span>
+              <span className="collapsible-title-about">
+                {t("queNoHacemosTitulo")}
+              </span>
               <span
                 className={`collapsible-arrow-about ${
                   openInfo === "quenohacemos" ? "open" : "closed"
@@ -188,17 +181,16 @@ const About = () => {
             </div>
             {openInfo === "quenohacemos" && (
               <div className="collapsible-content-about">
-                <ul>
-                  <li>
-                    No asesoramos sin datos fiables ni información actualizada.
-                  </li>
-                  <li>Tampoco alimentamos creencias infundadas ni mitos.</li>
-                  <li>No cobramos por nuestra labor, somos voluntarias.</li>
-                  <li>No visitamos a domicilio.</li>
-                </ul>
+                {t("queNoHacemos")
+                  .split("\n") // Divide el texto en un arreglo usando el salto de línea
+                  .map((item, index) => (
+                    <p key={index}>{item}</p> // Crea un párrafo por cada línea
+                  ))}
               </div>
             )}
           </div>
+
+          {/* Sección Quién Nos Apoya */}
           <div className="collapsible-container-about">
             <div
               className={`collapsible-header-about ${
@@ -206,7 +198,9 @@ const About = () => {
               }`}
               onClick={() => toggleInfo("quienapoya")}
             >
-              <span className="collapsible-title-about">¿Quién nos apoya?</span>
+              <span className="collapsible-title-about">
+                {t("quienNosApoya")}
+              </span>
               <span
                 className={`collapsible-arrow-about ${
                   openInfo === "quienapoya" ? "open" : "closed"
@@ -217,27 +211,11 @@ const About = () => {
             </div>
             {openInfo === "quienapoya" && (
               <div className="collapsible-content-about">
-                <ul>
-                  <li>
-                    Son varios los organismos locales y provinciales los que nos
-                    apoyan de distintas maneras.
-                  </li>
-                  <li>
-                    El Concello de Culleredo nos cede el local donde se celebran
-                    las reuniones de los viernes en dicho ayuntamiento y nos
-                    subvenciona el mantenimiento general de la asociación.
-                    Asimismo, nos cede espacios de uso público para realizar
-                    eventos y actividades.
-                  </li>
-                  <li>
-                    El Concello de A Coruña nos cede los espacios donde tienen
-                    lugar las reuniones de los martes en A Coruña y las charlas
-                    de embarazadas.
-                  </li>
-                  <li>
-                    La Diputación de A Coruña nos subvenciona la cartelería.
-                  </li>
-                </ul>
+                {t("apoyoTexto")
+                  .split("\n") // Divide el texto en un arreglo usando el salto de línea
+                  .map((item, index) => (
+                    <p key={index}>{item}</p> // Crea un párrafo por cada línea
+                  ))}
               </div>
             )}
           </div>

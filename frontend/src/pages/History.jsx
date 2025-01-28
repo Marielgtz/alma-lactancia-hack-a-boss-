@@ -4,19 +4,17 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./History.css";
 import InstagramPost from "../components/InstagramPost";
-import useContactInfo from '../hooks/useContactInfo.js'
-
+import useContactInfo from "../hooks/useContactInfo.js";
 
 const History = ({ instagramPost, instagramPostList }) => {
   const navigate = useNavigate();
-  const { generalSettings } = useContactInfo()
-      
-  const instagramLink = generalSettings?.linkInstagram || ''
-  const facebookLink = generalSettings?.linkFacebook || ''
-  
+  const { generalSettings } = useContactInfo();
+
+  const instagramLink = generalSettings?.linkInstagram || "";
+  const facebookLink = generalSettings?.linkFacebook || "";
+
   return (
     <div className="history-page">
-      <Header />
       <main className="history-main">
         <div className="history-header">
           <p className="history-text">Alma Lactancia</p>

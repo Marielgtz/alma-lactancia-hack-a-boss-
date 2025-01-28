@@ -12,13 +12,7 @@ body,
   flex-direction: column;
   min-height: 100vh;
   min-width: 100vw;
-}
-
-.contact-page .navbar {
-  background-color: #b380b5;
-  width: 100%; /* Asegura que el navbar ocupe todo el ancho */
-  position: relative;
-  padding: 40px 100px 10px 20px;
+  padding-top: 170px;
 }
 
 .contact-content {

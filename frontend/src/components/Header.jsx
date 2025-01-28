@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+// Header.jsx
+import React, { useState } from "react";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import "./Header.css";
 import useContactInfo from "../hooks/useContactInfo.js";
 import logoAlma from "../images/logo-alma.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import MySubscriptionModal from "../components/forms/MySubscriptionModal"; // Asegúrate de importar el modal
+import MySubscriptionModal from "../components/forms/MySubscriptionModal";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
 const Header = ({ scrolled }) => {
-  const { t } = useTranslation(); // t es la función que usamos para traducir
-
-  const API_BASE_URL = import.meta.env.VITE_API_URL;
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
   const { generalSettings } = useContactInfo();
 
   const [activeIndex, setActiveIndex] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Ocultar el Header en rutas específicas (Dashboard o Admin)
+  if (pathname.startsWith("/admin") || pathname.startsWith("/dashboard"))
+    return null;
 
   const toggleSubMenu = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -28,12 +32,10 @@ const Header = ({ scrolled }) => {
     setMenuOpen(!menuOpen);
   };
 
-  // Función para abrir el modal
   const handleUserProfileClick = () => {
     setIsModalOpen(true);
   };
 
-  // Función para cerrar el modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -42,8 +44,18 @@ const Header = ({ scrolled }) => {
   const facebookLink = generalSettings?.linkFacebook || "";
   const logoSrc = generalSettings?.logo ? `${generalSettings.logo}` : logoAlma;
 
+  // Determinamos el fondo según la ruta actual
+  const headerBackground =
+    {
+      "/": "transparent", // Inicio
+      "/biblioteca": "#b380b5", // Página de Biblioteca
+    }[pathname] || "#b380b5"; // Color predeterminado para otras páginas
+
   return (
-    <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
+    <header
+      className={`navbar ${scrolled ? "scrolled" : ""}`}
+      style={{ backgroundColor: headerBackground }}
+    >
       <nav className="navbar">
         <Link to="/" className="logo">
           <img src={logoSrc} alt="Logo de Alma" className="logo" />
@@ -75,7 +87,6 @@ const Header = ({ scrolled }) => {
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
           )}
-          {/* Icono de usuario que abre el modal */}
           <div
             className="social-media-item user-icon"
             onClick={handleUserProfileClick}
@@ -84,14 +95,13 @@ const Header = ({ scrolled }) => {
           >
             <FontAwesomeIcon icon={faUser} />
           </div>
-          {/* LanguageSwitcher */}
           <LanguageSwitcher />
         </div>
 
         <ul className={`menu ${menuOpen ? "active" : ""}`}>
           <li className="menu-item">
             <NavLink to="/" activeClassName="active">
-              {t("homeTitle")} {/* Traducción para el título de la página */}
+              {t("homeTitle")}
             </NavLink>
           </li>
           <li className="menu-item">
@@ -144,7 +154,6 @@ const Header = ({ scrolled }) => {
         </ul>
       </nav>
 
-      {/* Modal: Mostrarlo solo cuando isModalOpen es true */}
       {isModalOpen && <MySubscriptionModal onClose={closeModal} />}
     </header>
   );

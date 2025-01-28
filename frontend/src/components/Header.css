@@ -23,6 +23,7 @@ body {
 
 header {
   transition: background-color 0.3s ease;
+  height: 100px; /* Cambia a tu color deseado */
 }
 
 header.scrolled {

@@ -94,7 +94,6 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-      <Header />
       <main className="contact-main">
         <h1 className="contact-title">Contacto</h1>
         <div className="contact-content">

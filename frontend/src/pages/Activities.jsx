@@ -12,7 +12,7 @@ import formatDate from "../utils/formatDate";
 const Activities = ({ activities, setActivities }) => {
   const navigate = useNavigate();
   // const [filteredActivities, setFilteredActivites] = useState([])
-  console.log('resultado', activities);
+  console.log("resultado", activities);
   // Función que obtiene la lista de actividades
   useEffect(() => {
     async function fetchCalendar(setActivities) {
@@ -20,7 +20,6 @@ const Activities = ({ activities, setActivities }) => {
       if (calendarEvents) {
         setActivities(calendarEvents);
         console.log(calendarEvents);
-        
       }
     }
 
@@ -40,8 +39,8 @@ const Activities = ({ activities, setActivities }) => {
   // }, [])
 
   const handleEnrollClick = async (activity, activityNumber) => {
-    if(activity.summary.includes("EVENTO CANCELADO")) return;
-    
+    if (activity.summary.includes("EVENTO CANCELADO")) return;
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/check-is-published/${
@@ -74,7 +73,6 @@ const Activities = ({ activities, setActivities }) => {
 
   return (
     <div className="activity-page">
-      <Header />
       <main className="activity-main">
         <div className="activity-header">
           <p className="activity-text">Alma Lactancia</p>
@@ -95,7 +93,6 @@ const Activities = ({ activities, setActivities }) => {
         <ol className="activity-container">
           {activities.length > 0 ? (
             activities.map((activity, index) => {
-              
               // Calcular la duración
               const start = new Date(activity.start.dateTime);
               const end = new Date(activity.end.dateTime);
@@ -104,10 +101,8 @@ const Activities = ({ activities, setActivities }) => {
               const hours = Math.floor(durationInMinutes / 60);
               const minutes = durationInMinutes % 60;
 
-              const durationString = 
-                hours > 0 
-                  ? `${hours} h ${minutes} m`
-                  : `${minutes} minutos`;
+              const durationString =
+                hours > 0 ? `${hours} h ${minutes} m` : `${minutes} minutos`;
 
               // setPublishedActivity((prevData) => {
               //     const newData = [...prevData]
@@ -118,8 +113,13 @@ const Activities = ({ activities, setActivities }) => {
                 <li key={index} className="activity-cards">
                   <div className="activity-content">
                     <div className="activity-image">
-                      {activity.extendedProperties.private.image && activity.extendedProperties.private.image != "sin imagen"  ? (
-                        <img src={activity.extendedProperties.private.image} alt={activity.summary} />
+                      {activity.extendedProperties.private.image &&
+                      activity.extendedProperties.private.image !=
+                        "sin imagen" ? (
+                        <img
+                          src={activity.extendedProperties.private.image}
+                          alt={activity.summary}
+                        />
                       ) : (
                         <img src={silueta} alt="Imagen predeterminada" />
                       )}
@@ -128,7 +128,7 @@ const Activities = ({ activities, setActivities }) => {
                       {activity.summary || "Título"}
                     </h1>
                     <p className="activities-decription">
-                    {activity.description || "descripción"}
+                      {activity.description || "descripción"}
                     </p>
                     <p className="activities-location">
                       {activity.location || "Lugar"}
@@ -137,17 +137,15 @@ const Activities = ({ activities, setActivities }) => {
                       {formatDate(activity.start.dateTime) || "Fecha"}
                     </h2>
                     <h2 className="activities-date">
-                      Duración estimada: { durationString || "Duración"}
+                      Duración estimada: {durationString || "Duración"}
                     </h2>
                     <button
                       className="activities-inscription"
                       onClick={() => handleEnrollClick(activity, index + 1)}
                     >
-                      {
-                      activity.summary.includes("EVENTO CANCELADO")
-                      ? "Inscripciones cerradas"
-                      : "Inscribirse"
-                      }
+                      {activity.summary.includes("EVENTO CANCELADO")
+                        ? "Inscripciones cerradas"
+                        : "Inscribirse"}
                     </button>
                   </div>
                 </li>

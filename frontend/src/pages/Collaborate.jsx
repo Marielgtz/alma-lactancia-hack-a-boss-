@@ -25,7 +25,6 @@ const Collaborate = () => {
 
   return (
     <div className="collaborate-page">
-      <Header className="header-collaborate" />
       <div className="collaborate-content">
         <div className="columna-1">
           <p className="alma-text-colab">Alma Lactancia</p>
