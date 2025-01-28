@@ -298,6 +298,134 @@ header.scrolled {
   }
 }
 
+/* Estilos para pantallas entre 769px y 1000px */
+@media (min-width: 769px) and (max-width: 1000px) {
+  .navbar {
+    font-family: outfit;
+    width: 100vw;
+    position: relative;
+    background-color: #9c6fa0;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 10%;
+  }
+
+  .logo {
+    height: 4rem;
+    margin-top: 0.5em;
+  }
+
+  .social-media {
+    margin: 10px;
+  }
+
+  .social-media-item {
+    visibility: visible;
+    font-size: 0.9rem;
+  }
+
+  .social-media a {
+    color: white;
+    margin: 0.1em;
+  }
+
+  .social-media a svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+    cursor: pointer;
+    color: white;
+    font-size: 2rem;
+    align-self: flex-end;
+    margin-top: 0.8rem;
+    margin-right: 0.7rem;
+    z-index: 12;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .menu.active {
+    display: flex;
+    background-color: #9c6fa0;
+    z-index: 11;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+  }
+
+  .menu-item > a {
+    color: white;
+    padding: 1.5rem 0;
+    width: 100%;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .menu-item > a:hover {
+    background-color: #b380b5;
+    color: white;
+  }
+
+  /* Submenú */
+  .submenu {
+    display: none;
+    background-color: #9c6fa0;
+    width: 100%;
+    color: white;
+    transition: all 0.3s ease; /* Transición suave para apertura */
+  }
+
+  /* Submenú activo */
+  .submenu.active {
+    display: block;
+  }
+
+  .submenu li a {
+    color: #9c6fa0;
+    padding: 10px;
+    display: block;
+    background-color: white;
+    box-sizing: border-box;
+  }
+
+  .submenu li a:hover {
+    color: white;
+    background-color: #e0bb8e;
+  }
+
+  .menu-item {
+    position: relative;
+  }
+
+  /* Mostrar submenú al hacer hover */
+  .menu-item:hover .submenu {
+    display: block;
+  }
+
+  /* Icono de cierre del menú */
+  .menu-toggle-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 13;
+  }
+}
+
 @media (min-width: 1600px) {
   .navbar {
     font-size: 1.6rem;

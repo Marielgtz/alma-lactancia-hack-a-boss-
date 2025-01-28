@@ -42,3 +42,41 @@
 .alert-text-link:hover {
   color: white;
 }
+
+/* Evitar el espacio entre el alert y el header en pantallas entre 618px y 768px */
+@media (max-width: 768px) and (min-width: 618px) {
+  .App {
+    padding-top: 40px; /* Elimina el espacio superior */
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+
+  .alert-div {
+    top: 0; /* Asegura que el alert se mantenga arriba */
+  }
+}
+
+/* Asegurar que en pantallas más pequeñas o iguales a 618px también se mantenga */
+@media (max-width: 618px) {
+  .App {
+    padding-top: 60px; /* Sin espacio superior */
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+
+  .alert-div {
+    top: 0; /* Asegura que el alert no se desplace */
+  }
+}

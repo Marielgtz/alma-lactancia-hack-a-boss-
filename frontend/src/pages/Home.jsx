@@ -104,7 +104,6 @@ const Home = ({ homeData, scrolled }) => {
 
   return (
     <div className="home-page">
-      <Header scrolled={scrolled} defaultBackground={false} />
       <main className="main-home">
         <div className="img-section">
           <div className="background-image">

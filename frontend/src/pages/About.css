@@ -339,6 +339,9 @@ h3 {
 
 /* Estilos responsive */
 @media (max-width: 768px) {
+  .about-main {
+    padding-top: 0px;
+  }
   .img-section-about {
     position: relative;
     height: 50vh;
