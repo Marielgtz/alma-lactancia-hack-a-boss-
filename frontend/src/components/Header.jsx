@@ -54,7 +54,7 @@ const Header = ({ scrolled }) => {
   return (
     <header
       className={`navbar ${scrolled ? "scrolled" : ""}`}
-      style={{ backgroundColor: headerBackground }}
+      style={{ backgroundColor: scrolled ? "#b380b5" : headerBackground }}
     >
       <nav className="navbar">
         <Link to="/" className="logo">
