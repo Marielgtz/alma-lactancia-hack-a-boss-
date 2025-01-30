@@ -108,7 +108,6 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
     formData.append("surname", collaborator.surname);
     formData.append("role", collaborator.role);
     formData.append("description", collaborator.description);
-    formData.append("team", isTeam);
 
     if (selectedFile) {
       formData.append("collaboratorImage", selectedFile); // Añadir nueva imagen si se ha seleccionado
@@ -119,11 +118,12 @@ const EditCollaboratorForm = ({ collaboratorData, onSuccess }) => {
     try {
       if (collaborator.id) {
         // Actualizar colaborador existente
+
         const responseMsg = await updateCollaboratorService(
           collaborator.id,
           isTeam,
-          collaboratorData.image,
-          formData
+          collaboratorData.image, // Mantenemos esto para tener la imagen anterior
+          formData // Aquí enviamos todos los datos, incluida la nueva imagen si se ha seleccionado
         );
 
         if (responseMsg.error) {
