@@ -17,6 +17,8 @@ const DEFAULT_IMAGE_URL =
 
 const Home = ({ homeData, scrolled }) => {
   const { t } = useTranslation()
+  //Esto es para el condicional de los datos dinámicos traducidos llegados desde el backend:
+  const currentLang = getLocalStorageItem('language')
 
   const API_BASE_URL = import.meta.env.VITE_API_URL
   const { home } = useContactInfo()
@@ -169,7 +171,11 @@ const Home = ({ homeData, scrolled }) => {
                       }
                       alt={experience.image}
                     />
-                    <p>{experience.text}</p>
+                    <p>
+                      {currentLang === 'es'
+                        ? experience.text.es
+                        : experience.text.gl}
+                    </p>
                   </div>
                 ))}
             </div>
