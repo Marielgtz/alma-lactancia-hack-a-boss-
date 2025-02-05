@@ -5,16 +5,15 @@ import fedalma from '../images/cropped-logo_fedalma_200.png'
 import fedegalma from '../images/logo-fedegalma1-300x102.jpg'
 import './About.css'
 import { useTranslation } from 'react-i18next'
-import getLocalStorageItem from '../utils/getLocalStorageItem'
 
 const defaultCollaboratorPicture =
   'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'
 
 const About = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   //Esto es para el condicional de los datos dinámicos traducidos llegados desde el backend:
-  const currentLang = getLocalStorageItem('language')
+  const currentLang = i18n.language
 
   const [openInfo, setOpenInfo] = useState(null)
   const [teamMembers, setTeamMembers] = useState([])

@@ -9,16 +9,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './Home.css'
 import { useTranslation } from 'react-i18next'
-import getLocalStorageItem from '../utils/getLocalStorageItem.js'
 
 // URL de la imagen proporcionada (icono pecho)
 const DEFAULT_IMAGE_URL =
   'https://res.cloudinary.com/dqhemn1nv/image/upload/v1728065521/59e10e0a-c67b-46bc-a663-2f66f7316077.png'
 
 const Home = ({ homeData, scrolled }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
   //Esto es para el condicional de los datos dinámicos traducidos llegados desde el backend:
-  const currentLang = getLocalStorageItem('language')
+  const currentLang = i18n.language
 
   const API_BASE_URL = import.meta.env.VITE_API_URL
   const { home } = useContactInfo()
@@ -29,8 +29,13 @@ const Home = ({ homeData, scrolled }) => {
   const [error, setError] = useState(null)
 
   const imageHomeSrc = home?.imageHome
-  const textsNosotras = home?.sectionText ? home.sectionText.split('\n') : []
-  const titleCTA = home?.titleHome || ''
+  const textsNosotras = home?.sectionText
+    ? currentLang === 'es'
+      ? home.sectionText.es.split('\n')
+      : home.sectionText.gl.split('\n')
+    : []
+  const titleCTA =
+    currentLang === 'es' ? home?.titleHome.es || '' : home?.titleHome.gl || ''
 
   const navigate = useNavigate()
 
