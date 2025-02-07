@@ -1,69 +1,72 @@
-import React, { useState } from "react";
-import Footer from "../components/Footer";
-import useLibraryData from "../hooks/useLibraryData";
-import "./Library.css";
-import { useTranslation } from "react-i18next";
+import React, { useState } from 'react'
+import Footer from '../components/Footer'
+import useLibraryData from '../hooks/useLibraryData'
+import './Library.css'
+import { useTranslation } from 'react-i18next'
 
 const Library = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation()
+  const currentLang = i18n.language
 
-  const [openInfo, setOpenInfo] = useState(null);
-  const libraryData = useLibraryData();
+  const [openInfo, setOpenInfo] = useState(null)
+  const libraryData = useLibraryData()
 
   const renderTextWithFormatting = (text) => {
-    return text.split("\n").map((item, index) => {
-      if (item.trim().endsWith(":")) {
-        return <h4 key={index}>{item.trim()}</h4>;
+    return text.split('\n').map((item, index) => {
+      if (item.trim().endsWith(':')) {
+        return <h4 key={index}>{item.trim()}</h4>
       } else {
-        return <li key={index}>{item.trim()}</li>;
+        return <li key={index}>{item.trim()}</li>
       }
-    });
-  };
+    })
+  }
 
   const toggleInfo = (info) => {
-    setOpenInfo(info === openInfo ? null : info);
-  };
+    setOpenInfo(info === openInfo ? null : info)
+  }
 
   return (
-    <div className="library-page">
-      <main className="library-main">
-        <p className="alma-text">Alma Lactancia</p>
+    <div className='library-page'>
+      <main className='library-main'>
+        <p className='alma-text'>Alma Lactancia</p>
 
-        <h1 className="library-title">Biblioteca</h1>
-        <div className="contenedor-texto-biblioteca">
-          <p className="library-text">{t("textoInicialBiblioteca")}</p>
-          <p className="library-text">{t("textoInicialDosBiblioteca")}</p>
+        <h1 className='library-title'>Biblioteca</h1>
+        <div className='contenedor-texto-biblioteca'>
+          <p className='library-text'>{t('textoInicialBiblioteca')}</p>
+          <p className='library-text'>{t('textoInicialDosBiblioteca')}</p>
         </div>
-        <div className="collapsible-main">
-          <div className="collapsible-container-library">
+        <div className='collapsible-main'>
+          <div className='collapsible-container-library'>
             {/* Lactancia */}
             <div
               className={`collapsible-header-library ${
-                openInfo === "lactancia" ? "open" : ""
+                openInfo === 'lactancia' ? 'open' : ''
               }`}
-              onClick={() => toggleInfo("lactancia")}
+              onClick={() => toggleInfo('lactancia')}
             >
-              <span className="collapsible-title-library">Lactancia</span>
+              <span className='collapsible-title-library'>Lactancia</span>
               <span
                 className={`collapsible-arrow-library ${
-                  openInfo === "lactancia" ? "open" : ""
+                  openInfo === 'lactancia' ? 'open' : ''
                 }`}
               >
                 ᐳ
               </span>
             </div>
-            {openInfo === "lactancia" && (
-              <div className="collapsible-content-library">
+            {openInfo === 'lactancia' && (
+              <div className='collapsible-content-library'>
                 <h3>RECURSOS ONLINE</h3>
                 <ul>
                   {libraryData.lactationResources.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
-                        {resource.title}
+                        {currentLang === 'es'
+                          ? resource.title.es
+                          : resource.title.gl}
                       </a>
                     </li>
                   ))}
@@ -75,34 +78,36 @@ const Library = () => {
           </div>
 
           {/* Embarazo */}
-          <div className="collapsible-container-library">
+          <div className='collapsible-container-library'>
             <div
               className={`collapsible-header-library ${
-                openInfo === "embarazo" ? "open" : ""
+                openInfo === 'embarazo' ? 'open' : ''
               }`}
-              onClick={() => toggleInfo("embarazo")}
+              onClick={() => toggleInfo('embarazo')}
             >
-              <span className="collapsible-title-library">Embarazo</span>
+              <span className='collapsible-title-library'>Embarazo</span>
               <span
                 className={`collapsible-arrow-library ${
-                  openInfo === "embarazo" ? "open" : ""
+                  openInfo === 'embarazo' ? 'open' : ''
                 }`}
               >
                 ᐳ
               </span>
             </div>
-            {openInfo === "embarazo" && (
-              <div className="collapsible-content-library">
+            {openInfo === 'embarazo' && (
+              <div className='collapsible-content-library'>
                 <h3>RECURSOS</h3>
                 <ul>
                   {libraryData.pregnancyResources.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
-                        {resource.title}
+                        {currentLang === 'es'
+                          ? resource.title.es
+                          : resource.title.gl}
                       </a>
                     </li>
                   ))}
@@ -114,34 +119,36 @@ const Library = () => {
           </div>
 
           {/* Crianza */}
-          <div className="collapsible-container-library">
+          <div className='collapsible-container-library'>
             <div
               className={`collapsible-header-library ${
-                openInfo === "crianza" ? "open" : ""
+                openInfo === 'crianza' ? 'open' : ''
               }`}
-              onClick={() => toggleInfo("crianza")}
+              onClick={() => toggleInfo('crianza')}
             >
-              <span className="collapsible-title-library">Crianza</span>
+              <span className='collapsible-title-library'>Crianza</span>
               <span
                 className={`collapsible-arrow-library ${
-                  openInfo === "crianza" ? "open" : ""
+                  openInfo === 'crianza' ? 'open' : ''
                 }`}
               >
                 ᐳ
               </span>
             </div>
-            {openInfo === "crianza" && (
-              <div className="collapsible-content-library">
+            {openInfo === 'crianza' && (
+              <div className='collapsible-content-library'>
                 <h3>OTROS RECURSOS</h3>
                 <ul>
                   {libraryData.parentingResources.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
-                        {resource.title}
+                        {currentLang === 'es'
+                          ? resource.title.es
+                          : resource.title.gl}
                       </a>
                     </li>
                   ))}
@@ -153,36 +160,38 @@ const Library = () => {
           </div>
 
           {/* Alimentación complementaria */}
-          <div className="collapsible-container-library">
+          <div className='collapsible-container-library'>
             <div
               className={`collapsible-header-library ${
-                openInfo === "alimentacion" ? "open" : ""
+                openInfo === 'alimentacion' ? 'open' : ''
               }`}
-              onClick={() => toggleInfo("alimentacion")}
+              onClick={() => toggleInfo('alimentacion')}
             >
-              <span className="collapsible-title-library">
+              <span className='collapsible-title-library'>
                 Alimentación complementaria
               </span>
               <span
                 className={`collapsible-arrow-library ${
-                  openInfo === "alimentacion" ? "open" : ""
+                  openInfo === 'alimentacion' ? 'open' : ''
                 }`}
               >
                 ᐳ
               </span>
             </div>
-            {openInfo === "alimentacion" && (
-              <div className="collapsible-content-library">
+            {openInfo === 'alimentacion' && (
+              <div className='collapsible-content-library'>
                 <h3>BLOGS</h3>
                 <ul>
                   {libraryData.nutritionBlogs.map((resource, index) => (
                     <li key={index}>
                       <a
                         href={resource.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
-                        {resource.title}
+                        {currentLang === 'es'
+                          ? resource.title.es
+                          : resource.title.gl}
                       </a>
                     </li>
                   ))}
@@ -194,32 +203,34 @@ const Library = () => {
           </div>
 
           {/* Hemeroteca */}
-          <div className="collapsible-container-library">
+          <div className='collapsible-container-library'>
             <div
               className={`collapsible-header-library ${
-                openInfo === "hemeroteca" ? "open" : ""
+                openInfo === 'hemeroteca' ? 'open' : ''
               }`}
-              onClick={() => toggleInfo("hemeroteca")}
+              onClick={() => toggleInfo('hemeroteca')}
             >
-              <span className="collapsible-title-library">Hemeroteca</span>
+              <span className='collapsible-title-library'>Hemeroteca</span>
               <span
                 className={`collapsible-arrow-library ${
-                  openInfo === "hemeroteca" ? "open" : ""
+                  openInfo === 'hemeroteca' ? 'open' : ''
                 }`}
               >
                 ᐳ
               </span>
             </div>
-            {openInfo === "hemeroteca" && (
-              <div className="collapsible-content-library">
+            {openInfo === 'hemeroteca' && (
+              <div className='collapsible-content-library'>
                 {libraryData.archiveBlogs.map((resource, index) => (
                   <p key={index}>
                     <a
                       href={resource.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                     >
-                      {resource.title}
+                      {currentLang === 'es'
+                        ? resource.title.es
+                        : resource.title.gl}
                     </a>
                   </p>
                 ))}
@@ -230,7 +241,7 @@ const Library = () => {
       </main>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Library;
+export default Library

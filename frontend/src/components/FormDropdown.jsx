@@ -1,9 +1,10 @@
-import useFormDropdown from "../hooks/useFormDropdown";
-import CustomDialog from "./customDialog.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import "./FormDropdown.css";
-import { useEffect } from "react";
+import useFormDropdown from '../hooks/useFormDropdown'
+import CustomDialog from './customDialog.jsx'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import './FormDropdown.css'
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const FormDropdown = ({
   forms,
@@ -14,6 +15,10 @@ const FormDropdown = ({
   setSelectedForm,
   selectedForm,
 }) => {
+  //Para textos dinámicos en el idioma seleccionado:
+  const { i18n } = useTranslation()
+  const currentLang = i18n.language
+
   const {
     handleSelectForm,
     publishHandler,
@@ -36,61 +41,75 @@ const FormDropdown = ({
     setSelectedForm,
     publishedForm,
     selectedForm
-  );
-
-  useEffect(() => {
-    console.log("Published activities updated:", publishedActivities);
-  }, [publishedActivities]);
-
-  useEffect(() => {
-    console.log("Selected form:", selectedForm);
-  }, [selectedForm]);
+  )
 
   const publishFormIndex =
     Array.isArray(publishedForm) && selectedForm
       ? publishedForm.findIndex((form) => form.formId === selectedForm.formId)
-      : -1;
+      : -1
   return (
-    <div className="contenedor-seleccione-formulario">
-      <div className="contenedor-titulo-buscador">
+    <div className='contenedor-seleccione-formulario'>
+      <div className='contenedor-titulo-buscador'>
         <h2>Busca y selecciona un formulario...</h2>
         <input
-          className="buscar-formulario-input"
-          type="text"
-          placeholder="🔍 Busca un formulario..."
+          className='buscar-formulario-input'
+          type='text'
+          placeholder='🔍 Busca un formulario...'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="contenedor-listado-formularios">
+      <div className='contenedor-listado-formularios'>
         <ul>
-          {filteredFormEntries?.map(([formId, form], index) => (
-            <li key={index} onClick={() => handleSelectForm(formId)}>
-              {form.formName}
-            </li>
-          ))}
+          {filteredFormEntries?.map(([formId, form], index) => {
+            return currentLang === 'es' ? (
+              <li key={index} onClick={() => handleSelectForm(formId)}>
+                {form.formName.es}
+              </li>
+            ) : (
+              <li key={index} onClick={() => handleSelectForm(formId)}>
+                {form.formName.gl}
+              </li>
+            )
+          })}
         </ul>
       </div>
       {selectedForm && (
         <div>
-          <h3>Formulario: {selectedForm?.formName}</h3>
+          <h3>
+            Formulario:
+            {currentLang === 'es'
+              ? selectedForm?.formName.es
+              : selectedForm?.formName.gl}
+          </h3>
           <ul>
-            {selectedForm?.fields.map((field, index) => {
-              if (field.label !== "Partner" && field.label !== "partner")
-                return <li key={index}>{field.label}</li>;
-            })}
+            {currentLang === 'es'
+              ? selectedForm?.fields.map((field, index) => {
+                  if (
+                    field.label.es !== 'Partner' &&
+                    field.label.es !== 'partner'
+                  )
+                    return <li key={index}>{field.label.es}</li>
+                })
+              : selectedForm?.fields.map((field, index) => {
+                  if (
+                    field.label.gl !== 'Partner' &&
+                    field.label.gl !== 'partner'
+                  )
+                    return <li key={index}>{field.label.gl}</li>
+                })}
           </ul>
 
           {publishFormIndex !== -1 && publishedActivities[publishFormIndex] ? (
             <>
-              <p className="texto-asociado-evento">
+              <p className='texto-asociado-evento'>
                 {`Asociado al evento: ${
                   publishedActivities[publishFormIndex] &&
                   publishedActivities[publishFormIndex]?.summary
                 }`}
               </p>
               <button
-                className="boton-despublicar-formulario-dropdown"
+                className='boton-despublicar-formulario-dropdown'
                 onClick={() => unPublishHandler(publishFormIndex.toString())}
               >
                 Despublicar
@@ -100,41 +119,41 @@ const FormDropdown = ({
             <>
               <form
                 onSubmit={(e) => {
-                  e.preventDefault();
+                  e.preventDefault()
                   publishHandler(
                     selectedForm?.formId,
                     e.target.elements.activity.value
-                  );
+                  )
                 }}
               >
                 <select
-                  className="selector-evento-formularios"
-                  name="activity"
-                  id="activity"
+                  className='selector-evento-formularios'
+                  name='activity'
+                  id='activity'
                 >
-                  <option value="">Seleccione evento</option>
+                  <option value=''>Seleccione evento</option>
                   {publishedActivities.map((activity, index) => {
                     return (
                       <option key={index} value={index + 1}>
                         {activity.summary}
                       </option>
-                    );
+                    )
                   })}
                 </select>
-                <button className="boton-publicar-formulario-dropdown">
+                <button className='boton-publicar-formulario-dropdown'>
                   Publicar formulario
                 </button>
               </form>
             </>
           )}
           <button
-            className="boton-editar-formulario-dropdown"
+            className='boton-editar-formulario-dropdown'
             onClick={editFormHandler}
           >
-            <i className="fas fa-edit icon"></i> Editar
+            <i className='fas fa-edit icon'></i> Editar
           </button>
           <button
-            className="boton-eliminar-campo-editar-formulario"
+            className='boton-eliminar-campo-editar-formulario'
             onClick={openModal}
           >
             <FontAwesomeIcon icon={faTrash} /> Eliminar
@@ -151,14 +170,14 @@ const FormDropdown = ({
               onNo={() => handleNo(selectedForm?.formId, publishFormIndex)}
               onCancel={handleCancel}
               message={
-                "¿Borrar hoja de cálculo asociada? (Se perderán los datos de los asistentes)"
+                '¿Borrar hoja de cálculo asociada? (Se perderán los datos de los asistentes)'
               }
             />
           )}
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FormDropdown;
+export default FormDropdown
