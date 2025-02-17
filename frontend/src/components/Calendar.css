@@ -1,8 +1,10 @@
-.activities {
+.activities-container {
   display: flex;
-  justify-content: center; /* Distribuye las tarjetas proporcionalmente */
+  justify-content: center; /* Centra las tarjetas en el contenedor */
   align-items: center; /* Centra verticalmente las tarjetas si es necesario */
-  width: 100%; /* Asegura que ocupe el ancho completo */
+  width: 100%;
+  flex-wrap: wrap; /* Permite que las tarjetas se acomoden en varias filas si no hay suficiente espacio */
+  gap: 20px; /* Espacio entre las tarjetas */
 }
 .calendar-section {
   padding-bottom: 3rem;
@@ -19,7 +21,7 @@
 .activity {
   position: relative;
   background-color: transparent;
-  width: 20rem;
+  width: 20rem; /* Asegura que las tarjetas tengan un tamaño adecuado */
   height: 20rem;
   perspective: 1000px;
   margin: 0.5rem;
