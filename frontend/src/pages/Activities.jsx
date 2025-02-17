@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./Activities.css";
-import ActivityFilter from "../components/filters/ActivityFilter";
+
 import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
 import { getCalendarEvents, getPastEvents } from "../services/api";
 import { createMockupData } from "../services/mockUpService";
@@ -12,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 const Activities = ({ activities, setActivities }) => {
   const { i18n } = useTranslation();
-  //Esto es para el condicional de los datos dinámicos traducidos llegados desde el backend:
+  // Esto es para el condicional de los datos dinámicos traducidos llegados desde el backend:
   const currentLang = i18n.language;
 
   const navigate = useNavigate();
@@ -91,12 +90,20 @@ const Activities = ({ activities, setActivities }) => {
               const durationString =
                 hours > 0 ? `${hours} h ${minutes} m` : `${minutes} minutos`;
 
+              // Ajuste en el acceso
+              const access =
+                activity.extendedProperties?.private?.access?.trim();
+              const exclusiveAccess = ["solo_socios", "partners"];
+              const accessMessage = exclusiveAccess.includes(access)
+                ? "Exclusivo para socios"
+                : "Abierto a la comunidad";
+
               return (
                 <li key={index} className="activity-cards">
                   <div className="activity-content">
                     <div className="activity-image">
                       {activity.extendedProperties.private.image &&
-                      activity.extendedProperties.private.image !=
+                      activity.extendedProperties.private.image !==
                         "sin imagen" ? (
                         <img
                           src={activity.extendedProperties.private.image}
@@ -135,21 +142,8 @@ const Activities = ({ activities, setActivities }) => {
                       Duración estimada: {durationString || "Duración"}
                     </h2>
                     <p className="activities-access">
-                      {activity.extendedProperties?.private?.access ? (
-                        <>
-                          {console.log(
-                            "Access:",
-                            activity.extendedProperties.private.access
-                          )}{" "}
-                          {/* Agrega esto para depurar */}
-                          {activity.extendedProperties.private.access.trim() ===
-                          "socios"
-                            ? "Exclusivo para socios"
-                            : "Abierto a la comunidad"}
-                        </>
-                      ) : (
-                        "Acceso no especificado"
-                      )}
+                      {console.log("Access:", access)} {/* Para depurar */}
+                      {accessMessage}
                     </p>
 
                     <button

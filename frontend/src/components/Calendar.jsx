@@ -10,7 +10,6 @@ import "moment/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css";
 import { useTranslation } from "react-i18next";
-import formatDate from "../utils/formatDate";
 
 moment.updateLocale("es", {
   week: {
@@ -85,11 +84,18 @@ const MyCalendar = () => {
         const futureEvents = formattedEvents.filter(
           (event) => new Date(event.start).getTime() >= now.getTime()
         );
-        const sortedEvents = futureEvents
-          .sort((a, b) => new Date(a.start) - new Date(b.start))
-          .slice(0, 3);
+        const sortedEvents = futureEvents.sort(
+          (a, b) => new Date(a.start) - new Date(b.start)
+        );
 
-        setEvents(sortedEvents);
+        // Filtra los eventos para eliminar duplicados basándose en el título
+        const uniqueSortedEvents = sortedEvents.filter(
+          (event, index, self) =>
+            index === self.findIndex((e) => e.title === event.title)
+        );
+
+        // Toma solo los primeros 3 eventos únicos
+        setEvents(uniqueSortedEvents.slice(0, 3));
       } catch (error) {
         setError("Error fetching events");
         console.error("Error fetching events:", error);
@@ -141,16 +147,13 @@ const MyCalendar = () => {
   return (
     <div className="calendar-section">
       <h2 className="section-title-activity">{t("proximasActividadesHome")}</h2>
-      <div className="activities-container  ">
+      <div>
         {loading ? (
           <p>Cargando actividades...</p>
         ) : error ? (
           <p>{error}</p>
-        ) : events.length > 0 ? (
-          // Limita los eventos a 3 directamente aquí
-          <ActivityCard events={events.slice(0, 3)} currentLang={currentLang} />
         ) : (
-          <div className="activity">{t("noHayActividadesProgramadas")}</div>
+          <ActivityCard events={events.slice(0, 3)} currentLang={currentLang} />
         )}
       </div>
       <div className="contenedor-ver-actividades-inicio">

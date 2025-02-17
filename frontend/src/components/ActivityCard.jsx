@@ -1,5 +1,6 @@
 import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
 import formatDate from "../utils/formatDate";
+import "./ActivityCard.css";
 
 const ActivityCard = ({ events, currentLang }) => {
   if (!events || events.length === 0) {
@@ -7,7 +8,7 @@ const ActivityCard = ({ events, currentLang }) => {
   }
 
   return (
-    <div>
+    <div className="activities-container">
       {events.map((event) => (
         <div key={event.id} className="activity">
           <div className="card-inner">
