@@ -9,9 +9,7 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
   const [forms, setForms] = useState({})
   const [editingForm, setEditingForm] = useState(false)
   const [selectedForm, setSelectedForm] = useState(null)
-  useEffect(() => {
-    console.log('Editing form?:', editingForm)
-  }, [editingForm])
+
   return (
     <div className='contenedor-opciones-formularios'>
       <h1>Formularios</h1>
@@ -38,7 +36,7 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
             </p>
           </div>
           <h3 className='titulo-descriptivo-accion'>
-            Lista de formularios <i class='fas fa-arrow-down'></i>
+            Lista de formularios <i className='fas fa-arrow-down'></i>
           </h3>
           <FormDropdown
             forms={forms}
@@ -51,7 +49,7 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
           />
           <div>
             <h3 className='titulo-descriptivo-accion'>
-              Creador de formularios <i class='fas fa-arrow-down'></i>
+              Creador de formularios <i className='fas fa-arrow-down'></i>
             </h3>
             <div className='contenedor-pasos'>
               <p>

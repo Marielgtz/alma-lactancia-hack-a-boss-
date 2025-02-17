@@ -187,7 +187,7 @@ const MySubscriptionModal = ({ onClose }) => {
                 <div className='confirmacion-baja-modal'>
                   <p>
                     ¿Estás seguro de que deseas darte de baja? <br />
-                    <span class='mensaje-accion-baja'>
+                    <span className='mensaje-accion-baja'>
                       Esta acción no se puede deshacer.
                     </span>
                   </p>
