@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
-import FormBuilder from "../FormBuilder";
-import EditForm from "../EditForm";
-import "./CreadorFormularios.css";
+import { useEffect, useState } from 'react'
+import FormBuilder from '../FormBuilder'
+import EditForm from '../EditForm'
+import './CreadorFormularios.css'
 
-import FormDropdown from "../FormDropdown";
+import FormDropdown from '../FormDropdown'
 
 const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
-  const [forms, setForms] = useState({});
-  const [editingForm, setEditingForm] = useState(false);
-  const [selectedForm, setSelectedForm] = useState(null);
+  const [forms, setForms] = useState({})
+  const [editingForm, setEditingForm] = useState(false)
+  const [selectedForm, setSelectedForm] = useState(null)
   useEffect(() => {
-    console.log("Editing form?:", editingForm);
-  }, [editingForm]);
+    console.log('Editing form?:', editingForm)
+  }, [editingForm])
   return (
-    <div className="contenedor-opciones-formularios">
+    <div className='contenedor-opciones-formularios'>
       <h1>Formularios</h1>
       {editingForm ? (
         <EditForm
@@ -26,7 +26,7 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
         />
       ) : (
         <>
-          <div className="contenedor-pasos">
+          <div className='contenedor-pasos'>
             <p>
               En esta sección podéis gestionar vuestros formularios. Desde aquí
               se puede PUBLICAR, CREAR y MODIFICAR los formularios.
@@ -37,8 +37,8 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
               al final de la página.
             </p>
           </div>
-          <h3 className="titulo-descriptivo-accion">
-            Lista de formularios <i class="fas fa-arrow-down"></i>
+          <h3 className='titulo-descriptivo-accion'>
+            Lista de formularios <i class='fas fa-arrow-down'></i>
           </h3>
           <FormDropdown
             forms={forms}
@@ -50,12 +50,12 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
             setSelectedForm={setSelectedForm}
           />
           <div>
-            <h3 className="titulo-descriptivo-accion">
-              Creador de formularios <i class="fas fa-arrow-down"></i>
+            <h3 className='titulo-descriptivo-accion'>
+              Creador de formularios <i class='fas fa-arrow-down'></i>
             </h3>
-            <div className="contenedor-pasos">
+            <div className='contenedor-pasos'>
               <p>
-                Los formularios que creéis aquí se añadirán a la lista anterior.{" "}
+                Los formularios que creéis aquí se añadirán a la lista anterior.{' '}
                 <br /> <br />
                 CAMPOS: Añadid tantos como datos necesitéis recoger de cada
                 participante. Si queréis recoger teléfono o email, usad el campo
@@ -71,6 +71,6 @@ const CreadorFormularios = ({ publishedForm, setPublishedForm }) => {
         </>
       )}
     </div>
-  );
-};
-export default CreadorFormularios;
+  )
+}
+export default CreadorFormularios

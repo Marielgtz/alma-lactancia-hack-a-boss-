@@ -53,9 +53,7 @@ const useFormDropdown = (
           const data = await response.json()
           throw new Error(data.error)
         }
-      } catch (error) {
-        console.log('No hay datos que mostrar')
-      }
+      } catch (error) {}
     }
 
     //Máximo de formularios publicados al mismo tiempo. Cambiar length si se requieren más.

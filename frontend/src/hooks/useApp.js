@@ -22,6 +22,24 @@ const useApp = () => {
   })
 
   useEffect(() => {
+    const fetchPublishedForms = async () => {
+      try {
+        fetch(import.meta.env.VITE_API_URL + '/get-all-published-forms')
+          .then((response) => response.json())
+          .then((data) => {
+            setPublishedForm(data.forms)
+          })
+          .catch((error) => {
+            console.error('Error al obtener los formularios publicados:', error)
+          })
+      } catch (error) {
+        console.error('Ha ocurrido un error:', error)
+      }
+    }
+    fetchPublishedForms()
+  }, [])
+
+  useEffect(() => {
     const fetchInstagramPost = async () => {
       const url = `${import.meta.env.VITE_API_URL}/get-all-instagram-posts`
 
