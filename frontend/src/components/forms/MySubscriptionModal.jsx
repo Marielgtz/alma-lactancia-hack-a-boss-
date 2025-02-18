@@ -28,16 +28,21 @@ const MySubscriptionModal = ({ onClose }) => {
 
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:3001/check-subscription', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          id,
-        }),
-      })
+
+      const response = await fetch(
+        "https://alma-server-translatev-docker.onrender.com/check-subscription",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            id,
+          }),
+        }
+      );
+
 
       const data = await response.json()
 
@@ -68,18 +73,22 @@ const MySubscriptionModal = ({ onClose }) => {
     setLoading(true)
     try {
       const response = await fetch(
-        'https://alma-server-translatev-docker.onrender.com/renew-partnership',
+
+        "https://alma-server-translatev-docker.onrender.com/renew-partnership",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
+
           },
           body: JSON.stringify({
             email,
             id,
           }),
         }
-      )
+
+      );
+
 
       const data = await response.json()
 
@@ -103,7 +112,9 @@ const MySubscriptionModal = ({ onClose }) => {
     setLoading(true)
     try {
       const response = await fetch(
-        'http://localhost:3001/unsubscribe-partnership',
+
+        "https://alma-server-translatev-docker.onrender.com/unsubscribe-partnership",
+
         {
           method: 'POST',
           headers: {
