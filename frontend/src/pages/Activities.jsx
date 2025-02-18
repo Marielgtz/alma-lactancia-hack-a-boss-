@@ -30,16 +30,21 @@ const Activities = ({ activities, setActivities }) => {
   }, []);
 
   const handleEnrollClick = (activity, activityNumber) => {
+    console.log("Estado del modal:", showModal);
+
     if (activity.summary.includes("EVENTO CANCELADO")) return;
 
     const access = activity.extendedProperties?.private?.access?.trim();
-    const exclusiveAccess = ["solo_socios", "partners"];
+    console.log("Acceso requerido:", access); // Verifica qué valor se obtiene
 
+    const exclusiveAccess = ["solo_socios", "partners"];
     if (exclusiveAccess.includes(access)) {
+      console.log("Actividad exclusiva para socios. Abriendo modal...");
       setShowModal(true);
       setSelectedActivity(activity);
       setSelectedActivityNumber(activityNumber);
     } else {
+      console.log("Actividad abierta a todos. Redirigiendo a inscripción...");
       enrollUser(activity, activityNumber);
     }
   };

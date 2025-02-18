@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./MembershipModal.css";
 
 const MembershipModal = ({ isOpen, onClose, onVerify }) => {
   const [membershipID, setMembershipID] = useState("");
@@ -31,7 +32,7 @@ const MembershipModal = ({ isOpen, onClose, onVerify }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
+    <div className="modal-overlay">
       <div className="modal-content">
         <h2>Acceso exclusivo para socios</h2>
         <p>Introduce tu ID de socio para continuar con la inscripción:</p>
@@ -40,10 +41,17 @@ const MembershipModal = ({ isOpen, onClose, onVerify }) => {
           value={membershipID}
           onChange={(e) => setMembershipID(e.target.value)}
           placeholder="ID de socio"
+          className="input-id-socio"
         />
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <button onClick={handleVerify}>Verificar</button>
-        <button onClick={onClose}>Cancelar</button>
+        <div className="modal-actions">
+          <button onClick={handleVerify} className="confirm-verificar-btn">
+            Verificar
+          </button>
+          <button onClick={onClose} className="cancel-delete-btn">
+            Cancelar
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import "./ModalBooks.css"; // Crear un archivo CSS específico para el modal
+import "./ModalBooks.css";
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;

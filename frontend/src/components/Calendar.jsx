@@ -1,11 +1,9 @@
-// Calendar.jsx
-
 import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import CustomToolbar from "./CustomToolbar";
-import ActivityCard from "./ActivityCard"; // Importamos el nuevo componente
+import ActivityCard from "./ActivityCard";
 import "moment/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.css";
