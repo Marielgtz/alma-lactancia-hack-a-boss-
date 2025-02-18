@@ -47,6 +47,7 @@ const FormDropdown = ({
     Array.isArray(publishedForm) && selectedForm
       ? publishedForm.findIndex((form) => form.formId === selectedForm.formId)
       : -1
+
   return (
     <div className='contenedor-seleccione-formulario'>
       <div className='contenedor-titulo-buscador'>
@@ -163,7 +164,7 @@ const FormDropdown = ({
               onYes={() =>
                 handleYes(
                   selectedForm?.formId,
-                  selectedForm?.formName,
+                  selectedForm?.formName.es,
                   publishFormIndex
                 )
               }

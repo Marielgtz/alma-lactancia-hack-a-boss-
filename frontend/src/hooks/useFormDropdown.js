@@ -27,41 +27,6 @@ const useFormDropdown = (
       .catch((error) => {
         console.error('Error al obtener los formularios:', error)
       })
-
-    const getPublishedForm = async (jsonNumber) => {
-      try {
-        const response = await fetch(
-          import.meta.env.VITE_API_URL + `/get-published-form/${jsonNumber}`
-        )
-        if (response.ok) {
-          const data = await response.json()
-
-          if (Object.keys(data.form).length === 0) {
-            setPublishedForm((prevData) => {
-              const newData = [...prevData]
-              newData.splice(Number(jsonNumber) - 1, 1, {})
-              return newData
-            })
-          } else {
-            setPublishedForm((prevData) => {
-              const newData = [...prevData]
-              newData.splice(Number(jsonNumber) - 1, 1, data.form)
-              return newData
-            })
-          }
-        } else {
-          const data = await response.json()
-          throw new Error(data.error)
-        }
-      } catch (error) {
-        console.log('No hay datos que mostrar')
-      }
-    }
-
-    //Máximo de formularios publicados al mismo tiempo. Cambiar length si se requieren más.
-    Array.from({ length: 10 }, (_, index) => {
-      getPublishedForm(index + 1)
-    })
   }, [])
 
   //Los eventos publicados (para asociarlos a las hojas al publicar)
