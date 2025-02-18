@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import MembershipModal from "../components/MembershipModal";
 import "./Activities.css";
 
 import silueta from "../images/Alma_Lactancia_-_Foto_hero.jpg";
-import { getCalendarEvents, getPastEvents } from "../services/api";
-import { createMockupData } from "../services/mockUpService";
+import { getCalendarEvents } from "../services/api";
 import formatDate from "../utils/formatDate";
 import { useTranslation } from "react-i18next";
 
 const Activities = ({ activities, setActivities }) => {
   const { i18n } = useTranslation();
-  // Esto es para el condicional de los datos dinámicos traducidos llegados desde el backend:
   const currentLang = i18n.language;
-
   const navigate = useNavigate();
 
-  // Función que obtiene la lista de actividades
+  const [showModal, setShowModal] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState(null);
+  const [selectedActivityNumber, setSelectedActivityNumber] = useState(null);
+
   useEffect(() => {
     async function fetchCalendar(setActivities) {
       const calendarEvents = await getCalendarEvents();
@@ -28,23 +29,35 @@ const Activities = ({ activities, setActivities }) => {
     fetchCalendar(setActivities);
   }, []);
 
-  const handleEnrollClick = async (activity, activityNumber) => {
+  const handleEnrollClick = (activity, activityNumber) => {
     if (activity.summary.includes("EVENTO CANCELADO")) return;
 
+    const access = activity.extendedProperties?.private?.access?.trim();
+    const exclusiveAccess = ["solo_socios", "partners"];
+
+    if (exclusiveAccess.includes(access)) {
+      setShowModal(true);
+      setSelectedActivity(activity);
+      setSelectedActivityNumber(activityNumber);
+    } else {
+      enrollUser(activity, activityNumber);
+    }
+  };
+
+  const enrollUser = async (activity, activityNumber) => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/check-is-published/${
           activity.id
         }/${Number(activityNumber)}/true`
       );
+
       if (response.ok) {
         const data = await response.json();
-        const isPublished = data.isPublished;
-        if (!isPublished) {
+        if (!data.isPublished) {
           window.alert("No se han abierto las inscripciones");
           return;
         }
-        console.log("Se ha encontrado un formulario publicado en esta ranura");
       } else {
         window.alert("No hay formulario publicado");
         return;
@@ -78,19 +91,14 @@ const Activities = ({ activities, setActivities }) => {
         <ol className="activity-container">
           {activities.length > 0 ? (
             activities.map((activity, index) => {
-              console.log(activity);
-              // Calcular la duración
               const start = new Date(activity.start.dateTime);
               const end = new Date(activity.end.dateTime);
-
               const durationInMinutes = Math.floor((end - start) / (1000 * 60));
               const hours = Math.floor(durationInMinutes / 60);
               const minutes = durationInMinutes % 60;
-
               const durationString =
                 hours > 0 ? `${hours} h ${minutes} m` : `${minutes} minutos`;
 
-              // Ajuste en el acceso
               const access =
                 activity.extendedProperties?.private?.access?.trim();
               const exclusiveAccess = ["solo_socios", "partners"];
@@ -113,38 +121,22 @@ const Activities = ({ activities, setActivities }) => {
                         <img src={silueta} alt="Imagen predeterminada" />
                       )}
                     </div>
-                    <h1 className="activities-title">
-                      {currentLang === "es"
-                        ? activity.summary || "Título"
-                        : activity.extendedProperties.private.glSummary ||
-                          activity.summary ||
-                          "Título"}
-                    </h1>
+                    <h1 className="activities-title">{activity.summary}</h1>
                     <p className="activities-decription">
-                      {currentLang === "es"
-                        ? activity.description || "descripción"
-                        : activity.extendedProperties.private.glDescription ||
-                          activity.description ||
-                          "descripción"}
+                      {activity.description}
                     </p>
                     <p className="activities-location">
                       {activity.location || "Lugar"}
                     </p>
 
                     <h2 className="activities-date">
-                      {currentLang === "es"
-                        ? formatDate(activity.start.dateTime, null, "es") ||
-                          "Fecha"
-                        : formatDate(activity.start.dateTime, null, "gl") ||
-                          "Fecha"}
+                      {formatDate(activity.start.dateTime, null, "es") ||
+                        "Fecha"}
                     </h2>
                     <h2 className="activities-date">
                       Duración estimada: {durationString || "Duración"}
                     </h2>
-                    <p className="activities-access">
-                      {console.log("Access:", access)} {/* Para depurar */}
-                      {accessMessage}
-                    </p>
+                    <p className="activities-access">{accessMessage}</p>
 
                     <button
                       className="activities-inscription"
@@ -163,6 +155,14 @@ const Activities = ({ activities, setActivities }) => {
           )}
         </ol>
       </main>
+
+      {/* Modal de validación de ID */}
+      <MembershipModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onVerify={() => enrollUser(selectedActivity, selectedActivityNumber)}
+      />
+
       <Footer />
     </div>
   );
