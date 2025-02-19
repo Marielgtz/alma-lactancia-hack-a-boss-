@@ -28,21 +28,19 @@ const MySubscriptionModal = ({ onClose }) => {
 
     setLoading(true)
     try {
-
       const response = await fetch(
-        "https://alma-server-translatev-docker.onrender.com/check-subscription",
+        `${import.meta.env.VITE_API_URL}/check-subscription`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             email,
             id,
           }),
         }
-      );
-
+      )
 
       const data = await response.json()
 
@@ -73,22 +71,18 @@ const MySubscriptionModal = ({ onClose }) => {
     setLoading(true)
     try {
       const response = await fetch(
-
-        "https://alma-server-translatev-docker.onrender.com/renew-partnership",
+        `${import.meta.env.VITE_API_URL}/renew-partnership`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
-
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             email,
             id,
           }),
         }
-
-      );
-
+      )
 
       const data = await response.json()
 
@@ -112,8 +106,7 @@ const MySubscriptionModal = ({ onClose }) => {
     setLoading(true)
     try {
       const response = await fetch(
-
-        "https://alma-server-translatev-docker.onrender.com/unsubscribe-partnership",
+        `${import.meta.env.VITE_API_URL}/unsubscribe-partnership`,
 
         {
           method: 'POST',
