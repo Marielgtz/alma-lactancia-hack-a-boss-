@@ -43,7 +43,8 @@
   transition: all 0.2s ease-in-out;
   transform: translateY(-3px);
 }
-.input-id-socio {
+.input-id-socio,
+.input-email-socio {
   background-color: white;
   padding: 10px 20px;
   margin: 5px;

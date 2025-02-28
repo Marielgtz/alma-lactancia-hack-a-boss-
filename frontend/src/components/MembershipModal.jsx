@@ -3,28 +3,39 @@ import "./MembershipModal.css";
 
 const MembershipModal = ({ isOpen, onClose, onVerify }) => {
   const [membershipID, setMembershipID] = useState("");
+  const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleVerify = async () => {
-    if (!membershipID.trim()) {
-      setErrorMessage("Por favor, introduce tu ID de socio.");
+    if (!membershipID.trim() || !email.trim()) {
+      setErrorMessage(
+        "Por favor, introduce tu ID de socio y tu correo electrónico."
+      );
       return;
     }
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/checkCode/${membershipID}`
+        "https://alma-server-translatev-docker.onrender.com/check-access-code",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code: membershipID, email: email }),
+        }
       );
+
       const data = await response.json();
 
-      if (data.valid) {
-        onVerify();
-        onClose();
+      if (response.ok) {
+        onVerify(); // Llamar a la función de verificación exitosa
+        onClose(); // Cerrar el modal
       } else {
-        setErrorMessage("ID de socio no válido. Inténtalo de nuevo.");
+        setErrorMessage(
+          data.message || "Datos incorrectos. Inténtalo de nuevo."
+        );
       }
     } catch (error) {
-      setErrorMessage("Error al verificar el ID. Inténtalo más tarde.");
+      setErrorMessage("Error al verificar. Inténtalo más tarde.");
       console.error(error);
     }
   };
@@ -35,13 +46,23 @@ const MembershipModal = ({ isOpen, onClose, onVerify }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>Acceso exclusivo para socios</h2>
-        <p>Introduce tu ID de socio para continuar con la inscripción:</p>
+        <p>
+          Introduce tu ID de socio y tu correo para continuar con la
+          inscripción:
+        </p>
         <input
           type="text"
           value={membershipID}
           onChange={(e) => setMembershipID(e.target.value)}
           placeholder="ID de socio"
           className="input-id-socio"
+        />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Correo electrónico"
+          className="input-email-socio"
         />
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="modal-actions">

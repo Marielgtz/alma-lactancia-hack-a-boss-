@@ -113,9 +113,9 @@
 }
 
 .calendar-content {
-  padding: 1rem 3rem;
-  max-width: 60%;
-  max-height: 60%;
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -127,10 +127,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
   background-color: #d8e2dc;
-  border-radius: 1.5rem 0 0 1.5rem;
+  border-radius: 1.5rem;
   padding: 1rem;
+  width: 40%;
+  max-width: 100%;
 }
 
 .event-image-text {
@@ -178,10 +179,12 @@
 }
 
 .calendar-wrapper {
-  flex: 1;
+  width: 80%;
+  max-width: 100%;
+  margin: 0 auto;
   background-color: #fff;
   padding: 1rem;
-  border-radius: 0 1.5rem 1.5rem 0;
+  border-radius: 1.5rem;
 }
 
 .calendar {
@@ -275,15 +278,16 @@
 /*LEYENDA CALENDARIO*/
 .calendar-legend {
   display: flex;
-  justify-content: flex-start;
-  margin: 1rem;
-  font-family: Outfit, sans-serif;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra la leyenda */
+  margin-top: 1rem; /* Separa la leyenda del calendario */
+  width: 100%;
+  text-align: center;
 }
-
 .legend-item {
+  margin: 0.5rem 1rem;
   display: flex;
   align-items: center;
-  margin-right: 1.5rem;
 }
 
 .legend-color {
